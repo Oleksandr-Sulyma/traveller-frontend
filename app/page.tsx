@@ -1,7 +1,9 @@
-import Hero from '@/components/Home/Hero/Hero';
-import LatestStories from '@/components/Home/Blog/LatestStories';
-import TopTravellers from '@/components/Home/Team/TopTravellers';
+
+import Blog from '@/components/Home/Blog/Blog';
+import Layout from '@/components/Home/Layouts/Layout ';
+import Team from '@/components/Home/Team/Team';
 import CTA from '@/components/Home/CTA/CTA';
+
 
 // Це функції, які ми прописали в Task 38 (Server API)
 // Поки їх немає, можна закоментувати і передати пусті масиви
@@ -14,15 +16,14 @@ export default async function HomePage() {
 
   return (
     <main>
-      {/* Секція 1: Головний банер (Task 19) */}
-      <Hero />
-
+     
+{/* Секція 2: Популярні історії (Task 19) */}
+       <Layout/>
       {/* Секція 2: Популярні історії (Task 20) */}
-      {/* Передаємо дані всередину блоку */}
-      <LatestStories stories={[]} />
-
+      <Blog />
+       
       {/* Секція 3: Наші мандрівники (Task 21) */}
-      <TopTravellers users={[]} />
+      <Team />
 
       {/* Секція 4: Блок реєстрації (Task 22) */}
       <CTA />
