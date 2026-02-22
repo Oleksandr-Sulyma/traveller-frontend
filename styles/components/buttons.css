@@ -1,49 +1,142 @@
-/* =========================
-   PRIMARY BUTTONS
-========================= */
+/* ================================
+   BUTTONS BASE STYLES
+================================ */
 
-.button-primary {
-  font-family: var(--font-body); /* Було --font-main */
-  font-weight: var(--fw-semibold);
-  border-radius: var(--radius-sm);
-  border: 1px solid var(--color-primary); /* Було --btn-primary-bg */
-  color: var(--text-inverse); /* Білий текст */
-  background: var(--color-primary);
-  transition: background var(--transition-normal), opacity var(--transition-normal);
+.btn {
+  /* Локальні змінні для розмірів (можна перевизначати) */
+  --btn-height: 48px;
+  --btn-padding: 6px 12px;
+  --btn-width: auto;
+  --btn-radius: 8px; /* Дефолт для світлої теми */
+
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  cursor: pointer;
-}
-
-/* States */
-.button-primary:hover,
-.button-primary:focus {
-  background: var(--color-primary-hover); /* Твій токен ховера */
-  border-color: var(--color-primary-hover);
+  gap: var(--space-sm); /* Відступ між іконкою і текстом */
   
-  color: var(--text-inverse);
-}
-
-/* =========================
-   SECONDARY BUTTONS
-========================= */
-
-.button-secondary {
+  height: var(--btn-height);
+  width: var(--btn-width);
+  padding: var(--btn-padding);
+  border-radius: var(--btn-radius);
+  
   font-family: var(--font-body);
-  font-weight: var(--fw-semibold);
-  border-radius: var(--radius-sm);
-  border: 1px solid var(--border-default);
-  background: var(--bg-card); /* Світло-блакитний з твоїх токенів */
-  color: var(--text-primary);
-  transition: all var(--transition-normal);
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
+  font-weight: 500;
+  font-size: var(--fs-body-md); /* 18px */
+  line-height: 1.5;
+  
   cursor: pointer;
+  transition: var(--transition-fast);
+  box-sizing: border-box;
+  border: 1px solid transparent;
+  text-decoration: none;
 }
 
-.button-secondary:hover {
-  background: var(--border-default);
-  color: var(--color-primary);
+/* Спеціальний клас для кнопок-іконок (квадратні) */
+.btn-icon {
+  --btn-padding: 6px;
+  --btn-width: var(--btn-height);
+}
+
+/* Модифікатор для маленького розміру (32px) */
+.btn--sm {
+  --btn-height: 32px;
+  --btn-padding: 4px; /* Для іконки */
+}
+
+.btn--sm:not(.btn-icon) {
+  --btn-padding: 4px 8px; /* Для тексту */
+}
+
+/* Стан Disabled (загальний) */
+.btn:disabled, 
+.btn.is-disabled {
+  opacity: 0.3;
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
+/* ================================
+   LIGHT THEME (Default)
+================================ */
+
+/* Primary Button */
+.btn-primary {
+  background: #4169e1;
+  border-color: #4169e1;
+  color: #fff;
+}
+
+.btn-primary:hover, .btn-primary:focus {
+  background: #e8eeff;
+  color: #000;
+}
+
+.btn-primary:active {
+  background: #7a96ea;
+  color: #000;
+}
+
+/* Secondary Button */
+.btn-secondary {
+  background: rgba(0, 0, 0, 0.05);
+  border-color: rgba(0, 0, 0, 0.15);
+  color: #000;
+}
+
+.btn-secondary:hover, .btn-secondary:focus {
+  background: #4169e1;
+  border-color: transparent;
+  color: #fff;
+}
+
+.btn-secondary:active {
+  background: #1a2a5a;
+  border-color: transparent;
+  color: #fff;
+}
+
+/* ================================
+   DARK THEME
+================================ */
+
+[data-theme='dark'] .btn {
+  --btn-radius: 12px; /* У темній темі радіус 12px */
+}
+
+/* Dark Primary */
+[data-theme='dark'] .btn-primary {
+  background: #fff;
+  border-color: #fff;
+  color: #000;
+}
+
+[data-theme='dark'] .btn-primary:hover, 
+[data-theme='dark'] .btn-primary:focus {
+  background: #7f7f7f;
+  border-color: #7f7f7f;
+  color: #fff;
+}
+
+[data-theme='dark'] .btn-primary:active {
+  background: #4c4c4c;
+  border-color: #4c4c4c;
+  color: #fff;
+}
+
+/* Dark Secondary */
+[data-theme='dark'] .btn-secondary {
+  background: rgba(255, 255, 255, 0.1);
+  border-color: transparent;
+  color: #fff;
+}
+
+[data-theme='dark'] .btn-secondary:hover,
+[data-theme='dark'] .btn-secondary:focus {
+  background: #e8eeff;
+  color: #000;
+}
+
+[data-theme='dark'] .btn-secondary:active {
+  background: #7a96ea;
+  color: #000;
 }
