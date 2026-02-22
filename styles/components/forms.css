@@ -1,0 +1,109 @@
+/* =========================
+   FORMS
+========================= */
+
+/* -------------------------
+   INPUTS
+------------------------- */
+.input {
+  font-family: var(--font-main);
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 1.5;
+  border-radius: 8px;
+  padding: 8px;
+  width: 100%;
+  max-width: 560px;
+  height: 43px;
+  border: 1px solid rgba(0, 0, 0, 0.15);
+  background: rgba(255, 255, 255, 0);
+  transition:
+    border var(--transition),
+    background var(--transition),
+    color var(--transition);
+}
+
+/* States */
+.input:focus {
+  border: 1px solid var(--color-royal-blue);
+  outline: none;
+}
+
+.input.error {
+  border: 1px solid var(--color-red);
+  height: 69px; /* для error container */
+}
+
+.input:disabled {
+  opacity: 0.3;
+  cursor: not-allowed;
+}
+
+/* -------------------------
+   SELECT
+------------------------- */
+.select {
+  font-family: var(--font-main);
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 1.5;
+  border-radius: 8px;
+  padding: 8px;
+  width: 100%;
+  max-width: 560px;
+  height: 43px;
+  border: 1px solid rgba(0, 0, 0, 0.15);
+  background: rgba(255, 255, 255, 0);
+  appearance: none;
+  cursor: pointer;
+  transition:
+    border var(--transition),
+    background var(--transition),
+    color var(--transition);
+}
+
+.select:focus,
+.select:hover {
+  border: 1px solid var(--color-royal-blue);
+  outline: none;
+}
+
+.select.open {
+  height: 317px;
+  border-bottom-left-radius: 8px;
+  border-bottom-right-radius: 8px;
+  background: #fff;
+}
+
+.select option {
+  font-family: var(--font-main);
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 1.5;
+  color: var(--text-main);
+  padding: 4px 8px;
+}
+
+/* -------------------------
+   DARK THEME
+------------------------- */
+[data-theme='dark'] .input {
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  background: rgba(18, 18, 18, 0.3);
+  color: var(--color-white);
+}
+
+[data-theme='dark'] .input:focus {
+  border: 1px solid var(--color-royal-blue-light);
+}
+
+[data-theme='dark'] .select {
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  background: rgba(18, 18, 18, 0.3);
+  color: var(--color-white);
+}
+
+[data-theme='dark'] .select:focus,
+[data-theme='dark'] .select:hover {
+  border: 1px solid var(--color-royal-blue-light);
+}

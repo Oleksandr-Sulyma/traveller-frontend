@@ -1,0 +1,114 @@
+/* ================================
+   GLOBAL DESIGN TOKENS
+================================ */
+
+/* ----- Fonts ----- */
+:root {
+  --font-heading: 'Sora', sans-serif;
+  --font-body: 'Nunito Sans', sans-serif;
+
+  /* ----- Font Sizes ----- */
+  --fs-h1: 48px;
+  --fs-h2: 40px;
+  --fs-h3: 32px;
+  --fs-h4: 28px;
+  --fs-h5: 24px;
+  --fs-h6: 20px;
+
+  --fs-body-lg: 20px;
+  --fs-body-md: 18px;
+  --fs-body-sm: 16px;
+
+  /* ----- Font Weights ----- */
+  --fw-regular: 400;
+  --fw-semibold: 600;
+
+  /* ================================
+     LIGHT THEME COLORS
+  ================================ */
+
+  /* Backgrounds */
+  --bg-page: #ffffff;
+  --bg-header: #ffffff;
+  --bg-main: #ffffff;
+  --bg-footer: #e8eeff;
+  --bg-modal: #ffffff;
+  --bg-card: #e8eeff;
+  --bg-neutral: #9c9c9c;
+
+  /* Text */
+  --text-primary: #111111;
+  --text-secondary: #444444;
+  --text-muted: #777777;
+  --text-inverse: #ffffff;
+
+  /* Brand */
+  --color-primary: #4f46e5;
+  --color-primary-hover: #4338ca;
+  --color-accent: #22c55e;
+
+  /* Borders */
+  --border-default: #e5e7eb;
+
+  /* ================================
+     SPACING
+  ================================ */
+  --space-xs: 4px;
+  --space-sm: 8px;
+  --space-md: 16px;
+  --space-lg: 24px;
+  --space-xl: 32px;
+
+  /* ================================
+     RADIUS
+  ================================ */
+  --radius-sm: 6px;
+  --radius-md: 12px;
+  --radius-lg: 20px;
+
+  /* ================================
+     SHADOWS
+  ================================ */
+  --shadow-sm: 0 2px 6px rgba(0, 0, 0, 0.08);
+  --shadow-md: 0 6px 16px rgba(0, 0, 0, 0.12);
+
+  /* ================================
+     TRANSITIONS
+  ================================ */
+  --transition-fast: 0.2s ease;
+  --transition-normal: 0.3s ease;
+}
+
+/* ================================
+     DARK THEME (document.documentElement.setAttribute("data-theme", "dark");)
+
+  ================================ */
+
+[data-theme='dark'] {
+  /* Backgrounds */
+  --bg-page: #0f1115;
+  --bg-header: #14171c;
+  --bg-main: #0f1115;
+  --bg-footer: #181c24;
+  --bg-modal: #1c2028;
+  --bg-card: #181c24;
+  --bg-neutral: #2b2f36;
+
+  /* Text */
+  --text-primary: #f5f7fa;
+  --text-secondary: #c5c9d3;
+  --text-muted: #8b92a1;
+  --text-inverse: #111111;
+
+  /* Brand */
+  --color-primary: #6366f1;
+  --color-primary-hover: #818cf8;
+  --color-accent: #22c55e;
+
+  /* Borders */
+  --border-default: #2a2f3a;
+
+  /* Shadows */
+  --shadow-sm: 0 2px 6px rgba(0, 0, 0, 0.4);
+  --shadow-md: 0 6px 20px rgba(0, 0, 0, 0.5);
+}

@@ -1,0 +1,97 @@
+/* =========================
+   CSS RESET (modern)
+========================= */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html,
+body {
+  height: 100%;
+}
+
+img,
+picture,
+svg,
+video {
+  display: block;
+  max-width: 100%;
+}
+
+button,
+input,
+textarea,
+select {
+  font: inherit;
+  border: none;
+  background: none;
+}
+
+ul,
+ol {
+  list-style: none;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+/* =========================
+   BASE BODY STYLES
+========================= */
+
+body {
+  font-family: var(--font-main);
+  background-color: var(--bg-app);
+  color: var(--text-main);
+  line-height: 1.5;
+
+  transition:
+    background-color var(--transition),
+    color var(--transition);
+}
+
+/* =========================
+   TYPOGRAPHY
+========================= */
+
+h1,
+h2,
+h3 {
+  font-family: var(--font-heading);
+  font-weight: 700;
+}
+
+h4,
+h5,
+h6 {
+  font-family: var(--font-main);
+}
+
+p {
+  font-family: var(--font-main);
+}
+
+/* =========================
+   INTERACTIVE ELEMENTS
+========================= */
+
+button {
+  cursor: pointer;
+  transition: all var(--transition);
+}
+
+a {
+  transition: color var(--transition);
+}
+
+/* test*/
+.debug * {
+  outline: 1px solid red;
+}

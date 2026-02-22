@@ -1,0 +1,73 @@
+<!doctype html>
+<html lang="uk">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>UI Kit — Podorozhnyk</title>
+
+    <!-- ПІДКЛЮЧИ СВІЙ ГОЛОВНИЙ CSS -->
+    <link rel="stylesheet" href="./css/styles.css" />
+  </head>
+
+  <body>
+    <header class="container">
+      <h1>🎨 UI Kit — перевірка глобальних стилів</h1>
+    </header>
+
+    <main class="container">
+      <!-- BUTTONS -->
+      <section>
+        <h2>Buttons</h2>
+
+        <button class="btn">Primary Button</button>
+        <button class="btn btn--secondary">Secondary</button>
+        <button class="btn btn--outline">Outline</button>
+        <button class="btn btn--icon">
+          <svg width="20" height="20">
+            <use href="./images/icons.svg#icon-heart"></use>
+          </svg>
+        </button>
+      </section>
+
+      <!-- INPUTS -->
+      <section>
+        <h2>Inputs</h2>
+
+        <input class="input" type="text" placeholder="Text input" />
+
+        <input class="input" type="email" placeholder="Email" />
+
+        <textarea class="input" placeholder="Textarea"></textarea>
+
+        <label class="checkbox">
+          <input type="checkbox" />
+          <span>Checkbox</span>
+        </label>
+      </section>
+
+      <!-- CARDS -->
+      <section>
+        <h2>Cards</h2>
+
+        <div class="card">
+          <img src="https://picsum.photos/400/200" alt="" />
+          <div class="card__body">
+            <h3 class="card__title">
+              Дуже довгий заголовок картки який повинен обрізатися на два рядки
+            </h3>
+            <p class="card__text">
+              Дуже довгий опис який має обрізатися на кілька рядків щоб перевірити line-clamp.
+            </p>
+            <button class="btn">Read more</button>
+          </div>
+        </div>
+      </section>
+
+      <!-- CONTAINERS -->
+      <section>
+        <h2>Container Test</h2>
+        <div style="background: #eee; padding: 20px">Перевірка ширини контейнера</div>
+      </section>
+    </main>
+  </body>
+</html>
