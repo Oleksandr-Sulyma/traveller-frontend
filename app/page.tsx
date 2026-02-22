@@ -1,3 +1,7 @@
+import Hero from '@/components/Home/Hero/Hero';
+// import LatestStories from '@/components/Home/Blog/LatestStories';
+// import TopTravellers from '@/components/Home/Team/TopTravellers';
+// import CTA from '@/components/Home/CTA/CTA';
 
 import Blog from '@/components/Home/Blog/Blog';
 import Layout from '@/components/Home/Layouts/Layout ';
@@ -20,13 +24,18 @@ export default async function HomePage() {
 {/* Секція 2: Популярні історії (Task 19) */}
        <Layout/>
       {/* Секція 2: Популярні історії (Task 20) */}
+      {/* Передаємо дані всередину блоку */}
+      {/* <LatestStories stories={[]} /> */}
+
+      {/* Секція 3: Наші мандрівники (Task 21) */}
+      {/* <TopTravellers users={[]} /> */}
       <Blog />
        
       {/* Секція 3: Наші мандрівники (Task 21) */}
       <Team />
 
       {/* Секція 4: Блок реєстрації (Task 22) */}
-      <CTA />
+      {/* <CTA /> */}
     </main>
   );
 }
