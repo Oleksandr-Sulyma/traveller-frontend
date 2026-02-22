@@ -8,7 +8,7 @@ export default function UIKit() {
       <section style={{ marginBottom: '40px' }}>
         <h2>Buttons</h2>
         <div style={{ display: 'flex', gap: '10px', alignItems: 'center' }}>
-          <button className="btn">Primary Button</button>
+          <button className="button-primary">Primary Button</button>
           <button className="btn btn--secondary">Secondary</button>
           <button className="btn btn--outline">Outline</button>
           <button className="btn btn--icon">
