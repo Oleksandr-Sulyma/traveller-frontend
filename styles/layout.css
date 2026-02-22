@@ -1,0 +1,30 @@
+/* =========================
+   UNIVERSAL CONTAINER
+   Mobile First approach
+========================= */
+
+/* Мобільні: гумова верстка від 320px до 375px */
+.container {
+  width: 100%;
+  max-width: 375px; /* не більше 375px */
+  padding-inline: 20px;
+  margin-inline: auto;
+  box-sizing: border-box;
+  transition: all 0.3s ease;
+}
+
+/* Tablet: >=768px */
+@media (min-width: 768px) {
+  .container {
+    max-width: 768px;
+    padding-inline: 32px;
+  }
+}
+
+/* Desktop: >=1440px */
+@media (min-width: 1440px) {
+  .container {
+    max-width: 1440px;
+    padding-inline: 64px;
+  }
+}

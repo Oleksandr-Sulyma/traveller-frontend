@@ -1,0 +1,116 @@
+/* =========================
+   LINKS
+========================= */
+
+/* =========================
+   TEXT LINKS
+========================= */
+.link-text {
+  font-family: var(--font-main);
+  font-weight: 400;
+  border-radius: 8px;
+  padding-block: 0px;
+  padding-inline: 8px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition:
+    background var(--transition),
+    border var(--transition),
+    color var(--transition),
+    opacity var(--transition);
+}
+
+/* States */
+.link-text:hover,
+.link-text:focus {
+  border: 1px solid var(--text-main);
+}
+
+.link-text:active {
+  border: 1px solid var(--text-main);
+  background: var(--color-neutral-lightest);
+}
+
+.link-text:disabled {
+  opacity: 0.3;
+  cursor: not-allowed;
+}
+
+/* =========================
+   ICON LINKS (Only Icon)
+========================= */
+.link-icon {
+  border-radius: 8px;
+  padding: 2px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition:
+    background var(--transition),
+    border var(--transition),
+    opacity var(--transition);
+}
+
+/* Sizes */
+.link-icon-small {
+  width: 28px;
+  height: 28px;
+}
+.link-icon-large {
+  width: 32px;
+  height: 32px;
+}
+
+/* States */
+.link-icon:hover,
+.link-icon:focus {
+  border: 1px solid var(--text-main);
+}
+.link-icon:active {
+  border: 1px solid var(--text-main);
+  background: var(--color-neutral-lightest);
+}
+.link-icon:disabled {
+  opacity: 0.3;
+  cursor: not-allowed;
+}
+
+/* =========================
+   DARK THEME
+========================= */
+[data-theme='dark'] .link-text {
+  border-radius: 8px;
+  color: var(--color-white);
+}
+
+[data-theme='dark'] .link-text:hover,
+[data-theme='dark'] .link-text:focus {
+  border: 1px solid var(--color-white);
+}
+[data-theme='dark'] .link-text:active {
+  background: var(--color-neutral-dark);
+  border: 1px solid var(--color-white);
+}
+[data-theme='dark'] .link-text:disabled {
+  opacity: 0.3;
+}
+
+[data-theme='dark'] .link-icon {
+  border-radius: 8px;
+  color: var(--color-white);
+}
+
+[data-theme='dark'] .link-icon:hover,
+[data-theme='dark'] .link-icon:focus {
+  border: 1px solid var(--color-white);
+}
+[data-theme='dark'] .link-icon:active {
+  background: var(--color-neutral-dark);
+  border: 1px solid var(--color-white);
+}
+[data-theme='dark'] .link-icon:disabled {
+  opacity: 0.3;
+}

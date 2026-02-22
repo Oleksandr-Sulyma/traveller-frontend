@@ -1,0 +1,230 @@
+/* =========================
+   BUTTONS
+========================= */
+
+/* =========================
+   PRIMARY BUTTONS
+========================= */
+
+/* --- Text Buttons --- */
+.button-primary {
+  font-family: var(--font-main);
+  font-weight: 500;
+  border-radius: 8px;
+  border: 1px solid var(--btn-primary-bg);
+  color: var(--btn-primary-text);
+  background: var(--btn-primary-bg);
+  transition:
+    background var(--transition),
+    color var(--transition),
+    opacity var(--transition);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+/* Sizes */
+.button-primary-small {
+  padding-block: 4px;
+  padding-inline: 10px;
+  height: 32px;
+}
+.button-primary-medium {
+  padding-block: 6px;
+  padding-inline: 12px;
+  height: 39px;
+}
+.button-primary-large {
+  padding-block: 6px;
+  padding-inline: 12px;
+  height: 48px;
+}
+
+/* States */
+.button-primary:hover,
+.button-primary:focus {
+  background: var(--color-royal-blue-lighter);
+  color: var(--color-neutral-darkest);
+}
+.button-primary:active {
+  background: var(--color-royal-blue-light);
+  color: var(--color-neutral-darkest);
+}
+.button-primary:disabled {
+  opacity: 0.3;
+  cursor: not-allowed;
+}
+
+/* --- Icon Only Buttons --- */
+.button-primary-icon {
+  border-radius: 8px;
+  border: 1px solid var(--btn-primary-bg);
+  background: var(--btn-primary-bg);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition:
+    background var(--transition),
+    opacity var(--transition);
+}
+
+/* Icon Sizes */
+.button-primary-icon-small {
+  width: 32px;
+  height: 32px;
+  padding: 4px;
+}
+.button-primary-icon-large {
+  width: 48px;
+  height: 48px;
+  padding: 6px;
+}
+
+/* Icon States */
+.button-primary-icon:hover,
+.button-primary-icon:focus {
+  background: var(--color-royal-blue-lighter);
+}
+.button-primary-icon:active {
+  background: var(--color-royal-blue-light);
+}
+.button-primary-icon:disabled {
+  opacity: 0.3;
+  cursor: not-allowed;
+}
+
+/* =========================
+   SECONDARY BUTTONS
+========================= */
+
+.button-secondary {
+  font-family: var(--font-main);
+  font-weight: 500;
+  border-radius: 8px;
+  border: 1px solid rgba(0, 0, 0, 0.15);
+  background: rgba(0, 0, 0, 0.05);
+  color: var(--text-main);
+  transition:
+    background var(--transition),
+    color var(--transition),
+    opacity var(--transition);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+/* Sizes */
+.button-secondary-small {
+  padding-block: 4px;
+  padding-inline: 10px;
+  height: 32px;
+}
+.button-secondary-medium {
+  padding-block: 6px;
+  padding-inline: 12px;
+  height: 39px;
+}
+.button-secondary-large {
+  padding-block: 6px;
+  padding-inline: 12px;
+  height: 48px;
+}
+
+/* States */
+.button-secondary:hover,
+.button-secondary:focus {
+  background: var(--color-royal-blue-lighter);
+  color: var(--color-neutral-darkest);
+}
+.button-secondary:active {
+  background: var(--color-royal-blue-dark);
+  color: var(--color-neutral-darkest);
+}
+.button-secondary:disabled {
+  opacity: 0.3;
+  cursor: not-allowed;
+}
+
+/* --- Icon Only Buttons --- */
+.button-secondary-icon {
+  border-radius: 8px;
+  border: 1px solid rgba(0, 0, 0, 0.15);
+  background: rgba(0, 0, 0, 0.05);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition:
+    background var(--transition),
+    opacity var(--transition);
+}
+
+/* Icon Sizes */
+.button-secondary-icon-small {
+  width: 32px;
+  height: 32px;
+  padding: 4px;
+}
+.button-secondary-icon-large {
+  width: 48px;
+  height: 48px;
+  padding: 6px;
+}
+
+/* Icon States */
+.button-secondary-icon:hover,
+.button-secondary-icon:focus {
+  background: var(--color-royal-blue-lighter);
+  color: var(--color-neutral-darkest);
+}
+.button-secondary-icon:active {
+  background: var(--color-royal-blue-dark);
+}
+.button-secondary-icon:disabled {
+  opacity: 0.3;
+  cursor: not-allowed;
+}
+
+/* =========================
+   DARK THEME ADJUSTMENTS
+========================= */
+[data-theme='dark'] .button-primary {
+  border-radius: 12px;
+  border: 1px solid var(--color-white);
+  background: var(--color-white);
+  color: var(--color-neutral-darkest);
+}
+
+[data-theme='dark'] .button-primary:hover,
+[data-theme='dark'] .button-primary:focus {
+  background: var(--color-neutral-dark);
+  color: var(--color-white);
+}
+[data-theme='dark'] .button-primary:active {
+  background: var(--color-neutral-darker);
+  color: var(--color-white);
+}
+[data-theme='dark'] .button-primary:disabled {
+  opacity: 0.3;
+}
+
+[data-theme='dark'] .button-secondary {
+  border: 1px solid rgba(255, 255, 255, 0);
+  background: rgba(255, 255, 255, 0.1);
+  color: var(--color-white);
+}
+
+[data-theme='dark'] .button-secondary:hover,
+[data-theme='dark'] .button-secondary:focus {
+  background: var(--color-royal-blue-lighter);
+  color: var(--color-neutral-darkest);
+}
+[data-theme='dark'] .button-secondary:active {
+  background: var(--color-royal-blue-dark);
+}
+[data-theme='dark'] .button-secondary:disabled {
+  opacity: 0.3;
+}
