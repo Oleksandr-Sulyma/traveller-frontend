@@ -1,4 +1,3 @@
-
 .btn {
   /* Локальні змінні для розмірів (можна перевизначати) */
   --btn-height: 48px;
@@ -10,17 +9,17 @@
   align-items: center;
   justify-content: center;
   gap: var(--space-sm); /* Відступ між іконкою і текстом */
-  
+
   height: var(--btn-height);
   width: var(--btn-width);
   padding: var(--btn-padding);
   border-radius: var(--btn-radius);
-  
+
   font-family: var(--font-body);
   font-weight: 500;
   font-size: var(--fs-body-md); /* 18px */
   line-height: 1.5;
-  
+
   cursor: pointer;
   transition: var(--transition-fast);
   box-sizing: border-box;
@@ -45,7 +44,7 @@
 }
 
 /* Стан Disabled (загальний) */
-.btn:disabled, 
+.btn:disabled,
 .btn.is-disabled {
   opacity: 0.3;
   cursor: not-allowed;
@@ -54,6 +53,7 @@
 
 /* ================================
    LIGHT THEME (Default)
+ ================================ */
 
 /* Primary Button */
 .btn-primary {
@@ -62,7 +62,8 @@
   color: #fff;
 }
 
-.btn-primary:hover, .btn-primary:focus {
+.btn-primary:hover,
+.btn-primary:focus {
   background: #e8eeff;
   color: #000;
 }
@@ -79,7 +80,8 @@
   color: #000;
 }
 
-.btn-secondary:hover, .btn-secondary:focus {
+.btn-secondary:hover,
+.btn-secondary:focus {
   background: #4169e1;
   border-color: transparent;
   color: #fff;
@@ -93,6 +95,7 @@
 
 /* ================================
    DARK THEME
+   ================================ */
 
 [data-theme='dark'] .btn {
   --btn-radius: 12px; /* У темній темі радіус 12px */
@@ -105,7 +108,7 @@
   color: #000;
 }
 
-[data-theme='dark'] .btn-primary:hover, 
+[data-theme='dark'] .btn-primary:hover,
 [data-theme='dark'] .btn-primary:focus {
   background: #7f7f7f;
   border-color: #7f7f7f;
@@ -134,11 +137,14 @@
 [data-theme='dark'] .btn-secondary:active {
   background: #7a96ea;
   color: #000;
+}
 /* =========================
    BUTTONS
+   ================================ */
 
 /* =========================
    PRIMARY BUTTONS
+   ================================ */
 
 /* --- Text Buttons --- */
 .button-primary {
@@ -231,6 +237,7 @@
 
 /* =========================
    SECONDARY BUTTONS
+  ================================ */
 
 .button-secondary {
   font-family: var(--font-main);
@@ -323,6 +330,7 @@
 
 /* =========================
    DARK THEME ADJUSTMENTS
+========================= */
 [data-theme='dark'] .button-primary {
   border-radius: 12px;
   border: 1px solid var(--color-white);
