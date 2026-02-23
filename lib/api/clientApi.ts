@@ -1,6 +1,6 @@
 import { User } from "@/types/user";
 import nextServer from "./api";
-import { Story, StoryTag } from "@/types/story";
+import { Story } from "@/types/story";
 
 export interface StoryHttpResponse {
   stories: Story[];
@@ -10,13 +10,11 @@ export interface StoryHttpResponse {
 export default async function fetchStory(
   query: string,
   page: number,
-  tag?: string,
-): Promise<StoryHttpResponse> {
+  ): Promise<StoryHttpResponse> {
   const response = await nextServer.get<StoryHttpResponse>("/stories", {
     params: {
       search: query,
       page,
-      tag: tag || undefined,
       perPage: 12,
     },
   });
@@ -32,18 +30,15 @@ export async function fetchStoryById(id: string): Promise<Story> {
 export interface createStoryPost {
   title: string;
   content: string;
-  tag: StoryTag;
 }
 
 export async function createStory({
   title,
   content,
-  tag,
 }: createStoryPost): Promise<Story> {
   const postResponse = await nextServer.post<Story>("/stories", {
     title,
     content,
-    tag,
   });
   return postResponse.data;
 }

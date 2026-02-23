@@ -7,7 +7,6 @@ import { StoryHttpResponse } from "./clientApi";
 export default async function fetchStoryServer(
   query: string,
   page: number,
-  tag?: string,
 ): Promise<StoryHttpResponse> {
   const cookieStore = await cookies();
 
@@ -15,7 +14,6 @@ export default async function fetchStoryServer(
     params: {
       search: query,
       page,
-      tag: tag || undefined,
       perPage: 12,
     },
     headers: {
