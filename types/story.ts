@@ -12,4 +12,7 @@ export interface Story {
     favoriteCount: number;
     createdAt: string;
     updatedAt: string;
+    tag: StoryTag;
 }
+
+export type StoryTag = "travel" | "life" | "tech";
