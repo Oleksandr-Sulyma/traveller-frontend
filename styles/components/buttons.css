@@ -1,370 +1,163 @@
-.btn {
-  /* Локальні змінні для розмірів (можна перевизначати) */
-  --btn-height: 48px;
-  --btn-padding: 6px 12px;
-  --btn-width: auto;
-  --btn-radius: 8px; /* Дефолт для світлої теми */
-
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: var(--space-sm); /* Відступ між іконкою і текстом */
-
-  height: var(--btn-height);
-  width: var(--btn-width);
-  padding: var(--btn-padding);
-  border-radius: var(--btn-radius);
-
-  font-family: var(--font-body);
-  font-weight: 500;
-  font-size: var(--fs-body-md); /* 18px */
-  line-height: 1.5;
-
-  cursor: pointer;
-  transition: var(--transition-fast);
-  box-sizing: border-box;
-  border: 1px solid transparent;
-  text-decoration: none;
+/* =================================
+   BASE BUTTON STRUCTURE
+==================================== */
+button.btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    box-sizing: border-box;
+    font-family: var(--font-family);
+    font-weight: var(--fw-medium);
+    font-size: var(--fs-md);
+    line-height: var(--lh-base);
+    text-decoration: none;
+    border-radius: var(--radius-btn-light);
+    border: 1px solid transparent;
+    outline: none;
+    /* Ширина по контенту за замовчуванням */
+    width: auto;
 }
 
-/* Спеціальний клас для кнопок-іконок (квадратні) */
-.btn-icon {
-  --btn-padding: 6px;
-  --btn-width: var(--btn-height);
+/* РОЗМІРИ ТА ПАДІНГИ */
+/* Стандартна кнопка 48px */
+button.btn.btn--default {
+    height: 48px;
+    padding: 6px 12px; /* Падінги по боках */
 }
 
-/* Модифікатор для маленького розміру (32px) */
-.btn--sm {
-  --btn-height: 32px;
-  --btn-padding: 4px; /* Для іконки */
+/* Кнопка хедера 35px */
+button.btn.btn--header {
+    height: 35px;
+    padding: 4px 10px;
+    font-size: var(--fs-body-sm, 16px);
 }
 
-.btn--sm:not(.btn-icon) {
-  --btn-padding: 4px 8px; /* Для тексту */
+@media (max-width: 1024px) {
+    button.btn.btn--header {
+        height: 32px;
+        padding: 4px 10px;
+    }
 }
 
-/* Стан Disabled (загальний) */
-.btn:disabled,
-.btn.is-disabled {
-  opacity: 0.3;
-  cursor: not-allowed;
-  pointer-events: none;
+/* КНОПКИ З ІКОНКАМИ (Квадратні) */
+/* Якщо всередині тільки іконка — додаємо цей клас, щоб кнопка стала квадратом */
+button.btn.btn-icon {
+    width: 48px; 
+    height: 48px;
+    padding: 6px; /* Прибираємо падінги для центрування */
 }
 
-/* ================================
+button.btn.btn-icon--header {
+    width: 35px;
+    height: 35px;
+    padding: 4px;
+}
+
+@media (max-width: 1024px) {
+    button.btn.btn-icon--header {
+        width: 32px;
+        height: 32px;
+        padding: 4px;
+    }
+}
+
+button.btn:disabled {
+    opacity: 0.3 !important;
+    cursor: not-allowed !important;
+    pointer-events: none;
+}
+
+/* =================================
    LIGHT THEME (Default)
- ================================ */
+==================================== */
 
-/* Primary Button */
-.btn-primary {
-  background: #4169e1;
-  border-color: #4169e1;
-  color: #fff;
-}
-
-.btn-primary:hover,
-.btn-primary:focus {
-  background: #e8eeff;
-  color: #000;
+/* PRIMARY LIGHT */
+button.btn.btn-primary {
+    background-color: var(--color-royal-blue) !important;
+    border: 1px solid var(--color-royal-blue) !important;
+    color: var(--color-white) !important;
 }
 
-.btn-primary:active {
-  background: #7a96ea;
-  color: #000;
+button.btn.btn-primary:hover {
+    background-color: var(--color-royal-blue-lighter) !important;
+    border-color: var(--color-royal-blue-lighter) !important;
+    color: var(--color-neutral-darkest) !important;
 }
 
-/* Secondary Button */
-.btn-secondary {
-  background: rgba(0, 0, 0, 0.05);
-  border-color: rgba(0, 0, 0, 0.15);
-  color: #000;
+button.btn.btn-primary:active {
+    background-color: var(--color-royal-blue-light) !important;
+    border-color: var(--color-royal-blue-light) !important;
+    color: var(--color-neutral-darkest) !important;
+    transform: translateY(1px);
 }
 
-.btn-secondary:hover,
-.btn-secondary:focus {
-  background: #4169e1;
-  border-color: transparent;
-  color: #fff;
+/* SECONDARY LIGHT */
+button.btn.btn-secondary {
+    background-color: var(--opacity-neutral-darkest-5) !important;
+    border: 1px solid var(--opacity-neutral-darkest-15) !important;
+    color: var(--color-neutral-darkest) !important;
 }
 
-.btn-secondary:active {
-  background: #1a2a5a;
-  border-color: transparent;
-  color: #fff;
+button.btn.btn-secondary:hover {
+    background-color: var(--color-royal-blue) !important;
+    border-color: transparent !important;
+    color: var(--color-white) !important;
 }
 
-/* ================================
-   DARK THEME
-   ================================ */
-
-[data-theme='dark'] .btn {
-  --btn-radius: 12px; /* У темній темі радіус 12px */
+button.btn.btn-secondary:active {
+    background-color: var(--color-royal-blue-darker) !important;
+    border-color: transparent !important;
+    color: var(--color-white) !important;
+    transform: translateY(1px);
 }
 
-/* Dark Primary */
-[data-theme='dark'] .btn-primary {
-  background: #fff;
-  border-color: #fff;
-  color: #000;
+/* =================================
+   DARK THEME (Applied via data-theme)
+==================================== */
+[data-theme='dark'] button.btn {
+    border-radius: var(--radius-btn-dark);
 }
 
-[data-theme='dark'] .btn-primary:hover,
-[data-theme='dark'] .btn-primary:focus {
-  background: #7f7f7f;
-  border-color: #7f7f7f;
-  color: #fff;
+/* PRIMARY DARK */
+[data-theme='dark'] button.btn.btn-primary {
+    background-color: var(--color-white) !important;
+    border: 1px solid var(--color-white) !important;
+    color: var(--color-neutral-darkest) !important;
 }
 
-[data-theme='dark'] .btn-primary:active {
-  background: #4c4c4c;
-  border-color: #4c4c4c;
-  color: #fff;
+[data-theme='dark'] button.btn.btn-primary:hover {
+    background-color: var(--color-neutral) !important;
+    border-color: var(--color-neutral) !important;
+    color: var(--color-white) !important;
 }
 
-/* Dark Secondary */
-[data-theme='dark'] .btn-secondary {
-  background: rgba(255, 255, 255, 0.1);
-  border-color: transparent;
-  color: #fff;
+[data-theme='dark'] button.btn.btn-primary:active {
+    background-color: var(--color-neutral-dark) !important;
+    border: 1px solid var(--color-neutral-dark) !important;
+    color: var(--color-white) !important;
 }
 
-[data-theme='dark'] .btn-secondary:hover,
-[data-theme='dark'] .btn-secondary:focus {
-  background: #e8eeff;
-  color: #000;
+/* SECONDARY DARK */
+[data-theme='dark'] button.btn.btn-secondary {
+    background-color: var(--opacity-white-10) !important;
+    border: 1px solid transparent !important;
+    color: var(--color-white) !important;
 }
 
-[data-theme='dark'] .btn-secondary:active {
-  background: #7a96ea;
-  color: #000;
-}
-/* =========================
-   BUTTONS
-   ================================ */
-
-/* =========================
-   PRIMARY BUTTONS
-   ================================ */
-
-/* --- Text Buttons --- */
-.button-primary {
-  font-family: var(--font-main);
-  font-weight: 500;
-  border-radius: 8px;
-  border: 1px solid var(--btn-primary-bg);
-  color: var(--btn-primary-text);
-  background: var(--btn-primary-bg);
-  transition:
-    background var(--transition),
-    color var(--transition),
-    opacity var(--transition);
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
+[data-theme='dark'] button.btn.btn-secondary:hover {
+    background-color: var(--color-royal-blue-lighter) !important;
+    color: var(--color-neutral-darkest) !important;
 }
 
-/* Sizes */
-.button-primary-small {
-  padding-block: 4px;
-  padding-inline: 10px;
-  height: 32px;
-}
-.button-primary-medium {
-  padding-block: 6px;
-  padding-inline: 12px;
-  height: 39px;
-}
-.button-primary-large {
-  padding-block: 6px;
-  padding-inline: 12px;
-  height: 48px;
+[data-theme='dark'] button.btn.btn-secondary:active {
+    background-color: var(--color-royal-blue-light) !important;
+    color: var(--color-neutral-darkest) !important;
 }
 
-/* States */
-.button-primary:hover,
-.button-primary:focus {
-  background: var(--color-royal-blue-lighter);
-  color: var(--color-neutral-darkest);
-}
-.button-primary:active {
-  background: var(--color-royal-blue-light);
-  color: var(--color-neutral-darkest);
-}
-.button-primary:disabled {
-  opacity: 0.3;
-  cursor: not-allowed;
-}
-
-/* --- Icon Only Buttons --- */
-.button-primary-icon {
-  border-radius: 8px;
-  border: 1px solid var(--btn-primary-bg);
-  background: var(--btn-primary-bg);
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-  transition:
-    background var(--transition),
-    opacity var(--transition);
-}
-
-/* Icon Sizes */
-.button-primary-icon-small {
-  width: 32px;
-  height: 32px;
-  padding: 4px;
-}
-.button-primary-icon-large {
-  width: 48px;
-  height: 48px;
-  padding: 6px;
-}
-
-/* Icon States */
-.button-primary-icon:hover,
-.button-primary-icon:focus {
-  background: var(--color-royal-blue-lighter);
-}
-.button-primary-icon:active {
-  background: var(--color-royal-blue-light);
-}
-.button-primary-icon:disabled {
-  opacity: 0.3;
-  cursor: not-allowed;
-}
-
-/* =========================
-   SECONDARY BUTTONS
-  ================================ */
-
-.button-secondary {
-  font-family: var(--font-main);
-  font-weight: 500;
-  border-radius: 8px;
-  border: 1px solid rgba(0, 0, 0, 0.15);
-  background: rgba(0, 0, 0, 0.05);
-  color: var(--text-main);
-  transition:
-    background var(--transition),
-    color var(--transition),
-    opacity var(--transition);
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-}
-
-/* Sizes */
-.button-secondary-small {
-  padding-block: 4px;
-  padding-inline: 10px;
-  height: 32px;
-}
-.button-secondary-medium {
-  padding-block: 6px;
-  padding-inline: 12px;
-  height: 39px;
-}
-.button-secondary-large {
-  padding-block: 6px;
-  padding-inline: 12px;
-  height: 48px;
-}
-
-/* States */
-.button-secondary:hover,
-.button-secondary:focus {
-  background: var(--color-royal-blue-lighter);
-  color: var(--color-neutral-darkest);
-}
-.button-secondary:active {
-  background: var(--color-royal-blue-dark);
-  color: var(--color-neutral-darkest);
-}
-.button-secondary:disabled {
-  opacity: 0.3;
-  cursor: not-allowed;
-}
-
-/* --- Icon Only Buttons --- */
-.button-secondary-icon {
-  border-radius: 8px;
-  border: 1px solid rgba(0, 0, 0, 0.15);
-  background: rgba(0, 0, 0, 0.05);
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-  transition:
-    background var(--transition),
-    opacity var(--transition);
-}
-
-/* Icon Sizes */
-.button-secondary-icon-small {
-  width: 32px;
-  height: 32px;
-  padding: 4px;
-}
-.button-secondary-icon-large {
-  width: 48px;
-  height: 48px;
-  padding: 6px;
-}
-
-/* Icon States */
-.button-secondary-icon:hover,
-.button-secondary-icon:focus {
-  background: var(--color-royal-blue-lighter);
-  color: var(--color-neutral-darkest);
-}
-.button-secondary-icon:active {
-  background: var(--color-royal-blue-dark);
-}
-.button-secondary-icon:disabled {
-  opacity: 0.3;
-  cursor: not-allowed;
-}
-
-/* =========================
-   DARK THEME ADJUSTMENTS
-========================= */
-[data-theme='dark'] .button-primary {
-  border-radius: 12px;
-  border: 1px solid var(--color-white);
-  background: var(--color-white);
-  color: var(--color-neutral-darkest);
-}
-
-[data-theme='dark'] .button-primary:hover,
-[data-theme='dark'] .button-primary:focus {
-  background: var(--color-neutral-dark);
-  color: var(--color-white);
-}
-[data-theme='dark'] .button-primary:active {
-  background: var(--color-neutral-darker);
-  color: var(--color-white);
-}
-[data-theme='dark'] .button-primary:disabled {
-  opacity: 0.3;
-}
-
-[data-theme='dark'] .button-secondary {
-  border: 1px solid rgba(255, 255, 255, 0);
-  background: rgba(255, 255, 255, 0.1);
-  color: var(--color-white);
-}
-
-[data-theme='dark'] .button-secondary:hover,
-[data-theme='dark'] .button-secondary:focus {
-  background: var(--color-royal-blue-lighter);
-  color: var(--color-neutral-darkest);
-}
-[data-theme='dark'] .button-secondary:active {
-  background: var(--color-royal-blue-dark);
-}
-[data-theme='dark'] .button-secondary:disabled {
-  opacity: 0.3;
+/* FOCUS STATE */
+button.btn:focus-visible {
+    box-shadow: 0 0 0 3px rgba(65, 105, 225, 0.4);
 }
