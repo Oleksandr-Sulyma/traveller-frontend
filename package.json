@@ -10,12 +10,15 @@
     "format": "prettier --write \"**/*.{js,jsx,ts,tsx,json,css,md}\""
   },
   "dependencies": {
+    "@tanstack/react-query": "^5.90.21",
+    "@tanstack/react-query-devtools": "^5.91.3",
     "axios": "^1.13.5",
     "cookie": "^1.1.1",
     "modern-normalize": "^3.0.1",
     "next": "16.1.6",
     "react": "19.2.3",
-    "react-dom": "19.2.3"
+    "react-dom": "19.2.3",
+    "react-loader-spinner": "^8.0.2"
   },
   "devDependencies": {
     "@tailwindcss/postcss": "^4",
