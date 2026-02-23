@@ -1,116 +1,116 @@
-/* =========================
-   LINKS
-========================= */
-
-/* =========================
-   TEXT LINKS
-========================= */
-.link-text {
-  font-family: var(--font-main);
-  font-weight: 400;
-  border-radius: 8px;
-  padding-block: 0px;
-  padding-inline: 8px;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-  transition:
-    background var(--transition),
-    border var(--transition),
-    color var(--transition),
-    opacity var(--transition);
+/* =================================
+   BASE LINK STYLES
+==================================== */
+.link-base {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    transition: all 0.2s ease;
+    box-sizing: border-box;
+    cursor: pointer;
+    border-radius: 8px;
+    border: 1px solid transparent; /* Запобігає стрибкам */
 }
 
-/* States */
-.link-text:hover,
-.link-text:focus {
-  border: 1px solid var(--text-main);
+/* Текстові лінки: Ширина по контенту */
+.link-text {
+    width: auto;
+    min-width: max-content;
+    height: 27px;
+    padding: 0 8px;
+    font-family: var(--font-family);
+    font-weight: 500;
+    font-size: 18px;
+    line-height: 150%;
+    color: var(--color-neutral-darkest);
+}
+
+/* СТАН Hover/Active для LIGHT THEME */
+.link-text:hover, .link-text:focus-visible {
+    border: 1px solid var(--color-scheme-1-text);
 }
 
 .link-text:active {
-  border: 1px solid var(--text-main);
-  background: var(--color-neutral-lightest);
+    border: 1px solid var(--color-scheme-1-text);
+    background: var(--color-neutral-lighter);
 }
 
-.link-text:disabled {
-  opacity: 0.3;
-  cursor: not-allowed;
-}
-
-/* =========================
-   ICON LINKS (Only Icon)
-========================= */
+/* Іконки-лінки: Суворо 28x28 (без можливості зміни) */
 .link-icon {
-  border-radius: 8px;
-  padding: 2px;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-  transition:
-    background var(--transition),
-    border var(--transition),
-    opacity var(--transition);
+    width: 28px !important;
+    height: 28px !important;
+    min-width: 28px !important;
+    max-width: 28px !important;
+    padding: 2px;
+    color: var(--color-neutral-darkest);
 }
 
-/* Sizes */
-.link-icon-small {
-  width: 28px;
-  height: 28px;
-}
-.link-icon-large {
-  width: 32px;
-  height: 32px;
+.link-icon:hover, .link-icon:focus-visible {
+    border: 1px solid var(--color-scheme-1-text);
 }
 
-/* States */
-.link-icon:hover,
-.link-icon:focus {
-  border: 1px solid var(--text-main);
-}
 .link-icon:active {
-  border: 1px solid var(--text-main);
-  background: var(--color-neutral-lightest);
-}
-.link-icon:disabled {
-  opacity: 0.3;
-  cursor: not-allowed;
+    border: 1px solid var(--color-scheme-1-text);
+    background: var(--color-neutral-lighter);
 }
 
-/* =========================
+/* =================================
+   CONTEXTUAL LINKS (За ТЗ)
+==================================== */
+
+/* Хедер Головна (69px) */
+.link-header-main {
+    width: 69px !important;
+    height: 27px;
+    font-weight: 400;
+    color: var(--color-scheme-1-background);
+}
+
+/* Хедер Інші сторінки (113px) */
+.link-header-inner {
+    width: 113px !important;
+    height: 27px;
+    font-weight: 400;
+    color: var(--color-scheme-2-text);
+}
+
+/* Футер ПК (69х43) */
+.link-footer-pc {
+    padding: 8px 0px;
+    width: 69px !important;
+    height: 43px;
+    font-weight: 400;
+    color: var(--color-scheme-2-text);
+}
+
+/* Футер Мобільні/Планшет (auto ширина) */
+@media (max-width: 1024px) {
+    .link-footer-mobile {
+        padding: 8px 0px;
+        width: auto !important; /* По ширині тексту */
+        min-width: 61px;
+        height: auto;
+        font-size: 16px;
+        color: var(--color-scheme-2-text);
+    }
+}
+
+/* =================================
    DARK THEME
-========================= */
-[data-theme='dark'] .link-text {
-  border-radius: 8px;
-  color: var(--color-white);
+==================================== */
+[data-theme='dark'] .link-text,
+[data-theme='dark'] .link-icon {
+    color: var(--color-white) !important;
 }
 
 [data-theme='dark'] .link-text:hover,
-[data-theme='dark'] .link-text:focus {
-  border: 1px solid var(--color-white);
-}
-[data-theme='dark'] .link-text:active {
-  background: var(--color-neutral-dark);
-  border: 1px solid var(--color-white);
-}
-[data-theme='dark'] .link-text:disabled {
-  opacity: 0.3;
+[data-theme='dark'] .link-icon:hover {
+    border: 1px solid var(--color-white) !important;
 }
 
-[data-theme='dark'] .link-icon {
-  border-radius: 8px;
-  color: var(--color-white);
-}
-
-[data-theme='dark'] .link-icon:hover,
-[data-theme='dark'] .link-icon:focus {
-  border: 1px solid var(--color-white);
-}
+[data-theme='dark'] .link-text:active,
 [data-theme='dark'] .link-icon:active {
-  background: var(--color-neutral-dark);
-  border: 1px solid var(--color-white);
-}
-[data-theme='dark'] .link-icon:disabled {
-  opacity: 0.3;
+    background: var(--color-neutral-dark) !important;
+    border: 1px solid var(--color-white) !important;
 }
