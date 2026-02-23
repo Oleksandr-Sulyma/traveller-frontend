@@ -18,36 +18,36 @@ export default function AuthNavigation({
 
   if (mode === 'modal') {
     return (
-      <div className={css.modalAuth}>
-        <Link
-          href="/auth/login"
-          className={css.modalLogin}
-          onClick={handleClick}
-          aria-label="Увійти в акаунт"
-        >
-          Вхід
-        </Link>
-        <Link
-          href="/auth/register"
-          className={css.modalRegister}
-          onClick={handleClick}
-          aria-label="Зареєструватися"
-        >
-          Реєстрація
-        </Link>
-      </div>
+     // <div className={css.modalAuth}>
+     //   <Link
+     //     href="/auth/login"
+     //     className={css.modalLogin}
+     //     onClick={handleClick}
+     //     aria-label="Увійти в акаунт"
+    //    >
+    //      Вхід
+    //    </Link>
+   //     <Link
+   //       href="/auth/register"
+   //       className={css.modalRegister}
+   //       onClick={handleClick}
+  //        aria-label="Зареєструватися"
+   //     >
+    //      Реєстрація
+    //    </Link>
+   //   </div>
     );
   }
 
   // Desktop mode 
   return (
-    <div className={css.desktopAuth}>
-      <Link href="/auth/login" className={css.loginButton}>
-        Вхід
-      </Link>
-      <Link href="/auth/register" className={css.registerButton}>
-        Реєстрація
-      </Link>
-    </div>
+   // <div className={css.desktopAuth}>
+   //   <Link href="/auth/login" className={css.loginButton}>
+   //     Вхід
+   //   </Link>
+   //   <Link href="/auth/register" className={css.registerButton}>
+   //     Реєстрація
+   //   </Link>
+  // </div>
   );
 }
