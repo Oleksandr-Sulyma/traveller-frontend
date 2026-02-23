@@ -1,114 +1,95 @@
-/* ================================
-   GLOBAL DESIGN TOKENS
-================================ */
-
-/* ----- Fonts ----- */
 :root {
-  --font-heading: 'Sora', sans-serif;
-  --font-body: 'Nunito Sans', sans-serif;
+    /* --- 1. ПАЛІТРА ROYAL BLUE (З макета) --- */
+    --color-royal-blue: #4169e1;
+    --color-royal-blue-light: #7a96ea;
+    --color-royal-blue-lighter: #e8eeff;
+    --color-royal-blue-lightest: #f7f9ff;
+    --color-royal-blue-dark: #3454b4;
+    --color-royal-blue-darker: #1a2a5a;
+    --color-royal-blue-darkest: #131f43;
 
-  /* ----- Font Sizes ----- */
-  --fs-h1: 48px;
-  --fs-h2: 40px;
-  --fs-h3: 32px;
-  --fs-h4: 28px;
-  --fs-h5: 24px;
-  --fs-h6: 20px;
+    /* --- 2. НЕЙТРАЛЬНІ ТА СИСТЕМНІ КОЛЬОРИ --- */
+    --color-white: #fff;
+    --color-neutral-darkest: #000;
+    --color-neutral-darker: #191919;
+    --color-neutral-dark: #4c4c4c;
+    --color-neutral: #7f7f7f;
+    --color-neutral-light: #b2b2b2;
+    --color-neutral-lighter: #d8d8d8;
+    --color-neutral-lightest: #f2f2f2;
+    --color-red: #b00101;
 
-  --fs-body-lg: 20px;
-  --fs-body-md: 18px;
-  --fs-body-sm: 16px;
+    /* --- 3. ПРОЗОРІСТЬ (Opacity) --- */
+    --opacity-neutral-darkest-5: rgba(0, 0, 0, 0.05);
+    --opacity-neutral-darkest-10: rgba(0, 0, 0, 0.1);
+    --opacity-neutral-darkest-15: rgba(0, 0, 0, 0.15);
+    --opacity-neutral-darkest-20: rgba(0, 0, 0, 0.2);
+    --opacity-neutral-darkest-30: rgba(0, 0, 0, 0.3);
+    --opacity-neutral-darkest-60: rgba(0, 0, 0, 0.6);
+    
+    --opacity-white-5: rgba(255, 255, 255, 0.05);
+    --opacity-white-10: rgba(255, 255, 255, 0.1);
+    --opacity-white-15: rgba(255, 255, 255, 0.15);
+    --opacity-transparent: rgba(255, 255, 255, 0);
 
-  /* ----- Font Weights ----- */
-  --fw-regular: 400;
-  --fw-semibold: 600;
+    /* --- 4. СЕМАНТИЧНІ СХЕМИ (З макета) --- */
+    --color-scheme-1-background: var(--color-white);
+    --color-scheme-1-text: var(--color-neutral-darkest);
+    --color-scheme-1-border: var(--opacity-neutral-darkest-15);
+    --color-scheme-1-accent: var(--color-royal-blue);
+    
+    --color-scheme-2-background: var(--color-royal-blue-lightest);
+    --color-scheme-2-text: var(--color-neutral-darkest);
+    --color-scheme-2-border: var(--opacity-neutral-darkest-15);
+    --color-scheme-2-accent: var(--color-royal-blue);
 
-  /* ================================
-     LIGHT THEME COLORS
-  ================================ */
+    /* --- 5. ТИПОГРАФІКА --- */
+    --font-family: "Nunito Sans", sans-serif;
+    --fs-md: 18px;
+    --fs-sm: 16px;
+    --fs-xs: 12px;
+    --fw-medium: 500;
+    --lh-base: 1.5;
 
-  /* Backgrounds */
-  --bg-page: #ffffff;
-  --bg-header: #ffffff;
-  --bg-main: #ffffff;
-  --bg-footer: #e8eeff;
-  --bg-modal: #ffffff;
-  --bg-card: #e8eeff;
-  --bg-neutral: #9c9c9c;
+    /* --- 6. РАДІУСИ ТА ВІДСТУПИ --- */
+    --radius-btn-light: 8px;
+    --radius-btn-dark: 12px;
+    --space-sm: 8px;
+    --transition-fast: 0.2s ease;
 
-  /* Text */
-  --text-primary: #111111;
-  --text-secondary: #444444;
-  --text-muted: #777777;
-  --text-inverse: #ffffff;
-
-  /* Brand */
-  --color-primary: #4f46e5;
-  --color-primary-hover: #4338ca;
-  --color-accent: #22c55e;
-
-  /* Borders */
-  --border-default: #e5e7eb;
-
-  /* ================================
-     SPACING
-  ================================ */
-  --space-xs: 4px;
-  --space-sm: 8px;
-  --space-md: 16px;
-  --space-lg: 24px;
-  --space-xl: 32px;
-
-  /* ================================
-     RADIUS
-  ================================ */
-  --radius-sm: 6px;
-  --radius-md: 12px;
-  --radius-lg: 20px;
-
-  /* ================================
-     SHADOWS
-  ================================ */
-  --shadow-sm: 0 2px 6px rgba(0, 0, 0, 0.08);
-  --shadow-md: 0 6px 16px rgba(0, 0, 0, 0.12);
-
-  /* ================================
-     TRANSITIONS
-  ================================ */
-  --transition-fast: 0.2s ease;
-  --transition-normal: 0.3s ease;
-}
-
-/* ================================
-     DARK THEME (document.documentElement.setAttribute("data-theme", "dark");)
-
-  ================================ */
+    /* =================================
+   DARK THEME TOKENS
+==================================== */
 
 [data-theme='dark'] {
-  /* Backgrounds */
-  --bg-page: #0f1115;
-  --bg-header: #14171c;
-  --bg-main: #0f1115;
-  --bg-footer: #181c24;
-  --bg-modal: #1c2028;
-  --bg-card: #181c24;
-  --bg-neutral: #2b2f36;
+    /* Backgrounds */
+    --color-scheme-background: #0f1115;
+    --color-scheme-text: #f5f7fa;
+    
+    /* Primary Dark */
+    --btn-primary-bg: var(--color-white);
+    --btn-primary-text: var(--color-neutral-darkest);
+    --btn-primary-border: var(--color-white);
+    
+    --btn-primary-hover-bg: var(--color-neutral); /* #7f7f7f */
+    --btn-primary-hover-text: var(--color-white);
+    
+    --btn-primary-active-bg: var(--color-neutral-dark); /* #4c4c4c */
+    --btn-primary-active-border: var(--color-neutral-dark);
+    --btn-primary-active-text: var(--color-white);
 
-  /* Text */
-  --text-primary: #f5f7fa;
-  --text-secondary: #c5c9d3;
-  --text-muted: #8b92a1;
-  --text-inverse: #111111;
+    /* Secondary Dark */
+    --btn-secondary-bg: var(--opacity-white-10); /* rgba(255, 255, 255, 0.1) */
+    --btn-secondary-text: var(--color-white);
+    --btn-secondary-border: var(--opacity-transparent);
+    
+    --btn-secondary-hover-bg: var(--color-royal-blue-lighter); /* #e8eeff */
+    --btn-secondary-hover-text: var(--color-neutral-darkest);
+    
+    --btn-secondary-active-bg: var(--color-royal-blue-light); /* #7a96ea */
+    --btn-secondary-active-text: var(--color-neutral-darkest);
 
-  /* Brand */
-  --color-primary: #6366f1;
-  --color-primary-hover: #818cf8;
-  --color-accent: #22c55e;
-
-  /* Borders */
-  --border-default: #2a2f3a;
-
-  /* Shadows */
-  --shadow-sm: 0 2px 6px rgba(0, 0, 0, 0.4);
-  --shadow-md: 0 6px 20px rgba(0, 0, 0, 0.5);
+    /* Радіус для темної теми */
+    --radius-btn: var(--radius-btn-dark); /* 12px */
+}
 }
