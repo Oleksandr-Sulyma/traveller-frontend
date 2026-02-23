@@ -105,15 +105,12 @@
 }
 
 .copyright {
-  font-size: 14px;
-  opacity: 0.7;
+  font-size: 12px;
+  font-weight: 400;
   text-align: center;
 }
 
-/* ── TABLET (768px–1439px) ──
-   Рядок 1: [Логотип зліва]  ←──────────→  [Соцмережі справа]
-   Рядок 2:              [Навігація по центру]
-*/
+/* TABLET (768px–1439px)*/
 @media (min-width: 768px) {
   .footer {
     padding: 48px 32px;
@@ -128,8 +125,14 @@
     margin-bottom: 32px;
   }
 
+  .icon {
+    width: 24px;
+    height: 24px;
+  }
+
   .social {
     margin-left: auto;
+    gap: 12px;
   }
 
   /* Навігація займає повну ширину → переноситься на наступний рядок по центру */

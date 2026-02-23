@@ -17,22 +17,22 @@ export default function Footer() {
           </Link>
 
           <div className={styles.social}>
-            <a href="#" aria-label="Facebook">
+            <a href="https://www.facebook.com/login" target="_blank" aria-label="Facebook">
               <svg className={styles.icon} viewBox="0 0 32 32">
                 <use href="/sprites/sprite.svg#icon-Facebook" />
               </svg>
             </a>
-            <a href="#" aria-label="Instagram">
+            <a href="https://www.instagram.com/" target="_blank" aria-label="Instagram">
               <svg className={styles.icon} viewBox="0 0 32 32">
                 <use href="/sprites/sprite.svg#icon-Instagram" />
               </svg>
             </a>
-            <a href="#" aria-label="Twitter">
+            <a href="https://twitter.com/" target="_blank" aria-label="Twitter">
               <svg className={styles.icon} viewBox="0 0 32 32">
                 <use href="/sprites/sprite.svg#icon-X" />
               </svg>
             </a>
-            <a href="#" aria-label="YouTube">
+            <a href="https://www.youtube.com/" target="_blank" aria-label="YouTube">
               <svg className={styles.icon} viewBox="0 0 32 32">
                 <use href="/sprites/sprite.svg#icon-Youtube" />
               </svg>
