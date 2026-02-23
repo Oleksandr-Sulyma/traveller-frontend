@@ -3,7 +3,7 @@
 import Link from 'next/link';
 import Image from 'next/image';
 import { usePathname } from 'next/navigation';
-import css from './Header.module.css';
+// import css from './Header.module.css';
 import AuthNavigation from '../AuthNavigation/AuthNavigation'; 
 
 export default function Header() {
