@@ -2,14 +2,16 @@ import { User } from "./user";
 import { Category } from "./category"; 
 
 export interface Story {
-    _id: string;
+    id: string;
     title: string;
     article: string;
     img: string; 
     category: Category;
-    ownerId: Pick<User, '_id' | 'name'> & Partial<Pick<User, 'avatarUrl'>>;
+    ownerId: string;
     date: string;      
     favoriteCount: number;
     createdAt: string;
     updatedAt: string;
-  }
+}
+  
+export type StoryPost = Omit<Story, 'id' | 'createdAt' | 'updatedAt' | 'favoriteCount' | 'ownerId' | 'date'>;    

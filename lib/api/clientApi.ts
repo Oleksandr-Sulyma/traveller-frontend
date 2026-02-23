@@ -1,6 +1,6 @@
 import { User } from "@/types/user";
 import nextServer from "./api";
-import { Story } from "@/types/story";
+import { Story, StoryPost } from "@/types/story";
 
 export interface StoryHttpResponse {
   stories: Story[];
@@ -27,19 +27,9 @@ export async function fetchStoryById(id: string): Promise<Story> {
   return responseById.data;
 }
 
-export interface CreateStoryPost {
-  title: string;
-  article: string;
-}
 
-export async function createStory({
-  title,
-  article,
-}: CreateStoryPost): Promise<Story> {
-  const postResponse = await nextServer.post<Story>("/stories", {
-    title,
-    article,
-  });
+export async function createStory(input: StoryPost): Promise<Story> {
+  const postResponse = await nextServer.post<Story>("/stories", input);
   return postResponse.data;
 }
 
