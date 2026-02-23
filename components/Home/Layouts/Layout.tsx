@@ -13,7 +13,7 @@ export default function Layout() {
       <ul>
         <li>
           <svg width="40" height="40" style={{ color: 'black' }}>
-            <use href="/sprites/sprite.svg#prefix__icon-edit"></use>
+            <use href="/public/sprites/sprite.min.min.svg#prefix__prefix__icon-arrow_back"></use>
           </svg>
 
           <h3>Наша місія</h3>
