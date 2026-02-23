@@ -27,9 +27,10 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="uk">
       <body suppressHydrationWarning>
-         <Header />
-            <main>{children}</main>
-            <Footer />
+        <Header />
+        <main>{children}</main>
+        <Footer />
+        <div id="modal-root"></div>
       </body>
     </html>
   );
