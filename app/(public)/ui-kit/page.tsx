@@ -1,6 +1,8 @@
 "use client";
 
 import React, { useState } from 'react';
+import TextArea from '@/components/Forms/TextArea'
+import CustomSelect, { CATEGORIES_LIST } from '@/components/Forms/CustomSelect';
 
 export default function UiKitPage() {
   const [theme, setTheme] = useState<'light' | 'dark'>('light');
@@ -83,7 +85,8 @@ export default function UiKitPage() {
         </header>
 
         {/* --- SECTION 1: PRIMARY BUTTONS --- */}
-        <h2 style={{ color: '#4169e1', marginBottom: '30px' }}>1. Primary Variant</h2>
+        <h2 style={{ color: '#4169e1', marginBottom: '30px' }}>1. Button</h2>
+        <h3 style={{ color: '#27b351', marginBottom: '30px' }}>1.1. Primary Variant</h3>
 
         <ComponentSection 
           title="Primary: Standard"
@@ -110,7 +113,7 @@ export default function UiKitPage() {
         </ComponentSection>
 
         {/* --- SECTION 2: SECONDARY BUTTONS --- */}
-        <h2 style={{ color: '#777', marginBottom: '30px', marginTop: '100px' }}>2. Secondary Variant</h2>
+        <h3 style={{ color: '#777', marginBottom: '30px', marginTop: '100px' }}>1.2. Secondary Variant</h3>
 
         <ComponentSection 
           title="Secondary: Standard"
@@ -129,7 +132,7 @@ export default function UiKitPage() {
         </ComponentSection>
 
         {/* --- SECTION 3: PRIMARY ICON BUTTONS --- */}
-        <h2 style={{ color: '#4169e1', marginBottom: '30px', marginTop: '100px' }}>3. Primary Icon Buttons</h2>
+        <h3 style={{ color: '#4169e1', marginBottom: '30px', marginTop: '100px' }}>1.3. Primary Icon Buttons</h3>
 
         <ComponentSection 
           title="Primary Icon: Standard (48px)"
@@ -156,7 +159,7 @@ export default function UiKitPage() {
         </ComponentSection>
 
         {/* --- SECTION 4: SECONDARY ICON BUTTONS --- */}
-        <h2 style={{ color: '#777', marginBottom: '30px', marginTop: '100px' }}>4. Secondary Icon Buttons</h2>
+        <h3 style={{ color: '#777', marginBottom: '30px', marginTop: '100px' }}> 1.4. Secondary Icon Buttons</h3>
 
         <ComponentSection 
           title="Secondary Icon: Standard (48px)"
@@ -183,7 +186,7 @@ export default function UiKitPage() {
         </ComponentSection>
 
         {/* --- SECTION 5: LINKS --- */}
-        <h2 style={{ color: '#4169e1', marginBottom: '30px', marginTop: '100px' }}>5. Links System</h2>
+        <h2 style={{ color: '#4169e1', marginBottom: '30px', marginTop: '100px' }}>2. Links System</h2>
 
         <ComponentSection 
           title="Text Link: Standard"
@@ -209,6 +212,126 @@ export default function UiKitPage() {
           <a href="#" className="link-base link-icon" onClick={(e) => e.preventDefault()}>{PlusIcon}</a>
         </ComponentSection>
 
+         {/* --- SECTION 3: TEXT INPUTS (Fixed 67px) --- */}
+        <h2 style={{ color: '#4169e1', marginBottom: '30px' }}>3. Text Inputs</h2>
+
+        <ComponentSection 
+          title="3.1 Input: Normal"
+          description="Стандартний стан. Висота всієї конструкції 67px (інпут 43px + зона помилки)."
+          code={`<div className="input-group input-type">\n  <input className="input" placeholder="Введіть ваше ім'я" />\n  <div className="input-info">\n    <span className="error-text">Помилка</span>\n  </div>\n</div>`}
+        >
+          <div className="input-group input-type">
+            <input className="input" placeholder="Введіть ваше ім'я" />
+            <div className="input-info">
+              <span className="error-text">Текст помилки з'явиться тут</span>
+            </div>
+          </div>
+        </ComponentSection>
+
+        <ComponentSection 
+          title="3.2 Input: Error State"
+          description="Додано клас .has-error. Рамка стає червоною, текст помилки — видимим."
+          code={`<div className="input-group input-type has-error">\n  <input className="input" defaultValue="wrong-data" />\n  <div className="input-info">\n    <span className="error-text">Будь ласка, перевірте дані</span>\n  </div>\n</div>`}
+        >
+          <div className="input-group input-type has-error">
+            <input className="input" defaultValue="wrong-data" />
+            <div className="input-info">
+              <span className="error-text">Будь ласка, перевірте дані</span>
+            </div>
+          </div>
+        </ComponentSection>
+
+      {/* --- SECTION 4: TEXT AREAS (React Component) --- */}
+<h2 style={{ color: '#4169e1', marginBottom: '30px', marginTop: '100px' }}>4. Text Areas</h2>
+
+{/* 4.1 Варіант за замовчуванням (Історія) */}
+<ComponentSection 
+  title="4.1 Story Area (Default)"
+  description="Варіант для великих текстів. Висота 180px, ліміт 2500 символів та плейсхолдер встановлені автоматично."
+  code={`// Не потрібно передавати жодних пропсів\n<StoryTextArea />`}
+>
+  <TextArea />
+</ComponentSection>
+
+{/* 4.2 Варіант для коротких повідомлень */}
+<ComponentSection 
+  title="4.2 General Message Area (Custom)"
+  description="Для коротких повідомлень передаємо варіант 'h-120' та потрібний ліміт символів."
+  code={`<StoryTextArea \n  variant="h-120" \n  maxChars={300} \n  placeholder="Напишіть короткий коментар..." \n/>`}
+>
+  <TextArea 
+    variant="h-120" 
+    maxChars={300} 
+    placeholder="Напишіть короткий коментар..." 
+  />
+</ComponentSection>
+
+{/* 4.3 Демонстрація стану помилки */}
+<ComponentSection 
+  title="4.3 Error State Demo"
+  description="Компонент сам вираховує залишок і вмикає червоний колір, якщо текст задовгий."
+  code={`// Просто введіть текст більше ліміту - помилка з'явиться автоматично`}
+>
+  {/* Тут ми просто показуємо компонент, щоб розробник міг потестити введення */}
+  <TextArea 
+    variant="h-120" 
+    maxChars={10} 
+    placeholder="Введіть більше 10 символів..." 
+  />
+</ComponentSection>
+
+{/* --- SECTION 5: CUSTOM SELECT --- */}
+<h2 style={{ color: 'var(--color-royal-blue)', marginBottom: '30px', marginTop: '100px' }}>5. Custom Select</h2>
+
+<ComponentSection 
+  title="5.1 Category Selection"
+  description="Адаптивний селект з вибором регіону. Підтримує темну тему та мобільні версії."
+  code={`<CustomSelect />`}
+>
+  <CustomSelect />
+</ComponentSection>
+
+{/* Для візуальної перевірки станів розробником без взаємодії */}
+<ComponentSection 
+  title="5.2 Select States"
+  description="Візуальна перевірка кольорів у стані Filled та Open."
+  code={`// Ці стани активуються автоматично через CSS класи .is-filled та .is-open`}
+>
+  <div style={{ display: 'flex', flexDirection: 'column', gap: '40px' }}>
+    
+    {/* Стан: Filled */}
+    <div className="select-group">
+      <span className="select-label">Категорія</span>
+      <div className="select-container is-filled">
+        <div className="select-trigger">
+          <span className="select-trigger-text">Європа</span>
+          <div className="select-icon">
+            <svg><use xlinkHref="/sprites/sprite.svg#icon-keyboard_arrow_down" /></svg>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    {/* Стан: Open */}
+    <div className="select-group">
+      <span className="select-label">Категорія</span>
+      <div className="select-container is-open">
+        <div className="select-trigger" style={{ borderColor: 'var(--color-royal-blue-light)' }}>
+          <span className="select-trigger-text">Категорія</span>
+          <div className="select-icon" style={{ transform: 'rotate(180deg)' }}>
+            <svg><use xlinkHref="/sprites/sprite.svg#icon-keyboard_arrow_down" /></svg>
+          </div>
+        </div>
+        <div className="select-dropdown">
+           <div className="select-item">Азія</div>
+           <div className="select-item" style={{ background: 'var(--color-neutral-lightest)' }}>Гори</div>
+           <div className="select-item">Європа</div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</ComponentSection>
 
       </div>
     </div>
