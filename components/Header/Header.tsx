@@ -25,8 +25,8 @@ export default function TestPage() {
           description="Ми будемо сумувати за вами! "
           confirmButtonText="Вийти"
           cancelButtonText="Відмінити"
-          onConfirm={handleLogout}
           onCancel={() => setIsModalOpen(false)}
+          onConfirm={handleLogout}
         />
       )}
     </div>

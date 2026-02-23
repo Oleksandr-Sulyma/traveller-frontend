@@ -1,5 +1,5 @@
 .overlay{
-      position: fixed;
+  position: fixed;
   top: 0;
   left: 0;
   width: 100%;
@@ -16,13 +16,24 @@
    padding: 64px 20px 20px;
    width: 100%;
   position: relative;
-  max-width: 768px;
+  max-width: 767px;
   background-color: var(--color-scheme-2-background);
 }
-.iconeClose{
-   width: 32px;
+.closeBtn{
+   position: absolute;
+   top: 20px;
+   right: 20px;
+    width: 32px;
    height: 32px;
-   position: absolute; top: 20px; right: 20px;
+  
+  
+}
+.iconClose{
+    width:24px;
+    height: 24px;
+    display: block; 
+    stroke: var(--color-scheme-1-text); 
+    fill: none;
 }
 .content{
     display: flex;
@@ -31,7 +42,7 @@
     gap: 16px;
     width: 100%;
     max-width: 295px;
-    margin: 0 auto 32px;
+    margin: 12px auto 32px;
    
     
 }
@@ -58,27 +69,66 @@
     display: flex;
     flex-direction: column;
     gap: 24px;
-    align-items: center;
+    align-items: center;  
+    justify-content: center;
+   
 }
 
 .button {
-font-family: var(--font-family);
-font-weight: 500;
-font-size: 16px;
-line-height: 150%;
-color: var(--color-neutral-darkest);
-border: 1px solid var(--color-scheme-2-border);
-border-radius: 8px;
-padding: 6px 12px;
-width: 295px;
-height: 48px;
+
+  width: 295px !important; 
+  height: 48px !important;
+  border-radius: 8px !important;
+  padding: 6px 12px !important;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  
 
 }
-.confirmButton{ 
-background: var(--color-royal-blue);  
+
+@media (min-width: 768px) {
+   .overlay{
+    padding:32px
+   }
+   .modal{
+    padding: 64px 32px;
+    max-width: 768px;
+   }
+    .content{
+        max-width: 640px;
+    }
+    .buttons{
+        flex-direction: row;
+        gap: 16px;
+    }
+    .button{
+      width: 203px !important;
+    }
+
+    .title{
+        font-size: 32px;
+    }
+
+}
+@media (min-width: 1024px){
+
+.modal{
+    border-radius: 24px;
+    padding: 64px;
+    width: 768px;
+    max-width: 768px;
+}
+.title{
+    font-size: 48px;
 }
 
-.cancelButton{
-background: var(--opacity-neutral-darkest-5);    
+.description{
+    font-size: 20px;
+}  
+.buttons{
+    gap:24px;
 }
 
+   
+}

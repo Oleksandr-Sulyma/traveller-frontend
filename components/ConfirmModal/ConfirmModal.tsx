@@ -2,6 +2,7 @@
 import { createPortal } from "react-dom";
 import { useEffect, useRef } from "react";
 import css from "./ConfirmModal.module.css";
+import style from "@/styles/btn.module.css";
 
 interface ConfirmModalProps {
     title: string;
@@ -44,21 +45,28 @@ export default function ConfirmModal({ title, description, confirmButtonText, ca
     return createPortal(
         <div className={css.overlay} role="dialog" aria-modal="true" >
             <div className={css.modal} ref={modalRef} >
-                <svg className={css.iconClose}>
-                    {/* Коли спрайт буде готовий, #icon-close */} X
-                    <use href="/sprite.svg#icon-close"></use>
-                </svg>
+                <button
+                    type="button"
+                    onClick={onCancel}
+                    className={`${css.closeBtn} `}
+                    aria-label="Close"
+                >
+                    <svg className={css.iconClose} viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <use href="/sprites/sprite.svg#icon-close"></use>
+                    </svg>
+                </button>
+
                 <div className={css.content}>
                     <h3 className={css.title}>{title}</h3>
                     {description && <p className={css.description}>{description}</p>}
                 </div>
                 <div className={css.buttons}>
-                    <button onClick={onConfirm} className={`${css.cancelButton} ${css.button}`}>{cancelButtonText}</button>
-                    <button onClick={onCancel} className={`${css.confirmButton} ${css.button}`}>{confirmButtonText}</button>
+                    <button onClick={onCancel} className={`btn btn-secondary ${css.button} `}>{cancelButtonText}</button>
+                    <button onClick={onConfirm} className={`btn btn-primary ${css.button} `}>{confirmButtonText}</button>
                 </div>
 
             </div>
-        </div>, modalRoot
+        </div >, modalRoot
     )
 
 }
