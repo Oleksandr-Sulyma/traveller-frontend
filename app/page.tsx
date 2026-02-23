@@ -4,7 +4,7 @@ import Hero from '@/components/Home/Hero/Hero';
 // import CTA from '@/components/Home/CTA/CTA';
 
 import Blog from '@/components/Home/Blog/Blog';
-import Layout from '@/components/Home/Layouts/Layout ';
+import Layout from '@/components/Home/Layouts/Layout';
 import Team from '@/components/Home/Team/Team';
 import CTA from '@/components/Home/CTA/CTA';
 
