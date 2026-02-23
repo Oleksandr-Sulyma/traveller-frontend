@@ -17,6 +17,7 @@ import './fonts.css';
 
 import Header from '@/components/Header/Header';
 import Footer from '@/components/Footer/Footer';
+import TanStackProvider from '@/components/Providers/TanStackProvider';
 
 export const metadata: Metadata = {
   title: 'Подорожники',
@@ -27,9 +28,11 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="uk">
       <body suppressHydrationWarning>
-         <Header />
-            <main>{children}</main>
-            <Footer />
+        <TanStackProvider>
+          {/* <Header /> */}
+          <main>{children}</main>
+          <Footer />
+        </TanStackProvider>
       </body>
     </html>
   );
