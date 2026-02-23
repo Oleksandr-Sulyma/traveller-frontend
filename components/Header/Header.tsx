@@ -4,7 +4,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { usePathname } from 'next/navigation';
 import css from './Header.module.css';
-//import AuthNavigation from '......'; 
+import AuthNavigation from '../AuthNavigation/AuthNavigation'; 
 
 export default function Header() {
   const currentPath = usePathname(); 
@@ -25,7 +25,7 @@ export default function Header() {
           <span className={css.logoText}>Подорожники</span>
         </Link>
 
-        {/* Desktop навігація }
+        {/* Desktop навігація*/}
         <nav aria-label="Main navigation" className={css.desktopNav}>
           <ul className={css.navigation}>
             <li>
@@ -53,7 +53,7 @@ export default function Header() {
               </Link>
             </li>
           </ul>
-          <AuthNavigation variant="desktop" />
+          <AuthNavigation mode="desktop" />
         </nav>
 
         {/* Tablet: кнопка “Опублікувати історію” */}
