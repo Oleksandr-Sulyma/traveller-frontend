@@ -42,7 +42,6 @@ const RegisterSchema = Yup.object().shape({
 });
 
 export default function SignUp() {
-  // const queryClient = useQueryClient();
   const router = useRouter();
   const id = useId();
 
