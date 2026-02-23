@@ -1,72 +1,23 @@
-"use client"
-import { createPortal } from "react-dom";
-import { useEffect, useRef } from "react";
-import css from "./ConfirmModal.module.css";
-import style from "@/styles/btn.module.css";
+import ModalLayout from "../ModalLayout/ModalLayout";
+
+
 
 interface ConfirmModalProps {
-    title: string;
-    description?: string;
-    confirmButtonText: string;
-    cancelButtonText: string;
+    onClose: () => void;
     onConfirm: () => void;
-    onCancel: () => void;
 }
-export default function ConfirmModal({ title, description, confirmButtonText, cancelButtonText, onConfirm, onCancel }: ConfirmModalProps) {
-    const modalRoot = document.getElementById("modal-root");
-    const modalRef = useRef<HTMLDivElement>(null);
 
-    useEffect(() => {
-        const handleKeyDown = (event: KeyboardEvent) => {
-            if (event.key === "Escape") {
-                onCancel();
-            }
-        }
-        const handleClickOutside = (event: MouseEvent) => {
-            if (modalRef.current && !modalRef.current.contains(event.target as Node)) {
-                onCancel();
-            }
-        }
-        document.addEventListener("keydown", handleKeyDown);
-        document.addEventListener("mousedown", handleClickOutside);
-        document.body.style.overflow = "hidden";
-
-
-        return () => {
-            document.removeEventListener("keydown", handleKeyDown);
-            document.removeEventListener("mousedown", handleClickOutside);
-            document.body.style.overflow = "auto";
-        }
-    }, [onCancel]);
-
-    if (!modalRoot) {
-        return null;
-    }
-    return createPortal(
-        <div className={css.overlay} role="dialog" aria-modal="true" >
-            <div className={css.modal} ref={modalRef} >
-                <button
-                    type="button"
-                    onClick={onCancel}
-                    className={`${css.closeBtn} `}
-                    aria-label="Close"
-                >
-                    <svg className={css.iconClose} viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <use href="/sprites/sprite.svg#icon-close"></use>
-                    </svg>
-                </button>
-
-                <div className={css.content}>
-                    <h3 className={css.title}>{title}</h3>
-                    {description && <p className={css.description}>{description}</p>}
-                </div>
-                <div className={css.buttons}>
-                    <button onClick={onCancel} className={`btn btn-secondary ${css.button} `}>{cancelButtonText}</button>
-                    <button onClick={onConfirm} className={`btn btn-primary ${css.button} `}>{confirmButtonText}</button>
-                </div>
-
-            </div>
-        </div >, modalRoot
-    )
-
+export default function ConfirmModal(props: ConfirmModalProps) {
+    const { onConfirm, onClose } = props;
+    return (
+        <ModalLayout
+            title="Ви точно хочете вийти?"
+            description="Ми будемо сумувати за вами! "
+            confirmButtonText="Вийти"
+            cancelButtonText="Відмінити"
+            onConfirm={onConfirm}
+            onCancel={onClose}
+            onClose={onClose}
+        />
+    );
 }

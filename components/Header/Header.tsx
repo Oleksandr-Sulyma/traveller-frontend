@@ -1,35 +1,52 @@
-"use client";
+"use client"
 import { useState } from "react";
-import ConfirmModal from "@/components/ConfirmModal/ConfirmModal";
+import ConfirmModal from "../ConfirmModal/ConfirmModal";
+import AuthRedirectModal from "../AuthNavModal/AuthNavModal";
 
-export default function TestPage() {
-  const [isModalOpen, setIsModalOpen] = useState(false);
+export default function Header() {
+  // Стани для відкриття модалок
+  const [isLogoutOpen, setIsLogoutOpen] = useState(false);
+  const [isAuthWarningOpen, setIsAuthWarningOpen] = useState(false);
 
   const handleLogout = () => {
-    console.log("Користувач вийшов!");
-    setIsModalOpen(false);
+    console.log("Користувач вийшов");
+    setIsLogoutOpen(false);
   };
 
   return (
-    <div style={{ padding: "40px" }}>
-      <h1>Хедер</h1>
-      <h1>Перевірка модалки</h1>
+    <header className="header">
+      <h1>Header</h1>
 
-      <button onClick={() => setIsModalOpen(true)}>
-        Відкрити вікно виходу
-      </button>
 
-      {isModalOpen && (
+      <div >
+        {/* Кнопка 1: Тестуємо вихід */}
+        <button onClick={() => setIsLogoutOpen(true)} className="btn">
+          confirmModal
+        </button>
+        <br>
+        </br>
+        {/* Кнопка 2: Тестуємо помилку збереження */}
+        <button onClick={() => setIsAuthWarningOpen(true)} className="btn">
+          authNavModal
+        </button>
+      </div>
+
+
+
+      {/* 1. Модалка підтвердження виходу */}
+      {isLogoutOpen && (
         <ConfirmModal
-          title="Ви точно хочете вийти?"
-          description="Ми будемо сумувати за вами! "
-          confirmButtonText="Вийти"
-          cancelButtonText="Відмінити"
-          onCancel={() => setIsModalOpen(false)}
+          onClose={() => setIsLogoutOpen(false)}
           onConfirm={handleLogout}
         />
       )}
-    </div>
+
+      {/* 2. Модалка редіректу (помилка збереження) */}
+      {isAuthWarningOpen && (
+        <AuthRedirectModal
+          onClose={() => setIsAuthWarningOpen(false)}
+        />
+      )}
+    </header>
   );
 }
-
