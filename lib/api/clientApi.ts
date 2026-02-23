@@ -7,10 +7,10 @@ export interface StoryHttpResponse {
   totalPages: number;
 }
 
-export default async function fetchStory(
+export default async function fetchStories(
   query: string,
   page: number,
-  ): Promise<StoryHttpResponse> {
+): Promise<StoryHttpResponse> {
   const response = await nextServer.get<StoryHttpResponse>("/stories", {
     params: {
       search: query,
@@ -27,25 +27,24 @@ export async function fetchStoryById(id: string): Promise<Story> {
   return responseById.data;
 }
 
-export interface createStoryPost {
+export interface CreateStoryPost {
   title: string;
-  content: string;
+  article: string;
 }
 
 export async function createStory({
   title,
-  content,
-}: createStoryPost): Promise<Story> {
+  article,
+}: CreateStoryPost): Promise<Story> {
   const postResponse = await nextServer.post<Story>("/stories", {
     title,
-    content,
+    article,
   });
   return postResponse.data;
 }
 
 export async function deleteStory(id: string): Promise<Story> {
   const deleteResponse = await nextServer.delete<Story>(`/stories/${id}`);
-
   return deleteResponse.data;
 }
 
@@ -54,10 +53,10 @@ export interface RegisterRequest {
   password: string;
 }
 
-export interface UserRegister {
-  username: string;
-  email: string;
-}
+// export interface UserRegister {
+//   username: string;
+//   email: string;
+// }
 
 export async function register(data: RegisterRequest) {
   const res = await nextServer.post<User>("/auth/register", data);
@@ -91,7 +90,7 @@ export interface UpdateUserRequest {
   username: string;
 }
 
-export const getMeUpdate = async (payload: UpdateUserRequest) => {
+export const updateMe = async (payload: UpdateUserRequest) => {
   const res = await nextServer.patch<User>("/users/me", payload);
   return res.data;
 };
