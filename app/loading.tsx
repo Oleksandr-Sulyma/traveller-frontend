@@ -1,5 +1,7 @@
+import Loader from '@/components/Loader/Loader';
+
 const Loading = () => {
-  return <p>Loading, please wait...</p>;
+  return <Loader color="#FFFFFF" size={50} />;
 };
 
 export default Loading;
