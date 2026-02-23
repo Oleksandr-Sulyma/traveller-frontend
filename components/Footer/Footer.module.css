@@ -1,0 +1,185 @@
+.footer {
+  background: #e6edff;
+  padding: 48px 20px;
+  display: flex;
+  justify-content: center;
+  font-family: sans-serif;
+  color: #000;
+}
+
+.container {
+  width: 100%;
+  max-width: 1440px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* ── MOBILE (default) ──
+   Логотип, соцмережі і навігація — вертикально по центру
+*/
+.mainRow {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 40px;
+  margin-bottom: 40px;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  text-decoration: none;
+  color: inherit;
+  font-family: 'Sora', sans-serif;
+  font-weight: 400;
+  font-size: 17px;
+  letter-spacing: -0.01em;
+}
+
+.icon {
+  width: 32px;
+  height: 32px;
+  display: block;
+}
+
+.social {
+  display: flex;
+  gap: 16px;
+  align-items: center;
+}
+
+.social a {
+  color: inherit;
+  transition:
+    transform 0.25s,
+    opacity 0.25s;
+}
+
+.social a:hover {
+  transform: scale(1.15);
+  opacity: 0.7;
+}
+
+.nav {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+}
+
+.nav a {
+  position: relative;
+  font-size: 16px;
+  text-decoration: none;
+  font-family: 'Nunito Sans', sans-serif;
+  color: #000;
+  transition: opacity 0.25s;
+}
+
+.nav a::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: -2px;
+  width: 0%;
+  height: 2px;
+  background: currentColor;
+  transition: width 0.25s;
+}
+
+.nav a:hover {
+  opacity: 0.8;
+}
+.nav a:hover::after {
+  width: 100%;
+}
+
+.divider {
+  width: 100%;
+  border: none;
+  border-top: 1px solid rgba(0, 0, 0, 0.2);
+  margin-bottom: 32px;
+}
+
+.copyright {
+  font-size: 14px;
+  opacity: 0.7;
+  text-align: center;
+}
+
+/* ── TABLET (768px–1439px) ──
+   Рядок 1: [Логотип зліва]  ←──────────→  [Соцмережі справа]
+   Рядок 2:              [Навігація по центру]
+*/
+@media (min-width: 768px) {
+  .footer {
+    padding: 48px 32px;
+  }
+
+  .mainRow {
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    gap: 24px;
+    margin-bottom: 32px;
+  }
+
+  .social {
+    margin-left: auto;
+  }
+
+  /* Навігація займає повну ширину → переноситься на наступний рядок по центру */
+  .nav {
+    flex-direction: row;
+    justify-content: center;
+    gap: 32px;
+    width: 100%;
+    order: 3;
+  }
+}
+
+/* ── DESKTOP (1440px+) ──
+   Один рядок: [Логотип] ─── [Соцмережі по центру] ─── [Навігація справа]
+*/
+@media (min-width: 1440px) {
+  .footer {
+    padding: 80px 64px;
+  }
+
+  .mainRow {
+    flex-wrap: nowrap;
+    align-items: center;
+    margin-bottom: 43px;
+    position: relative;
+  }
+
+  .logo {
+    flex-shrink: 0;
+  }
+
+  /* Соцмережі абсолютно по центру контейнера */
+  .social {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    margin-left: 0;
+    gap: 16px;
+  }
+
+  /* Навігація справа */
+  .nav {
+    flex-direction: row;
+    width: auto;
+    margin-left: auto;
+    gap: 24px;
+    order: unset;
+  }
+
+  .nav a {
+    font-size: 17px;
+  }
+}
