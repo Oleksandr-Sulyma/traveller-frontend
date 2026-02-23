@@ -10,17 +10,17 @@
   align-items: center;
   justify-content: center;
   gap: var(--space-sm); /* Відступ між іконкою і текстом */
-  
+
   height: var(--btn-height);
   width: var(--btn-width);
   padding: var(--btn-padding);
   border-radius: var(--btn-radius);
-  
+
   font-family: var(--font-body);
   font-weight: 500;
   font-size: var(--fs-body-md); /* 18px */
   line-height: 1.5;
-  
+
   cursor: pointer;
   transition: var(--transition-fast);
   box-sizing: border-box;
@@ -45,7 +45,7 @@
 }
 
 /* Стан Disabled (загальний) */
-.btn:disabled, 
+.btn:disabled,
 .btn.is-disabled {
   opacity: 0.3;
   cursor: not-allowed;
@@ -62,7 +62,8 @@
   color: #fff;
 }
 
-.btn-primary:hover, .btn-primary:focus {
+.btn-primary:hover,
+.btn-primary:focus {
   background: #e8eeff;
   color: #000;
 }
@@ -79,7 +80,8 @@
   color: #000;
 }
 
-.btn-secondary:hover, .btn-secondary:focus {
+.btn-secondary:hover,
+.btn-secondary:focus {
   background: #4169e1;
   border-color: transparent;
   color: #fff;
@@ -92,11 +94,10 @@
 }
 
 /* ================================
-   DARK THEME
+    DARK THEME
 
 [data-theme='dark'] .btn {
-  --btn-radius: 12px; /* У темній темі радіус 12px */
-}
+  --btn-radius: 12px; У темній темі радіус 12px
 
 /* Dark Primary */
 [data-theme='dark'] .btn-primary {
@@ -105,7 +106,7 @@
   color: #000;
 }
 
-[data-theme='dark'] .btn-primary:hover, 
+[data-theme='dark'] .btn-primary:hover,
 [data-theme='dark'] .btn-primary:focus {
   background: #7f7f7f;
   border-color: #7f7f7f;
@@ -134,11 +135,12 @@
 [data-theme='dark'] .btn-secondary:active {
   background: #7a96ea;
   color: #000;
+}
 /* =========================
-   BUTTONS
+    BUTTONS
 
 /* =========================
-   PRIMARY BUTTONS
+    PRIMARY BUTTONS
 
 /* --- Text Buttons --- */
 .button-primary {
@@ -230,7 +232,7 @@
 }
 
 /* =========================
-   SECONDARY BUTTONS
+    SECONDARY BUTTONS
 
 .button-secondary {
   font-family: var(--font-main);
@@ -321,42 +323,40 @@
   cursor: not-allowed;
 }
 
-/* =========================
-   DARK THEME ADJUSTMENTS
-[data-theme='dark'] .button-primary {
-  border-radius: 12px;
-  border: 1px solid var(--color-white);
-  background: var(--color-white);
-  color: var(--color-neutral-darkest);
-}
+/* DARK THEME ADJUSTMENTS [data-theme='dark'] .button-primary {
+    border-radius: 12px;
+    border: 1px solid var(--color-white);
+    background: var(--color-white);
+    color: var(--color-neutral-darkest);
+  }
 
-[data-theme='dark'] .button-primary:hover,
-[data-theme='dark'] .button-primary:focus {
-  background: var(--color-neutral-dark);
-  color: var(--color-white);
-}
-[data-theme='dark'] .button-primary:active {
-  background: var(--color-neutral-darker);
-  color: var(--color-white);
-}
-[data-theme='dark'] .button-primary:disabled {
-  opacity: 0.3;
-}
+  [data-theme='dark'] .button-primary:hover,
+  [data-theme='dark'] .button-primary:focus {
+    background: var(--color-neutral-dark);
+    color: var(--color-white);
+  }
+  [data-theme='dark'] .button-primary:active {
+    background: var(--color-neutral-darker);
+    color: var(--color-white);
+  }
+  [data-theme='dark'] .button-primary:disabled {
+    opacity: 0.3;
+  }
 
-[data-theme='dark'] .button-secondary {
-  border: 1px solid rgba(255, 255, 255, 0);
-  background: rgba(255, 255, 255, 0.1);
-  color: var(--color-white);
-}
+  [data-theme='dark'] .button-secondary {
+    border: 1px solid rgba(255, 255, 255, 0);
+    background: rgba(255, 255, 255, 0.1);
+    color: var(--color-white);
+  }
 
-[data-theme='dark'] .button-secondary:hover,
-[data-theme='dark'] .button-secondary:focus {
-  background: var(--color-royal-blue-lighter);
-  color: var(--color-neutral-darkest);
-}
-[data-theme='dark'] .button-secondary:active {
-  background: var(--color-royal-blue-dark);
-}
-[data-theme='dark'] .button-secondary:disabled {
-  opacity: 0.3;
-}
+  [data-theme='dark'] .button-secondary:hover,
+  [data-theme='dark'] .button-secondary:focus {
+    background: var(--color-royal-blue-lighter);
+    color: var(--color-neutral-darkest);
+  }
+  [data-theme='dark'] .button-secondary:active {
+    background: var(--color-royal-blue-dark);
+  }
+  [data-theme='dark'] .button-secondary:disabled {
+    opacity: 0.3;
+  } */
