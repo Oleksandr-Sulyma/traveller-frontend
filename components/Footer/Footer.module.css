@@ -1,10 +1,9 @@
 .footer {
-  background: #e8eeff;
+  background: var(--color-royal-blue-lighter);
   padding: 48px 20px;
   display: flex;
   justify-content: center;
-  font-family: sans-serif;
-  color: #000;
+  color: var(--color-scheme-2-text);
 }
 
 .container {
@@ -15,9 +14,6 @@
   align-items: center;
 }
 
-/* ── MOBILE (default) ──
-   Логотип, соцмережі і навігація — вертикально по центру
-*/
 .mainRow {
   width: 100%;
   display: flex;
@@ -32,8 +28,7 @@
   align-items: center;
   gap: 12px;
   text-decoration: none;
-  color: inherit;
-  font-family: 'Sora', sans-serif;
+  color: var(--color-scheme-2-text);
   font-weight: 400;
   font-size: 17px;
   letter-spacing: -0.01em;
@@ -42,7 +37,7 @@
 .icon {
   width: 32px;
   height: 32px;
-  display: block;
+  fill: currentColor;
 }
 
 .social {
@@ -52,7 +47,7 @@
 }
 
 .social a {
-  color: inherit;
+  color: var(--color-scheme-2-text);
   transition:
     transform 0.25s,
     opacity 0.25s;
@@ -72,10 +67,9 @@
 
 .nav a {
   position: relative;
-  font-size: 16px;
+  font-size: var(--fs-sm);
   text-decoration: none;
-  font-family: 'Nunito Sans', sans-serif;
-  color: #000;
+  color: var(--color-scheme-2-text);
   transition: opacity 0.25s;
 }
 
@@ -93,6 +87,7 @@
 .nav a:hover {
   opacity: 0.8;
 }
+
 .nav a:hover::after {
   width: 100%;
 }
@@ -100,17 +95,18 @@
 .divider {
   width: 100%;
   border: none;
-  border-top: 1px solid rgba(0, 0, 0, 0.2);
+  border-top: 1px solid var(--opacity-neutral-darkest-15);
   margin-bottom: 32px;
 }
 
 .copyright {
-  font-size: 12px;
+  font-size: var(--fs-xs);
   font-weight: 400;
   text-align: center;
+  color: var(--color-scheme-2-text);
 }
 
-/* TABLET (768px–1439px)*/
+/* TABLET */
 @media (min-width: 768px) {
   .footer {
     padding: 48px 32px;
@@ -135,7 +131,6 @@
     gap: 12px;
   }
 
-  /* Навігація займає повну ширину → переноситься на наступний рядок по центру */
   .nav {
     flex-direction: row;
     justify-content: center;
@@ -145,9 +140,7 @@
   }
 }
 
-/* ── DESKTOP (1440px+) ──
-   Один рядок: [Логотип] ─── [Соцмережі по центру] ─── [Навігація справа]
-*/
+/* DESKTOP */
 @media (min-width: 1440px) {
   .footer {
     padding: 80px 64px;
@@ -164,7 +157,6 @@
     flex-shrink: 0;
   }
 
-  /* Соцмережі абсолютно по центру контейнера */
   .social {
     position: absolute;
     left: 50%;
@@ -173,7 +165,6 @@
     gap: 16px;
   }
 
-  /* Навігація справа */
   .nav {
     flex-direction: row;
     width: auto;
@@ -183,6 +174,10 @@
   }
 
   .nav a {
-    font-size: 17px;
+    font-size: var(--fs-md);
+  }
+
+  .copyright {
+    font-size: var(--fs-sm);
   }
 }
