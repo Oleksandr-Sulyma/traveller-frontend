@@ -1,7 +1,7 @@
 'use client';
 
 import Link from 'next/link';
-import css from './AuthNavigation.module.css';
+// import css from './AuthNavigation.module.css';
 
 type AuthNavigationProps = {
   mode?: 'desktop' | 'modal';
