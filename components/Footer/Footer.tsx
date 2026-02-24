@@ -9,11 +9,20 @@ export default function Footer() {
   const year = new Date().getFullYear();
 
   return (
-    <footer className={styles.footer}>
-      <div className={styles.container}>
+    <footer className={styles.footer} style={{ background: 'var(--footer-background)' }}>
+      <div className="container ">
         <div className={styles.mainRow}>
-          <Link href="/" className={styles.logo}>
-            <Image src={logo} alt="Подорожники логотип" width={23} height={23} />
+          <Link
+            href="/"
+            className={styles.logo + ' link-base link-text link-footer-pc link-footer-mobile'}
+          >
+            <Image
+              src={logo}
+              alt="Подорожники логотип"
+              width={23}
+              height={23}
+              className="logoIcon"
+            />
             <span>Подорожники</span>
           </Link>
 
