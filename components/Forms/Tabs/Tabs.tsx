@@ -1,3 +1,5 @@
+'use client';
+
 import React, { useState } from 'react';
 import styles from './Tabs.module.css';
 
@@ -5,16 +7,19 @@ interface TabsProps {
   firstLabel?: string;
   secondLabel?: string;
   onChange?: (state: 'state1' | 'state2') => void;
+  defaultActive?: 'state1' | 'state2';
 }
 
 const Tabs: React.FC<TabsProps> = ({ 
   firstLabel = "Збережені історії", 
   secondLabel = "Мої історії", 
-  onChange 
+  onChange,
+  defaultActive = 'state1'
 }) => {
-    const [active, setActive] = useState<'state1' | 'state2'>('state1');
+  const [active, setActive] = useState<'state1' | 'state2'>(defaultActive);
 
   const handleToggle = (targetState: 'state1' | 'state2') => {
+    if (active === targetState) return; 
     setActive(targetState);
     if (onChange) {
       onChange(targetState);
