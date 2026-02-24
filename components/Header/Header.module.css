@@ -1,0 +1,133 @@
+/* =================================
+   1. ОСНОВНА СТРУКТУРА (HEADER)
+==================================== */
+.header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 72px;
+    display: flex;
+    align-items: center;
+    z-index: 1000;
+    transition: background 0.3s ease, border-color 0.3s ease;
+    box-sizing: border-box;
+    
+    /* Стандарт для внутрішніх сторінок */
+    background-color: var(--color-scheme-1-background);
+    border-bottom: 1px solid var(--color-scheme-1-border);
+}
+
+/* Стан для головної сторінки (Hero-секція) */
+.isHome {
+    background-color: transparent !important;
+    border-bottom: 1px solid transparent !important;
+}
+
+.headerContainer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 40px; 
+    width: 100%;
+}
+
+/* =================================
+   2. ЛОГОТИП ТА НАВІГАЦІЯ
+==================================== */
+.content {
+    display: flex;
+    align-items: center;
+}
+
+.logoLink {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    text-decoration: none;
+}
+
+.logoText {
+    font-family: var(--second-family);
+    font-weight: 700;
+    font-size: 20px;
+    color: var(--color-scheme-1-text);
+}
+
+.columnRight {
+    display: flex;
+    align-items: center;
+    gap: 32px;
+}
+
+.navLinks {
+    display: flex;
+    align-items: center;
+    gap: 24px;
+}
+
+.link {
+    font-family: var(--font-family);
+    font-weight: 500;
+    font-size: 16px;
+    color: var(--color-scheme-1-text);
+    transition: color 0.2s ease;
+}
+
+.link:hover, .link.active {
+    color: var(--color-royal-blue);
+}
+
+/* Світлий текст лінків, коли хедер прозорий (isHome) */
+.isHome .link {
+    color: var(--color-white);
+}
+
+/* =================================
+   3. ГРУПА КНОПОК (ACTIONS)
+==================================== */
+.actions {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+
+/* =================================
+   4. МОБІЛЬНІ ЕЛЕМЕНТИ
+==================================== */
+.btnBurger {
+    display: none; /* За замовчуванням приховано на десктопі */
+    width: 32px;
+    height: 32px;
+    padding: 4px;
+    border-radius: 8px;
+    background: var(--opacity-white-10);
+    color: var(--color-white);
+    cursor: pointer;
+}
+
+/* =================================
+   5. АДАПТИВНІСТЬ
+==================================== */
+@media (max-width: 1024px) {
+    .navLinks {
+        display: none; /* Ховаємо десктопну навігацію */
+    }
+
+    .btnBurger {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    /* На мобілках у прозорому хедері бургер завжди білий */
+    .isHome .btnBurger {
+        color: var(--color-white);
+    }
+}
+
+@media (max-width: 768px) {
+    .columnRight {
+        gap: 12px;
+    }
+}

@@ -1,39 +1,31 @@
 /* =========================
-   CSS RESET (modern)
+   1. CSS RESET (modern)
 ========================= */
 
-*,
-*::before,
-*::after {
+*, *::before, *::after {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
 }
 
-html,
-body {
+html, body {
   height: 100%;
 }
 
-img,
-picture,
-svg,
-video {
+img, picture, svg, video {
   display: block;
   max-width: 100%;
 }
 
-button,
-input,
-textarea,
-select {
+/* Прибираємо дефолтні рамки та фони у полів вводу */
+button, input, textarea, select {
   font: inherit;
   border: none;
   background: none;
+  outline: none;
 }
 
-ul,
-ol {
+ul, ol {
   list-style: none;
 }
 
@@ -43,55 +35,28 @@ a {
 }
 
 /* =========================
-   BASE BODY STYLES
+   2. BASE BODY & THEME
 ========================= */
 
 body {
-  font-family: var(--font-main);
-  background-color: var(--bg-app);
-  color: var(--text-main);
-  line-height: 1.5;
-
+  /* ТУТ ми лише задаємо фон та базовий колір тексту.
+     Шрифти та розміри підтягнуться з typography.css */
+  background-color: var(--color-scheme-1-background);
+  color: var(--color-scheme-1-text);
+  
   transition:
-    background-color var(--transition),
-    color var(--transition);
+    background-color var(--transition-fast),
+    color var(--transition-fast);
+    
+  -webkit-font-smoothing: antialiased;
 }
 
-/* =========================
-   TYPOGRAPHY
-========================= */
-
-h1,
-h2,
-h3 {
-  font-family: var(--font-heading);
-  font-weight: 700;
-}
-
-h4,
-h5,
-h6 {
-  font-family: var(--font-main);
-}
-
-p {
-  font-family: var(--font-main);
-}
-
-/* =========================
-   INTERACTIVE ELEMENTS
-========================= */
-
+/* Глобальні налаштування для кнопок та посилань */
 button {
   cursor: pointer;
-  transition: all var(--transition);
 }
 
-a {
-  transition: color var(--transition);
-}
-
-/* test*/
+/* Дебаг-режим */
 .debug * {
   outline: 1px solid red;
 }

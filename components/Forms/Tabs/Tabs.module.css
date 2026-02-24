@@ -1,0 +1,101 @@
+/* =================================
+    MOBILE FIRST (від 320px)
+==================================== */
+
+.tabsWrapper {
+    box-sizing: border-box;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%; 
+    max-width: 335px;
+    margin: 0 auto;
+}
+
+.tabsSwitcher {
+    box-sizing: border-box;
+    display: flex;
+    padding: 4px;
+    width: 100%;
+    height: 48px;
+    border-radius: 12px;
+    /* Використовуємо нейтральний фон зі змінних */
+    background: var(--color-royal-blue-lightest);
+    border: 1px solid var(--opacity-neutral-darkest-5);
+    transition: all 0.3s ease;
+    position: relative;
+}
+
+.tabBtn {
+    box-sizing: border-box;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 50%;
+    height: 40px;
+    border-radius: 8px;
+    font-family: var(--font-family);
+    font-size: 16px;
+    font-weight: 500;
+    line-height: 1.5;
+    cursor: pointer;
+    border: none;
+    background: transparent;
+    color: var(--color-neutral-dark);
+    transition: all 0.3s ease;
+    z-index: 2;
+}
+
+/* Стан для активної кнопки (Перша) */
+.stateFirst .tabBtnFirst {
+    background: var(--color-white);
+    color: var(--color-royal-blue);
+    box-shadow: 0 2px 8px var(--opacity-neutral-darkest-5);
+}
+
+/* Стан для активної кнопки (Друга) */
+.stateSecond .tabBtnSecond {
+    background: var(--color-white);
+    color: var(--color-royal-blue);
+    box-shadow: 0 2px 8px var(--opacity-neutral-darkest-5);
+}
+
+/* =================================
+    TABLET & DESKTOP (від 768px)
+==================================== */
+
+@media (min-width: 768px) {
+    .tabsWrapper {
+        max-width: 462px;
+    }
+
+    .tabsSwitcher {
+        height: 56px;
+        padding: 6px;
+    }
+
+    .tabBtn {
+        height: 44px;
+        font-size: 18px;
+    }
+}
+
+/* =================================
+    DARK THEME
+==================================== */
+
+:global([data-theme='dark']) .tabsSwitcher {
+    background: var(--opacity-white-10);
+    border-color: var(--opacity-white-15);
+}
+
+:global([data-theme='dark']) .tabBtn {
+    color: var(--color-neutral-light);
+}
+
+:global([data-theme='dark']) .stateFirst .tabBtnFirst,
+:global([data-theme='dark']) .stateSecond .tabBtnSecond {
+    background: var(--color-white);
+    color: var(--color-neutral-darkest);
+    box-shadow: none;
+}

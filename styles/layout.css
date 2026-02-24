@@ -1,12 +1,12 @@
 /* =========================
-   UNIVERSAL CONTAINER
+   1. UNIVERSAL CONTAINER
    Mobile First approach
 ========================= */
 
 /* Мобільні: гумова верстка від 320px до 375px */
 .container {
   width: 100%;
-  max-width: 375px; /* не більше 375px */
+  max-width: 375px;
   padding-inline: 20px;
   margin-inline: auto;
   box-sizing: border-box;
@@ -27,4 +27,22 @@
     max-width: 1440px;
     padding-inline: 64px;
   }
+}
+
+/* =========================
+   2. MAIN CONTENT WRAPPER
+   Керування накладанням на Header
+========================= */
+
+.main-content {
+    min-height: 100vh;
+    /* Відступ зверху для всіх сторінок за замовчуванням */
+    padding-top: 72px; 
+    transition: padding-top 0.3s ease;
+}
+
+/* Спеціальний клас для головної сторінки: 
+   Hero має заходити ПІД прозорий хедер */
+.is-home-layout {
+    padding-top: 0 !important;
 }
