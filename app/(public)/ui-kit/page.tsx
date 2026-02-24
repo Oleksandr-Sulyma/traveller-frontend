@@ -1,8 +1,11 @@
 "use client";
 
 import React, { useState } from 'react';
-import TextArea from '@/components/Forms/TextArea'
-import CustomSelect, { CATEGORIES_LIST } from '@/components/Forms/CustomSelect';
+import TextArea from '@/components/Forms/StoryTextArea/StoryTextArea'
+import CustomSelect, { CATEGORIES_LIST } from '@/components/Forms/CustomSelect/CustomSelect';
+import Tabs from '@/components/Forms/Tabs/Tabs'; 
+import styles from '@/components/Forms/Tabs/Tabs.module.css';
+
 
 export default function UiKitPage() {
   const [theme, setTheme] = useState<'light' | 'dark'>('light');
@@ -326,6 +329,61 @@ export default function UiKitPage() {
            <div className="select-item">Азія</div>
            <div className="select-item" style={{ background: 'var(--color-neutral-lightest)' }}>Гори</div>
            <div className="select-item">Європа</div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</ComponentSection>
+
+{/* Section 6: Tabs Switching */}
+<ComponentSection 
+  title="6.1 Tabs: Interactive Component"
+  description="Універсальний перемикач станів. Підтримує передачу назв кнопок через пропси. Повертає значення 'state1' або 'state2' у функцію onChange."
+  code={`<Tabs 
+  firstLabel="Збережені історії" 
+  secondLabel="Мої історії" 
+  onChange={(state) => console.log(state)} 
+/>`}
+>
+  <Tabs onChange={(state) => console.log("Обрано:", state)} />
+</ComponentSection>
+
+<ComponentSection 
+  title="6.2 Tabs States & Props API"
+  description="Візуальна перевірка станів та опис вхідних параметрів."
+  code={`// API Компонента:
+// firstLabel (string): Текст лівої кнопки (за замовчуванням: "Збережені історії")
+// secondLabel (string): Текст правої кнопки (за замовчуванням: "Мої історії")
+// onChange (function): Callback, що отримує 'state1' або 'state2'
+`}
+>
+  <div style={{ display: 'flex', flexDirection: 'column', gap: '60px' }}>
+    
+    {/* Візуальна перевірка Стан 1 */}
+    <div className="kit-group">
+      <span className="kit-label" style={{ marginBottom: '10px', display: 'block', color: 'var(--color-neutral)' }}>
+        Стан: state1 (Active First)
+      </span>
+      {/* Використовуємо реальний компонент з фіксацією пропса, якщо він підтримує value, 
+          або просто чисту верстку для тесту кольорів: */}
+      <div className={styles.tabsWrapper}>
+        <div className={`${styles.tabsSwitcher} ${styles.stateFirst}`}>
+          <button className={`${styles.tabBtn} ${styles.tabBtnFirst}`}>Monthly</button>
+          <button className={`${styles.tabBtn} ${styles.tabBtnSecond}`}>Yearly</button>
+        </div>
+      </div>
+    </div>
+
+    {/* Візуальна перевірка Стан 2 */}
+    <div className="kit-group">
+      <span className="kit-label" style={{ marginBottom: '10px', display: 'block', color: 'var(--color-neutral)' }}>
+        Стан: state2 (Active Second)
+      </span>
+      <div className={styles.tabsWrapper}>
+        <div className={`${styles.tabsSwitcher} ${styles.stateSecond}`}>
+          <button className={`${styles.tabBtn} ${styles.tabBtnFirst}`}>Збережені історії</button>
+          <button className={`${styles.tabBtn} ${styles.tabBtnSecond}`}>Мої історії</button>
         </div>
       </div>
     </div>

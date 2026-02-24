@@ -1,0 +1,120 @@
+/* =================================
+    MOBILE FIRST (від 320px)
+    Гумова верстка до 375px
+==================================== */
+
+.tabsWrapper {
+    box-sizing: border-box;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px dashed #9747ff;
+    border-radius: 5px;
+    width: 100%; 
+    max-width: 335px;
+    height: 48px;
+    margin: 0 auto;
+}
+
+.tabsSwitcher {
+    box-sizing: border-box;
+    display: flex;
+    padding: 4px;
+    width: 100%;
+    height: 48px;
+    border-radius: 10px;
+    background: var(--color-scheme-2-foreground);
+    border: 1px solid var(--opacity-transparent);
+    transition: background 0.3s ease;
+}
+
+.tabBtn {
+    box-sizing: border-box;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 4px 12px;
+    width: 50%;
+    height: 40px;
+    border-radius: 8px;
+    font-family: var(--font-family);
+    line-height: 150%;
+    cursor: pointer;
+    font-size: 16px;
+    border: 1px solid transparent;
+    background: transparent;
+    color: var(--color-scheme-2-text);
+    transition: background-color 0.3s ease, border-color 0.3s ease, color 0.3s ease;
+    will-change: background-color, color;
+}
+
+/* СТАН 1: First Active (Mobile) */
+.stateFirst .tabBtnFirst {
+    background: var(--color-scheme-2-background);
+    border: 1px solid var(--color-scheme-2-border);
+    font-weight: 400; 
+}
+.stateFirst .tabBtnSecond {
+    font-weight: 500;
+}
+
+/* СТАН 2: Second Active (Mobile) */
+.stateSecond .tabBtnFirst {
+    font-weight: 400;
+}
+.stateSecond .tabBtnSecond {
+    background: var(--color-scheme-2-background);
+    border: 1px solid var(--color-scheme-2-border);
+    font-weight: 500;
+}
+
+/* =================================
+    TABLET & DESKTOP (від 768px)
+==================================== */
+
+@media (min-width: 768px) {
+    .tabsWrapper {
+        width: 462px;
+        max-width: none;
+        height: 156px;
+    }
+
+    .tabsSwitcher {
+        width: 422px;
+        height: 48px;
+    }
+
+    .tabBtn {
+        font-size: 18px;
+    }
+
+    .stateFirst .tabBtnFirst { font-weight: 500; }
+    .stateFirst .tabBtnSecond { font-weight: 400; }
+    
+    .stateSecond .tabBtnFirst { font-weight: 400; }
+    .stateSecond .tabBtnSecond { font-weight: 500; }
+}
+
+/* =================================
+    DARK THEME (Applied via :global)
+==================================== */
+
+:global([data-theme='dark']) .tabBtn {
+    border-radius: var(--radius-btn-dark);
+}
+
+/* Активна кнопка в темній темі (Кольори Primary Dark) */
+:global([data-theme='dark']) .stateFirst .tabBtnFirst,
+:global([data-theme='dark']) .stateSecond .tabBtnSecond {
+    background-color: var(--color-white) !important;
+    border: 1px solid var(--color-white) !important;
+    color: var(--color-neutral-darkest) !important;
+}
+
+/* Неактивна кнопка в темній темі (Кольори Secondary Dark) */
+:global([data-theme='dark']) .stateFirst .tabBtnSecond,
+:global([data-theme='dark']) .stateSecond .tabBtnFirst {
+    background-color: var(--opacity-white-10) !important;
+    border: 1px solid transparent !important;
+    color: var(--color-white) !important;
+}
