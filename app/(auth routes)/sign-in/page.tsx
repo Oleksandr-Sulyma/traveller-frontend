@@ -3,7 +3,7 @@
 import { useRouter } from 'next/navigation';
 import { useId } from 'react';
 import * as Yup from 'yup';
-import { useMutation, useQueryClient } from '@tanstack/react-query';
+import { useMutation } from '@tanstack/react-query';
 import { ErrorMessage, Field, Form, Formik, FormikHelpers } from 'formik';
 import { register } from '@/lib/api/clientApi';
 import Link from 'next/link';
@@ -15,16 +15,14 @@ interface FormValues {
 
 const initialValues: FormValues = { email: '', password: '' };
 
-const passwordRules = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&]).{8,}$/;
-
 const RegisterSchema = Yup.object().shape({
   email: Yup.string()
     .trim()
     .lowercase()
-    .email('Enter a valid email address')
-    .required('Email is required'),
+    .email('Введіть коректну електронну адресу')
+    .required("Електронна пошта є обов'язковою"),
 
-  password: Yup.string().required('Password is required'),
+  password: Yup.string().required("Пароль є обов'язковим"),
 });
 
 export default function SignIn() {
