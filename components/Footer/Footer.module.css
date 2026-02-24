@@ -46,50 +46,11 @@
   align-items: center;
 }
 
-.social a {
-  color: var(--color-scheme-2-text);
-  transition:
-    transform 0.25s,
-    opacity 0.25s;
-}
-
-.social a:hover {
-  transform: scale(1.15);
-  opacity: 0.7;
-}
-
 .nav {
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: 16px;
-}
-
-.nav a {
-  position: relative;
-  font-size: var(--fs-sm);
-  text-decoration: none;
-  color: var(--color-scheme-2-text);
-  transition: opacity 0.25s;
-}
-
-.nav a::after {
-  content: '';
-  position: absolute;
-  left: 0;
-  bottom: -2px;
-  width: 0%;
-  height: 2px;
-  background: currentColor;
-  transition: width 0.25s;
-}
-
-.nav a:hover {
-  opacity: 0.8;
-}
-
-.nav a:hover::after {
-  width: 100%;
 }
 
 .divider {
@@ -162,14 +123,14 @@
     left: 50%;
     transform: translateX(-50%);
     margin-left: 0;
-    gap: 16px;
+    align-self: flex-start;
   }
 
   .nav {
     flex-direction: row;
     width: auto;
     margin-left: auto;
-    gap: 24px;
+    gap: 32px;
     order: unset;
   }
 
