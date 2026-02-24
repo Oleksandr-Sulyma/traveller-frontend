@@ -17,6 +17,7 @@ import './fonts.css';
 
 import Header from '@/components/Header/Header';
 import Footer from '@/components/Footer/Footer';
+import FooterWrapper from '@/components/Footer/FooterWrapper';
 
 export const metadata: Metadata = {
   title: 'Подорожники',
@@ -27,9 +28,10 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="uk">
       <body suppressHydrationWarning>
-         <Header />
-            <main>{children}</main>
-            <Footer />
+        <Header />
+        <main>{children}</main>
+        <FooterWrapper hideOn={['/auth/register', '/auth/login']} />{' '}
+        {/* Приховуємо футер на сторінках реєстрації та входу */}
       </body>
     </html>
   );
