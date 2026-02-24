@@ -1,6 +1,5 @@
 /* =================================
     MOBILE FIRST (від 320px)
-    Гумова верстка до 375px
 ==================================== */
 
 .tabsWrapper {
@@ -8,11 +7,8 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    border: 1px dashed #9747ff;
-    border-radius: 5px;
     width: 100%; 
     max-width: 335px;
-    height: 48px;
     margin: 0 auto;
 }
 
@@ -22,10 +18,12 @@
     padding: 4px;
     width: 100%;
     height: 48px;
-    border-radius: 10px;
-    background: var(--color-scheme-2-foreground);
-    border: 1px solid var(--opacity-transparent);
-    transition: background 0.3s ease;
+    border-radius: 12px;
+    /* Використовуємо нейтральний фон зі змінних */
+    background: var(--color-royal-blue-lightest);
+    border: 1px solid var(--opacity-neutral-darkest-5);
+    transition: all 0.3s ease;
+    position: relative;
 }
 
 .tabBtn {
@@ -33,39 +31,33 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: 4px 12px;
     width: 50%;
     height: 40px;
     border-radius: 8px;
     font-family: var(--font-family);
-    line-height: 150%;
-    cursor: pointer;
     font-size: 16px;
-    border: 1px solid transparent;
+    font-weight: 500;
+    line-height: 1.5;
+    cursor: pointer;
+    border: none;
     background: transparent;
-    color: var(--color-scheme-2-text);
-    transition: background-color 0.3s ease, border-color 0.3s ease, color 0.3s ease;
-    will-change: background-color, color;
+    color: var(--color-neutral-dark);
+    transition: all 0.3s ease;
+    z-index: 2;
 }
 
-/* СТАН 1: First Active (Mobile) */
+/* Стан для активної кнопки (Перша) */
 .stateFirst .tabBtnFirst {
-    background: var(--color-scheme-2-background);
-    border: 1px solid var(--color-scheme-2-border);
-    font-weight: 400; 
-}
-.stateFirst .tabBtnSecond {
-    font-weight: 500;
+    background: var(--color-white);
+    color: var(--color-royal-blue);
+    box-shadow: 0 2px 8px var(--opacity-neutral-darkest-5);
 }
 
-/* СТАН 2: Second Active (Mobile) */
-.stateSecond .tabBtnFirst {
-    font-weight: 400;
-}
+/* Стан для активної кнопки (Друга) */
 .stateSecond .tabBtnSecond {
-    background: var(--color-scheme-2-background);
-    border: 1px solid var(--color-scheme-2-border);
-    font-weight: 500;
+    background: var(--color-white);
+    color: var(--color-royal-blue);
+    box-shadow: 0 2px 8px var(--opacity-neutral-darkest-5);
 }
 
 /* =================================
@@ -74,47 +66,36 @@
 
 @media (min-width: 768px) {
     .tabsWrapper {
-        width: 462px;
-        max-width: none;
-        height: 156px;
+        max-width: 462px;
     }
 
     .tabsSwitcher {
-        width: 422px;
-        height: 48px;
+        height: 56px;
+        padding: 6px;
     }
 
     .tabBtn {
+        height: 44px;
         font-size: 18px;
     }
-
-    .stateFirst .tabBtnFirst { font-weight: 500; }
-    .stateFirst .tabBtnSecond { font-weight: 400; }
-    
-    .stateSecond .tabBtnFirst { font-weight: 400; }
-    .stateSecond .tabBtnSecond { font-weight: 500; }
 }
 
 /* =================================
-    DARK THEME (Applied via :global)
+    DARK THEME
 ==================================== */
 
-:global([data-theme='dark']) .tabBtn {
-    border-radius: var(--radius-btn-dark);
+:global([data-theme='dark']) .tabsSwitcher {
+    background: var(--opacity-white-10);
+    border-color: var(--opacity-white-15);
 }
 
-/* Активна кнопка в темній темі (Кольори Primary Dark) */
+:global([data-theme='dark']) .tabBtn {
+    color: var(--color-neutral-light);
+}
+
 :global([data-theme='dark']) .stateFirst .tabBtnFirst,
 :global([data-theme='dark']) .stateSecond .tabBtnSecond {
-    background-color: var(--color-white) !important;
-    border: 1px solid var(--color-white) !important;
-    color: var(--color-neutral-darkest) !important;
-}
-
-/* Неактивна кнопка в темній темі (Кольори Secondary Dark) */
-:global([data-theme='dark']) .stateFirst .tabBtnSecond,
-:global([data-theme='dark']) .stateSecond .tabBtnFirst {
-    background-color: var(--opacity-white-10) !important;
-    border: 1px solid transparent !important;
-    color: var(--color-white) !important;
+    background: var(--color-white);
+    color: var(--color-neutral-darkest);
+    box-shadow: none;
 }

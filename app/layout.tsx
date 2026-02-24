@@ -1,18 +1,19 @@
 import type { Metadata } from 'next';
 
+/* Стилі (Reset та Глобальні змінні) */
 import 'modern-normalize/modern-normalize.css';
-
 import '@/styles/variables.css';
 import '@/styles/base.css';
 import '@/styles/layout.css';
 import '@/styles/typography.css';
 
-/* components */
+/* Компоненти стилів */
 import '@/styles/components/buttons.css';
 import '@/styles/components/forms.css';
 import '@/styles/components/links.css';
 import '@/styles/components/cards.css';
 
+/* Шрифти */
 import './fonts.css';
 
 import Header from '@/components/Header/Header';
@@ -42,12 +43,17 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="uk">
+    <html lang="uk" suppressHydrationWarning>
       <body suppressHydrationWarning>
-        <Header />
-        <main>{children}</main>
-        <FooterWrapper hideOn={['/auth/register', '/auth/login']} />{' '}
-        {/* Приховуємо футер на сторінках реєстрації та входу */}
+        <ThemeProvider>
+         
+          <HeaderWrapper />
+          <MainContent>
+            {children}
+          </MainContent>
+          
+          <FooterWrapper hideOn={['/auth/register', '/auth/login']} />
+        </ThemeProvider>
       </body>
     </html>
   );

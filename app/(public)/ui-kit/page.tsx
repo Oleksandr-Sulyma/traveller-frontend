@@ -1,11 +1,9 @@
 "use client";
 
 import React, { useState } from 'react';
-import TextArea from '@/components/Forms/StoryTextArea/StoryTextArea'
-import CustomSelect, { CATEGORIES_LIST } from '@/components/Forms/CustomSelect/CustomSelect';
+import StoryTextArea from '@/components/Forms/StoryTextArea/StoryTextArea';
+import CustomSelect from '@/components/Forms/CustomSelect/CustomSelect';
 import Tabs from '@/components/Forms/Tabs/Tabs'; 
-import styles from '@/components/Forms/Tabs/Tabs.module.css';
-
 
 export default function UiKitPage() {
   const [theme, setTheme] = useState<'light' | 'dark'>('light');
@@ -22,37 +20,38 @@ export default function UiKitPage() {
     </svg>
   );
 
-  const containerStyle: React.CSSProperties = {
-    width: '100%',
-    maxWidth: '375px',
-    paddingInline: '20px',
-    marginInline: 'auto',
-    boxSizing: 'border-box',
-    transition: 'all 0.3s ease',
-    border: '1px dashed #ccc',
-    paddingBlock: '20px',
-    marginBottom: '20px',
-    display: 'flex',
-    justifyContent: 'center'
-  };
-
-  const ComponentSection = ({ title, description, code, children }: any) => (
-    <div style={{ marginBottom: '80px', borderBottom: '2px solid #eee', paddingBottom: '40px' }}>
-      <h3 style={{ fontSize: '22px', fontWeight: 'bold', marginBottom: '8px' }}>{title}</h3>
-      <p style={{ color: theme === 'light' ? '#666' : '#aaa', marginBottom: '20px' }}>{description}</p>
+  const ComponentSection = ({ title, usage, code, children }: any) => (
+    <div style={{ marginBottom: '60px', borderBottom: '1px solid var(--color-scheme-1-border)', paddingBottom: '30px' }}>
+      <h3 style={{ fontSize: '20px', color: 'var(--color-royal-blue)', marginBottom: '10px' }}>{title}</h3>
+      <div style={{ 
+        backgroundColor: 'var(--color-scheme-2-background)', 
+        padding: '12px', 
+        borderRadius: '6px', 
+        marginBottom: '15px',
+        fontSize: '14px',
+        borderLeft: '4px solid var(--color-royal-blue)',
+        color: 'var(--color-scheme-1-text)'
+      }}>
+        <strong>💡 Порада:</strong> {usage}
+      </div>
       
-      <div className="container" style={containerStyle}>
+      <div style={{ 
+        padding: '20px', 
+        border: '1px dashed var(--color-scheme-1-border)', 
+        borderRadius: '8px',
+        backgroundColor: 'var(--color-scheme-1-background)'
+      }}>
         {children}
       </div>
 
       <pre style={{ 
-        background: '#2d2d2d', 
-        color: '#ccc', 
+        background: '#1e1e1e', 
+        color: '#569cd6', 
         padding: '15px', 
         borderRadius: '8px', 
-        overflowX: 'auto',
+        marginTop: '15px',
         fontSize: '13px',
-        marginTop: '20px'
+        overflowX: 'auto'
       }}>
         <code>{code}</code>
       </pre>
@@ -60,338 +59,207 @@ export default function UiKitPage() {
   );
 
   return (
-    <div style={{ 
-      backgroundColor: theme === 'light' ? '#ffffff' : '#0f1115', 
-      color: theme === 'light' ? '#000' : '#fff',
-      minHeight: '100vh', 
-      padding: '40px 10px',
-      transition: '0.3s'
-    }}>
-      <div style={{ maxWidth: '800px', margin: '0 auto' }}>
+    <div style={{ padding: '40px 20px', maxWidth: '1000px', margin: '0 auto', color: 'var(--color-scheme-1-text)' }}>
+      <header style={{ textAlign: 'center', marginBottom: '80px' }}>
+        <h1 style={{ fontSize: '36px', marginBottom: '20px' }}>UI Kit: Довідник розробника</h1>
+        <button className="btn btn-primary" onClick={toggleTheme}>
+          Переключити на {theme === 'light' ? 'Dark' : 'Light'} тему
+        </button>
+      </header>
+
+      {/* --- ГЛОБАЛЬНА ТАБЛИЦЯ ВИСОТ --- */}
+      <section style={{ marginBottom: '80px' }}>
+        <h2 style={{ fontSize: '24px', marginBottom: '20px', color: 'var(--color-royal-blue)' }}>Система висот елементів</h2>
+        <table style={{ width: '100%', borderCollapse: 'collapse', fontSize: '14px' }}>
+          <thead>
+            <tr style={{ textAlign: 'left', borderBottom: '2px solid var(--color-royal-blue)' }}>
+              <th style={{ padding: '10px' }}>Елемент</th>
+              <th style={{ padding: '10px' }}>Клас / Варіант</th>
+              <th style={{ padding: '10px' }}>Висота (px)</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr style={{ borderBottom: '1px solid var(--color-scheme-1-border)' }}>
+              <td style={{ padding: '10px' }}>Кнопка (Стандарт)</td><td>.btn-primary / .btn-secondary</td><td>48px</td>
+            </tr>
+            <tr style={{ borderBottom: '1px solid var(--color-scheme-1-border)' }}>
+              <td style={{ padding: '10px' }}>Кнопка (Хедер)</td><td>.btn--header / .btn-icon--header</td><td>35px</td>
+            </tr>
+            <tr style={{ borderBottom: '1px solid var(--color-scheme-1-border)' }}>
+              <td style={{ padding: '10px' }}>Текстове поле (Input)</td><td>.input-group.input-type</td><td>69px (разом з помилкою)</td>
+            </tr>
+            <tr style={{ borderBottom: '1px solid var(--color-scheme-1-border)' }}>
+              <td style={{ padding: '10px' }}>Поле тексту (Мале)</td><td>StoryTextArea variant="h-120"</td><td>146px (разом з лічильником)</td>
+            </tr>
+            <tr style={{ borderBottom: '1px solid var(--color-scheme-1-border)' }}>
+              <td style={{ padding: '10px' }}>Поле тексту (Велике)</td><td>StoryTextArea variant="h-180"</td><td>206px (разом з лічильником)</td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
+
+      {/* --- КНОПКИ ТА ШИРИНА --- */}
+      <section>
+        <h2 style={{ fontSize: '28px', borderBottom: '2px solid', marginBottom: '30px' }}>1. Кнопки та керування шириною</h2>
         
-        <header style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '60px' }}>
-          <h1 style={{ fontSize: '28px' }}>UI Kit Control Panel</h1>
-          <button 
-            onClick={toggleTheme}
-            style={{ 
-              padding: '10px 20px', 
-              cursor: 'pointer',
-              borderRadius: '30px',
-              border: '2px solid #4169e1',
-              background: 'transparent',
-              color: '#4169e1',
-              fontWeight: 'bold'
-            }}
-          >
-            {theme === 'light' ? 'Увімкнути Dark Mode' : 'Увімкнути Light Mode'}
-          </button>
-        </header>
-
-        {/* --- SECTION 1: PRIMARY BUTTONS --- */}
-        <h2 style={{ color: '#4169e1', marginBottom: '30px' }}>1. Button</h2>
-        <h3 style={{ color: '#27b351', marginBottom: '30px' }}>1.1. Primary Variant</h3>
-
         <ComponentSection 
-          title="Primary: Standard"
-          description="Основна кнопка, висота 48px. Ширина за контентом (падінги 24px)."
-          code={`<button className="btn btn-primary btn--default">Primary Button</button>`}
+          title="1.1 Зміна стану та ширини"
+          usage="Поміняйте клас primary/secondary для кольору. Для ширини використовуйте inline-style або зовнішній контейнер."
+          code={`<button className="btn btn-primary" style={{ width: '180px' }}>Фіксована</button>\n<button className="btn btn-secondary" style={{ width: '100%' }}>На всю ширину</button>`}
         >
-          <button className="btn btn-primary btn--default">Primary Button</button>
-        </ComponentSection>
-
-        <ComponentSection 
-          title="Primary: Fixed Width (180px)"
-          description="Основна кнопка із заданою шириною 180px."
-          code={`<button className="btn btn-primary btn--default" style={{ width: '180px' }}>180px Button</button>`}
-        >
-          <button className="btn btn-primary btn--default" style={{ width: '180px' }}>180px Button</button>
-        </ComponentSection>
-
-        <ComponentSection 
-          title="Primary: Header Size"
-          description="Зменшена версія для хедера. Висота 35px."
-          code={`<button className="btn btn-primary btn--header">Header Primary</button>`}
-        >
-          <button className="btn btn-primary btn--header">Header Primary</button>
-        </ComponentSection>
-
-        {/* --- SECTION 2: SECONDARY BUTTONS --- */}
-        <h3 style={{ color: '#777', marginBottom: '30px', marginTop: '100px' }}>1.2. Secondary Variant</h3>
-
-        <ComponentSection 
-          title="Secondary: Standard"
-          description="Другорядна кнопка, висота 48px."
-          code={`<button className="btn btn-secondary btn--default">Secondary Button</button>`}
-        >
-          <button className="btn btn-secondary btn--default">Secondary Button</button>
-        </ComponentSection>
-
-        <ComponentSection 
-          title="Secondary: Fixed Width (180px)"
-          description="Другорядна кнопка із заданою шириною 180px."
-          code={`<button className="btn btn-secondary btn--default" style={{ width: '180px' }}>180px Button</button>`}
-        >
-          <button className="btn btn-secondary btn--default" style={{ width: '180px' }}>180px Button</button>
-        </ComponentSection>
-
-        {/* --- SECTION 3: PRIMARY ICON BUTTONS --- */}
-        <h3 style={{ color: '#4169e1', marginBottom: '30px', marginTop: '100px' }}>1.3. Primary Icon Buttons</h3>
-
-        <ComponentSection 
-          title="Primary Icon: Standard (48px)"
-          description="Квадратна кнопка 48x48 з іконкою."
-          code={`<button className="btn btn-primary btn-icon">{PlusIcon}</button>`}
-        >
-          <button className="btn btn-primary btn-icon">{PlusIcon}</button>
-        </ComponentSection>
-
-        <ComponentSection 
-          title="Primary Icon: Fixed Width (180px)"
-          description="Квадратна кнопка розтягнута до 180px (іконка по центру)."
-          code={`<button className="btn btn-primary btn-icon" style={{ width: '180px' }}>{PlusIcon}</button>`}
-        >
-          <button className="btn btn-primary btn-icon" style={{ width: '180px' }}>{PlusIcon}</button>
-        </ComponentSection>
-
-        <ComponentSection 
-          title="Primary Icon: Header (35px)"
-          description="Квадратна кнопка 35x35 для хедера."
-          code={`<button className="btn btn-primary btn-icon--header">{PlusIcon}</button>`}
-        >
-          <button className="btn btn-primary btn-icon--header">{PlusIcon}</button>
-        </ComponentSection>
-
-        {/* --- SECTION 4: SECONDARY ICON BUTTONS --- */}
-        <h3 style={{ color: '#777', marginBottom: '30px', marginTop: '100px' }}> 1.4. Secondary Icon Buttons</h3>
-
-        <ComponentSection 
-          title="Secondary Icon: Standard (48px)"
-          description="Квадратна кнопка Secondary 48x48."
-          code={`<button className="btn btn-secondary btn-icon">{PlusIcon}</button>`}
-        >
-          <button className="btn btn-secondary btn-icon">{PlusIcon}</button>
-        </ComponentSection>
-
-        <ComponentSection 
-          title="Secondary Icon: Fixed Width (180px)"
-          description="Квадратна кнопка Secondary розтягнута до 180px."
-          code={`<button className="btn btn-secondary btn-icon" style={{ width: '180px' }}>{PlusIcon}</button>`}
-        >
-          <button className="btn btn-secondary btn-icon" style={{ width: '180px' }}>{PlusIcon}</button>
-        </ComponentSection>
-
-        <ComponentSection 
-          title="Secondary Icon: Header (35px)"
-          description="Квадратна кнопка Secondary 35x35."
-          code={`<button className="btn btn-secondary btn-icon--header">{PlusIcon}</button>`}
-        >
-          <button className="btn btn-secondary btn-icon--header">{PlusIcon}</button>
-        </ComponentSection>
-
-        {/* --- SECTION 5: LINKS --- */}
-        <h2 style={{ color: '#4169e1', marginBottom: '30px', marginTop: '100px' }}>2. Links System</h2>
-
-        <ComponentSection 
-          title="Text Link: Standard"
-          description="Текстове посилання, ширина auto (за ТЗ)."
-          code={`<a href="#" className="link-base link-text">Link</a>`}
-        >
-          <a href="#" className="link-base link-text"  onClick={(e) => e.preventDefault()}>Link</a>
-        </ComponentSection>
-
-        <ComponentSection 
-          title="Text Link: Fixed Width (180px)"
-          description="Текстове посилання з шириною 180px."
-          code={`<a href="#" className="link-base link-text" style={{ width: '180px' }}>Link</a>`}
-        >
-          <a href="#" className="link-base link-text" style={{ width: '180px' }} onClick={(e) => e.preventDefault()}>Link</a>
-        </ComponentSection>
-
-        <ComponentSection 
-          title="Icon Link: Standard (28px)"
-          description="Посилання-іконка 28x28."
-          code={`<a href="#" className="link-base link-icon">{PlusIcon}</a>`}
-        >
-          <a href="#" className="link-base link-icon" onClick={(e) => e.preventDefault()}>{PlusIcon}</a>
-        </ComponentSection>
-
-         {/* --- SECTION 3: TEXT INPUTS (Fixed 67px) --- */}
-        <h2 style={{ color: '#4169e1', marginBottom: '30px' }}>3. Text Inputs</h2>
-
-        <ComponentSection 
-          title="3.1 Input: Normal"
-          description="Стандартний стан. Висота всієї конструкції 67px (інпут 43px + зона помилки)."
-          code={`<div className="input-group input-type">\n  <input className="input" placeholder="Введіть ваше ім'я" />\n  <div className="input-info">\n    <span className="error-text">Помилка</span>\n  </div>\n</div>`}
-        >
-          <div className="input-group input-type">
-            <input className="input" placeholder="Введіть ваше ім'я" />
-            <div className="input-info">
-              <span className="error-text">Текст помилки з'явиться тут</span>
-            </div>
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '15px' }}>
+            <button className="btn btn-primary" style={{ width: '180px' }}>180px Primary</button>
+            <button className="btn btn-secondary" style={{ width: '100%' }}>Full Width Secondary</button>
           </div>
         </ComponentSection>
 
         <ComponentSection 
-          title="3.2 Input: Error State"
-          description="Додано клас .has-error. Рамка стає червоною, текст помилки — видимим."
-          code={`<div className="input-group input-type has-error">\n  <input className="input" defaultValue="wrong-data" />\n  <div className="input-info">\n    <span className="error-text">Будь ласка, перевірте дані</span>\n  </div>\n</div>`}
+          title="1.2 Іконки: Primary vs Secondary"
+          usage="Клас .btn-icon створює квадратну кнопку. Колір іконки успадковується (currentColor)."
+          code={`<button className="btn btn-primary btn-icon">{PlusIcon}</button>\n<button className="btn btn-secondary btn-icon">{PlusIcon}</button>`}
         >
-          <div className="input-group input-type has-error">
-            <input className="input" defaultValue="wrong-data" />
-            <div className="input-info">
-              <span className="error-text">Будь ласка, перевірте дані</span>
-            </div>
+          <div style={{ display: 'flex', gap: '15px' }}>
+            <button className="btn btn-primary btn-icon">{PlusIcon}</button>
+            <button className="btn btn-secondary btn-icon">{PlusIcon}</button>
+            <button className="btn btn-primary btn-icon--header">{PlusIcon}</button>
+          </div>
+        </ComponentSection>
+      </section>
+
+      {/* --- ПОСИЛАННЯ --- */}
+      <section style={{ marginTop: '80px' }}>
+        <h2 style={{ fontSize: '28px', borderBottom: '2px solid', marginBottom: '30px' }}>2. Посилання (links.css)</h2>
+        
+        <ComponentSection 
+          title="2.1 Текстові та іконочні лінки"
+          usage="Клас .link-text для звичайних лінків, .link-icon для кнопок-іконок без фону."
+          code={`<a href="#" className="link-base link-text">Читати статтю</a>\n<a href="#" className="link-base link-icon">{PlusIcon}</a>`}
+        >
+          <div style={{ display: 'flex', gap: '30px', alignItems: 'center' }}>
+            <a href="#" className="link-base link-text" onClick={(e) => e.preventDefault()}>Текстова лінка</a>
+            <a href="#" className="link-base link-icon" onClick={(e) => e.preventDefault()}>{PlusIcon}</a>
+          </div>
+        </ComponentSection>
+      </section>
+
+      {/* --- ФУТЕР --- */}
+      <section style={{ marginTop: '80px' }}>
+        <h2 style={{ fontSize: '28px', borderBottom: '2px solid', marginBottom: '30px' }}>3. Футер (footer.css)</h2>
+        
+        <ComponentSection 
+          title="3.1 Елементи футера"
+          usage="Для посилань у футері використовуйте клас .link-footer-pc. Він має специфічні кольори для світлої/темної тем."
+          code={`<div style={{ background: 'var(--footer-background)' }}>\n  <a href="#" className="link-base link-text link-footer-pc">Про нас</a>\n</div>`}
+        >
+          <div style={{ 
+            background: 'var(--footer-background)', 
+            padding: '20px', 
+            borderRadius: '8px', 
+            display: 'flex', 
+            gap: '20px',
+            color: 'var(--footer-text)'
+          }}>
+            <a href="#" className="link-base link-text link-footer-pc" onClick={(e) => e.preventDefault()}>Контакти</a>
+            <a href="#" className="link-base link-text link-footer-pc" onClick={(e) => e.preventDefault()}>Допомога</a>
+            <a href="#" className="link-base link-icon" style={{color: 'var(--footer-text)'}} onClick={(e) => e.preventDefault()}>{PlusIcon}</a>
+          </div>
+        </ComponentSection>
+      </section>
+
+      {/* --- ФОРМИ --- */}
+      <section style={{ marginTop: '80px' }}>
+        <h2 style={{ fontSize: '28px', borderBottom: '2px solid', marginBottom: '30px' }}>4. Форми та React-компоненти</h2>
+
+        <ComponentSection 
+          title="4.1 Динамічний Select"
+          usage="Використовуйте компонент CustomSelect. Ширина контейнера регулюється через батьківський div."
+          code={`import CustomSelect from '@/components/Forms/CustomSelect/CustomSelect';\n\n<div style={{ width: '300px' }}>\n  <CustomSelect label="Регіон" />\n</div>`}
+        >
+          <div style={{ width: '335px' }}>
+            <CustomSelect label="Оберіть регіон подорожі" />
           </div>
         </ComponentSection>
 
-      {/* --- SECTION 4: TEXT AREAS (React Component) --- */}
-<h2 style={{ color: '#4169e1', marginBottom: '30px', marginTop: '100px' }}>4. Text Areas</h2>
+        <ComponentSection 
+          title="4.2 Перемикач Tabs"
+          usage="Завжди має ширину 100% від контейнера, але обмежений max-width: 462px у CSS."
+          code={`<Tabs onChange={(s) => console.log(s)} />`}
+        >
+          <Tabs />
+        </ComponentSection>
 
-{/* 4.1 Варіант за замовчуванням (Історія) */}
-<ComponentSection 
-  title="4.1 Story Area (Default)"
-  description="Варіант для великих текстів. Висота 180px, ліміт 2500 символів та плейсхолдер встановлені автоматично."
-  code={`// Не потрібно передавати жодних пропсів\n<StoryTextArea />`}
->
-  <TextArea />
-</ComponentSection>
+{/* --- SECTION 5: TYPOGRAPHY SYSTEM --- */}
+<section style={{ marginTop: '100px' }}>
+  <h2 style={{ fontSize: '28px', borderBottom: '2px solid var(--color-royal-blue)', marginBottom: '30px', paddingBottom: '10px' }}>
+    5. Typography (Шрифтова система)
+  </h2>
 
-{/* 4.2 Варіант для коротких повідомлень */}
-<ComponentSection 
-  title="4.2 General Message Area (Custom)"
-  description="Для коротких повідомлень передаємо варіант 'h-120' та потрібний ліміт символів."
-  code={`<StoryTextArea \n  variant="h-120" \n  maxChars={300} \n  placeholder="Напишіть короткий коментар..." \n/>`}
->
-  <TextArea 
-    variant="h-120" 
-    maxChars={300} 
-    placeholder="Напишіть короткий коментар..." 
-  />
-</ComponentSection>
-
-{/* 4.3 Демонстрація стану помилки */}
-<ComponentSection 
-  title="4.3 Error State Demo"
-  description="Компонент сам вираховує залишок і вмикає червоний колір, якщо текст задовгий."
-  code={`// Просто введіть текст більше ліміту - помилка з'явиться автоматично`}
->
-  {/* Тут ми просто показуємо компонент, щоб розробник міг потестити введення */}
-  <TextArea 
-    variant="h-120" 
-    maxChars={10} 
-    placeholder="Введіть більше 10 символів..." 
-  />
-</ComponentSection>
-
-{/* --- SECTION 5: CUSTOM SELECT --- */}
-<h2 style={{ color: 'var(--color-royal-blue)', marginBottom: '30px', marginTop: '100px' }}>5. Custom Select</h2>
-
-<ComponentSection 
-  title="5.1 Category Selection"
-  description="Адаптивний селект з вибором регіону. Підтримує темну тему та мобільні версії."
-  code={`<CustomSelect />`}
->
-  <CustomSelect />
-</ComponentSection>
-
-{/* Для візуальної перевірки станів розробником без взаємодії */}
-<ComponentSection 
-  title="5.2 Select States"
-  description="Візуальна перевірка кольорів у стані Filled та Open."
-  code={`// Ці стани активуються автоматично через CSS класи .is-filled та .is-open`}
->
-  <div style={{ display: 'flex', flexDirection: 'column', gap: '40px' }}>
-    
-    {/* Стан: Filled */}
-    <div className="select-group">
-      <span className="select-label">Категорія</span>
-      <div className="select-container is-filled">
-        <div className="select-trigger">
-          <span className="select-trigger-text">Європа</span>
-          <div className="select-icon">
-            <svg><use xlinkHref="/sprites/sprite.svg#icon-keyboard_arrow_down" /></svg>
-          </div>
-        </div>
-      </div>
+  {/* 5.1 Основні гарнітури */}
+  <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '20px', marginBottom: '40px' }}>
+    <div style={{ padding: '20px', border: '1px solid var(--color-scheme-1-border)', borderRadius: '12px' }}>
+      <p style={{ fontSize: '14px', color: 'var(--color-neutral)', marginBottom: '10px' }}>Primary Font (Основний)</p>
+      <p style={{ fontSize: '24px', fontWeight: 700 }}>Nunito Sans</p>
+      <p style={{ opacity: 0.8 }}>Використовується для основного тексту, кнопок, інпутів та описів.</p>
     </div>
-
-    {/* Стан: Open */}
-    <div className="select-group">
-      <span className="select-label">Категорія</span>
-      <div className="select-container is-open">
-        <div className="select-trigger" style={{ borderColor: 'var(--color-royal-blue-light)' }}>
-          <span className="select-trigger-text">Категорія</span>
-          <div className="select-icon" style={{ transform: 'rotate(180deg)' }}>
-            <svg><use xlinkHref="/sprites/sprite.svg#icon-keyboard_arrow_down" /></svg>
-          </div>
-        </div>
-        <div className="select-dropdown">
-           <div className="select-item">Азія</div>
-           <div className="select-item" style={{ background: 'var(--color-neutral-lightest)' }}>Гори</div>
-           <div className="select-item">Європа</div>
-        </div>
-      </div>
+    <div style={{ padding: '20px', border: '1px solid var(--color-scheme-1-border)', borderRadius: '12px' }}>
+      <p style={{ fontSize: '14px', color: 'var(--color-neutral)', marginBottom: '10px' }}>Heading Font (Заголовки)</p>
+      <p style={{ fontSize: '24px', fontWeight: 700, fontFamily: 'var(--second-family)' }}>Raleway</p>
+      <p style={{ opacity: 0.8 }}>Використовується виключно для заголовків H1-H4 та акцентних елементів.</p>
     </div>
-
   </div>
-</ComponentSection>
 
-{/* Section 6: Tabs Switching */}
-<ComponentSection 
-  title="6.1 Tabs: Interactive Component"
-  description="Універсальний перемикач станів. Підтримує передачу назв кнопок через пропси. Повертає значення 'state1' або 'state2' у функцію onChange."
-  code={`<Tabs 
-  firstLabel="Збережені історії" 
-  secondLabel="Мої історії" 
-  onChange={(state) => console.log(state)} 
-/>`}
->
-  <Tabs onChange={(state) => console.log("Обрано:", state)} />
-</ComponentSection>
-
-<ComponentSection 
-  title="6.2 Tabs States & Props API"
-  description="Візуальна перевірка станів та опис вхідних параметрів."
-  code={`// API Компонента:
-// firstLabel (string): Текст лівої кнопки (за замовчуванням: "Збережені історії")
-// secondLabel (string): Текст правої кнопки (за замовчуванням: "Мої історії")
-// onChange (function): Callback, що отримує 'state1' або 'state2'
-`}
->
-  <div style={{ display: 'flex', flexDirection: 'column', gap: '60px' }}>
-    
-    {/* Візуальна перевірка Стан 1 */}
-    <div className="kit-group">
-      <span className="kit-label" style={{ marginBottom: '10px', display: 'block', color: 'var(--color-neutral)' }}>
-        Стан: state1 (Active First)
-      </span>
-      {/* Використовуємо реальний компонент з фіксацією пропса, якщо він підтримує value, 
-          або просто чисту верстку для тесту кольорів: */}
-      <div className={styles.tabsWrapper}>
-        <div className={`${styles.tabsSwitcher} ${styles.stateFirst}`}>
-          <button className={`${styles.tabBtn} ${styles.tabBtnFirst}`}>Monthly</button>
-          <button className={`${styles.tabBtn} ${styles.tabBtnSecond}`}>Yearly</button>
-        </div>
+  {/* 5.2 Заголовки з поясненням адаптивності */}
+  <ComponentSection 
+    title="5.1 Семантичні заголовки (Raleway)"
+    usage="Розміри змінюються автоматично: H1 на мобільних 32px, на десктопі 56px. Текст має letter-spacing: -0.01em."
+    code={`<h1>Головний заголовок</h1>\n<h2>Назва секції</h2>\n<h3>Заголовок картки</h3>\n<h4>Заклик до дії</h4>`}
+  >
+    <div style={{ display: 'flex', flexDirection: 'column', gap: '30px', width: '100%' }}>
+      <div style={{ borderLeft: '3px solid var(--color-royal-blue)', paddingLeft: '20px' }}>
+        <span style={{ fontSize: '12px', color: 'var(--color-neutral)', textTransform: 'uppercase' }}>H1: Hero / Page Title</span>
+        <h1 style={{ marginTop: '5px' }}>Подорожуй та ділись враженнями</h1>
+      </div>
+      <div style={{ borderLeft: '3px solid var(--color-royal-blue)', paddingLeft: '20px' }}>
+        <span style={{ fontSize: '12px', color: 'var(--color-neutral)', textTransform: 'uppercase' }}>H2: Section Header</span>
+        <h2 style={{ marginTop: '5px' }}>Найкращі історії тижня</h2>
+      </div>
+      <div style={{ borderLeft: '3px solid var(--color-royal-blue)', paddingLeft: '20px' }}>
+        <span style={{ fontSize: '12px', color: 'var(--color-neutral)', textTransform: 'uppercase' }}>H3: Card Title</span>
+        <h3 style={{ marginTop: '5px' }}>Таємниці старих Карпат</h3>
+      </div>
+      <div style={{ borderLeft: '3px solid var(--color-royal-blue)', paddingLeft: '20px' }}>
+        <span style={{ fontSize: '12px', color: 'var(--color-neutral)', textTransform: 'uppercase' }}>H4: Small Header</span>
+        <h4 style={{ marginTop: '5px' }}>Приєднуйся до спільноти</h4>
       </div>
     </div>
+  </ComponentSection>
 
-    {/* Візуальна перевірка Стан 2 */}
-    <div className="kit-group">
-      <span className="kit-label" style={{ marginBottom: '10px', display: 'block', color: 'var(--color-neutral)' }}>
-        Стан: state2 (Active Second)
-      </span>
-      <div className={styles.tabsWrapper}>
-        <div className={`${styles.tabsSwitcher} ${styles.stateSecond}`}>
-          <button className={`${styles.tabBtn} ${styles.tabBtnFirst}`}>Збережені історії</button>
-          <button className={`${styles.tabBtn} ${styles.tabBtnSecond}`}>Мої історії</button>
+  {/* 5.3 Службові класи */}
+  <ComponentSection 
+    title="5.2 Додаткові стилі тексту"
+    usage="Класи для мета-даних, тегів та форм. Використовують Nunito Sans з різною жирністю."
+    code={`<p className="author-info">Олена, 20 жов</p>\n<span className="tag-text">Європа</span>\n<span className="upload-text">Завантажити фото</span>`}
+  >
+    <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '30px' }}>
+      <div>
+        <p className="author-info">Олена Кузнєцова, 20 жовтня</p>
+        <p style={{ fontSize: '11px', color: 'var(--color-neutral)', marginTop: '5px' }}>.author-info: Bold, 16px/18px</p>
+      </div>
+      <div>
+        <div style={{ display: 'inline-block', padding: '4px 12px', backgroundColor: 'var(--color-royal-blue-lighter)', borderRadius: '20px' }}>
+          <span className="tag-text">ЄВРОПА</span>
         </div>
+        <p style={{ fontSize: '11px', color: 'var(--color-neutral)', marginTop: '5px' }}>.tag-text: SemiBold, 12px/16px</p>
+      </div>
+      <div>
+        <span className="upload-text">Додати світлину</span>
+        <p style={{ fontSize: '11px', color: 'var(--color-neutral)', marginTop: '5px' }}>.upload-text: Medium, 16px/18px</p>
       </div>
     </div>
+  </ComponentSection>
+</section>
 
-  </div>
-</ComponentSection>
-
-      </div>
+      </section>
     </div>
   );
 }

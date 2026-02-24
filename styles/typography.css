@@ -1,144 +1,131 @@
-/* =========================
-   TYPOGRAPHY SYSTEM
-   Mobile First
-========================= */
-
-/* ===== BASE BODY TEXT ===== */
+/* =================================
+   TYPOGRAPHY SYSTEM (Mobile First)
+==================================== */
 
 body {
-  font-family: var(--font-main);
+  font-family: var(--font-family);
   font-size: 16px;
   line-height: 1.5;
+  color: var(--color-scheme-2-text);
 }
 
 /* =========================
-   HEADINGS
+   HEADINGS (Семантична база)
 ========================= */
 
-/* ---- H1 (Hero only) ---- */
-
+/* H1: Hero Title (Головна) та Page Title (Інші сторінки) */
 h1 {
-  font-family: var(--font-heading);
+  font-family: var(--second-family);
   font-weight: 700;
   font-size: 32px;
   line-height: 1.1;
   letter-spacing: -0.01em;
 }
 
-/* ---- H2 Section titles ---- */
-
+/* H2: Назва секції (Головна) */
 h2 {
-  font-family: var(--font-heading);
+  font-family: var(--second-family);
   font-weight: 700;
   font-size: 28px;
   line-height: 1.2;
   letter-spacing: -0.01em;
 }
 
-/* ---- H3 ---- */
-
+/* H3: Підзаголовок секції */
 h3 {
-  font-family: var(--font-heading);
+  font-family: var(--second-family);
   font-weight: 700;
   font-size: 20px;
   line-height: 1.3;
   letter-spacing: -0.01em;
 }
 
-/* ---- H4 ---- */
-
+/* H4: Заголовок банерів / Заголовок заклику */
 h4 {
-  font-family: var(--font-main);
+  font-family: var(--second-family);
   font-weight: 700;
   font-size: 18px;
-  line-height: 1.5;
-}
-
-/* ---- H5 ---- */
-
-h5 {
-  font-family: var(--font-main);
-  font-weight: 600;
-  font-size: 12px;
-  line-height: 1.5;
-}
-
-/* ---- H6 ---- */
-
-h6 {
-  font-family: var(--font-main);
-  font-weight: 600;
-  font-size: 10px;
   line-height: 1.4;
+  letter-spacing: -0.01em;
 }
 
 /* =========================
-   PARAGRAPH TEXT
+   SPECIFIC CLASSES (Додаткові стилі)
 ========================= */
 
-p {
-  font-family: var(--font-main);
-  font-weight: 400;
+.hero-title { color: var(--color-white); }
+.hero-text { color: var(--color-white); font-size: 16px; }
+
+.page-title { 
+  color: var(--color-scheme-1-text); 
+  text-align: center; 
+}
+
+/* Published on / Written by */
+.author-info {
+  font-family: var(--font-family);
+  font-weight: 700;
   font-size: 16px;
   line-height: 1.5;
 }
 
-/* =========================
-   TABLET
-========================= */
+/* Tags */
+.tag-text {
+  font-family: var(--font-family);
+  font-weight: 600;
+  font-size: 12px;
+  color: var(--color-neutral-darkest);
+}
 
-@media (min-width: 768px) {
-  h1 {
-    font-size: 48px;
-  }
-
-  h2 {
-    font-size: 52px;
-  }
-
-  h3 {
-    font-size: 20px;
-  }
-
-  h4 {
-    font-size: 18px;
-  }
-
-  h5 {
-    font-size: 12px;
-  }
-
-  p {
-    font-size: 16px;
-  }
+/* Завантажити фото */
+.upload-text {
+  font-family: var(--font-family);
+  font-weight: 500;
+  font-size: 16px;
+  color: var(--color-neutral-darkest);
 }
 
 /* =========================
-   DESKTOP
+   ADAPTIVE (Tablet 768px)
+========================= */
+
+@media (min-width: 768px) {
+  h1 { font-size: 48px; }
+  h2 { font-size: 44px; }
+  h3 { font-size: 20px; }
+  h4 { font-size: 18px; }
+}
+
+/* =========================
+   ADAPTIVE (Desktop 1440px)
 ========================= */
 
 @media (min-width: 1440px) {
-  h1 {
-    font-size: 56px;
-  }
+  h1 { font-size: 56px; }
+  h2 { font-size: 52px; }
+  h3 { font-size: 32px; }
+  h4 { font-size: 26px; }
+  
+  p, .hero-text { font-size: 20px; }
+  .text-md { font-size: 18px; } /* Специфічний середній текст */
+  
+  .author-info { font-size: 18px; }
+  .tag-text { font-size: 16px; }
+  .upload-text { font-size: 18px; }
+}
 
-  h2 {
-    font-size: 52px;
-  }
+/* =========================
+   DARK THEME
+========================= */
 
-  h3 {
-    font-size: 32px;
-  }
-
-  h4 {
-    font-size: 26px;
-  }
-
-  h5 {
-    font-size: 16px;
-  }
-
-  p {
-    font-size: 20px;
+[data-theme='dark'] {
+  body { color: var(--color-white); }
+  
+  h2, h3, h4, 
+  .page-title, 
+  .author-info, 
+  .tag-text, 
+  .upload-text {
+    color: var(--color-white) !important;
   }
 }
