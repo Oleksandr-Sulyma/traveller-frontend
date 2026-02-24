@@ -9,7 +9,7 @@ export default function Footer() {
   const year = new Date().getFullYear();
 
   return (
-    <footer className={styles.footer} data-theme="dark">
+    <footer className={styles.footer}>
       <div className="container ">
         <div className={styles.mainRow}>
           <Link
