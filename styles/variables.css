@@ -1,67 +1,71 @@
 :root {
-    /* --- 1. ПАЛІТРА ROYAL BLUE (З макета) --- */
-    --color-royal-blue: #4169e1;
-    --color-royal-blue-light: #7a96ea;
-    --color-royal-blue-lighter: #e8eeff;
-    --color-royal-blue-lightest: #f7f9ff;
-    --color-royal-blue-dark: #3454b4;
-    --color-royal-blue-darker: #1a2a5a;
-    --color-royal-blue-darkest: #131f43;
+  /* --- 1. ПАЛІТРА ROYAL BLUE (З макета) --- */
+  --color-royal-blue: #4169e1;
+  --color-royal-blue-light: #7a96ea;
+  --color-royal-blue-lighter: #e8eeff;
+  --color-royal-blue-lightest: #f7f9ff;
+  --color-royal-blue-dark: #3454b4;
+  --color-royal-blue-darker: #1a2a5a;
+  --color-royal-blue-darkest: #131f43;
 
-    /* --- 2. НЕЙТРАЛЬНІ ТА СИСТЕМНІ КОЛЬОРИ --- */
-    --color-white: #fff;
-    --color-neutral-darkest: #000;
-    --color-neutral-darker: #191919;
-    --color-neutral-dark: #4c4c4c;
-    --color-neutral: #7f7f7f;
-    --color-neutral-light: #b2b2b2;
-    --color-neutral-lighter: #d8d8d8;
-    --color-neutral-lightest: #f2f2f2;
-    --color-red: #b00101;
+  /* --- 2. НЕЙТРАЛЬНІ ТА СИСТЕМНІ КОЛЬОРИ --- */
+  --color-white: #fff;
+  --color-neutral-darkest: #000;
+  --color-neutral-darker: #191919;
+  --color-neutral-dark: #4c4c4c;
+  --color-neutral: #7f7f7f;
+  --color-neutral-light: #b2b2b2;
+  --color-neutral-lighter: #d8d8d8;
+  --color-neutral-lightest: #f2f2f2;
+  --color-red: #b00101;
 
-    /* --- 3. ПРОЗОРІСТЬ (Opacity) --- */
-    --opacity-neutral-darkest-5: rgba(0, 0, 0, 0.05);
-    --opacity-neutral-darkest-10: rgba(0, 0, 0, 0.1);
-    --opacity-neutral-darkest-15: rgba(0, 0, 0, 0.15);
-    --opacity-neutral-darkest-20: rgba(0, 0, 0, 0.2);
-    --opacity-neutral-darkest-30: rgba(0, 0, 0, 0.3);
-    --opacity-neutral-darkest-40: rgba(0, 0, 0, 0.4);
-    --opacity-neutral-darkest-60: rgba(0, 0, 0, 0.6);
-    
-    --opacity-white-5: rgba(255, 255, 255, 0.05);
-    --opacity-white-10: rgba(255, 255, 255, 0.1);
-    --opacity-white-15: rgba(255, 255, 255, 0.15);
-    --opacity-white-40: rgba(255, 255, 255, 0.4);
-    --opacity-white-60: rgba(255, 255, 255, 0.6);
-    --opacity-transparent: rgba(255, 255, 255, 0);
+  /* --- 3. ПРОЗОРІСТЬ (Opacity) --- */
+  --opacity-neutral-darkest-5: rgba(0, 0, 0, 0.05);
+  --opacity-neutral-darkest-10: rgba(0, 0, 0, 0.1);
+  --opacity-neutral-darkest-15: rgba(0, 0, 0, 0.15);
+  --opacity-neutral-darkest-20: rgba(0, 0, 0, 0.2);
+  --opacity-neutral-darkest-30: rgba(0, 0, 0, 0.3);
+  --opacity-neutral-darkest-40: rgba(0, 0, 0, 0.4);
+  --opacity-neutral-darkest-60: rgba(0, 0, 0, 0.6);
 
-    /* --- 4. СЕМАНТИЧНІ СХЕМИ --- */
-    --color-scheme-1-background: var(--color-white);
-    --color-scheme-1-text: var(--color-neutral-darkest);
-    --color-scheme-1-border: var(--opacity-neutral-darkest-15);
-    --color-scheme-1-accent: var(--color-royal-blue);
-    
-    --color-scheme-2-background: var(--color-royal-blue-lightest);
-    --color-scheme-2-text: var(--color-neutral-darkest);
-    --color-scheme-2-border: var(--opacity-neutral-darkest-15);
-    --color-scheme-2-accent: var(--color-royal-blue);
+  --opacity-white-5: rgba(255, 255, 255, 0.05);
+  --opacity-white-10: rgba(255, 255, 255, 0.1);
+  --opacity-white-15: rgba(255, 255, 255, 0.15);
+  --opacity-white-40: rgba(255, 255, 255, 0.4);
+  --opacity-white-60: rgba(255, 255, 255, 0.6);
+  --opacity-transparent: rgba(255, 255, 255, 0);
 
-    /* Токен для плейсхолдера (Світла тема) */
-    --color-input-placeholder: var(--opacity-neutral-darkest-40);
+  /* --- 4. СЕМАНТИЧНІ СХЕМИ --- */
+  --color-scheme-1-background: var(--color-white);
+  --color-scheme-1-text: var(--color-neutral-darkest);
+  --color-scheme-1-border: var(--opacity-neutral-darkest-15);
+  --color-scheme-1-accent: var(--color-royal-blue);
 
-    /* --- 5. ТИПОГРАФІКА --- */
-    --font-family: "Nunito Sans", sans-serif;
-    --fs-md: 18px;
-    --fs-sm: 16px;
-    --fs-xs: 12px;
-    --fw-medium: 500;
-    --lh-base: 1.5;
+  --color-scheme-2-background: var(--color-royal-blue-lightest);
+  --color-scheme-2-text: var(--color-neutral-darkest);
+  --color-scheme-2-border: var(--opacity-neutral-darkest-15);
+  --color-scheme-2-accent: var(--color-royal-blue);
 
-    /* --- 6. РАДІУСИ ТА ВІДСТУПИ --- */
-    --radius-btn-light: 8px;
-    --radius-btn-dark: 12px;
-    --space-sm: 8px;
-    --transition-fast: 0.2s ease;
+  /* Токен для плейсхолдера (Світла тема) */
+  --color-input-placeholder: var(--opacity-neutral-darkest-40);
+
+  /* --- 5. ТИПОГРАФІКА --- */
+  --font-family: 'Nunito Sans', sans-serif;
+  --fs-md: 18px;
+  --fs-sm: 16px;
+  --fs-xs: 12px;
+  --fw-medium: 500;
+  --lh-base: 1.5;
+
+  /* --- 6. РАДІУСИ ТА ВІДСТУПИ --- */
+  --radius-btn-light: 8px;
+  --radius-btn-dark: 12px;
+  --space-sm: 8px;
+  --transition-fast: 0.2s ease;
+
+  /* --- 7. FOOTER --- */
+  --footer-background: var(--color-royal-blue-lighter);
+  --divider-color: var(--opacity-neutral-darkest-15);
 }
 
 /* =================================
@@ -69,37 +73,41 @@
 ==================================== */
 
 [data-theme='dark'] {
-    /* Backgrounds */
-    --color-scheme-background: #0f1115;
-    --color-scheme-text: #f5f7fa;
-    --color-scheme-2-text: var(--color-white);
-    --color-scheme-1-text: var(--color-white);
+  /* Backgrounds */
+  --color-scheme-background: #0f1115;
+  --color-scheme-text: #f5f7fa;
+  --color-scheme-2-text: var(--color-white);
+  --color-scheme-1-text: var(--color-white);
 
-    /* Токен для плейсхолдера (Темна тема) */
-    --color-input-placeholder: var(--opacity-white-40);
-    
-    /* Primary Dark Buttons */
-    --btn-primary-bg: var(--color-white);
-    --btn-primary-text: var(--color-neutral-darkest);
-    --btn-primary-border: var(--color-white);
-    
-    --btn-primary-hover-bg: var(--color-neutral);
-    --btn-primary-hover-text: var(--color-white);
-    
-    --btn-primary-active-bg: var(--color-neutral-dark);
-    --btn-primary-active-border: var(--color-neutral-dark);
-    --btn-primary-active-text: var(--color-white);
+  /* Footer */
+  --footer-background: var(--color-scheme-background);
+  --divider-color: var(--color-royal-blue-lighter);
 
-    /* Secondary Dark Buttons */
-    --btn-secondary-bg: var(--opacity-white-10);
-    --btn-secondary-text: var(--color-white);
-    --btn-secondary-border: var(--opacity-transparent);
-    
-    --btn-secondary-hover-bg: var(--color-royal-blue-lighter);
-    --btn-secondary-hover-text: var(--color-neutral-darkest);
-    
-    --btn-secondary-active-bg: var(--color-royal-blue-light);
-    --btn-secondary-active-text: var(--color-neutral-darkest);
+  /* Токен для плейсхолдера (Темна тема) */
+  --color-input-placeholder: var(--opacity-white-40);
 
-    --radius-btn: var(--radius-btn-dark);
+  /* Primary Dark Buttons */
+  --btn-primary-bg: var(--color-white);
+  --btn-primary-text: var(--color-neutral-darkest);
+  --btn-primary-border: var(--color-white);
+
+  --btn-primary-hover-bg: var(--color-neutral);
+  --btn-primary-hover-text: var(--color-white);
+
+  --btn-primary-active-bg: var(--color-neutral-dark);
+  --btn-primary-active-border: var(--color-neutral-dark);
+  --btn-primary-active-text: var(--color-white);
+
+  /* Secondary Dark Buttons */
+  --btn-secondary-bg: var(--opacity-white-10);
+  --btn-secondary-text: var(--color-white);
+  --btn-secondary-border: var(--opacity-transparent);
+
+  --btn-secondary-hover-bg: var(--color-royal-blue-lighter);
+  --btn-secondary-hover-text: var(--color-neutral-darkest);
+
+  --btn-secondary-active-bg: var(--color-royal-blue-light);
+  --btn-secondary-active-text: var(--color-neutral-darkest);
+
+  --radius-btn: var(--radius-btn-dark);
 }
