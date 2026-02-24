@@ -1,0 +1,26 @@
+.container{
+  padding: 64px 0;
+}
+
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+@media (min-width: 768px) {
+  .wrapper {
+    flex-direction: row;
+    gap: 24px;
+    font-weight: 700;
+    & h2 {
+      font-size: 44px;
+    }
+  }
+}
+
+/* @media (min-width: 1440px){
+.wrapper{
+  display: flex;
+}
+} */

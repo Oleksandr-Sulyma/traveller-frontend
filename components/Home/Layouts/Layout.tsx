@@ -1,7 +1,9 @@
+import css from './Layout.module.css'
+
 export default function Layout() {
   return (
     <section className="container">
-      <div>
+      <div className={css.wrapper}>
         <h2>Проєкт, створений для тих, хто живе подорожами</h2>
         <p>
           Ми віримо, що кожна подорож — це унікальна історія, варта того, щоб нею поділилися. Наша
@@ -13,17 +15,23 @@ export default function Layout() {
       <ul>
         <li>
           <svg width="40" height="40" style={{ color: 'black' }}>
-            <use href="/public/sprites/sprite.min.min.svg#prefix__prefix__icon-arrow_back"></use>
+            <use href="/sprites/sprite.svg#icon-wand_stars"></use>
           </svg>
 
           <h3>Наша місія</h3>
           <p>Об'єднувати людей через любов до пригод та надихати на нові відкриття.</p>
         </li>
         <li>
+          <svg width="40" height="40" style={{ color: 'black' }}>
+            <use href="/sprites/sprite.svg#icon-travel_luggage_and_bags"></use>
+          </svg>
           <h3>Автентичні історії</h3>
           <p>Ми цінуємо справжні, нередаговані враження від мандрівників з усього світу.</p>
         </li>
         <li>
+          <svg width="40" height="40" style={{ color: 'black' }}>
+            <use href="/sprites/sprite.svg#icon-communication"></use>
+          </svg>
           <h3>Ваша спільнота</h3>
           <p>Станьте частиною спільноти, де кожен може бути і автором, і читачем.</p>
         </li>
