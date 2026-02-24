@@ -35,7 +35,7 @@ export default async function HomePage() {
       <Team />
 
       {/* Секція 4: Блок реєстрації (Task 22) */}
-      {/* <CTA /> */}
+      <CTA />
     </main>
   );
 }

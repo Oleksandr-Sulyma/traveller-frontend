@@ -12,4 +12,4 @@ export interface Story {
     favoriteCount: number;
     createdAt: string;
     updatedAt: string;
-}
+  }
