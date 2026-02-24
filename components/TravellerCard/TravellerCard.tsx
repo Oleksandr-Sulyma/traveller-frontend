@@ -15,7 +15,8 @@ export default function TravelerCard({
   onViewProfile,
 }: TravelerCardProps) {
   return (
-    <div className={`traveler-card ${styles.traveler_card}`} data-theme="dark">
+    // <div className={`${styles.traveler_card}`} data-theme="dark">
+    <div className={`traveler-card-text  ${styles.traveler_card} `} data-theme="dark">
       <img src={photo} alt={name} className={styles.traveler_card_photo} />
       <div className={styles.traveler_card_content}>
         <h3 className={styles.traveler_card_name}>{name}</h3>

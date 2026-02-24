@@ -4,7 +4,8 @@
   width: 335px;
   height: 363px;
   min-width: 250px;
-  background: var(--color-scheme-2-background);
+  background-color: var(--color-royal-blue-lighter);
+  /* background-color: green; */
 
   display: flex;
   flex-direction: column;
@@ -35,7 +36,7 @@
   font-weight: 600;
   font-size: 18px;
   line-height: 150%;
-  color: var(--color-neutral-darker);
+  color: var(--color-scheme-2-text);
 
   overflow: hidden;
   text-overflow: ellipsis;
@@ -48,7 +49,7 @@
   font-weight: 400;
   font-size: 16px;
   line-height: 150%;
-  color: var(--color-neutral-darker);
+  color: var(--color-scheme-2-text);
 
   display: -webkit-box;
   -webkit-line-clamp: 3;
@@ -65,4 +66,10 @@
   padding: 6px 12px;
   width: 100%;
   height: 48px;
+
+  font-weight: 400 !important;
+  font-family: var(--font-family);
+  font-size: 16px;
+  line-height: 150%;
+  color: var(--color-neutral-darkest);
 }
