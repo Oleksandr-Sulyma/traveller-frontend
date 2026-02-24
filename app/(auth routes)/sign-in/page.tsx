@@ -1,12 +1,13 @@
 'use client';
 
+import { ErrorMessage, Field, Form, Formik, FormikHelpers } from 'formik';
+import { useAuthStore } from '@/lib/store/authStore';
+import { useMutation } from '@tanstack/react-query';
+import { register } from '@/lib/api/clientApi';
 import { useRouter } from 'next/navigation';
 import { useId } from 'react';
-import * as Yup from 'yup';
-import { useMutation } from '@tanstack/react-query';
-import { ErrorMessage, Field, Form, Formik, FormikHelpers } from 'formik';
-import { register } from '@/lib/api/clientApi';
 import Link from 'next/link';
+import * as Yup from 'yup';
 
 interface FormValues {
   email: string;
@@ -26,11 +27,16 @@ const RegisterSchema = Yup.object().shape({
 });
 
 export default function SignIn() {
+  const setUser = useAuthStore(state => state.setUser);
   const router = useRouter();
   const id = useId();
 
   const { mutate, isPending } = useMutation({
     mutationFn: (data: FormValues) => register(data),
+    onSuccess: user => {
+      setUser(user);
+      router.push('/profile');
+    },
   });
 
   const handleSubmit = (values: FormValues, actions: FormikHelpers<FormValues>) => {
