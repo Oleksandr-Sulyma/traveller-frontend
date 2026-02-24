@@ -1,0 +1,34 @@
+.toggle {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--btn-secondary-bg);
+  border: 1px solid var(--btn-secondary-border);
+  color: var(--btn-secondary-text);
+  padding: 6px 12px;
+  border-radius: var(--radius-btn-light);
+  cursor: pointer;
+  transition: all var(--transition-fast);
+}
+
+.toggle:hover {
+  background: var(--btn-secondary-hover-bg);
+  color: var(--btn-secondary-hover-text);
+}
+
+.icon {
+  width: 20px;
+  height: 20px;
+  fill: currentColor; /* Іконка прийме колір тексту кнопки */
+}
+
+.text {
+  font-family: var(--font-family);
+  font-weight: 500;
+  font-size: 14px;
+}
+
+.placeholder {
+  width: 120px;
+  height: 34px;
+}

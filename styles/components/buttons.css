@@ -1,7 +1,7 @@
 /* =================================
-   BASE BUTTON STRUCTURE
+   1. BASE BUTTON STRUCTURE
 ==================================== */
-button.btn {
+.btn {
     display: inline-flex;
     align-items: center;
     justify-content: center;
@@ -17,147 +17,93 @@ button.btn {
     border-radius: var(--radius-btn-light);
     border: 1px solid transparent;
     outline: none;
-    /* Ширина по контенту за замовчуванням */
     width: auto;
 }
 
-/* РОЗМІРИ ТА ПАДІНГИ */
-/* Стандартна кнопка 48px */
-button.btn.btn--default {
-    height: 48px;
-    padding: 6px 12px; /* Падінги по боках */
-}
+/* РОЗМІРИ */
+.btn--default { height: 48px; padding: 6px 12px; }
+.btn--header { height: 35px; padding: 4px 10px; font-size: 16px; }
 
-/* Кнопка хедера 35px */
-button.btn.btn--header {
-    height: 35px;
-    padding: 4px 10px;
-    font-size: var(--fs-body-sm, 16px);
-}
+/* КНОПКИ-ІКОНКИ (Квадратні) */
+.btn-icon { width: 48px; height: 48px; padding: 6px; }
+.btn-icon--header { width: 35px; height: 35px; padding: 4px; }
 
 @media (max-width: 1024px) {
-    button.btn.btn--header {
-        height: 32px;
-        padding: 4px 10px;
-    }
+    .btn--header { height: 32px; }
+    .btn-icon--header { width: 32px; height: 32px; }
 }
 
-/* КНОПКИ З ІКОНКАМИ (Квадратні) */
-/* Якщо всередині тільки іконка — додаємо цей клас, щоб кнопка стала квадратом */
-button.btn.btn-icon {
-    width: 48px; 
-    height: 48px;
-    padding: 6px; /* Прибираємо падінги для центрування */
+/* =================================
+   2. COLOR VARIANTS (LIGHT THEME)
+==================================== */
+
+/* PRIMARY */
+.btn.btn-primary {
+    background-color: var(--color-royal-blue);
+    color: var(--color-white);
+}
+.btn.btn-primary:hover {
+    background-color: var(--color-royal-blue-lighter);
+    color: var(--color-neutral-darkest);
 }
 
-button.btn.btn-icon--header {
-    width: 35px;
-    height: 35px;
-    padding: 4px;
+/* SECONDARY */
+.btn.btn-secondary {
+    background-color: var(--opacity-neutral-darkest-5);
+    border-color: var(--opacity-neutral-darkest-15);
+    color: var(--color-neutral-darkest);
+}
+.btn.btn-secondary:hover {
+    background-color: var(--color-royal-blue);
+    color: var(--color-white);
 }
 
-@media (max-width: 1024px) {
-    button.btn.btn-icon--header {
-        width: 32px;
-        height: 32px;
-        padding: 4px;
-    }
+/* GHOST VARIANTS */
+.btn--ghost {
+    background-color: transparent;
+    border: 1px solid var(--color-royal-blue);
+    color: var(--color-royal-blue);
+}
+.btn--ghost-white {
+    background-color: transparent;
+    border: 1px solid var(--color-white);
+    color: var(--color-white);
 }
 
-button.btn:disabled {
-    opacity: 0.3 !important;
-    cursor: not-allowed !important;
+/* =================================
+   3. DARK THEME
+==================================== */
+[data-theme='dark'] .btn { border-radius: var(--radius-btn-dark); }
+
+[data-theme='dark'] .btn.btn-primary {
+    background-color: var(--color-white);
+    color: var(--color-neutral-darkest);
+}
+[data-theme='dark'] .btn.btn-primary:hover {
+    background-color: var(--color-neutral);
+    color: var(--color-white);
+}
+
+[data-theme='dark'] .btn.btn-secondary {
+    background-color: var(--opacity-white-10);
+    color: var(--color-white);
+}
+[data-theme='dark'] .btn.btn-secondary:hover {
+    background-color: var(--color-royal-blue-lighter);
+    color: var(--color-neutral-darkest);
+}
+
+/* =================================
+   4. COMMON STATES
+==================================== */
+.btn:active { transform: translateY(1px); }
+
+.btn:disabled {
+    opacity: 0.3;
+    cursor: not-allowed;
     pointer-events: none;
 }
 
-/* =================================
-   LIGHT THEME (Default)
-==================================== */
-
-/* PRIMARY LIGHT */
-button.btn.btn-primary {
-    background-color: var(--color-royal-blue) !important;
-    border: 1px solid var(--color-royal-blue) !important;
-    color: var(--color-white) !important;
-}
-
-button.btn.btn-primary:hover {
-    background-color: var(--color-royal-blue-lighter) !important;
-    border-color: var(--color-royal-blue-lighter) !important;
-    color: var(--color-neutral-darkest) !important;
-}
-
-button.btn.btn-primary:active {
-    background-color: var(--color-royal-blue-light) !important;
-    border-color: var(--color-royal-blue-light) !important;
-    color: var(--color-neutral-darkest) !important;
-    transform: translateY(1px);
-}
-
-/* SECONDARY LIGHT */
-button.btn.btn-secondary {
-    background-color: var(--opacity-neutral-darkest-5) !important;
-    border: 1px solid var(--opacity-neutral-darkest-15) !important;
-    color: var(--color-neutral-darkest) !important;
-}
-
-button.btn.btn-secondary:hover {
-    background-color: var(--color-royal-blue) !important;
-    border-color: transparent !important;
-    color: var(--color-white) !important;
-}
-
-button.btn.btn-secondary:active {
-    background-color: var(--color-royal-blue-darker) !important;
-    border-color: transparent !important;
-    color: var(--color-white) !important;
-    transform: translateY(1px);
-}
-
-/* =================================
-   DARK THEME (Applied via data-theme)
-==================================== */
-[data-theme='dark'] button.btn {
-    border-radius: var(--radius-btn-dark);
-}
-
-/* PRIMARY DARK */
-[data-theme='dark'] button.btn.btn-primary {
-    background-color: var(--color-white) !important;
-    border: 1px solid var(--color-white) !important;
-    color: var(--color-neutral-darkest) !important;
-}
-
-[data-theme='dark'] button.btn.btn-primary:hover {
-    background-color: var(--color-neutral) !important;
-    border-color: var(--color-neutral) !important;
-    color: var(--color-white) !important;
-}
-
-[data-theme='dark'] button.btn.btn-primary:active {
-    background-color: var(--color-neutral-dark) !important;
-    border: 1px solid var(--color-neutral-dark) !important;
-    color: var(--color-white) !important;
-}
-
-/* SECONDARY DARK */
-[data-theme='dark'] button.btn.btn-secondary {
-    background-color: var(--opacity-white-10) !important;
-    border: 1px solid transparent !important;
-    color: var(--color-white) !important;
-}
-
-[data-theme='dark'] button.btn.btn-secondary:hover {
-    background-color: var(--color-royal-blue-lighter) !important;
-    color: var(--color-neutral-darkest) !important;
-}
-
-[data-theme='dark'] button.btn.btn-secondary:active {
-    background-color: var(--color-royal-blue-light) !important;
-    color: var(--color-neutral-darkest) !important;
-}
-
-/* FOCUS STATE */
-button.btn:focus-visible {
+.btn:focus-visible {
     box-shadow: 0 0 0 3px rgba(65, 105, 225, 0.4);
 }
