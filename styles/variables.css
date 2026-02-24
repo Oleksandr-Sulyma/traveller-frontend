@@ -1,5 +1,5 @@
 :root {
-    /* --- 1. ПАЛІТРА ROYAL BLUE (З макета) --- */
+    /* --- 1. ПАЛІТРА ROYAL BLUE --- */
     --color-royal-blue: #4169e1;
     --color-royal-blue-light: #7a96ea;
     --color-royal-blue-lighter: #e8eeff;
@@ -31,11 +31,12 @@
     --opacity-white-5: rgba(255, 255, 255, 0.05);
     --opacity-white-10: rgba(255, 255, 255, 0.1);
     --opacity-white-15: rgba(255, 255, 255, 0.15);
+    --opacity-white-20: rgba(255, 255, 255, 0.2);
     --opacity-white-40: rgba(255, 255, 255, 0.4);
     --opacity-white-60: rgba(255, 255, 255, 0.6);
     --opacity-transparent: rgba(255, 255, 255, 0);
 
-    /* --- 4. СЕМАНТИЧНІ СХЕМИ --- */
+    /* --- 4. СЕМАНТИЧНІ СХЕМИ (Світла тема) --- */
     --color-scheme-1-background: var(--color-white);
     --color-scheme-1-text: var(--color-neutral-darkest);
     --color-scheme-1-border: var(--opacity-neutral-darkest-15);
@@ -45,12 +46,18 @@
     --color-scheme-2-text: var(--color-neutral-darkest);
     --color-scheme-2-border: var(--opacity-neutral-darkest-15);
     --color-scheme-2-accent: var(--color-royal-blue);
+    --color-scheme-2-foreground: var(--color-royal-blue-lighter);
 
-    /* Токен для плейсхолдера (Світла тема) */
+    /* --- ФУТЕР (Світла тема) --- */
+    --footer-background: var(--color-scheme-2-foreground);
+    --footer-text: var(--color-neutral-darkest);
+
+    /* Плейсхолдер (Світла тема) */
     --color-input-placeholder: var(--opacity-neutral-darkest-40);
 
     /* --- 5. ТИПОГРАФІКА --- */
     --font-family: "Nunito Sans", sans-serif;
+    --second-family: "Raleway", sans-serif; 
     --fs-md: 18px;
     --fs-sm: 16px;
     --fs-xs: 12px;
@@ -70,12 +77,25 @@
 
 [data-theme='dark'] {
     /* Backgrounds */
-    --color-scheme-background: #0f1115;
-    --color-scheme-text: #f5f7fa;
-    --color-scheme-2-text: var(--color-white);
-    --color-scheme-1-text: var(--color-white);
+    --color-scheme-1-background: #0f1115;
+    --color-scheme-2-background: #0f1115; 
+    
+    /* ТУТ МИ ДОДАЛИ ЦЮ ЗМІННУ ДЛЯ КАРТОК */
+    --color-scheme-2-foreground: var(--opacity-white-10);
 
-    /* Токен для плейсхолдера (Темна тема) */
+    /* Texts */
+    --color-scheme-1-text: var(--color-white);
+    --color-scheme-2-text: var(--color-white);
+
+    /* Borders */
+    --color-scheme-1-border: var(--opacity-white-15);
+    --color-scheme-2-border: var(--opacity-white-15);
+
+    /* --- ФУТЕР (Темна тема) --- */
+    --footer-background: var(--color-royal-blue-darkest); 
+    --footer-text: var(--color-white);
+
+    /* Плейсхолдер (Темна тема) */
     --color-input-placeholder: var(--opacity-white-40);
     
     /* Primary Dark Buttons */

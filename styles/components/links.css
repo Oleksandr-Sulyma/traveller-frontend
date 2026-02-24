@@ -10,10 +10,11 @@
     box-sizing: border-box;
     cursor: pointer;
     border-radius: 8px;
-    border: 1px solid transparent; /* Запобігає стрибкам */
+    background-color: transparent !important;
+    border: 1px solid transparent !important; 
 }
 
-/* Текстові лінки: Ширина по контенту */
+/* Текстові лінки */
 .link-text {
     width: auto;
     min-width: max-content;
@@ -26,91 +27,71 @@
     color: var(--color-neutral-darkest);
 }
 
-/* СТАН Hover/Active для LIGHT THEME */
-.link-text:hover, .link-text:focus-visible {
-    border: 1px solid var(--color-scheme-1-text);
-}
-
-.link-text:active {
-    border: 1px solid var(--color-scheme-1-text);
-    background: var(--color-neutral-lighter);
-}
-
-/* Іконки-лінки: Суворо 28x28 (без можливості зміни) */
+/* Іконки-лінки */
 .link-icon {
     width: 28px !important;
     height: 28px !important;
     min-width: 28px !important;
-    max-width: 28px !important;
     padding: 2px;
     color: var(--color-neutral-darkest);
 }
 
-.link-icon:hover, .link-icon:focus-visible {
-    border: 1px solid var(--color-scheme-1-text);
+/* =================================
+   HOVER / FOCUS / ACTIVE (Light Theme)
+==================================== */
+
+/* При фокусі та ховері з'являється рамка кольору тексту */
+.link-base:hover, 
+.link-base:focus-visible {
+    border: 1px solid var(--color-neutral-darkest) !important;
+    outline: none;
 }
 
-.link-icon:active {
-    border: 1px solid var(--color-scheme-1-text);
-    background: var(--color-neutral-lighter);
+.link-base:active {
+    background-color: var(--color-neutral-lighter) !important;
+    border: 1px solid var(--color-neutral-darkest) !important;
 }
 
 /* =================================
-   CONTEXTUAL LINKS (За ТЗ)
+   DISABLED STATE (Універсальний)
 ==================================== */
-
-/* Хедер Головна (69px) */
-.link-header-main {
-    width: 69px !important;
-    height: 27px;
-    font-weight: 400;
-    color: var(--color-scheme-1-background);
-}
-
-/* Хедер Інші сторінки (113px) */
-.link-header-inner {
-    width: 113px !important;
-    height: 27px;
-    font-weight: 400;
-    color: var(--color-scheme-2-text);
-}
-
-/* Футер ПК (69х43) */
-.link-footer-pc {
-    padding: 8px 0px;
-    width: 69px !important;
-    height: 43px;
-    font-weight: 400;
-    color: var(--color-scheme-2-text);
-}
-
-/* Футер Мобільні/Планшет (auto ширина) */
-@media (max-width: 1024px) {
-    .link-footer-mobile {
-        padding: 8px 0px;
-        width: auto !important; /* По ширині тексту */
-        min-width: 61px;
-        height: auto;
-        font-size: 16px;
-        color: var(--color-scheme-2-text);
-    }
+.link-base:disabled,
+.link-base.is-disabled {
+    opacity: 0.3 !important;
+    cursor: not-allowed !important;
+    pointer-events: none !important;
+    border-color: transparent !important;
+    background-color: transparent !important;
 }
 
 /* =================================
-   DARK THEME
+   DARK THEME ADAPTATION
 ==================================== */
-[data-theme='dark'] .link-text,
-[data-theme='dark'] .link-icon {
+[data-theme='dark'] .link-base {
     color: var(--color-white) !important;
 }
 
-[data-theme='dark'] .link-text:hover,
-[data-theme='dark'] .link-icon:hover {
+/* Рамка в темній темі стає білою */
+[data-theme='dark'] .link-base:hover,
+[data-theme='dark'] .link-base:focus-visible {
     border: 1px solid var(--color-white) !important;
 }
 
-[data-theme='dark'] .link-text:active,
-[data-theme='dark'] .link-icon:active {
-    background: var(--color-neutral-dark) !important;
+[data-theme='dark'] .link-base:active {
+    background-color: var(--opacity-white-10) !important;
     border: 1px solid var(--color-white) !important;
+}
+
+/* =================================
+   CONTEXTUAL OVERRIDES (Footer/Header)
+==================================== */
+
+/* Гарантуємо, що контекстні лінки наслідують логіку прозорості */
+.link-footer-pc, 
+.link-footer-mobile,
+.link-header-inner,
+.link-header-main {
+    background-color: transparent !important;
+    /* Колір тексту береться з ваших контекстних стилів, 
+       але рамка при ховері буде працювати згідно з .link-base */
 }
