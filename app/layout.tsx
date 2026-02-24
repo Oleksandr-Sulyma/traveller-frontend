@@ -21,6 +21,7 @@ import { ThemeProvider } from '@/components/ThemeProvider';
 import HeaderWrapper from '@/components/Header/HeaderWrapper';
 import FooterWrapper from '@/components/Footer/FooterWrapper';
 import MainContent from '@/components/MainContent/MainContent';
+import TanStackProvider from '@/components/Providers/TanStackProvider';
 
 export const metadata: Metadata = {
   title: 'Подорожники',
@@ -32,10 +33,12 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     <html lang="uk" suppressHydrationWarning>
       <body suppressHydrationWarning>
         <ThemeProvider>
-          <HeaderWrapper />
-          <MainContent>{children}</MainContent>
+          <TanStackProvider>
+            <HeaderWrapper />
+            <MainContent>{children}</MainContent>
 
-          <FooterWrapper hideOn={['/auth/register', '/auth/login']} />
+            <FooterWrapper hideOn={['/auth/register', '/auth/login']} />
+          </TanStackProvider>
         </ThemeProvider>
       </body>
     </html>

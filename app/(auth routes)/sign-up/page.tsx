@@ -1,13 +1,14 @@
 'use client';
 
 import css from './SignUpPage.module.css';
+import Link from 'next/link';
+import * as Yup from 'yup';
+import { ErrorMessage, Field, Form, Formik, FormikHelpers } from 'formik';
+import { useMutation } from '@tanstack/react-query';
+import { register } from '@/lib/api/clientApi';
 import { useRouter } from 'next/navigation';
 import { useId } from 'react';
-import * as Yup from 'yup';
-import { useMutation, useQueryClient } from '@tanstack/react-query';
-import { ErrorMessage, Field, Form, Formik, FormikHelpers } from 'formik';
-import { register } from '@/lib/api/clientApi';
-import Link from 'next/link';
+import { useAuthStore } from '@/lib/store/authStore';
 
 interface FormValues {
   username: string;
@@ -22,31 +23,36 @@ const passwordRules = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&]).{8,}$/;
 const RegisterSchema = Yup.object().shape({
   username: Yup.string()
     .trim()
-    .min(5, 'Username must be at least 5 characters')
-    .max(30, 'Username must be at most 30 characters')
-    .matches(/^[a-zA-Z0-9_]+$/, 'Only letters, numbers, and underscore allowed')
-    .required('Username is required'),
+    .min(5, 'Ім’я користувача має містити щонайменше 5 символів')
+    .max(30, 'Ім’я користувача має містити не більше 30 символів')
+    .matches(/^[a-zA-Z0-9_]+$/, 'Можна використовувати лише літери, цифри та підкреслення')
+    .required('Будь ласка, введіть ім’я користувача'),
 
   email: Yup.string()
     .trim()
     .lowercase()
-    .email('Enter a valid email address')
-    .required('Email is required'),
+    .email('Введіть коректну електронну адресу')
+    .required('Будь ласка, введіть електронну пошту'),
 
   password: Yup.string()
     .matches(
       passwordRules,
-      'Password must contain 8+ characters, uppercase, lowercase, number, and special character'
+      'Пароль має містити щонайменше 8 символів, великі та малі літери, цифру і спеціальний символ'
     )
-    .required('Password is required'),
+    .required('Будь ласка, введіть пароль'),
 });
 
 export default function SignUp() {
-  const router = useRouter();
   const id = useId();
+  const router = useRouter();
+  const setUser = useAuthStore(state => state.setUser);
 
   const { mutate, isPending } = useMutation({
     mutationFn: (data: FormValues) => register(data),
+    onSuccess: user => {
+      setUser(user);
+      router.push('/profile');
+    },
   });
 
   const handleSubmit = (values: FormValues, actions: FormikHelpers<FormValues>) => {
