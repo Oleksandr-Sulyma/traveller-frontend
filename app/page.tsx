@@ -4,7 +4,7 @@ import Hero from '@/components/Home/Hero/Hero';
 // import CTA from '@/components/Home/CTA/CTA';
 
 import Blog from '@/components/Home/Blog/Blog';
-import Layout from '@/components/Home/Layouts/Layout ';
+import Layout from '@/components/Home/Layouts/Layout';
 import Team from '@/components/Home/Team/Team';
 import CTA from '@/components/Home/CTA/CTA';
 
@@ -19,9 +19,8 @@ export default async function HomePage() {
   // const travellers = await getTopTravellers();
 
   return (
-    <main>
-     
-{/* Секція 2: Популярні історії (Task 19) */}
+        <>
+        {/* Секція 2: Популярні історії (Task 19) */}
        <Layout/>
       {/* Секція 2: Популярні історії (Task 20) */}
       {/* Передаємо дані всередину блоку */}
@@ -36,6 +35,7 @@ export default async function HomePage() {
 
       {/* Секція 4: Блок реєстрації (Task 22) */}
       <CTA />
-    </main>
+        </>
+
   );
 }
