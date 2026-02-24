@@ -1,12 +1,27 @@
-.container{
+.wrapper {
+  width: 100%;
   padding: 64px 0;
 }
-
-.wrapper {
+.position {
   display: flex;
   flex-direction: column;
   gap: 24px;
 }
+
+.text{
+  margin-bottom: 64px;
+}
+
+.svgWrapper{
+display: flex;
+flex-direction: column;
+gap:32px
+}
+
+.wrapperLi{
+  
+}
+
 
 @media (min-width: 768px) {
   .wrapper {
