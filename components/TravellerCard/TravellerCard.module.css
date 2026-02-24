@@ -1,11 +1,13 @@
 .traveler_card {
   border-radius: 16px;
   padding: 24px;
-  width: 335px;
-  height: 363px;
+
+  width: 100%;
   min-width: 250px;
-  background-color: var(--color-royal-blue-lighter);
-  /* background-color: green; */
+  max-width: 335px; /* щоб не розтягувалась на десктопі */
+
+  height: 363px;
+  background: var(--color-scheme-2-foreground);
 
   display: flex;
   flex-direction: column;
@@ -66,10 +68,28 @@
   padding: 6px 12px;
   width: 100%;
   height: 48px;
-
   font-weight: 400 !important;
   font-family: var(--font-family);
   font-size: 16px;
   line-height: 150%;
   color: var(--color-neutral-darkest);
+}
+
+/* tablet */
+@media (min-width: 768px) {
+  .traveler_card {
+    width: 340px;
+    height: 363px;
+  }
+}
+
+/* desktop */
+@media (min-width: 1440px) {
+  .traveler_card {
+    width: 310px;
+    height: 384px;
+  }
+  .traveler_card_text {
+    font-size: 18px;
+  }
 }
