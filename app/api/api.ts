@@ -3,6 +3,6 @@
 import axios from 'axios';
 
 export const api = axios.create({
-  baseURL: 'http://traveller-backend-lia1.onrender.com',
+  baseURL: 'traveller-backend-lia1.onrender.com',
   withCredentials: true,
 });

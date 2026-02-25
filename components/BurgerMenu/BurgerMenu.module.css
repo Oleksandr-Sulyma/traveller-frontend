@@ -1,4 +1,5 @@
-/* ===== Overlay ===== */
+/* /*
+/* ===== Overlay ===== /
 .overlay {
   position: fixed;
   top: 0;
@@ -14,7 +15,7 @@
   animation: fadeIn 0.3s ease forwards;
 }
 
-/* ===== Modal ===== */
+/* ===== Modal ===== /
 .modal {
   width: 375px;
   max-width: 90%;
@@ -31,7 +32,7 @@
   animation: slideIn 0.3s ease forwards;
 }
 
-/* ===== Animations ===== */
+/* ===== Animations ===== /
 @keyframes fadeIn {
   from { opacity: 0; }
   to { opacity: 1; }
@@ -48,7 +49,7 @@
   }
 }
 
-/* ===== Modal Header ===== */
+/* ===== Modal Header ===== /
 .modalHeader {
   display: flex;
   align-items: center;
@@ -58,7 +59,7 @@
   border-bottom: 1px solid rgba(0, 0, 0, 0.1);
 }
 
-/* ===== Logo ===== */
+/* ===== Logo ===== /
 .logoModal {
   display: flex;
   align-items: center;
@@ -84,7 +85,7 @@
   white-space: nowrap;
 }
 
-/* ===== Close Button ===== */
+/* ===== Close Button ===== /
 .closeButton {
   display: flex;
   align-items: center;
@@ -121,7 +122,7 @@
 .closeButton:focus .closeCross {
   color: #0d6efd !important; }
 
-/* ===== Navigation ===== */
+/* ===== Navigation ===== /
 .modalNav {
   width: 100%;
 }
@@ -152,7 +153,7 @@
   color: #0d6efd; 
 }
 
-/* ===== ( AuthNavigation) ===== */
+/* ===== ( AuthNavigation) ===== /
 .modalAuth {
   display: flex;
   flex-direction: column;
@@ -192,10 +193,132 @@
   background: #0b5ed7;
 }
 
-/* ===== Responsive Fixes ===== */
+/* ===== Responsive Fixes ===== /
 @media (max-height: 700px) {
   .modal {
     gap: 24px;
     min-height: 85vh;
+  }
+} */
+
+
+
+
+
+
+/* ===== Overlay (Задній фон) ===== */
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  /* Використовуємо ваш колір фону зі змінних */
+  background-color: var(--color-scheme-1-background);
+  z-index: 2000;
+  display: flex;
+  flex-direction: column;
+  /* Анімація появи згідно з ТЗ */
+  animation: fadeIn 0.3s ease-out forwards;
+}
+
+/* ===== Modal (Контент меню) ===== */
+.modal {
+  width: 100%;
+  height: 100%;
+  padding: 20px 20px 40px 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 48px;
+  /* Прибираємо старі тіні та бордери, щоб був ефект повного екрану */
+}
+
+/* ===== Header всередині меню (Лого + Хрестик) ===== */
+.modalHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.logoModal {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.logoModalText {
+  font-family: var(--second-family);
+  font-weight: 700;
+  font-size: 20px;
+  color: var(--color-scheme-1-text);
+}
+
+.closeButton {
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: var(--color-scheme-1-text);
+  transition: color var(--transition-fast);
+}
+
+.closeCross {
+  font-size: 32px; /* Робимо хрестик більшим і зручнішим */
+  line-height: 1;
+}
+
+.closeButton:hover {
+  color: var(--color-royal-blue);
+}
+
+/* ===== Навігація ===== */
+.modalNav {
+  flex: 1; 
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.navigation {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 32px;
+}
+
+.navigationLink {
+  font-family: var(--second-family);
+  font-size: 24px;
+  font-weight: 700;
+  color: var(--color-scheme-1-text);
+  transition: color var(--transition-fast);
+}
+
+.navigationLink:hover,
+.navigationLink.active {
+  color: var(--color-royal-blue);
+}
+
+/* ===== Animations ===== */
+@keyframes fadeIn {
+  from { 
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to { 
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Адаптація під планшет: контент не має занадто розтягуватися */
+@media (min-width: 768px) {
+  .navigationLink {
+    font-size: 32px;
   }
 }

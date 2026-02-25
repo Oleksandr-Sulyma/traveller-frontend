@@ -25,24 +25,25 @@ import TanStackProvider from '@/components/Providers/TanStackProvider';
 import { BASE_URL, SITE_DESCRIPTION, SITE_NAME, SITE_SMAL_DESCRIPTION } from '@/lib/constants/seo';
 
 export const metadata: Metadata = {
-  title: SITE_SMAL_DESCRIPTION,
-  description: SITE_DESCRIPTION,
-  openGraph: {
-    title: SITE_SMAL_DESCRIPTION,
-    description: SITE_DESCRIPTION,
-    url: BASE_URL,
-    siteName: SITE_SMAL_DESCRIPTION,
-    images: [
-      {
-        url: '../public/images/title-bg.png',
-        width: 1200,
-        height: 630,
-        alt: SITE_NAME,
-      },
-    ],
-    type: 'website',
-  },
-};
+metadataBase: new URL(BASE_URL),
+title: SITE_SMAL_DESCRIPTION,
+description: SITE_DESCRIPTION,
+openGraph: {
+title: SITE_SMAL_DESCRIPTION,
+description: SITE_DESCRIPTION,
+url: BASE_URL,
+siteName: SITE_SMAL_DESCRIPTION,
+images: [
+{
+url: '/images/og-image.webp',
+width: 1200,
+height: 630,
+alt: SITE_NAME,
+},
+],
+type: 'website',
+},
+}
 
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
