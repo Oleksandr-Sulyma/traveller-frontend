@@ -22,7 +22,7 @@ export default function Hero() {
           alt="Traveler Background"
           fill
           priority
-          quality={85}
+          quality={75}
           className={styles['hero-image']}
         />
       </picture>

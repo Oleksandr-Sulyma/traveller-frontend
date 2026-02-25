@@ -1,9 +1,9 @@
-
+/* 
 
 /* =================================
    ПЕРЕГЛЯНУТИ ЩЕ РАЗ ПОЧИСТИТИ!!!!!!!!!!
    1. ОСНОВНА СТРУКТУРА (HEADER)
-==================================== */
+==================================== /
 
  .header {
   position: fixed;
@@ -28,15 +28,11 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 0 24px;
-  width: 100%;
   height: 100%;
   gap: 32px;
 }
 
-/* ЛОГО */
+/* ЛОГО /
 .logoLink { display: flex; align-items: center; gap: 8px; text-decoration: none; }
 .logoIcon { width: 22px; height: 22px; flex-shrink: 0; }
 .logoText {
@@ -48,7 +44,7 @@
 }
 .isHome .logoText { color: #fff; }
 
-/* НАВІГАЦІЯ */
+/* НАВІГАЦІЯ /
 .desktopNav {
   display: flex;
   align-items: center;
@@ -94,7 +90,7 @@
   margin-left: auto !important;
 }
 
-/*  AuthNavigation */
+/*  AuthNavigation /
 :global(.desktopAuth) {
   display: flex !important;
   flex-direction: row !important;
@@ -102,7 +98,7 @@
   gap: 12px !important;
 }
 
-/* КНОПКА ТЕМИ */
+/* КНОПКА ТЕМИ /
 .themeToggle {
   width: 40px !important;
   height: 40px !important;
@@ -124,7 +120,7 @@
 }
 
 /* TABLET */
-@media (max-width: 1024px) and (min-width: 769px) {
+/* @media (max-width: 1024px) and (min-width: 769px) {
   .container { gap: 24px; }
   .desktopNav { gap: 28px; max-width: 500px; }
   .navigation { gap: 20px; }
@@ -132,10 +128,10 @@
   .navigationLink,
   .isHome .navigationLink { color: var(--color-scheme-1-text) !important; }
   .isHome .logoText { color: var(--color-scheme-1-text) !important; }
-}
+} */
 
 /* MOBILE */
-@media (max-width: 768px) {
+/* @media (max-width: 768px) {
   .container { gap: 16px; padding: 0 20px; }
   .desktopNav { display: none !important; }
 }
@@ -183,7 +179,7 @@
   gap: 32px;
 }
 
-/* ЛОГО */
+/* ЛОГО /
 .logoLink { display: flex; align-items: center; gap: 8px; text-decoration: none; }
 .logoIcon { width: 22px; height: 22px; flex-shrink: 0; }
 .logoText {
@@ -195,7 +191,7 @@
 }
 .isHome .logoText { color: #fff; }
 
-/* НАВІГАЦІЯ */
+/* НАВІГАЦІЯ /
 .desktopNav {
   display: flex;
   align-items: center;
@@ -241,7 +237,7 @@
   margin-left: auto !important;
 }
 
-/*  AuthNavigation */
+/*  AuthNavigation /
 :global(.desktopAuth) {
   display: flex !important;
   flex-direction: row !important;
@@ -249,7 +245,7 @@
   gap: 12px !important;
 }
 
-/* КНОПКА ТЕМИ */
+/* КНОПКА ТЕМИ /
 .themeToggle {
   width: 40px !important;
   height: 40px !important;
@@ -270,7 +266,7 @@
   transform: scale(1.05) !important;
 }
 
-/* TABLET */
+/* TABLET /
 @media (max-width: 1024px) and (min-width: 769px) {
   .container { gap: 24px; }
   .desktopNav { gap: 28px; max-width: 500px; }
@@ -281,7 +277,7 @@
   .isHome .logoText { color: var(--color-scheme-1-text) !important; }
 }
 
-/* MOBILE */
+/* MOBILE /
 @media (max-width: 768px) {
   .container { gap: 16px; padding: 0 20px; }
   .desktopNav { display: none !important; }
@@ -299,9 +295,9 @@
   margin: 0 !important;
   padding: 0 8px !important;
 }
-/* ===== БУРГЕР-КНОПКА ===== */
+/* ===== БУРГЕР-КНОПКА ===== /
 .burgerButton {
-  display: none; /* СКРИТО на десктопі */
+  display: none; /* СКРИТО на десктопі /
   align-items: center;
   justify-content: center;
   width: 42px;
@@ -334,148 +330,229 @@
   transition: all 0.3s ease;
 }
 
-/* ТІЛЬКИ НА МОБІЛЬНИХ (≤768px) */
+/* ТІЛЬКИ НА МОБІЛЬНИХ (≤768px) /
 @media (max-width: 768px) {
   .burgerButton {
-    display: flex !important; /* ПОКАЗУЄМО тільки тут */
+    display: flex !important; /* ПОКАЗУЄМО тільки тут *
   }
   .desktopNav {
     display: none !important;
   }
+} */
+ 
+
+
+/* ===========================================
+   ОСНОВНА СТРУКТУРА ХЕДЕРА
+============================================== */
+.header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 72px;
+  display: flex;
+  align-items: center;
+  z-index: 1000;
+  /* Додаємо блюр та напівпрозорість для стану, коли користувач скролить */
+  background-color: var(--color-scheme-1-background);
+  backdrop-filter: blur(8px);
+  border-bottom: 1px solid var(--color-scheme-1-border);
+  transition: background-color var(--transition-fast), 
+              border-color var(--transition-fast),
+              backdrop-filter var(--transition-fast);
 }
 
-
-
-/* =================================
-   1. ОСНОВНА СТРУКТУРА (HEADER)
-==================================== */
-/*.header {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 72px;
-    display: flex;
-    align-items: center;
-    z-index: 1000;
-    transition: background 0.3s ease, border-color 0.3s ease;
-    box-sizing: border-box;
-    
-    /* Стандарт для внутрішніх сторінок *
-    background-color: var(--color-scheme-1-background);
-    border-bottom: 1px solid var(--color-scheme-1-border);
-}
-
-/* Стан для головної сторінки (Hero-секція) *
+/* Стан для головної сторінки, коли ми зверху (над Hero) */
 .isHome {
-    background-color: transparent !important;
-    border-bottom: 1px solid transparent !important;
+  background-color: transparent;
+  border-bottom-color: transparent;
+  backdrop-filter: blur(0px);
 }
 
-.headerContainer {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    height: 40px; 
-    width: 100%;
+/* Стан для головної сторінки при скролі (додаємо цей клас через JS у Header.tsx) */
+.isScrolled {
+  background-color: var(--color-scheme-1-background);
+  border-bottom: 1px solid var(--color-scheme-1-border);
+  backdrop-filter: blur(8px);
 }
 
-/* =================================
-   2. ЛОГОТИП ТА НАВІГАЦІЯ
-==================================== *
-.content {
-    display: flex;
-    align-items: center;
+.container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 100%;
+  width: 100%;
 }
 
+/* ЛОГОТИП */
 .logoLink {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    text-decoration: none;
+  display: flex;
+  align-items: center;
+  gap: 8px;
 }
 
 .logoText {
-    font-family: var(--second-family);
-    font-weight: 700;
-    font-size: 20px;
-    color: var(--color-scheme-1-text);
+  font-family: var(--second-family);
+  font-weight: 700;
+  font-size: 20px;
+  color: var(--color-scheme-1-text);
+  transition: color var(--transition-fast);
 }
 
-.columnRight {
+.isHome:not(.isScrolled) .logoText {
+  color: var(--color-white);
+}
+
+/* ДЕСКТОПНА НАВІГАЦІЯ (> 1440px) */
+.desktopNav {
+  display: none;
+}
+
+@media (min-width: 1440px) {
+  .desktopNav {
     display: flex;
     align-items: center;
     gap: 32px;
-}
+    flex: 1;
+    justify-content: center;
+  }
 
-.navLinks {
+  .navigation {
     display: flex;
-    align-items: center;
     gap: 24px;
-}
+  }
 
-.link {
+  .navigationLink {
     font-family: var(--font-family);
     font-weight: 500;
     font-size: 16px;
     color: var(--color-scheme-1-text);
-    transition: color 0.2s ease;
-}
+    transition: color var(--transition-fast);
+  }
 
-.link:hover, .link.active {
-    color: var(--color-royal-blue);
-}
-
-/* Світлий текст лінків, коли хедер прозорий (isHome) *
-.isHome .link {
+  .isHome:not(.isScrolled) .navigationLink {
     color: var(--color-white);
+  }
+
+  .navigationLink:hover,
+  .navigationLink.active {
+    color: var(--color-royal-blue);
+  }
 }
 
-/* =================================
-   3. ГРУПА КНОПОК (ACTIONS)
-==================================== *
-.actions {
+/* ГРУПА КНОПОК */
+.actionsGroup {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+/* 1. ПЛАНШЕТНА ВЕРСІЯ (768px - 1439px) */
+.tabletAuthVisible {
+  display: none;
+}
+
+@media (min-width: 768px) and (max-width: 1439px) {
+  .tabletAuthVisible {
     display: flex;
     align-items: center;
-    gap: 16px;
+  }
 }
 
-/* =================================
-   4. МОБІЛЬНІ ЕЛЕМЕНТИ
-==================================== *
-.btnBurger {
-    display: none; /* За замовчуванням приховано на десктопі *
-    width: 32px;
-    height: 32px;
-    padding: 4px;
-    border-radius: 8px;
-    background: var(--opacity-white-10);
-    color: var(--color-white);
-    cursor: pointer;
+.tabletGuestActions {
+  display: flex;
+  gap: 12px;
 }
 
-/* =================================
-   5. АДАПТИВНІСТЬ
-==================================== *
-@media (max-width: 1024px) {
-    .navLinks {
-        display: none; /* Ховаємо десктопну навігацію *
-    }
-
-    .btnBurger {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-    }
-
-    /* На мобілках у прозорому хедері бургер завжди білий *
-    .isHome .btnBurger {
-        color: var(--color-white);
-    }
+.navBtnLink {
+  font-family: var(--font-family);
+  font-weight: 500;
+  font-size: 16px;
+  color: var(--color-scheme-1-text);
+  transition: color var(--transition-fast);
+  white-space: nowrap;
 }
 
-@media (max-width: 768px) {
-    .columnRight {
-        gap: 12px;
-    }
-}*/
+.isHome:not(.isScrolled) .navBtnLink {
+  color: var(--color-white);
+}
+
+.navBtnLink:hover {
+  color: var(--color-royal-blue);
+}
+
+/* 2. ДЕСКТОПНА ВЕРСІЯ (1440px+) */
+.desktopAuthOnly {
+  display: none;
+}
+
+@media (min-width: 1440px) {
+  .desktopAuthOnly {
+    display: flex;
+    align-items: center;
+  }
+}
+
+/* ПЕРЕМИКАЧ ТЕМИ */
+.themeToggle {
+  width: 40px;
+  height: 40px;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--color-scheme-1-text);
+  cursor: pointer;
+  transition: background-color var(--transition-fast), color var(--transition-fast);
+}
+
+.isHome:not(.isScrolled) .themeToggle {
+  color: var(--color-white);
+}
+
+.themeToggle:hover {
+  background-color: var(--opacity-neutral-darkest-5);
+}
+
+/* КНОПКА БУРГЕРА */
+.burgerButton {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 4px;
+  width: 40px;
+  height: 40px;
+  padding: 0;
+  background: transparent;
+  border: 1px solid var(--color-scheme-1-border);
+  border-radius: 8px;
+  color: var(--color-scheme-1-text);
+  cursor: pointer;
+  transition: all var(--transition-fast);
+}
+
+.isHome:not(.isScrolled) .burgerButton {
+  color: var(--color-white);
+  border-color: var(--opacity-white-15);
+}
+
+.burgerLines {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  width: 24px;
+}
+
+.burgerLines span {
+  display: block;
+  width: 100%;
+  height: 2px;
+  background-color: currentColor;
+  border-radius: 2px;
+}
+
+.burgerButton:hover {
+  background-color: var(--opacity-neutral-darkest-5);
+}
