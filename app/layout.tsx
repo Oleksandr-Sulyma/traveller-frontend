@@ -56,6 +56,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             <MainContent>{children}</MainContent>
 
             <FooterWrapper hideOn={['/auth/register', '/auth/login']} />
+            <div id='modal-root'></div>
           </TanStackProvider>
         </ThemeProvider>
       </body>
