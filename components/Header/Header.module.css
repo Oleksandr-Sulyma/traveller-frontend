@@ -5,6 +5,7 @@
    1. ОСНОВНА СТРУКТУРА (HEADER)
 ==================================== */
 
+
 .header {
   position: fixed;
   top: 0;
@@ -69,7 +70,7 @@
 }
 
 /* =================================
-   НАВІГАЦІЯ
+   НАВІГАЦИЯ
 ==================================== */
 .desktopNav {
   display: flex;
@@ -120,7 +121,6 @@
   border-radius: 1px;
 }
 
-/*  */
 .isHome .navigationLink {
   color: var(--color-white);
 }
@@ -176,7 +176,7 @@
 ==================================== */
 
 /* ==== TABLET 769–1024px ==== */
-/* Ссылки всегда чёрные, без кликов и без курсора */
+/* Чёрные ссылки, кликабельные, без hover */
 @media (min-width: 769px) and (max-width: 1024px) {
   .container { gap: 24px; }
   .desktopNav { gap: 28px; max-width: 500px; }
@@ -185,8 +185,7 @@
   .navigationLink,
   .isHome .navigationLink {
     color: var(--color-scheme-1-text);
-    cursor: default;
-    pointer-events: none;
+    cursor: pointer;
     text-decoration: none;
     font-size: 15px;
   }
@@ -222,7 +221,7 @@
 }
 
 /* =================================
-   БУРГЕР
+   БУРГЕР (ДОРОБИТИ!!!!!!!!!!)
 ==================================== */
 .mobileBurger {
   display: none;
@@ -250,7 +249,7 @@
 }
 
 /* =================================
-  АНІМАЦІЯ
+    АНИІМАЦИЯ
 ==================================== */
 .navigationLink:focus,
 .logoLink:focus,
