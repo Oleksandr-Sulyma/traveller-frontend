@@ -28,20 +28,20 @@ export const metadata: Metadata = {
   title: SITE_SMAL_DESCRIPTION,
   description: SITE_DESCRIPTION,
   openGraph: {
-        title: SITE_SMAL_DESCRIPTION,
-        description: SITE_DESCRIPTION,
-        url: BASE_URL,
-        siteName: SITE_SMAL_DESCRIPTION,
-        images: [
-          {
-            url: '../public/images/title-bg.png',
-            width: 1200,
-            height: 630,
-            alt: SITE_NAME,
-          },
-        ],
-        type: 'website',
+    title: SITE_SMAL_DESCRIPTION,
+    description: SITE_DESCRIPTION,
+    url: BASE_URL,
+    siteName: SITE_SMAL_DESCRIPTION,
+    images: [
+      {
+        url: '../public/images/title-bg.png',
+        width: 1200,
+        height: 630,
+        alt: SITE_NAME,
       },
+    ],
+    type: 'website',
+  },
 };
 
 
@@ -55,6 +55,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             <MainContent>{children}</MainContent>
 
             <FooterWrapper hideOn={['/auth/register', '/auth/login']} />
+            <div id='modal-root'></div>
           </TanStackProvider>
         </ThemeProvider>
       </body>
