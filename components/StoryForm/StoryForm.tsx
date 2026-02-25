@@ -13,7 +13,9 @@ import { useStoryDraftStore } from '@/lib/store/storyStore';
 
 import css from './StoryForm.module.css';
 import { ImageUpload, type ImageUploadValue } from './ImageUpload';
-import { Category, CATEGORY_MAP } from '@/types/category';
+
+import { useCategories } from '@/lib/hooks/useCategories';
+// import { Category, CATEGORY_MAP } from '@/types/category';
 
 
 interface StoryFormValues {
@@ -36,7 +38,7 @@ const validationSchema = Yup.object({
   img: Yup.string().nullable(),
 });
 
-const CATEGORIES = Object.keys(Category)
+
 
 export default function StoryForm() {
   const queryClient = useQueryClient();
@@ -44,12 +46,13 @@ export default function StoryForm() {
 
   const { draft, setDraft, clearDraft } = useStoryDraftStore();
   const [coverImage, setCoverImage] = React.useState<ImageUploadValue | null>(null);
+  const { categories, isLoading, isError } = useCategories();
 
   const initialValues: StoryFormValues = {
     title: draft.title,
     article: draft.article, 
     category: draft.category as unknown as string,
-    img: draft.img,
+    img: '', // form хранит только превью, бинарь живет в draft
   };
 
   const handleCancel = () => {
@@ -62,7 +65,6 @@ export default function StoryForm() {
     onSuccess() {
       queryClient.invalidateQueries({ queryKey: ['stories'] });
       clearDraft();
-      handleCancel();
     },
     onError() {
       toast.error('Помилка при створенні історії');
@@ -77,14 +79,19 @@ export default function StoryForm() {
       toast.error('Максимальний розмір зображення — 2MB');
       setCoverImage(null);
       setFieldValue('img', '');
-      setDraft({ ...draft, img: '' });
+      setDraft({ ...draft, img: undefined as any });
       return;
     }
 
     setCoverImage(value);
-    const img = value?.preview ?? '';
-    setFieldValue('img', img);
-    setDraft({ ...draft, img });
+    const imgPreview = value?.preview ?? '';
+    setFieldValue('img', imgPreview);
+
+    // храним в драфте именно File, который потом уйдет в FormData
+    setDraft({
+      ...draft,
+      img: (value?.file as any)!,
+    });
   };
 
   return (
@@ -93,10 +100,9 @@ export default function StoryForm() {
       initialValues={initialValues}
       validationSchema={validationSchema}
       validate={values => {
-        const errors: Partial<Record<keyof StoryFormValues | 'storyImage', string>> = {};
-        // storyImage required по ТЗ
+        const errors: Partial<Record<keyof StoryFormValues | 'img', string>> = {};
         if (!coverImage) {
-          errors.storyImage = 'Обкладинка історії є обов\'язковою';
+          errors.img = 'Обкладинка історії є обов\'язковою';
         }
         return errors;
       }}
@@ -112,22 +118,20 @@ export default function StoryForm() {
           title: values.title,
           article: values.article,
           category: values.category as any,
-          img: values.img,
+          img: coverImage.file as any,
         });
 
 
-        const payload: any = {
+        const payload: StoryPost = {
           title: values.title,
           article: values.article,
           category: values.category, // categoryId
-          storyImage: {
-            buffer: Array.from(coverImage.buffer),
-          },
+          img: coverImage.file,
         };
 
         console.log('Submitting story with payload:', payload);
         
-        createStoryMutation(payload as StoryPost as any);
+        createStoryMutation(payload);
       }}
     >
       {({ values, handleChange, setFieldValue, errors, touched }) => (
@@ -138,8 +142,8 @@ export default function StoryForm() {
               value={values.img}
               onChange={value => handleImageChange(value, setFieldValue)}
             />
-            {'storyImage' in errors && (
-              <div className={css.error}>{(errors as any).storyImage}</div>
+            {'img' in errors && (
+              <div className={css.error}>{(errors as any).img}</div>
             )}
           </div>
 
@@ -178,11 +182,12 @@ export default function StoryForm() {
               <option value="" disabled>
                 Категорія
               </option>
-              {CATEGORIES.map(categoryId => (
-                <option key={categoryId} value={categoryId}>
-                  {CATEGORY_MAP[categoryId]}
+              {categories.map(({ id, name }) => (
+                <option key={id} value={id}>
+                  {name}
                 </option>
               ))}
+        
             </select>
             {touched.category && errors.category && (
               <div className={css.error}>{errors.category}</div>

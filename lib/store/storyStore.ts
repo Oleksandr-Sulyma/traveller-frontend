@@ -1,13 +1,12 @@
 import { StoryPost } from '@/types/story';
 import { create } from 'zustand';
 import { persist } from 'zustand/middleware';
-import { Category } from '@/types/category';
 
 const initialDraft: StoryPost = {
-    title: '',
-    article: '',
-    img: '',
-    category: Category.Europe, 
+  title: '',
+  article: '',
+  img: undefined as unknown as File,
+  category: '',
 };
 
 interface StoryDraftStore {
