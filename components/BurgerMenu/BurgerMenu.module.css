@@ -1,0 +1,201 @@
+/* ===== Overlay ===== */
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(247, 249, 255, 0.96);
+  backdrop-filter: blur(6px);
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  z-index: 200;
+  animation: fadeIn 0.3s ease forwards;
+}
+
+/* ===== Modal ===== */
+.modal {
+  width: 375px;
+  max-width: 90%;
+  height: auto;
+  min-height: 595px;
+  background: #f7f9ff;
+  border-radius: 16px;
+  padding: 16px 20px 32px 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 32px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.12);
+  animation: slideIn 0.3s ease forwards;
+}
+
+/* ===== Animations ===== */
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes slideIn {
+  from {
+    transform: translateY(-10px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+/* ===== Modal Header ===== */
+.modalHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  padding-bottom: 20px;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+/* ===== Logo ===== */
+.logoModal {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  color: #1a1a1a;
+  font-weight: 600;
+  font-size: 15px;
+  text-decoration: none;
+  cursor: pointer;
+  transition: opacity 0.2s ease;
+}
+
+.logoModal:hover {
+  opacity: 0.8;
+}
+
+.logoModalIcon {
+  width: 22px;
+  height: 22px;
+}
+
+.logoModalText {
+  white-space: nowrap;
+}
+
+/* ===== Close Button ===== */
+.closeButton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+  background: rgba(0, 0, 0, 0.05);
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.closeButton:hover {
+  background: rgba(0, 0, 0, 0.1);
+  opacity: 0.85;
+}
+
+.closeIcon {
+  width: 20px;
+  height: 20px;
+  stroke: #000;
+  stroke-width: 1.5px;
+}
+.closeCross {
+  font-size: 18px;
+  font-weight: 700;
+  color: #333;
+  line-height: 1;
+  transition: color 0.2s ease;
+}
+
+.closeButton:hover .closeCross,
+.closeButton:focus .closeCross {
+  color: #0d6efd !important; }
+
+/* ===== Navigation ===== */
+.modalNav {
+  width: 100%;
+}
+
+.navigation {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 28px;
+  width: 100%;
+}
+
+.navigationLink {
+  font-size: 18px;
+  font-weight: 500;
+  color: #1a1a1a;
+  text-decoration: none;
+  padding: 10px 0;
+  text-align: center;
+  transition: color 0.2s ease;
+}
+
+.navigationLink:hover,
+.navigationLink.active {
+  color: #0d6efd; 
+}
+
+/* ===== ( AuthNavigation) ===== */
+.modalAuth {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+  margin-top: auto;
+  width: 100%;
+}
+
+.modalLogin,
+.modalRegister {
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 16px;
+  border-radius: 8px;
+  padding: 10px 20px;
+  width: 80%;
+  text-align: center;
+  transition: all 0.2s ease;
+}
+
+.modalLogin {
+  color: #1a1a1a;
+  background: rgba(0, 0, 0, 0.05);
+}
+
+.modalLogin:hover {
+  background: rgba(0, 0, 0, 0.1);
+}
+
+.modalRegister {
+  color: #fff;
+  background: #0d6efd;
+}
+
+.modalRegister:hover {
+  background: #0b5ed7;
+}
+
+/* ===== Responsive Fixes ===== */
+@media (max-height: 700px) {
+  .modal {
+    gap: 24px;
+    min-height: 85vh;
+  }
+}
