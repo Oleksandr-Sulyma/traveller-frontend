@@ -88,18 +88,18 @@ export default function Header({ isHome = false }: HeaderProps) {
 
         {/* ==== BurgerMenu (мобільна версія) ==== */}
         <button
-  type="button"
-  className={css.burgerButton}
-  onClick={toggleMenu}
-  aria-label="Відкрити меню"
->
-  {/* 3 горизонтальні риски = бургер */}
-  <div className={css.burgerLines}>
-    <span></span>
-    <span></span>
-    <span></span>
-  </div>
-</button>
+          type="button"
+          className={css.burgerButton}
+          onClick={toggleMenu}
+          aria-label="Відкрити меню"
+        >
+          {/* 3 горизонтальні риски = бургер */}
+          <div className={css.burgerLines}>
+            <span></span>
+            <span></span>
+            <span></span>
+          </div>
+        </button>
 
 
         {isMenuOpen && <BurgerMenu onCloseAction={closeMenu} />}
