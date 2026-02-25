@@ -1,219 +1,83 @@
 /* =========================
-   CARDS
+   CARDS SYSTEM
 ========================= */
 
 /* Blog Card */
 .blog-card {
-  border: 0px solid rgba(0, 0, 0, 0.15);
+  border: none;
   border-radius: 16px;
-  background: #e8eeff;
+  /* Використовуємо семантичну змінну з макета */
+  background: var(--color-scheme-2-foreground); 
   display: flex;
   gap: 24px;
   overflow: hidden;
- 
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
-/* Mobile */
+.blog-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 24px rgba(65, 105, 225, 0.15);
+}
+
+/* Адаптивні розміри Blog Card (згідно з макетом) */
 @media (max-width: 767px) {
   .blog-card {
     width: 335px;
     height: 575px;
     flex-direction: column;
+    margin-inline: auto;
   }
 }
 
-/* Tablet */
 @media (min-width: 768px) and (max-width: 1439px) {
   .blog-card {
     width: 340px;
     height: 578px;
+    flex-direction: column;
   }
 }
 
-/* Desktop */
 @media (min-width: 1440px) {
   .blog-card {
     width: 421px;
     height: 677px;
+    flex-direction: column;
   }
 }
 
-/* Blog Card - content */
-.blog-card-content {
-  padding: 24px;
-  width: 368px;
-  height: 160px;
-  overflow: hidden;
-}
+/* =========================
+   TRAVELER CARD
+========================= */
 
-/* Heading - clamp to 2 lines */
-.blog-card-heading {
-  font-family: 'Nunito Sans', sans-serif;
-  font-weight: 700;
-  font-size: 26px;
-  line-height: 1.5;
-  color: #000;
-  display: -webkit-box;
-  -webkit-line-clamp: 2;
-  -webkit-box-orient: vertical;
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
-
-/* Text */
-.blog-card-text {
-  font-family: 'Nunito Sans', sans-serif;
-  font-weight: 400;
-  font-size: 18px;
-  line-height: 1.5;
-  color: #000;
-  overflow: hidden;
-}
-
-/* Tag */
-.blog-card-tag {
-  border: 1px solid rgba(255, 255, 255, 0);
-  border-radius: 6px;
-  width: 67px;
-  height: 24px;
-  font-family: 'Nunito Sans', sans-serif;
-  font-weight: 600;
-  font-size: 16px;
-  line-height: 1.5;
-  color: #000;
-}
-
-/* Avatar */
-.blog-card-avatar {
-  display: flex;
-  gap: 12px;
-  width: 368px;
-  height: 54px;
-}
-
-/* Avatar Image */
-.blog-card-avatar img {
-  border-radius: 100%;
-  width: 48px;
-  height: 48px;
-}
-
-/* Avatar content (name + time) */
-.blog-card-avatar-content {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  width: 304px;
-  height: 54px;
-}
-
-.blog-card-avatar-name {
-  font-family: 'Nunito Sans', sans-serif;
-  font-weight: 600;
-  font-size: 16px;
-  line-height: 1.5;
-  color: #000;
-}
-
-.blog-card-avatar-time {
-  font-family: 'Nunito Sans', sans-serif;
-  font-weight: 400;
-  font-size: 16px;
-  line-height: 1.5;
-  color: #000;
-}
-
-/* Buttons block */
-.blog-card-buttons {
-  display: flex;
-  gap: 8px;
-  width: 368px;
-  height: 48px;
-}
-
-/* Traveler Card */
 .traveler-card {
-  border: 0px solid rgba(0, 0, 0, 0.15);
+  border: none;
   border-radius: 16px;
-  background: #e8eeff;
+  /* Використовуємо ту саму змінну для фону */
+  background: var(--color-scheme-2-foreground);
   padding: 24px;
   display: flex;
   flex-direction: column;
+  align-items: center;
+  text-align: center;
+  transition: transform 0.3s ease;
 }
 
-/* Mobile */
-@media (max-width: 767px) {
-  .traveler-card {
-    width: 335px;
-    height: 575px;
-  }
+/* Розміри Traveler Card */
+@media (max-width: 767px) { 
+  .traveler-card { width: 335px; height: 575px; } 
+}
+@media (min-width: 768px) { 
+  .traveler-card { width: 340px; height: 363px; } 
+}
+@media (min-width: 1440px) { 
+  .traveler-card { width: 310px; height: 384px; } 
 }
 
-/* Tablet */
-@media (min-width: 768px) and (max-width: 1439px) {
-  .traveler-card {
-    width: 340px;
-    height: 363px;
-    min-width: 250px;
-  }
-}
+/* =========================
+   DARK THEME
+========================= */
 
-/* Desktop */
-@media (min-width: 1440px) {
-  .traveler-card {
-    width: 310px;
-    height: 384px;
-  }
-}
-
-/* Traveler Card content */
-.traveler-card-content {
-  width: 262px;
-  height: 230px;
-  overflow: hidden;
-}
-
-/* Name */
-.traveler-card-name {
-  font-family: 'Nunito Sans', sans-serif;
-  font-weight: 600;
-  font-size: 26px;
-  line-height: 1.5;
-  color: #000;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-}
-
-/* Job title */
-.traveler-card-job {
-  font-family: 'Nunito Sans', sans-serif;
-  font-weight: 400;
-  font-size: 20px;
-  line-height: 1.5;
-  color: #000;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-}
-
-/* Text */
-.traveler-card-text {
-  font-family: 'Nunito Sans', sans-serif;
-  font-weight: 400;
-  font-size: 18px;
-  line-height: 1.5;
-  color: #000;
-  overflow: hidden;
-}
-
-/* Button */
-.traveler-card-button {
-  border: 1px solid rgba(0, 0, 0, 0.15);
-  border-radius: 8px;
-  padding-block: 6px;
-  padding-inline: 12px;
-  width: 262px;
-  height: 48px;
-  background: rgba(0, 0, 0, 0.05);
+[data-theme='dark'] .blog-card,
+[data-theme='dark'] .traveler-card {
+  border: 1px solid var(--opacity-white-15);
 }

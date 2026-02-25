@@ -1,0 +1,143 @@
+.footer {
+  background: var(--color-royal-blue-lighter);
+  padding: 48px 20px;
+  display: flex;
+  justify-content: center;
+  color: var(--color-scheme-2-text);
+}
+
+.container {
+  width: 100%;
+  max-width: 1440px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.mainRow {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 40px;
+  margin-bottom: 40px;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  text-decoration: none;
+  color: var(--color-scheme-2-text);
+  font-weight: 400;
+  font-size: 17px;
+  letter-spacing: -0.01em;
+}
+
+.icon {
+  width: 32px;
+  height: 32px;
+  fill: currentColor;
+}
+
+.social {
+  display: flex;
+  gap: 16px;
+  align-items: center;
+}
+
+.nav {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+}
+
+.divider {
+  width: 100%;
+  border: none;
+  border-top: 1px solid var(--color-scheme-2-background);
+  margin-bottom: 32px;
+}
+
+.copyright {
+  font-size: var(--fs-xs);
+  font-weight: 400;
+  text-align: center;
+}
+
+/* TABLET */
+@media (min-width: 768px) {
+  .footer {
+    padding: 48px 32px;
+  }
+
+  .mainRow {
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    gap: 24px;
+    margin-bottom: 32px;
+  }
+
+  .icon {
+    width: 24px;
+    height: 24px;
+  }
+
+  .social {
+    margin-left: auto;
+    gap: 12px;
+  }
+
+  .nav {
+    flex-direction: row;
+    justify-content: center;
+    gap: 32px;
+    width: 100%;
+    order: 3;
+  }
+}
+
+/* DESKTOP */
+@media (min-width: 1440px) {
+  .footer {
+    padding: 80px 64px;
+  }
+
+  .mainRow {
+    flex-wrap: nowrap;
+    align-items: center;
+    margin-bottom: 43px;
+    position: relative;
+  }
+
+  .logo {
+    flex-shrink: 0;
+  }
+
+  .social {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    margin-left: 0;
+    align-self: flex-start;
+  }
+
+  .nav {
+    flex-direction: row;
+    width: auto;
+    margin-left: auto;
+    gap: 32px;
+    order: unset;
+  }
+
+  .nav a {
+    font-size: var(--fs-md);
+  }
+
+  .copyright {
+    font-size: var(--fs-sm);
+  }
+}

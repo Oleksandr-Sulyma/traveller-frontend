@@ -1,5 +1,5 @@
 /* =================================
-    FORMS - SYSTEM (FIXED HEIGHTS)
+    FORMS - SYSTEM (BASE)
 ==================================== */
 
 .input-group {
@@ -7,15 +7,9 @@
     flex-direction: column;
     width: 100%;
     position: relative;
-    box-sizing: border-box;
 }
 
-/* ФІКСОВАНІ ВИСОТИ КОНТЕЙНЕРІВ (Поле + 8px margin + 18px інфо-зона = +26px) */
-.input-group.input-type { height: 69px; }   /* 43 + 26 */
-.input-group.area-120  { height: 146px; }  /* 120 + 26 */
-.input-group.area-180  { height: 206px; }  /* 180 + 26 */
-
-/* Спільні стилі полів */
+/* Базові стилі для всіх полів */
 .input, .textarea {
     width: 100%;
     padding: 12px;
@@ -23,255 +17,41 @@
     box-sizing: border-box;
     background: transparent;
     font-family: var(--font-family);
-    font-weight: 400;
     font-size: 18px;
-    line-height: 150%;
-    border: 1px solid var(--opacity-neutral-darkest-15);
+    line-height: 1.5;
+    border: 1px solid var(--color-scheme-1-border);
     color: var(--color-scheme-1-text);
-    transition: all 0.2s ease;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
     outline: none;
 }
 
-.input { height: 43px; padding: 8px 12px; }
-.textarea { resize: none; } 
-.textarea.h-120 { height: 120px; }
-.textarea.h-180 { height: 180px; }
-
-.input::placeholder, 
-.textarea::placeholder { 
-    color: var(--color-input-placeholder); 
+/* Стан фокусу */
+.input:focus, .textarea:focus {
+    border-color: var(--color-royal-blue);
+    box-shadow: 0 0 0 2px var(--color-royal-blue-lighter);
 }
 
-.input:focus, .textarea:focus { border: 1px solid var(--color-scheme-1-accent); }
-
-/* Стан Помилки */
+/* Стан помилки */
 .input-group.has-error .input,
 .input-group.has-error .textarea {
     border-color: var(--color-red) !important;
-    color: var(--color-red) !important;
-}
-
-/* --- ІНФОРМАЦІЙНА ЗОНА (ПІД ПОЛЕМ) --- */
-
-.input-info {
-    margin-top: 8px;
-    height: 18px;
-    display: flex;
-    position: relative;
-}
-
-.error-text, .input-counter {
-    font-family: var(--font-family);
-    font-size: 12px;
-    line-height: 150%;
-    position: absolute;
-    left: 0;
-    top: 0;
-    transition: opacity 0.2s, visibility 0.2s;
 }
 
 .error-text {
     color: var(--color-red);
-    visibility: hidden;
-    opacity: 0;
+    font-size: 12px;
+    min-height: 18px;
+    margin-top: 4px;
 }
 
-.input-counter {
-    color: var(--color-scheme-2-text);
-    visibility: visible;
-    opacity: 1;
-}
-
-.input-group.has-error .error-text {
-    visibility: visible;
-    opacity: 1;
-}
-
-.input-group.has-error .input-counter {
-    visibility: hidden;
-    opacity: 0;
-}
-
-/* =================================
-    SELECT COMPONENT SYSTEM
-==================================== */
-
-.select-group {
-    display: flex;
-    flex-direction: column;
-    width: 100%;
-    max-width: 865px;
-    gap: 8px;
-    box-sizing: border-box;
-}
-
-.select-label {
-    font-family: var(--font-family);
-    font-weight: 400;
-    font-size: 18px;
-    line-height: 150%;
-    color: var(--color-scheme-2-text);
-}
-
-.select-container {
-    position: relative;
-    width: 100%;
-    user-select: none;
-}
-
-.select-trigger {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    width: 100%;
-    height: 43px;
-    padding: 8px;
-    background: transparent;
-    border: 1px solid var(--opacity-neutral-darkest-15);
-    border-radius: 8px;
-    cursor: pointer;
-    transition: all 0.2s ease;
-    box-sizing: border-box;
-}
-
-.select-trigger-text {
-    font-family: var(--font-family);
-    font-weight: 400;
-    font-size: 18px;
-    line-height: 150%;
-    color: var(--color-input-placeholder);
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-}
-
-.select-container.is-filled .select-trigger-text {
-    color: var(--color-scheme-1-text);
-}
-
-.select-trigger:hover,
-.select-container.is-open .select-trigger {
-    border: 1px solid var(--color-royal-blue-light);
-}
-
-.select-container.is-open .select-trigger {
-    border-radius: 8px 8px 0 0;
-}
-
-/* --- DROPDOWN LIST --- */
-
-.select-dropdown {
-    position: absolute;
-    top: 100%;
-    left: 0;
-    width: 100%;
-    background: var(--color-scheme-1-background);
-    border: 1px solid var(--color-royal-blue-light);
-    border-top: none;
-    border-radius: 0 0 8px 8px;
-    z-index: 100;
-    max-height: 274px;
-    overflow-y: auto;
-    padding: 12px 8px;
-    box-sizing: border-box;
-}
-
-.select-item {
-    width: 100%;
-    height: 35px;
-    padding: 4px 8px;
-    display: flex;
-    align-items: center;
-    font-family: var(--font-family);
-    font-size: 18px;
-    color: var(--color-scheme-1-text);
-    cursor: pointer;
-    border-radius: 4px;
-    transition: background 0.2s;
-    box-sizing: border-box;
-}
-
-.select-item:hover {
-    background: var(--color-neutral-lightest);
-}
-
-.select-icon {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 24px;
-    height: 24px;
-    color: var(--opacity-neutral-darkest-60);
-    transition: transform 0.3s ease, color 0.2s ease;
-}
-
-.select-icon svg {
-    width: 24px;
-    height: 24px;
-    fill: currentColor;
-}
-
-.select-container.is-open .select-icon {
-    transform: rotate(180deg);
-    color: var(--color-scheme-1-text);
-}
-
-
-/* --- DARK THEME OVERRIDES --- */
-
-[data-theme='dark'] .input, 
-[data-theme='dark'] .textarea,
-[data-theme='dark'] .select-trigger {
-    border-color: var(--opacity-white-15);
-    color: var(--color-white) !important;
-}
-
-/* Використовуємо наш новий семантичний токен для всіх плейсхолдерів */
-[data-theme='dark'] .input::placeholder, 
-[data-theme='dark'] .textarea::placeholder,
-[data-theme='dark'] .select-trigger-text {
+/* Плейсхолдери */
+.input::placeholder, .textarea::placeholder {
     color: var(--color-input-placeholder);
 }
 
-/* Текст стає білим тільки коли значення вже обрано */
-[data-theme='dark'] .select-container.is-filled .select-trigger-text {
-    color: var(--color-white) !important;
-}
-
-/* Список та елементи */
-[data-theme='dark'] .select-dropdown {
-    background: #1a1d23; /* Темний фон для списку */
+/* DARK THEME */
+[data-theme='dark'] .input,
+[data-theme='dark'] .textarea {
     border-color: var(--opacity-white-15);
-}
-
-[data-theme='dark'] .select-item {
     color: var(--color-white);
-}
-
-[data-theme='dark'] .select-item:hover {
-    background: var(--opacity-white-10);
-}
-
-/* Іконки та лічильники */
-[data-theme='dark'] .input-counter,
-[data-theme='dark'] .select-icon { 
-    color: var(--opacity-white-60); 
-}
-
-/* =================================
-    ADAPTIVE DESIGN
-==================================== */
-
-@media (max-width: 1024px) {
-    .select-group { max-width: 704px; }
-    .select-label { font-size: 16px; }
-    .select-trigger { height: 40px; }
-    .select-trigger-text, .select-item { font-size: 16px; }
-}
-
-@media (max-width: 480px) {
-    .select-group { max-width: 335px; }
-    .select-label { font-size: 16px; }
-    .select-trigger { height: 40px; }
-    .select-trigger-text, .select-item { font-size: 16px; }
 }
