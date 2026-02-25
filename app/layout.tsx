@@ -21,11 +21,28 @@ import { ThemeProvider } from "@/components/ThemeProvider";
 import HeaderWrapper from '@/components/Header/HeaderWrapper';
 import FooterWrapper from '@/components/Footer/FooterWrapper';
 import MainContent from '@/components/MainContent/MainContent';
+import { BASE_URL, SITE_DESCRIPTION, SITE_NAME, SITE_SMAL_DESCRIPTION } from '@/lib/constants/seo';
 
 export const metadata: Metadata = {
-  title: 'Подорожники',
-  description: 'Мандрівки вашої мрії',
+  title: SITE_SMAL_DESCRIPTION,
+  description: SITE_DESCRIPTION,
+  openGraph: {
+        title: SITE_SMAL_DESCRIPTION,
+        description: SITE_DESCRIPTION,
+        url: BASE_URL,
+        siteName: SITE_SMAL_DESCRIPTION,
+        images: [
+          {
+            url: '../public/images/title-bg.png',
+            width: 1200,
+            height: 630,
+            alt: SITE_NAME,
+          },
+        ],
+        type: 'website',
+      },
 };
+
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
