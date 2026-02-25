@@ -17,10 +17,11 @@ import '@/styles/components/cards.css';
 import './fonts.css';
 
 /* Контекст та Обертки */
-import { ThemeProvider } from "@/components/ThemeProvider";
+import { ThemeProvider } from '@/components/ThemeProvider';
 import HeaderWrapper from '@/components/Header/HeaderWrapper';
 import FooterWrapper from '@/components/Footer/FooterWrapper';
 import MainContent from '@/components/MainContent/MainContent';
+import TanStackProvider from '@/components/Providers/TanStackProvider';
 import { BASE_URL, SITE_DESCRIPTION, SITE_NAME, SITE_SMAL_DESCRIPTION } from '@/lib/constants/seo';
 
 export const metadata: Metadata = {
@@ -49,13 +50,12 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     <html lang="uk" suppressHydrationWarning>
       <body suppressHydrationWarning>
         <ThemeProvider>
-         
-          <HeaderWrapper />
-          <MainContent>
-            {children}
-          </MainContent>
-          
-          <FooterWrapper hideOn={['/auth/register', '/auth/login']} />
+          <TanStackProvider>
+            <HeaderWrapper />
+            <MainContent>{children}</MainContent>
+
+            <FooterWrapper hideOn={['/auth/register', '/auth/login']} />
+          </TanStackProvider>
         </ThemeProvider>
       </body>
     </html>
