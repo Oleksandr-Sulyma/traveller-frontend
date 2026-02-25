@@ -1,5 +1,7 @@
 'use client';
-import { useState } from 'react';
+
+import { useState, useEffect } from 'react';
+import { useTheme } from 'next-themes';
 import Link from 'next/link';
 import Image from 'next/image';
 import { usePathname } from 'next/navigation';
@@ -14,58 +16,78 @@ interface HeaderProps {
 export default function Header({ isHome = false }: HeaderProps) {
   const currentPath = usePathname();
 
-  return (
-    <>
-      <header className={`${css.header} ${isHome ? css.isHome : ''}`}>
-        <div className={css.container}>
-          {/* ЛОГО */}
-          <Link href="/" aria-label="На головну" className={css.logoLink}>
-            <Image
-              src={logo}                     
-              width={22}
-              height={22}
-              alt="Подорожники — головна сторінка"
-              aria-hidden="true"
-              className={css.logoIcon}
-              priority={isHome}
-            />
-            <span className={css.logoText}>Подорожники</span>
-          </Link>
+  // ==== Работа с темой ====
+  const { theme, setTheme } = useTheme();
+  const [mounted, setMounted] = useState(false);
+  useEffect(() => setMounted(true), []);
 
-          <nav aria-label="Основна навігація" className={css.desktopNav}>
-            <ul className={css.navigation}>
-              <li>
-                <Link 
-                  href="/" 
-                  className={`${css.navigationLink} ${currentPath === '/' ? css.active : ''}`}
-                >
-                  Головна
-                </Link>
-              </li>
-              <li>
-                <Link 
-                  href="/stories" 
-                  className={`${css.navigationLink} ${currentPath === '/stories' ? css.active : ''}`}
-                >
-                  Історії
-                </Link>
-              </li>
-              <li>
-                <Link 
-                  href="/travellers" 
-                  className={`${css.navigationLink} ${currentPath === '/travellers' ? css.active : ''}`}
-                >
-                  Мандрівники
-                </Link>
-              </li>
-            </ul>
+  // Не рендерим до монтирования клиента (чтобы избежать "глазков")
+  if (!mounted) return null;
+
+  return (
+    <header className={`${css.header} ${isHome ? css.isHome : ''}`}>
+      <div className={css.container}>
+        {/* ==== ЛОГО ==== */}
+        <Link href="/" aria-label="На головну" className={css.logoLink}>
+          <Image
+            src={logo}
+            width={22}
+            height={22}
+            alt="Подорожники — головна сторінка"
+            aria-hidden="true"
+            className={css.logoIcon}
+            priority={isHome}
+          />
+          <span className={css.logoText}>Подорожники</span>
+        </Link>
+
+        {/* ==== НАВИГАЦИЯ ==== */}
+        <nav aria-label="Основна навігація" className={css.desktopNav}>
+          <ul className={css.navigation}>
+            <li>
+              <Link
+                href="/"
+                className={`${css.navigationLink} ${currentPath === '/' ? css.active : ''}`}
+              >
+                Головна
+              </Link>
+            </li>
+            <li>
+              <Link
+                href="/stories"
+                className={`${css.navigationLink} ${currentPath === '/stories' ? css.active : ''}`}
+              >
+                Історії
+              </Link>
+            </li>
+            <li>
+              <Link
+                href="/travellers"
+                className={`${css.navigationLink} ${currentPath === '/travellers' ? css.active : ''}`}
+              >
+                Мандрівники
+              </Link>
+            </li>
+          </ul>
+
+      {/* ==== КНОПКИ АВТОРИЗАЦІЇ + ТЕМНА ТЕМА ==== */}
+          <div className={css.actionsGroup}>
             <AuthNavigation mode="desktop" />
-          </nav>
-        </div>
-      </header>
-    </>
+            <button
+              type="button"
+              onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}
+              aria-label="Перемкнути тему"
+              className={css.themeToggle}
+            >
+              {theme === 'dark' ? '🌞' : '🌙'}
+            </button>
+          </div>
+        </nav>
+      </div>
+    </header>
   );
 }
+
 
 
 // не мій!!!
