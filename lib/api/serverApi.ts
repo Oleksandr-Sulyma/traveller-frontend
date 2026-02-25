@@ -24,15 +24,40 @@ export default async function fetchStoryServer(
   return response.data;
 }
 
-export async function fetchStoryByIdServer(id: string): Promise<Story> {
-  const cookieStore = await cookies();
+// export async function fetchStoryByIdServer(id: string): Promise<Story> {
+//   const cookieStore = await cookies();
 
-  const responseById = await nextServer.get<Story>(`/stories/${id}`, {
-    headers: {
-      Cookie: cookieStore.toString(),
-    },
-  });
-  return responseById.data;
+//   const responseById = await nextServer.get<Story>(`/stories/${id}`, {
+//     headers: {
+//       Cookie: cookieStore.toString(),
+//     },
+//   });
+//   return responseById.data;
+// }
+export async function fetchStoryByIdServer(id: string): Promise<Story | null> {
+  // 1. Переконуємося, що id — це чистий рядок (про всяк випадок)
+  const cleanId = String(id).trim();
+
+  try {
+    const cookieStore = await cookies();
+    const cookiesString = cookieStore.toString();
+
+    // 2. Робимо запит
+    const responseById = await nextServer.get<Story>(`/stories/${cleanId}`, {
+      headers: {
+        // Передаємо куки, тільки якщо вони є
+        ...(cookiesString ? { Cookie: cookiesString } : {}),
+      },
+    });
+
+    return responseById.data;
+  } catch (error: any) {
+    // 3. Логуємо конкретну помилку, щоб розуміти причину
+    console.error(`❌ API Error [${cleanId}]:`, error.response?.status, error.response?.data);
+    
+    // Якщо бекенд повернув 404 або 500, ми не "вбиваємо" додаток, а повертаємо null
+    return null; 
+  }
 }
 
 export const getMeServer = async () => {
