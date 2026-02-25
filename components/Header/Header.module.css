@@ -1,7 +1,278 @@
+
+
+/* =================================
+   ПЕРЕГЛЯНУТИ ЩЕ РАЗ ПОЧИСТИТИ!!!!!!!!!!
+   1. ОСНОВНА СТРУКТУРА (HEADER)
+==================================== */
+
+.header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 72px;
+  display: flex;
+  align-items: center;
+  z-index: 1000;
+  transition: all 0.3s ease;
+  box-sizing: border-box;
+  background-color: var(--color-scheme-1-background);
+  border-bottom: 1px solid var(--color-scheme-1-border);
+  animation: fadeInDown 0.5s ease-out;
+}
+
+.isHome {
+  background-color: transparent !important;
+  border-bottom: 1px solid transparent !important;
+}
+
+.container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 24px;
+  height: 100%;
+  gap: 32px;
+}
+
+/* =================================
+   ЛОГОТИП
+==================================== */
+.logoLink {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  text-decoration: none;
+}
+
+.logoIcon {
+  display: block;
+  width: 22px;
+  height: 22px;
+  flex-shrink: 0;
+}
+
+.logoText {
+  font-family: var(--second-family);
+  font-weight: 700;
+  font-size: 20px;
+  line-height: 1.2;
+  color: var(--color-scheme-1-text);
+  transition: color 0.3s ease;
+}
+
+.isHome .logoText {
+  color: var(--color-white);
+}
+
+/* =================================
+   НАВІГАЦІЯ
+==================================== */
+.desktopNav {
+  display: flex;
+  align-items: center;
+  gap: 32px;
+  flex: 1;
+  max-width: 600px;
+}
+
+.navigation {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.navigation li {
+  display: block;
+}
+
+.navigationLink {
+  font-family: var(--font-family);
+  font-weight: 500;
+  font-size: 16px;
+  color: var(--color-white);
+  text-decoration: none;
+  transition: color 0.2s ease;
+  white-space: nowrap;
+  padding: 8px 0;
+  position: relative;
+}
+
+.navigationLink:hover,
+.navigationLink.active {
+  color: var(--color-royal-blue);
+}
+
+.navigationLink:hover::after {
+  content: '';
+  position: absolute;
+  bottom: -4px;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: var(--color-royal-blue);
+  border-radius: 1px;
+}
+
+/*  */
+.isHome .navigationLink {
+  color: var(--color-white);
+}
+
+/* =================================
+   КНОПКИ АВТОРИЗАЦІЇ
+==================================== */
+.desktopNav > div:last-child {
+  margin-left: auto;
+  padding-right: 24px;
+  display: flex;
+  gap: 20px;
+}
+
+.authButton {
+  padding: 8px 20px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  font-family: var(--font-family);
+  font-weight: 500;
+  font-size: 14px;
+  border-radius: 8px;
+  text-decoration: none;
+  transition: all 0.2s ease;
+}
+
+.authButton--login {
+  color: var(--color-scheme-1-text);
+  border: 1px solid var(--color-scheme-1-border);
+}
+
+.authButton--login:hover {
+  border-color: var(--color-royal-blue);
+  color: var(--color-royal-blue);
+  background: rgba(13, 110, 253, 0.04);
+}
+
+.authButton--register {
+  background: var(--color-royal-blue);
+  color: var(--color-white);
+  border: 1px solid var(--color-royal-blue);
+}
+
+.authButton--register:hover {
+  background: #0056b3;
+  border-color: #0056b3;
+  transform: translateY(-1px);
+}
+
+/* =================================
+   АДАПТИВНІСТЬ
+==================================== */
+
+/* ==== TABLET 769–1024px ==== */
+/* Ссылки всегда чёрные, без кликов и без курсора */
+@media (min-width: 769px) and (max-width: 1024px) {
+  .container { gap: 24px; }
+  .desktopNav { gap: 28px; max-width: 500px; }
+  .navigation { gap: 20px; }
+
+  .navigationLink,
+  .isHome .navigationLink {
+    color: var(--color-scheme-1-text);
+    cursor: default;
+    pointer-events: none;
+    text-decoration: none;
+    font-size: 15px;
+  }
+
+  .navigationLink:hover,
+  .navigationLink.active,
+  .isHome .navigationLink:hover,
+  .isHome .navigationLink.active {
+    color: var(--color-scheme-1-text);
+  }
+
+  .isHome .logoText {
+    color: var(--color-scheme-1-text);
+  }
+}
+
+/* ==== MOBILE ≤768px ==== */
+@media (max-width: 768px) {
+  .container {
+    gap: 16px;
+    padding: 0 20px;
+  }
+  .desktopNav { display: none !important; }
+  .mobileBurger { display: flex; }
+  .logoText { font-size: 18px; }
+}
+
+/* ==== MOBILE ≤480px ==== */
+@media (max-width: 480px) {
+  .container { padding: 0 16px; gap: 12px; }
+  .logoIcon { width: 20px; height: 20px; }
+  .logoText { font-size: 16px; }
+}
+
+/* =================================
+   БУРГЕР
+==================================== */
+.mobileBurger {
+  display: none;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  border: none;
+  background: none;
+  cursor: pointer;
+  padding: 12px;
+  border-radius: 8px;
+  transition: all 0.2s ease;
+}
+
+.mobileBurger:hover {
+  background: rgba(13, 110, 253, 0.1);
+}
+
+.burgerIcon {
+  width: 24px;
+  height: 24px;
+  stroke: var(--color-scheme-1-text);
+  stroke-width: 2;
+}
+
+/* =================================
+  АНІМАЦІЯ
+==================================== */
+.navigationLink:focus,
+.logoLink:focus,
+.authButton:focus,
+.mobileBurger:focus {
+  outline: 2px solid var(--color-royal-blue);
+  outline-offset: 2px;
+}
+
+@keyframes fadeInDown {
+  from { opacity: 0; transform: translateY(-10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+
+
+
+
 /* =================================
    1. ОСНОВНА СТРУКТУРА (HEADER)
 ==================================== */
-.header {
+/*.header {
     position: fixed;
     top: 0;
     left: 0;
@@ -13,12 +284,12 @@
     transition: background 0.3s ease, border-color 0.3s ease;
     box-sizing: border-box;
     
-    /* Стандарт для внутрішніх сторінок */
+    /* Стандарт для внутрішніх сторінок *
     background-color: var(--color-scheme-1-background);
     border-bottom: 1px solid var(--color-scheme-1-border);
 }
 
-/* Стан для головної сторінки (Hero-секція) */
+/* Стан для головної сторінки (Hero-секція) *
 .isHome {
     background-color: transparent !important;
     border-bottom: 1px solid transparent !important;
@@ -34,7 +305,7 @@
 
 /* =================================
    2. ЛОГОТИП ТА НАВІГАЦІЯ
-==================================== */
+==================================== *
 .content {
     display: flex;
     align-items: center;
@@ -78,14 +349,14 @@
     color: var(--color-royal-blue);
 }
 
-/* Світлий текст лінків, коли хедер прозорий (isHome) */
+/* Світлий текст лінків, коли хедер прозорий (isHome) *
 .isHome .link {
     color: var(--color-white);
 }
 
 /* =================================
    3. ГРУПА КНОПОК (ACTIONS)
-==================================== */
+==================================== *
 .actions {
     display: flex;
     align-items: center;
@@ -94,9 +365,9 @@
 
 /* =================================
    4. МОБІЛЬНІ ЕЛЕМЕНТИ
-==================================== */
+==================================== *
 .btnBurger {
-    display: none; /* За замовчуванням приховано на десктопі */
+    display: none; /* За замовчуванням приховано на десктопі *
     width: 32px;
     height: 32px;
     padding: 4px;
@@ -108,10 +379,10 @@
 
 /* =================================
    5. АДАПТИВНІСТЬ
-==================================== */
+==================================== *
 @media (max-width: 1024px) {
     .navLinks {
-        display: none; /* Ховаємо десктопну навігацію */
+        display: none; /* Ховаємо десктопну навігацію *
     }
 
     .btnBurger {
@@ -120,7 +391,7 @@
         justify-content: center;
     }
 
-    /* На мобілках у прозорому хедері бургер завжди білий */
+    /* На мобілках у прозорому хедері бургер завжди білий *
     .isHome .btnBurger {
         color: var(--color-white);
     }
@@ -130,4 +401,4 @@
     .columnRight {
         gap: 12px;
     }
-}
+}*/

@@ -1,76 +1,76 @@
 'use client';
+import { useState } from 'react';
+import Link from 'next/link';
+import Image from 'next/image';
+import { usePathname } from 'next/navigation';
+import AuthNavigation from '../AuthNavigation/AuthNavigation';
+import css from './Header.module.css';
+import logo from '@/public/favicon.svg';  
 
-// import Link from 'next/link';
-// import Image from 'next/image';
-// import { usePathname } from 'next/navigation';
-// import css from './Header.module.css';
-// import AuthNavigation from '../AuthNavigation/AuthNavigation'; 
-// import ThemeToggle from '../ThemeToggle/ThemeToggle';
-// import styles from './Header.module.css';
-// import logo from '@/public/favicon.svg';
-// export default function Header() {
-//   const currentPath = usePathname(); 
+interface HeaderProps {
+  isHome?: boolean;
+}
 
-//   return (<div></div>
-//     // <header className={css.header}>
-//     //   <div className={css.container}>
-//     //     {/* Logo */}
-//     //     <Link href="/" aria-label="Home" className={css.logoLink}>
-//     //       <Image
-//     //         src="/logo.svg"
-//     //         width={22}
-//     //         height={22}
-//     //         alt="logo"
-//     //         aria-hidden="true"
-//     //         className={css.logoIcon}
-//     //       />
-//     //       <span className={css.logoText}>Подорожники</span>
-//     //     </Link>
+export default function Header({ isHome = false }: HeaderProps) {
+  const currentPath = usePathname();
 
-//     //     {/* Desktop навігація*/}
-//     //     <nav aria-label="Main navigation" className={css.desktopNav}>
-//     //       <ul className={css.navigation}>
-//     //         <li>
-//     //           <Link
-//     //             href="/"
-//     //             className={css.navigationLink}
-//     //           >
-//     //             Головна
-//     //           </Link>
-//     //         </li>
-//     //         <li>
-//     //           <Link
-//     //             href="/stories"
-//     //             className={css.navigationLink}
-//     //           >
-//     //             Історії
-//     //           </Link>
-//     //         </li>
-//     //         <li>
-//     //           <Link
-//     //             href="/travellers"
-//     //             className={css.navigationLink}
-//     //           >
-//     //             Мандрівники
-//     //           </Link>
-//     //         </li>
-//     //       </ul>
-//     //       <AuthNavigation mode="desktop" />
-//     //     </nav>
+  return (
+    <>
+      <header className={`${css.header} ${isHome ? css.isHome : ''}`}>
+        <div className={css.container}>
+          {/* ЛОГО */}
+          <Link href="/" aria-label="На головну" className={css.logoLink}>
+            <Image
+              src={logo}                     
+              width={22}
+              height={22}
+              alt="Подорожники — головна сторінка"
+              aria-hidden="true"
+              className={css.logoIcon}
+              priority={isHome}
+            />
+            <span className={css.logoText}>Подорожники</span>
+          </Link>
 
-//     //     {/* Tablet: кнопка “Опублікувати історію” */}
-//     //     <div className={css.tabletActions}>
-//     //       <Link href="/stories/create" className={css.publishButton}>
-//     //         Опублікувати історію
-//     //       </Link>
-//     //     </div>
-//     //   </div>
-//     // </header>
-//   );
-// }
-// ----------------------
+          <nav aria-label="Основна навігація" className={css.desktopNav}>
+            <ul className={css.navigation}>
+              <li>
+                <Link 
+                  href="/" 
+                  className={`${css.navigationLink} ${currentPath === '/' ? css.active : ''}`}
+                >
+                  Головна
+                </Link>
+              </li>
+              <li>
+                <Link 
+                  href="/stories" 
+                  className={`${css.navigationLink} ${currentPath === '/stories' ? css.active : ''}`}
+                >
+                  Історії
+                </Link>
+              </li>
+              <li>
+                <Link 
+                  href="/travellers" 
+                  className={`${css.navigationLink} ${currentPath === '/travellers' ? css.active : ''}`}
+                >
+                  Мандрівники
+                </Link>
+              </li>
+            </ul>
+            <AuthNavigation mode="desktop" />
+          </nav>
+        </div>
+      </header>
+    </>
+  );
+}
 
-'use client';
+
+// не мій!!!
+
+/*'use client';
 
 import Link from 'next/link';
 import Image from 'next/image';
@@ -90,7 +90,7 @@ export default function Header({ isHome }: HeaderProps) {
   return (
     <header className={`${styles.header} ${isHome ? styles.isHome : ''}`}>
       <div className={`container ${styles.headerContainer}`}>
-        {/* Логотип */}
+        {/* Логотип *}
         <div className={styles.content}>
           <Link href="/" className={styles.logoLink}>
             <Image 
@@ -105,7 +105,7 @@ export default function Header({ isHome }: HeaderProps) {
         </div>
 
         <div className={styles.columnRight}>
-          {/* Навігація */}
+          {/* Навігація *}
           <nav className={styles.navLinks}>
             <Link 
               href="/" 
@@ -128,28 +128,28 @@ export default function Header({ isHome }: HeaderProps) {
           </nav>
 
           <div className={styles.actions}>
-            {/* Перемикач теми */}
+            {/* Перемикач теми *}
             <ThemeToggle />
 
             {!isLoggedIn ? (
               <>
-                {/* Кнопка Увійти - використовуємо класи з нашого buttons.css */}
+                {/* Кнопка Увійти - використовуємо класи з нашого buttons.css *}
                 <button className={`btn btn--header ${isHome ? 'btn--ghost-white' : 'btn--ghost'}`}>
                   Увійти
                 </button>
                 
-                {/* Кнопка Реєстрація */}
+                {/* Кнопка Реєстрація *}
                 <button className="btn btn--header btn-primary">
                   Реєстрація
                 </button>
               </>
             ) : (
               <div className={styles.profile}>
-                {/* Тут буде аватар */}
+                {/* Тут буде аватар *}
               </div>
             )}
             
-            {/* Кнопка Бургер (мобільне меню) */}
+            {/* Кнопка Бургер (мобільне меню) *}
             <button className={styles.btnBurger} aria-label="Відкрити меню">
                <svg width="24" height="24">
                  <use xlinkHref="/sprites/sprite.svg#menu" />
@@ -160,9 +160,4 @@ export default function Header({ isHome }: HeaderProps) {
       </div>
     </header>
   );
-}
-
-
-
-
-
+}*/
