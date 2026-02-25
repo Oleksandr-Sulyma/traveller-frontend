@@ -6,8 +6,9 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { usePathname } from 'next/navigation';
 import AuthNavigation from '../AuthNavigation/AuthNavigation';
+import BurgerMenu from '../BurgerMenu/BurgerMenu';
 import css from './Header.module.css';
-import logo from '@/public/favicon.svg';  
+import logo from '@/public/favicon.svg';
 
 interface HeaderProps {
   isHome?: boolean;
@@ -15,14 +16,16 @@ interface HeaderProps {
 
 export default function Header({ isHome = false }: HeaderProps) {
   const currentPath = usePathname();
-
-  // ==== Работа с темой ====
   const { theme, setTheme } = useTheme();
-  const [mounted, setMounted] = useState(false);
-  useEffect(() => setMounted(true), []);
 
-  // Не рендерим до монтирования клиента (чтобы избежать "глазков")
+  const [mounted, setMounted] = useState(false);
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+
+  useEffect(() => setMounted(true), []);
   if (!mounted) return null;
+
+  const toggleMenu = () => setIsMenuOpen((prev) => !prev);
+  const closeMenu = () => setIsMenuOpen(false);
 
   return (
     <header className={`${css.header} ${isHome ? css.isHome : ''}`}>
@@ -34,14 +37,13 @@ export default function Header({ isHome = false }: HeaderProps) {
             width={22}
             height={22}
             alt="Подорожники — головна сторінка"
-            aria-hidden="true"
             className={css.logoIcon}
             priority={isHome}
           />
           <span className={css.logoText}>Подорожники</span>
         </Link>
 
-        {/* ==== НАВИГАЦИЯ ==== */}
+        {/* ==== НАВІГАЦІЯ (десктоп) ==== */}
         <nav aria-label="Основна навігація" className={css.desktopNav}>
           <ul className={css.navigation}>
             <li>
@@ -70,7 +72,7 @@ export default function Header({ isHome = false }: HeaderProps) {
             </li>
           </ul>
 
-      {/* ==== КНОПКИ АВТОРИЗАЦІЇ + ТЕМНА ТЕМА ==== */}
+          {/* ==== КНОПКИ АВТОРИЗАЦІЇ + ТЕМНА ТЕМА ==== */}
           <div className={css.actionsGroup}>
             <AuthNavigation mode="desktop" />
             <button
@@ -83,10 +85,29 @@ export default function Header({ isHome = false }: HeaderProps) {
             </button>
           </div>
         </nav>
+
+        {/* ==== BurgerMenu (мобільна версія) ==== */}
+        <button
+  type="button"
+  className={css.burgerButton}
+  onClick={toggleMenu}
+  aria-label="Відкрити меню"
+>
+  {/* 3 горизонтальні риски = бургер */}
+  <div className={css.burgerLines}>
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</button>
+
+
+        {isMenuOpen && <BurgerMenu onCloseAction={closeMenu} />}
       </div>
     </header>
   );
 }
+
 
 
 
