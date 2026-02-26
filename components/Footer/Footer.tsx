@@ -4,16 +4,26 @@ import styles from './Footer.module.css';
 import '@/styles/components/links.css';
 import Image from 'next/image';
 import logo from '@/public/favicon.svg';
+import TravelerCard from '../TravellerCard/TravellerCard';
 
 export default function Footer() {
   const year = new Date().getFullYear();
 
   return (
-    <footer className={styles.footer}>
-      <div className={styles.container}>
+    <footer className={styles.footer} style={{ background: 'var(--footer-background)' }}>
+      <div className="container ">
         <div className={styles.mainRow}>
-          <Link href="/" className={styles.logo}>
-            <Image src={logo} alt="Подорожники логотип" width={23} height={23} />
+          <Link
+            href="/"
+            className={styles.logo + ' link-base link-text link-footer-pc link-footer-mobile'}
+          >
+            <Image
+              src={logo}
+              alt="Подорожники логотип"
+              width={23}
+              height={23}
+              className="logoIcon"
+            />
             <span>Подорожники</span>
           </Link>
 
@@ -82,6 +92,7 @@ export default function Footer() {
         <hr className={styles.divider} />
 
         <p className={styles.copyright}>© {year} Подорожники. Усі права захищені.</p>
+      
       </div>
     </footer>
   );

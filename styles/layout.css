@@ -5,15 +5,14 @@
 
 /* Мобільні: гумова верстка від 320px до 375px */
 .container {
-  width: 100%;
   max-width: 375px;
-  padding-inline: 20px;
+  width: 100%;
   margin-inline: auto;
-  box-sizing: border-box;
+  padding-inline: 20px; 
   transition: all 0.3s ease;
 }
 
-/* Tablet: >=768px */
+
 @media (min-width: 768px) {
   .container {
     max-width: 768px;
@@ -21,7 +20,6 @@
   }
 }
 
-/* Desktop: >=1440px */
 @media (min-width: 1440px) {
   .container {
     max-width: 1440px;

@@ -24,27 +24,63 @@
 .btn--default { height: 48px; padding: 6px 12px; }
 .btn--header { height: 35px; padding: 4px 10px; font-size: 16px; }
 
+/* Модифікатор для Hero-кнопки */
+.btn--hero {
+    height: 39px;
+    padding: 6px 12px;
+    font-size: 16px;
+    width: 100%;
+}
+
 /* КНОПКИ-ІКОНКИ (Квадратні) */
 .btn-icon { width: 48px; height: 48px; padding: 6px; }
 .btn-icon--header { width: 35px; height: 35px; padding: 4px; }
 
-@media (max-width: 1024px) {
-    .btn--header { height: 32px; }
-    .btn-icon--header { width: 32px; height: 32px; }
+/* АДАПТИВНЕ КЕРУВАННЯ ШИРИНОЮ */
+
+/* Мобільна версія (база)
+@media (min-width: 768px) {
+    .btn--hero { width: 115px; }
+} */
+
+/* Планшет */
+@media (min-width: 768px) and (max-width: 1439px) {
+    .btn--hero { width: 115px; }
 }
 
+/* Десктоп */
+@media (min-width: 1440px) {
+    .btn--hero { width: 126px; }
+}
+
+
 /* =================================
-   2. COLOR VARIANTS (LIGHT THEME)
+    2. COLOR VARIANTS (LIGHT THEME)
 ==================================== */
 
-/* PRIMARY */
+/* PRIMARY (включаючи Hero) */
 .btn.btn-primary {
     background-color: var(--color-royal-blue);
     color: var(--color-white);
+    border-color: var(--color-royal-blue);
 }
+
+.btn--hero {
+    background-color: var(--color-royal-blue)!important;
+    color: var(--color-white)!important;
+    border-color: var(--color-royal-blue)!important;
+}
+
 .btn.btn-primary:hover {
     background-color: var(--color-royal-blue-lighter);
     color: var(--color-neutral-darkest);
+    border-color: var(--color-royal-blue-lighter);
+}
+
+.btn--hero:hover {
+    background-color: var(--color-royal-blue-lighter)!important;
+    color: var(--color-neutral-darkest)!important;
+    border-color: var(--color-royal-blue-lighter)!important;
 }
 
 /* SECONDARY */
@@ -56,6 +92,7 @@
 .btn.btn-secondary:hover {
     background-color: var(--color-royal-blue);
     color: var(--color-white);
+    border-color: var(--color-royal-blue);
 }
 
 /* GHOST VARIANTS */
@@ -64,6 +101,7 @@
     border: 1px solid var(--color-royal-blue);
     color: var(--color-royal-blue);
 }
+
 .btn--ghost-white {
     background-color: transparent;
     border: 1px solid var(--color-white);

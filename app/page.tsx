@@ -9,8 +9,6 @@ import Team from '@/components/Home/Team/Team';
 import CTA from '@/components/Home/CTA/CTA';
 
 
-// Це функції, які ми прописали в Task 38 (Server API)
-// Поки їх немає, можна закоментувати і передати пусті масиви
 // import { getPopularStories, getTopTravellers } from '@/lib/api/serverApi';
 
 export default async function HomePage() {
@@ -20,6 +18,7 @@ export default async function HomePage() {
 
   return (
         <>
+        <Hero/>
         {/* Секція 2: Популярні історії (Task 19) */}
        <Layout/>
       {/* Секція 2: Популярні історії (Task 20) */}

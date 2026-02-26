@@ -98,14 +98,13 @@ export default function UiKitPage() {
         </table>
       </section>
 
-      {/* --- КНОПКИ ТА ШИРИНА --- */}
+      {/* --- КНОПКИ --- */}
       <section>
         <h2 style={{ fontSize: '28px', borderBottom: '2px solid', marginBottom: '30px' }}>1. Кнопки та керування шириною</h2>
-        
         <ComponentSection 
           title="1.1 Зміна стану та ширини"
           usage="Поміняйте клас primary/secondary для кольору. Для ширини використовуйте inline-style або зовнішній контейнер."
-          code={`<button className="btn btn-primary" style={{ width: '180px' }}>Фіксована</button>\n<button className="btn btn-secondary" style={{ width: '100%' }}>На всю ширину</button>`}
+          code={`<button className="btn btn-primary" style={{ width: '180px' }}>Фіксована</button>`}
         >
           <div style={{ display: 'flex', flexDirection: 'column', gap: '15px' }}>
             <button className="btn btn-primary" style={{ width: '180px' }}>180px Primary</button>
@@ -114,14 +113,13 @@ export default function UiKitPage() {
         </ComponentSection>
 
         <ComponentSection 
-          title="1.2 Іконки: Primary vs Secondary"
+          title="1.2 Іконки"
           usage="Клас .btn-icon створює квадратну кнопку. Колір іконки успадковується (currentColor)."
-          code={`<button className="btn btn-primary btn-icon">{PlusIcon}</button>\n<button className="btn btn-secondary btn-icon">{PlusIcon}</button>`}
+          code={`<button className="btn btn-primary btn-icon">{PlusIcon}</button>`}
         >
           <div style={{ display: 'flex', gap: '15px' }}>
             <button className="btn btn-primary btn-icon">{PlusIcon}</button>
             <button className="btn btn-secondary btn-icon">{PlusIcon}</button>
-            <button className="btn btn-primary btn-icon--header">{PlusIcon}</button>
           </div>
         </ComponentSection>
       </section>
@@ -129,11 +127,10 @@ export default function UiKitPage() {
       {/* --- ПОСИЛАННЯ --- */}
       <section style={{ marginTop: '80px' }}>
         <h2 style={{ fontSize: '28px', borderBottom: '2px solid', marginBottom: '30px' }}>2. Посилання (links.css)</h2>
-        
         <ComponentSection 
           title="2.1 Текстові та іконочні лінки"
           usage="Клас .link-text для звичайних лінків, .link-icon для кнопок-іконок без фону."
-          code={`<a href="#" className="link-base link-text">Читати статтю</a>\n<a href="#" className="link-base link-icon">{PlusIcon}</a>`}
+          code={`<a href="#" className="link-base link-text">Читати статтю</a>`}
         >
           <div style={{ display: 'flex', gap: '30px', alignItems: 'center' }}>
             <a href="#" className="link-base link-text" onClick={(e) => e.preventDefault()}>Текстова лінка</a>
@@ -142,38 +139,28 @@ export default function UiKitPage() {
         </ComponentSection>
       </section>
 
-      {/* --- ФУТЕР --- */}
+      {/* --- ФОРМИ ТА КОМПОНЕНТИ --- */}
       <section style={{ marginTop: '80px' }}>
-        <h2 style={{ fontSize: '28px', borderBottom: '2px solid', marginBottom: '30px' }}>3. Футер (footer.css)</h2>
-        
+        <h2 style={{ fontSize: '28px', borderBottom: '2px solid', marginBottom: '30px' }}>3. Форми та React-компоненти</h2>
+
+        {/* --- НОВИЙ БЛОК: ТЕКСТОВИЙ ІНПУТ --- */}
         <ComponentSection 
-          title="3.1 Елементи футера"
-          usage="Для посилань у футері використовуйте клас .link-footer-pc. Він має специфічні кольори для світлої/темної тем."
-          code={`<div style={{ background: 'var(--footer-background)' }}>\n  <a href="#" className="link-base link-text link-footer-pc">Про нас</a>\n</div>`}
+          title="3.1 Базовий Текстовий Інпут"
+          usage="Використовуйте структуру .input-group разом з класом .input. Поле помилки має бути присутнім для збереження висоти."
+          code={`<div className="input-group input-type">\n  <input className="input" placeholder="Ваше ім'я" />\n  <span className="error-text"></span>\n</div>`}
         >
-          <div style={{ 
-            background: 'var(--footer-background)', 
-            padding: '20px', 
-            borderRadius: '8px', 
-            display: 'flex', 
-            gap: '20px',
-            color: 'var(--footer-text)'
-          }}>
-            <a href="#" className="link-base link-text link-footer-pc" onClick={(e) => e.preventDefault()}>Контакти</a>
-            <a href="#" className="link-base link-text link-footer-pc" onClick={(e) => e.preventDefault()}>Допомога</a>
-            <a href="#" className="link-base link-icon" style={{color: 'var(--footer-text)'}} onClick={(e) => e.preventDefault()}>{PlusIcon}</a>
+          <div style={{ width: '335px' }}>
+            <div className="input-group input-type">
+              <input className="input" placeholder="Введіть ваше ім'я" />
+              <span className="error-text"></span>
+            </div>
           </div>
         </ComponentSection>
-      </section>
-
-      {/* --- ФОРМИ --- */}
-      <section style={{ marginTop: '80px' }}>
-        <h2 style={{ fontSize: '28px', borderBottom: '2px solid', marginBottom: '30px' }}>4. Форми та React-компоненти</h2>
 
         <ComponentSection 
-          title="4.1 Динамічний Select"
+          title="3.2 Динамічний Select"
           usage="Використовуйте компонент CustomSelect. Ширина контейнера регулюється через батьківський div."
-          code={`import CustomSelect from '@/components/Forms/CustomSelect/CustomSelect';\n\n<div style={{ width: '300px' }}>\n  <CustomSelect label="Регіон" />\n</div>`}
+          code={`<div style={{ width: '335px' }}>\n  <CustomSelect label="Регіон" />\n</div>`}
         >
           <div style={{ width: '335px' }}>
             <CustomSelect label="Оберіть регіон подорожі" />
@@ -181,12 +168,43 @@ export default function UiKitPage() {
         </ComponentSection>
 
         <ComponentSection 
-          title="4.2 Перемикач Tabs"
-          usage="Завжди має ширину 100% від контейнера, але обмежений max-width: 462px у CSS."
-          code={`<Tabs onChange={(s) => console.log(s)} />`}
+          title="3.3 Перемикач Tabs"
+          usage="Завжди має ширину 100% від контейнера, але обмежений max-width у CSS."
+          code={`<Tabs />`}
         >
           <Tabs />
         </ComponentSection>
+
+        <ComponentSection 
+          title="3.4 Текстова область StoryTextArea"
+          usage="Має вбудований лічильник символів та валідацію. Варіанти h-120 та h-180."
+          code={`<StoryTextArea variant="h-120" maxChars={500} />`}
+        >
+          <StoryTextArea variant="h-120" maxChars={500} />
+        </ComponentSection>
+      </section>
+
+      {/* --- ФУТЕР (ПЕРЕНЕСЕНО СЮДИ) --- */}
+      <section style={{ marginTop: '80px' }}>
+        <h2 style={{ fontSize: '28px', borderBottom: '2px solid', marginBottom: '30px' }}>4. Футер (footer.css)</h2>
+        <ComponentSection 
+          title="4.1 Елементи футера"
+          usage="Для посилань у футері використовуйте клас .link-footer-pc. Він має специфічні кольори для світлої/темної тем."
+          code={`<a href="#" className="link-base link-text link-footer-pc">Про нас</a>`}
+        >
+          <div style={{ 
+            background: 'var(--color-royal-blue-lighter)', 
+            padding: '20px', 
+            borderRadius: '8px', 
+            display: 'flex', 
+            gap: '20px'
+          }}>
+            <a href="#" className="link-base link-text link-footer-pc" onClick={(e) => e.preventDefault()}>Контакти</a>
+            <a href="#" className="link-base link-text link-footer-pc" onClick={(e) => e.preventDefault()}>Допомога</a>
+            <a href="#" className="link-base link-icon" onClick={(e) => e.preventDefault()}>{PlusIcon}</a>
+          </div>
+        </ComponentSection>
+      </section>
 
 {/* --- SECTION 5: TYPOGRAPHY SYSTEM --- */}
 <section style={{ marginTop: '100px' }}>
@@ -258,8 +276,6 @@ export default function UiKitPage() {
     </div>
   </ComponentSection>
 </section>
-
-      </section>
     </div>
   );
 }

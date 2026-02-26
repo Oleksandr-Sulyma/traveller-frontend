@@ -1,0 +1,274 @@
+/* CSS
+
+.desktopAuth {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.loginButton,
+.registerButton {
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: row;
+  gap: 8px;
+  font-size: 16px;
+  font-weight: 500;
+  border-radius: 8px;
+  padding-block: 4px;
+  padding-inline: 10px;
+  height: 35px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+/* DESKTOP (>1024px) /
+.loginButton {
+  color: #ffffff !important;     /* КУ-КУ ПЕРЕВІРИТИ КОЛЬОГРИ ФІГМА!!! БІЛІ ЛІТЕРИ/
+  background: #f0f0f5 !important; /* КУ-КУ ПЕРЕВІРИТИ КОЛЬОГРИ ФІГМА!!! СІРИЙ ФОН /
+  width: 58px !important;
+}
+
+.loginButton:hover {
+  background: #e0e0e5 !important;
+}
+
+.loginButton:active {
+  background: #d0d0db !important;
+}
+
+.registerButton {
+  width: 113px !important;
+  background-color: #ffffff !important; /* КУ-КУ ПЕРЕВІРИТИ КОЛЬОГРИ ФІГМА!!!БІЛИЙ ФОН /
+  color: #1a1a1a !important;            /* КУ-КУ ПЕРЕВІРИТИ КОЛЬОГРИ ФІГМА!!! ЧОРНІ ЛІТЕРИ /
+}
+
+.registerButton:hover {
+  background: #f8f8f8 !important;
+}
+
+.registerButton:active {
+  background: #f0f0f0 !important;
+}
+
+/* TABLET (769px - 1024px) /
+@media (max-width: 1024px) and (min-width: 769px) {
+  .loginButton {
+    color: #000000 !important;  /* КУ-КУ ПЕРЕВІРИТИ КОЛЬОГРИ ФІГМА!!! ЧОРНІ ЛІТЕРИ /
+    background: #f0f0f5 !important; /* КУ-КУ ПЕРЕВІРИТИ КОЛЬОГРИ ФІГМА!!! СІРИЙ ФОН /
+    width: auto !important;
+    min-width: 58px !important;
+  }
+  
+  .registerButton {
+    color: #000000 !important;  /* КУ-КУ ПЕРЕВІРИТИ КОЛЬОГРИ ФІГМА!!! ЧОРНІ ЛІТЕРИ /
+    background: #4169e1 !important; /* КУ-КУ ПЕРЕВІРИТИ КОЛЬОГРИ ФІГМА!!! СИНИЙ ФОН /
+    width: auto !important;
+    min-width: 113px !important;
+  }
+  
+  .loginButton:hover {
+    background: #e0e0e5 !important;
+  }
+  
+  .registerButton:hover {
+    background: #365ac5 !important;
+  }
+}
+
+/* MODAL /
+.modalAuth {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  width: 100%;
+}
+
+.modalLogin,
+.modalRegister {
+  text-decoration: none;
+  font-size: 16px;
+  font-weight: 500;
+  padding: 14px 24px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  text-align: center;
+  width: 100%;
+  display: block;
+}
+
+.modalLogin {
+  background-color: #f0f0f5;
+  color: #1a1a1a;
+  border: 1px solid transparent;
+}
+
+.modalLogin:hover {
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  background: #4169e1;
+  color: #ffffff;
+}
+
+.modalLogin:active {
+  border: 1px solid #4169e1;
+  background: #7a96ea;
+  color: #000000;
+}
+
+.modalRegister {
+  background: #4169e1;
+  color: #ffffff;
+  border: 1px solid transparent;
+}
+
+.modalRegister:hover {
+  color: #000;
+  border: 1px solid #4169e1;
+  background: #e8eeff;
+}
+
+.modalRegister:active {
+  color: #ffffff;
+  border: 1px solid rgba(255, 255, 255, 0);
+  background: #1a2a5a;
+}
+
+/* isHome адаптація /
+:global(.isHome) .loginButton {
+  background: rgba(240, 240, 245, 0.9) !important;
+}
+
+:global(.isHome) .registerButton {
+  background: rgba(255, 255, 255, 0.95) !important;
+}
+
+.authButton:focus {
+  outline: 2px solid #4169e1 !important;
+  outline-offset: 2px !important;
+}
+
+ */
+
+.desktopAuth {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.authButton {
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 35px;
+  padding: 4px 10px;
+  border-radius: 8px;
+  font-size: 16px;
+  font-weight: 500;
+  transition: all var(--transition-fast);
+  border: 1px solid var(--color-scheme-1-border);
+}
+
+/* Кнопка Входу (Десктоп) */
+.loginButton {
+  background-color: var(--color-royal-blue-lightest);
+  color: var(--color-royal-blue);
+}
+
+.loginButton:hover {
+  background-color: var(--color-royal-blue-lighter);
+}
+
+/* Кнопка Реєстрації (Десктоп) */
+.registerButton {
+  background-color: var(--color-royal-blue);
+  color: var(--color-white);
+}
+
+.registerButton:hover {
+  background-color: var(--color-royal-blue-dark);
+}
+
+/* Користувач */
+.userInfo {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.avatarPlaceholder {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background-color: var(--color-royal-blue);
+  color: var(--color-white);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 14px;
+}
+
+.userName {
+  font-family: var(--font-family);
+  font-size: 16px;
+  font-weight: 500;
+  color: var(--color-scheme-1-text);
+}
+
+.logoutButton {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 20px;
+  color: var(--color-scheme-1-text);
+  padding: 4px;
+  transition: transform var(--transition-fast), color var(--transition-fast);
+}
+
+.logoutButton:hover {
+  transform: translateX(3px);
+  color: var(--color-red);
+}
+
+/* Бургер-меню (Modal) */
+.modalAuth {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  width: 100%;
+  margin-top: auto; 
+}
+
+.modalLogin, .modalRegister {
+  width: 100%;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 12px;
+  font-weight: 600;
+  transition: all var(--transition-fast);
+}
+
+.modalLogin {
+  background-color: var(--color-royal-blue-lightest);
+  color: var(--color-royal-blue);
+  border: 1px solid var(--color-royal-blue-lighter);
+}
+
+.modalRegister {
+  background-color: var(--color-royal-blue);
+  color: var(--color-white);
+}
+
+/* Темна тема для кнопок у бургері */
+[data-theme='dark'] .modalLogin {
+  background-color: var(--opacity-white-10);
+  color: var(--color-white);
+  border-color: var(--opacity-white-15);
+}
