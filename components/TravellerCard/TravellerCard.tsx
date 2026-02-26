@@ -3,7 +3,6 @@ import Link from 'next/link';
 import type { User } from '../../types/user';
 
 interface TravelerCardProps extends Pick<User, '_id' | 'avatarUrl' | 'description' | 'name'> {
-  avatarUrl: string;
   buttonText?: string;
 }
 
