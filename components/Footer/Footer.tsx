@@ -4,7 +4,6 @@ import styles from './Footer.module.css';
 import '@/styles/components/links.css';
 import Image from 'next/image';
 import logo from '@/public/favicon.svg';
-import TravelerCard from '../TravellerCard/TravellerCard';
 
 export default function Footer() {
   const year = new Date().getFullYear();
@@ -92,7 +91,6 @@ export default function Footer() {
         <hr className={styles.divider} />
 
         <p className={styles.copyright}>© {year} Подорожники. Усі права захищені.</p>
-      
       </div>
     </footer>
   );
