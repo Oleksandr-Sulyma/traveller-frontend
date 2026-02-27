@@ -15,7 +15,7 @@ export default function Layout() {
         </div>
         <ul className={css.svgWrapper}>
           <li className={css.wrapperLi}>
-            <svg className={css.svg} width="48" height="48" style={{ color: 'black' }}>
+            <svg className={css.svg} width="48" height="48">
               <use href="/sprites/sprite.svg#icon-wand_stars"></use>
             </svg>
 
@@ -23,14 +23,14 @@ export default function Layout() {
             <p>Об'єднувати людей через любов до пригод та надихати на нові відкриття.</p>
           </li>
           <li className={css.wrapperLi}>
-            <svg width="48" height="48" style={{ color: 'black' }}>
+            <svg width="48" height="48">
               <use href="/sprites/sprite.svg#icon-travel_luggage_and_bags"></use>
             </svg>
             <h3>Автентичні історії</h3>
             <p>Ми цінуємо справжні, нередаговані враження від мандрівників з усього світу.</p>
           </li>
           <li className={css.wrapperLi}>
-            <svg width="48" height="48" style={{ color: 'black' }}>
+            <svg width="48" height="48">
               <use href="/sprites/sprite.svg#icon-communication"></use>
             </svg>
             <h3>Ваша спільнота</h3>
