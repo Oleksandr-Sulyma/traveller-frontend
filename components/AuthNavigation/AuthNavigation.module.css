@@ -1,3 +1,4 @@
+
 .desktopAuth {
   display: flex;
   align-items: center;
@@ -17,14 +18,14 @@
   transition: all var(--transition-fast);
 }
 
-/* 🔥 КНОПКА "ВХІД" — АДАПТИВНИЙ КОЛІР */
+/*  КНОПКА "ВХІД" — АДАПТИВНИЙ КОЛІР */
 .loginButton {
   background-color: transparent;
   color: var(--color-white);
   border: 1px solid rgba(255, 255, 255, 0.3);
 }
 
-/* ✅ ЧЁРНЫЙ ТЕКСТ + РАМКА при скролле/на белом фоне */
+/*  ЧЁРНЫЙ ТЕКСТ + РАМКА при скролле/на белом фоне */
 .loginButton.darkText,
 header.isScrolled .loginButton,
 header:not(.isHome) .loginButton {
@@ -104,7 +105,7 @@ header:not(.isHome) .registerButton {
   color: var(--color-red);
 }
 
-/* Бургер-меню (Modal) */
+/* Бургер-меню (Modal)*/
 .modalAuth {
   display: flex;
   flex-direction: column;
