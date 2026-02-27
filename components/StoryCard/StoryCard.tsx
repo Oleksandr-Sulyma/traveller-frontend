@@ -1,5 +1,4 @@
 import styles from './StoryCard.module.css';
-import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 import type { Story } from '../../types/story';
@@ -53,7 +52,7 @@ export default function StoryCard({
     }
   }
 
-  const handleSaveClick = async () => {
+  const handleSaveClick = async (): Promise<void> => {
     if (isSaving) return;
     setIsSaving(true);
     const isAuth = await checkAuth();
@@ -65,6 +64,10 @@ export default function StoryCard({
     const ok = await saveStory(_id);
     if (ok) setSaved(true);
     setIsSaving(false);
+  };
+
+  const handleNavigate = (): void => {
+    router.push(`/stories/${_id}`);
   };
 
   return (
@@ -100,11 +103,14 @@ export default function StoryCard({
             </div>
           </div>
           <div className={styles.story_card_footer}>
-            <Link href={`/stories/${_id}`}>
-              <button className={`btn btn-secondary ${styles.story_card_button}`} type="button">
-                {buttonText}
-              </button>
-            </Link>
+            <button
+              className={`btn btn-secondary ${styles.story_card_button}`}
+              type="button"
+              onClick={handleNavigate}
+            >
+              {buttonText}
+            </button>
+
             <button
               className={`btn btn-primary btn-icon ${styles.story_card_icon_button}`}
               type="button"
