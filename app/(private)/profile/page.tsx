@@ -1,3 +1,5 @@
-export default function Profile() {
-  return <div>Sign In page!</div>;
+import { redirect } from "next/navigation";
+
+export default function ProfilePage() {
+  redirect("/profile/own");
 }

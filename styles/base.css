@@ -17,7 +17,6 @@ img, picture, svg, video {
   max-width: 100%;
 }
 
-/* Прибираємо дефолтні рамки та фони у полів вводу */
 button, input, textarea, select {
   font: inherit;
   border: none;
@@ -39,9 +38,8 @@ a {
 ========================= */
 
 body {
-  /* ТУТ ми лише задаємо фон та базовий колір тексту.
-     Шрифти та розміри підтягнуться з typography.css */
-  background-color: var(--color-scheme-1-background);
+  /* Встановлюємо фон всього сайту згідно з вашою змінною */
+  background-color: var(--color-scheme-2-background);
   color: var(--color-scheme-1-text);
   
   transition:
@@ -49,9 +47,12 @@ body {
     color var(--transition-fast);
     
   -webkit-font-smoothing: antialiased;
+  
+  /* Гарантуємо, що фон заповнює весь екран, навіть якщо контенту мало */
+  min-height: 100vh;
 }
 
-/* Глобальні налаштування для кнопок та посилань */
+/* Глобальні налаштування для кнопок */
 button {
   cursor: pointer;
 }

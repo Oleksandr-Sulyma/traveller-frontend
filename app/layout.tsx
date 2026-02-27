@@ -25,6 +25,7 @@ import TanStackProvider from '@/components/Providers/TanStackProvider';
 import { BASE_URL, SITE_DESCRIPTION, SITE_NAME, SITE_SMAL_DESCRIPTION } from '@/lib/constants/seo';
 
 export const metadata: Metadata = {
+  metadataBase: new URL(BASE_URL),
   title: SITE_SMAL_DESCRIPTION,
   description: SITE_DESCRIPTION,
   openGraph: {
@@ -34,7 +35,7 @@ export const metadata: Metadata = {
     siteName: SITE_SMAL_DESCRIPTION,
     images: [
       {
-        url: '../public/images/title-bg.png',
+        url: '/images/og-image.webp',
         width: 1200,
         height: 630,
         alt: SITE_NAME,
@@ -43,7 +44,6 @@ export const metadata: Metadata = {
     type: 'website',
   },
 };
-
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
@@ -54,8 +54,8 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             <HeaderWrapper />
             <MainContent>{children}</MainContent>
 
-            <FooterWrapper hideOn={['/auth/register', '/auth/login']} />
-            <div id='modal-root'></div>
+            <FooterWrapper hideOn={['/sign-up', '/sign-in']} />
+            <div id="modal-root"></div>
           </TanStackProvider>
         </ThemeProvider>
       </body>
