@@ -94,3 +94,14 @@ export const updateMe = async (payload: UpdateUserRequest) => {
   const res = await nextServer.patch<User>("/users/me", payload);
   return res.data;
 };
+
+
+export async function addToSave(storyId: string): Promise<Story> {
+  const response = await nextServer.post<Story>(`/stories/${storyId}/save`);
+  return response.data;
+}
+
+export async function removeFromSave(storyId: string): Promise<Story> {
+  const response = await nextServer.delete<Story>(`/stories/${storyId}/save`);
+  return response.data;
+}
