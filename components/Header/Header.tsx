@@ -112,7 +112,7 @@ export default function Header({ isHome = false }: HeaderProps) {
 
         <div className={css.actionsGroup}>
           
-          {/* ТАБЛЕТ (768px - 1439px): ТОЛЬКО "Опублікувати історію" */}
+          {/* ТАБЛЕТ (768px - 1439px): "Опублікувати історію" */}
           <div className={css.tabletAuthVisible}>
             <Link 
               href={isLoggedIn ? "/stories/create" : "/sign-in"} 
@@ -127,21 +127,23 @@ export default function Header({ isHome = false }: HeaderProps) {
             <AuthNavigation mode="desktop" isLoggedIn={isLoggedIn} />
           </div>
 
-          {/*  БУРГЕР (tablet + mobile) */}
-          <button 
-            type="button"
-            className={css.burgerButton} 
-            onClick={toggleMenu}
-            aria-label="Відкрити меню"
-          >
-            <div className={css.burgerLines}>
-              <span></span>
-              <span></span>
-              <span></span>
-            </div>
-          </button>
+          {/* МОБІЛЬНА (до 767px): ТІЛЬКИ БУРГЕР */}
+          <div className={css.mobileBurgerOnly}>
+            <button 
+              type="button"
+              className={css.burgerButton} 
+              onClick={toggleMenu}
+              aria-label="Відкрити меню"
+            >
+              <div className={css.burgerLines}>
+                <span></span>
+                <span></span>
+                <span></span>
+              </div>
+            </button>
+          </div>
 
-          {/* ТЕМА  */}
+          {/* ТЕМА (всі екрани) */}
           <button 
             type="button"
             className={css.themeToggle} 
