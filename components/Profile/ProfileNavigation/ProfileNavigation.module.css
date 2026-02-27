@@ -1,0 +1,20 @@
+.div {
+    display: inline-flex;
+    background: #e8eeff;
+    border: 1px solid rgba(255, 255, 255, 0);
+    border-radius: 10px;
+
+    margin-top: 48px;
+
+    padding: 4px;
+}
+
+.link {
+    border-radius: 8px;
+    padding: 7px 30px;
+}
+
+.active {
+    background: #f7f9ff;
+    border: 1px solid rgba(0, 0, 0, 0.15);
+}

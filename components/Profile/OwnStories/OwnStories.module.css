@@ -1,0 +1,33 @@
+.div {
+    background: #e8eeff;
+    padding: 40px 32px;
+    max-width: 533px;
+    margin-top: 40px;
+    border-radius: 24px;
+
+    margin-bottom: 72px;
+}
+
+.title {
+    font-family: var(--second-family);
+    font-weight: 700;
+    font-size: 26px;
+    line-height: 1.4;
+    letter-spacing: -0.01em;
+
+    margin-bottom: 32px;
+
+    /* width: 270px; */
+}
+
+.btn {
+    font-weight: 500;
+    font-size: 18px;
+    line-height: 1.5;
+    color: #fff;
+    background: #4169e1;
+
+    border: 1px solid #4169e1;
+    border-radius: 8px;
+    padding: 10px 12px;
+}
