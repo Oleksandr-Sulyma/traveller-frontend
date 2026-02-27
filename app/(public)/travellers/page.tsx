@@ -47,7 +47,7 @@ export default function Page() {
 
   try {
     const { data } = await api.get(
-      'https://traveller-backend-lia1.onrender.com/users',
+      '/users',
       { params: { page: 1, perPage: limit } }
     );
 
