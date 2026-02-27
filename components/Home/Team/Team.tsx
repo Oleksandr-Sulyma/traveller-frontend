@@ -10,26 +10,23 @@ interface RequestUser {
   users: User[];
   totalPages: number;
 }
+
 export default function Team() {
   const [users, setUsers] = useState<User[]>([]);
   const [page, setPage] = useState(1);
   const [isLoading, setIsLoading] = useState(false);
-  const [hasMore, setHasMore] = useState(false);
-  const perPageMap = 4;
+  const [hasMore, setHasMore] = useState(true);
+  const perPage = 4;
 
   const fetchUsers = async (perPage: number, nextPage: number) => {
     setIsLoading(true);
     try {
       const { data } = await axios.get<RequestUser>(
         'https://traveller-backend-lia1.onrender.com/users',
-        {
-          params: { page: nextPage, perPage },
-        }
+        { params: { page: nextPage, perPage } }
       );
 
-      if (data.users.length > 0) {
-        setUsers(data.users); // завжди рівно 4 елементи
-      }
+      setUsers(prev => [...prev, ...data.users]);
 
       setHasMore(data.users.length === perPage);
     } catch (error) {
@@ -40,7 +37,7 @@ export default function Team() {
   };
 
   useEffect(() => {
-    fetchUsers(perPageMap, 1);
+    fetchUsers(perPage, 1);
   }, []);
 
   const handleLoadMore = (perPage: number) => {
@@ -60,19 +57,21 @@ export default function Team() {
                 <TravelerCard
                   avatarUrl={user.avatarUrl}
                   name={user.name}
-                  description={user.description}
+                  description={user.description ?? 'Без опису'}
                   _id={user._id}
                 />
               </li>
             ))}
           </ul>
-          <Pagination
-            onLoadMore={handleLoadMore}
-            isLoading={isLoading}
-            hasMore={hasMore}
-            perPageMap={{ mobile: 4, tablet: 4, desktop: 4 }}
-            label="Переглянути всіх"
-          />
+          {hasMore && (
+            <Pagination
+              onLoadMore={handleLoadMore}
+              isLoading={isLoading}
+              hasMore={hasMore}
+              perPageMap={{ mobile: 4, tablet: 4, desktop: 4 }}
+              label="Переглянути ще"
+            />
+          )}
         </div>
       </div>
     </section>

@@ -10,7 +10,10 @@
   flex-direction: column;
   gap: 24px;
 }
-.positionUlButton button {
+/* .positionUlButton button {
+  display: none;
+} */
+.positionUlButton > button {
   display: none;
 }
 
@@ -45,8 +48,7 @@
   }
   .wrapperUl {
     display: flex;
-    flex-direction: row;
-    flex-wrap: nowrap;
+    flex-wrap: wrap;
     justify-content: space-between;
   }
   .positionUlButton {
