@@ -15,14 +15,14 @@ import css from './StoryForm.module.css';
 import { ImageUpload, type ImageUploadValue } from './ImageUpload';
 
 import { useCategories } from '@/lib/hooks/useCategories';
-// import { Category, CATEGORY_MAP } from '@/types/category';
+
 
 
 interface StoryFormValues {
   title: string;
   article: string;
-  category: string; // categoryId
-  img: string; // preview url for draft only
+  category: string; 
+  img: string;
 }
 
 const MAX_IMAGE_SIZE = 2 * 1024 * 1024; // 2MB
@@ -52,7 +52,7 @@ export default function StoryForm() {
     title: draft.title,
     article: draft.article, 
     category: draft.category as unknown as string,
-    img: '', // form хранит только превью, бинарь живет в draft
+    img: '',
   };
 
   const handleCancel = () => {
@@ -87,7 +87,6 @@ export default function StoryForm() {
     const imgPreview = value?.preview ?? '';
     setFieldValue('img', imgPreview);
 
-    // храним в драфте именно File, который потом уйдет в FormData
     setDraft({
       ...draft,
       img: (value?.file as any)!,
@@ -112,7 +111,6 @@ export default function StoryForm() {
           return;
         }
 
-        // синхронизируем драфт
         setDraft({
           ...draft,
           title: values.title,
@@ -125,7 +123,7 @@ export default function StoryForm() {
         const payload: StoryPost = {
           title: values.title,
           article: values.article,
-          category: values.category, // categoryId
+          category: values.category, 
           img: coverImage.file,
         };
 
@@ -134,106 +132,122 @@ export default function StoryForm() {
         createStoryMutation(payload);
       }}
     >
-      {({ values, handleChange, setFieldValue, errors, touched }) => (
-        <Form className={css.form}>
-          <div className={css.coverBlock}>
-            <label className={css.label}>Обкладинка статті</label>
-            <ImageUpload
-              value={values.img}
-              onChange={value => handleImageChange(value, setFieldValue)}
-            />
-            {'img' in errors && (
-              <div className={css.error}>{(errors as any).img}</div>
-            )}
-          </div>
+      {({
+        values,
+        handleChange,
+        setFieldValue,
+        errors,
+        touched,
+        isValid,
+        isSubmitting,
+      }) => (
+        <>
+          <h1>Створити нову історію</h1>
+          <Form className={css.form}>
+            <div className={css.coverRow}>
+              <div className={css.coverBlock}>
+                <label className={css.label}>Обкладинка статті</label>
+                <ImageUpload
+                  value={values.img}
+                  onChange={value => handleImageChange(value, setFieldValue)}
+                />
+                {'img' in errors && (
+                  <div className={css.error}>{(errors as any).img}</div>
+                )}
+              </div>
 
-          <div className={css.formGroup}>
-            <label htmlFor="title" className={css.label}>
-              Заголовок
-            </label>
-            <Field
-              id="title"
-              type="text"
-              name="title"
-              className={css.input}
-              placeholder="Введіть заголовок історії"
-              maxLength={80}
-            />
-            {touched.title && errors.title && (
-              <div className={css.error}>{errors.title}</div>
-            )}
-          </div>
+              <div className={css.actions}>
+                <button
+                  type="submit"
+                  className="btn btn--default btn-primary"
+                  disabled={
+                    isPending ||
+                    isSubmitting ||
+                    !isValid ||
+                    !coverImage
+                  }
+                >
+                  {isPending ? 'Зберігаємо...' : 'Зберегти'}
+                </button>
+                <button
+                  type="button"
+                  className="btn btn--default btn-secondary"
+                  onClick={handleCancel}
+                >
+                  Відмінити
+                </button>
+              </div>
+            </div>
 
-          <div className={css.formGroup}>
-            <label htmlFor="category" className={css.label}>
-              Категорія
-            </label>
-            <select
-              id="category"
-              name="category"
-              className={css.select}
-              value={values.category}
-              onChange={e => {
-                handleChange(e);
-                setDraft({ ...draft, category: e.target.value as any });
-              }}
-              required
-            >
-              <option value="" disabled>
+            <div className={`input-group ${css.formGroup}`}>
+              <label htmlFor="title" className={css.label}>
+                Заголовок
+              </label>
+              <Field
+                id="title"
+                type="text"
+                name="title"
+                className="input"
+                placeholder="Введіть заголовок історії"
+                maxLength={80}
+              />
+              {touched.title && errors.title && (
+                <div className={css.error}>{errors.title}</div>
+              )}
+            </div>
+
+            <div className={`input-group ${css.formGroup}`}>
+              <label htmlFor="category" className={css.label}>
                 Категорія
-              </option>
-              {categories.map(({ id, name }) => (
-                <option key={id} value={id}>
-                  {name}
+              </label>
+              <select
+                id="category"
+                name="category"
+                className="input"
+                value={values.category}
+                onChange={e => {
+                  handleChange(e);
+                  setDraft({ ...draft, category: e.target.value as any });
+                }}
+                required
+              >
+                <option value="" disabled>
+                  Категорія
                 </option>
-              ))}
-        
-            </select>
-            {touched.category && errors.category && (
-              <div className={css.error}>{errors.category}</div>
-            )}
-          </div>
+                {categories.map(({ id, name }) => (
+                  <option key={id} value={id}>
+                    {name}
+                  </option>
+                ))}
+              </select>
+              {touched.category && errors.category && (
+                <div className={css.error}>{errors.category}</div>
+              )}
+            </div>
 
-          <div className={css.formGroup}>
-            <label htmlFor="article" className={css.label}>
-              Опис історії
-            </label>
-            <Field
-              as="textarea"
-              id="article"
-              name="article"
-              rows={10}
-              className={css.textarea}
-              placeholder="Ваша історія тут"
-              maxLength={2500}
-              onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) => {
-                handleChange(e);
-                setDraft({ ...draft, article: e.target.value });
-              }}
-            />
-            {touched.article && errors.article && (
-              <div className={css.error}>{errors.article}</div>
-            )}
-          </div>
-
-          <div className={css.actions}>
-            <button
-              type="button"
-              className={css.cancelButton}
-              onClick={handleCancel}
-            >
-              Відмінити
-            </button>
-            <button
-              type="submit"
-              className={css.submitButton}
-              disabled={isPending}
-
-            >
-              {isPending ? 'Зберігаємо...' : 'Зберегти'}
-            </button>
-          </div>
-        </Form>
+            <div className={`input-group ${css.formGroup}`}>
+              <label htmlFor="article" className={css.label}>
+                Опис історії
+              </label>
+              <Field
+                as="textarea"
+                id="article"
+                name="article"
+                rows={10}
+                className="textarea"
+                placeholder="Ваша історія тут"
+                maxLength={2500}
+                onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) => {
+                  handleChange(e);
+                  setDraft({ ...draft, article: e.target.value });
+                }}
+              />
+              {touched.article && errors.article && (
+                <div className={css.error}>{errors.article}</div>
+              )}
+            </div>
+          </Form>
+        </>
       )}
     </Formik>
   );

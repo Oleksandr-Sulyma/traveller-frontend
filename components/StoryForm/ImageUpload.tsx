@@ -1,4 +1,5 @@
 import { FC, ChangeEvent, useState } from "react";
+import Image from 'next/image';
 
 export interface ImageUploadValue {
   file: File;
@@ -7,7 +8,7 @@ export interface ImageUploadValue {
 }
 
 interface ImageUploadProps {
-  value?: string | null; // preview (для edit-форм)
+  value?: string | null;
   onChange: (value: ImageUploadValue | null) => void;
 }
 
@@ -51,29 +52,47 @@ export const ImageUpload: FC<ImageUploadProps> = ({
 
   return (
     <div>
-      <input type="file" accept="image/*" onChange={handleChange} />
-
       <div
         style={{
           marginTop: 12,
-          width: 200,
-          height: 200,
-          border: "1px dashed #ccc",
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "center",
+          width: 865,
+          height: 576,
+          borderRadius: 16,
+          overflow: 'hidden',
+          backgroundColor: '#e5e7eb',
+          position: 'relative',
         }}
       >
         {preview ? (
           <img
             src={preview}
             alt="preview"
-            style={{ maxWidth: "100%", maxHeight: "100%" }}
+            style={{ width: '100%', height: '100%', objectFit: 'cover' }}
           />
         ) : (
-          <span>No image</span>
+          <Image
+            src="/images/storyForm/desktop@1x.webp"
+            alt="Story placeholder"
+            fill
+            style={{ objectFit: 'cover' }}
+          />
         )}
       </div>
+
+      <label style={{ display: 'inline-block', marginTop: 12 }}>
+        <button
+          type="button"
+          className="btn btn--default btn-secondary"
+        >
+          Завантажити фото
+        </button>
+        <input
+          type="file"
+          accept="image/*"
+          onChange={handleChange}
+          style={{ display: 'none' }}
+        />
+      </label>
     </div>
   );
 };
