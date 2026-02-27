@@ -8,7 +8,7 @@ export default function Team() {
         <div className={css.positionH2Svg}>
           <h2>Наші Мандрівники</h2>
           <button type="button">
-            <svg width="48" height="48" style={{ color: 'black' }}>
+            <svg width="48" height="48">
               <use href="/sprites/sprite.svg#icon-close"></use>
             </svg>
           </button>
@@ -20,7 +20,7 @@ export default function Team() {
             <li></li>
             <li></li>
           </ul>
-          <button className="btn btn-primary" style={{ height: '48px' }} type="button">
+          <button style={{ height: '48px' }} type="button">
             Переглянути всіх
           </button>
         </div>
