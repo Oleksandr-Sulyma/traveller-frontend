@@ -1,4 +1,4 @@
-import css from './Layout.module.css'
+import css from './Layout.module.css';
 
 export default function Layout() {
   return (
