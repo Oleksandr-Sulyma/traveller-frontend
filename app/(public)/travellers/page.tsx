@@ -47,7 +47,7 @@ export default function Page() {
 
   try {
     const { data } = await api.get(
-      '/users',
+      'https://traveller-backend-lia1.onrender.com/users',
       { params: { page: 1, perPage: limit } }
     );
 
@@ -74,8 +74,8 @@ if (nextTotal !== null) {
 
   const hasMore = total === null ? true : users.length < total;
 
-  const handleLoadMore = async () => {
-    await fetchUsers(users.length + 3);
+  const handleLoadMore = async (_perPageFromButton: number) => {
+    await fetchUsers(users.length + 4);
   };
 
  return (
