@@ -1,347 +1,3 @@
-/* 
-
-/* =================================
-   ПЕРЕГЛЯНУТИ ЩЕ РАЗ ПОЧИСТИТИ!!!!!!!!!!
-   1. ОСНОВНА СТРУКТУРА (HEADER)
-==================================== /
-
- .header {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 72px;
-  display: flex;
-  align-items: center;
-  z-index: 1000;
-  background: var(--color-scheme-1-background);
-  border-bottom: 1px solid var(--color-scheme-1-border);
-  transition: all 0.3s ease;
-}
-
-.isHome { 
-  background: transparent !important; 
-  border-bottom: transparent !important; 
-}
-
-.container {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  height: 100%;
-  gap: 32px;
-}
-
-/* ЛОГО /
-.logoLink { display: flex; align-items: center; gap: 8px; text-decoration: none; }
-.logoIcon { width: 22px; height: 22px; flex-shrink: 0; }
-.logoText {
-  font-family: var(--second-family);
-  font-weight: 700;
-  font-size: 20px;
-  color: var(--color-scheme-1-text);
-  transition: color 0.3s ease;
-}
-.isHome .logoText { color: #fff; }
-
-/* НАВІГАЦІЯ /
-.desktopNav {
-  display: flex;
-  align-items: center;
-  gap: 32px;
-  flex: 1;
-  max-width: 600px;
-}
-
-.navigation {
-  display: flex;
-  align-items: center;
-  gap: 24px;
-  list-style: none;
-  margin: 0;
-  padding: 0;
-}
-
-.navigation li { display: block; }
-
-.navigationLink {
-  font-family: var(--font-family);
-  font-weight: 500;
-  font-size: 16px;
-  color: var(--color-scheme-1-text);
-  text-decoration: none;
-  padding: 8px 0;
-  transition: color 0.2s ease;
-  white-space: nowrap;
-}
-
-.navigationLink:hover,
-.navigationLink.active { 
-  color: var(--color-royal-blue); 
-}
-
-.isHome .navigationLink { color: #fff; }
-
-
-.actionsGroup {
-  display: flex !important;
-  align-items: center !important;
-  gap: 16px !important;
-  margin-left: auto !important;
-}
-
-/*  AuthNavigation /
-:global(.desktopAuth) {
-  display: flex !important;
-  flex-direction: row !important;
-  align-items: center !important;
-  gap: 12px !important;
-}
-
-/* КНОПКА ТЕМИ /
-.themeToggle {
-  width: 40px !important;
-  height: 40px !important;
-  border: none !important;
-  background: none !important;
-  border-radius: 8px !important;
-  cursor: pointer !important;
-  display: flex !important;
-  align-items: center !important;
-  justify-content: center !important;
-  font-size: 20px !important;
-  color: var(--color-scheme-1-text) !important;
-  transition: all 0.3s ease !important;
-}
-
-.themeToggle:hover {
-  background: rgba(13, 110, 253, 0.1) !important;
-  transform: scale(1.05) !important;
-}
-
-/* TABLET */
-/* @media (max-width: 1024px) and (min-width: 769px) {
-  .container { gap: 24px; }
-  .desktopNav { gap: 28px; max-width: 500px; }
-  .navigation { gap: 20px; }
-  
-  .navigationLink,
-  .isHome .navigationLink { color: var(--color-scheme-1-text) !important; }
-  .isHome .logoText { color: var(--color-scheme-1-text) !important; }
-} */
-
-/* MOBILE */
-/* @media (max-width: 768px) {
-  .container { gap: 16px; padding: 0 20px; }
-  .desktopNav { display: none !important; }
-}
-
-.actionsGroup,
-.actionsGroup * {
-  display: flex !important;
-  flex-direction: row !important;
-  align-items: center !important;
-  flex-wrap: nowrap !important;
-}
-
-.actionsGroup > * {
-  margin: 0 !important;
-  padding: 0 8px !important;
-}
-.header {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 72px;
-  display: flex;
-  align-items: center;
-  z-index: 1000;
-  background: var(--color-scheme-1-background);
-  border-bottom: 1px solid var(--color-scheme-1-border);
-  transition: all 0.3s ease;
-}
-
-.isHome { 
-  background: transparent !important; 
-  border-bottom: transparent !important; 
-}
-
-.container {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 0 24px;
-  width: 100%;
-  height: 100%;
-  gap: 32px;
-}
-
-/* ЛОГО /
-.logoLink { display: flex; align-items: center; gap: 8px; text-decoration: none; }
-.logoIcon { width: 22px; height: 22px; flex-shrink: 0; }
-.logoText {
-  font-family: var(--second-family);
-  font-weight: 700;
-  font-size: 20px;
-  color: var(--color-scheme-1-text);
-  transition: color 0.3s ease;
-}
-.isHome .logoText { color: #fff; }
-
-/* НАВІГАЦІЯ /
-.desktopNav {
-  display: flex;
-  align-items: center;
-  gap: 32px;
-  flex: 1;
-  max-width: 600px;
-}
-
-.navigation {
-  display: flex;
-  align-items: center;
-  gap: 24px;
-  list-style: none;
-  margin: 0;
-  padding: 0;
-}
-
-.navigation li { display: block; }
-
-.navigationLink {
-  font-family: var(--font-family);
-  font-weight: 500;
-  font-size: 16px;
-  color: var(--color-scheme-1-text);
-  text-decoration: none;
-  padding: 8px 0;
-  transition: color 0.2s ease;
-  white-space: nowrap;
-}
-
-.navigationLink:hover,
-.navigationLink.active { 
-  color: var(--color-royal-blue); 
-}
-
-.isHome .navigationLink { color: #fff; }
-
-
-.actionsGroup {
-  display: flex !important;
-  align-items: center !important;
-  gap: 16px !important;
-  margin-left: auto !important;
-}
-
-/*  AuthNavigation /
-:global(.desktopAuth) {
-  display: flex !important;
-  flex-direction: row !important;
-  align-items: center !important;
-  gap: 12px !important;
-}
-
-/* КНОПКА ТЕМИ /
-.themeToggle {
-  width: 40px !important;
-  height: 40px !important;
-  border: none !important;
-  background: none !important;
-  border-radius: 8px !important;
-  cursor: pointer !important;
-  display: flex !important;
-  align-items: center !important;
-  justify-content: center !important;
-  font-size: 20px !important;
-  color: var(--color-scheme-1-text) !important;
-  transition: all 0.3s ease !important;
-}
-
-.themeToggle:hover {
-  background: rgba(13, 110, 253, 0.1) !important;
-  transform: scale(1.05) !important;
-}
-
-/* TABLET /
-@media (max-width: 1024px) and (min-width: 769px) {
-  .container { gap: 24px; }
-  .desktopNav { gap: 28px; max-width: 500px; }
-  .navigation { gap: 20px; }
-  
-  .navigationLink,
-  .isHome .navigationLink { color: var(--color-scheme-1-text) !important; }
-  .isHome .logoText { color: var(--color-scheme-1-text) !important; }
-}
-
-/* MOBILE /
-@media (max-width: 768px) {
-  .container { gap: 16px; padding: 0 20px; }
-  .desktopNav { display: none !important; }
-}
-
-.actionsGroup,
-.actionsGroup * {
-  display: flex !important;
-  flex-direction: row !important;
-  align-items: center !important;
-  flex-wrap: nowrap !important;
-}
-
-.actionsGroup > * {
-  margin: 0 !important;
-  padding: 0 8px !important;
-}
-/* ===== БУРГЕР-КНОПКА ===== /
-.burgerButton {
-  display: none; /* СКРИТО на десктопі /
-  align-items: center;
-  justify-content: center;
-  width: 42px;
-  height: 42px;
-  border: 1px solid rgba(0, 0, 0, 0.1);
-  border-radius: 8px;
-  background: transparent;
-  cursor: pointer;
-  transition: background 0.2s ease, transform 0.2s ease;
-  color: var(--color-scheme-1-text);
-}
-
-.burgerButton:hover {
-  background: rgba(13, 110, 253, 0.08);
-  transform: scale(1.05);
-}
-
-.burgerLines {
-  display: flex;
-  flex-direction: column;
-  gap: 4px;
-  width: 24px;
-  height: 20px;
-}
-
-.burgerLines span {
-  height: 3px;
-  background: currentColor;
-  border-radius: 2px;
-  transition: all 0.3s ease;
-}
-
-/* ТІЛЬКИ НА МОБІЛЬНИХ (≤768px) /
-@media (max-width: 768px) {
-  .burgerButton {
-    display: flex !important; /* ПОКАЗУЄМО тільки тут *
-  }
-  .desktopNav {
-    display: none !important;
-  }
-} */
- 
-
-
 /* ===========================================
    ОСНОВНА СТРУКТУРА ХЕДЕРА
 ============================================== */
@@ -354,7 +10,6 @@
   display: flex;
   align-items: center;
   z-index: 1000;
-  /* Додаємо блюр та напівпрозорість для стану, коли користувач скролить */
   background-color: var(--color-scheme-1-background);
   backdrop-filter: blur(8px);
   border-bottom: 1px solid var(--color-scheme-1-border);
@@ -363,14 +18,305 @@
               backdrop-filter var(--transition-fast);
 }
 
-/* Стан для головної сторінки, коли ми зверху (над Hero) */
 .isHome {
   background-color: transparent;
   border-bottom-color: transparent;
   backdrop-filter: blur(0px);
 }
 
-/* Стан для головної сторінки при скролі (додаємо цей клас через JS у Header.tsx) */
+.isScrolled {
+  background-color: var(--color-scheme-1-background);
+  border-bottom: 1px solid var(--color-scheme-1-border);
+  backdrop-filter: blur(8px);
+}
+
+.container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 100%;
+  width: 100%;
+  max-width: 1440px;
+  margin: 0 auto;
+  padding: 0 20px;
+  box-sizing: border-box;
+}
+
+/* ЛОГОТИП */
+.logoLink {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  text-decoration: none;
+}
+
+.logoText {
+  font-family: var(--second-family);
+  font-weight: 700;
+  font-size: 20px;
+  color: var(--color-scheme-1-text);
+  transition: color var(--transition-fast);
+}
+
+.isHome:not(.isScrolled) .logoText {
+  color: var(--color-white);
+}
+
+/* ДЕСКТОПНА НАВІГАЦІЯ (1440px+) */
+.desktopNav {
+  display: none;
+}
+
+.navigation {
+  display: flex;
+  gap: 24px;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+@media (min-width: 1440px) {
+  .desktopNav {
+    display: flex;
+    align-items: center;
+    gap: 32px;
+    flex: 1;
+    justify-content: center;
+  }
+
+  .navigationLink {
+    font-family: var(--font-family);
+    font-weight: 500;
+    font-size: 16px;
+    color: var(--color-scheme-1-text);
+    text-decoration: none;
+    transition: color var(--transition-fast);
+    padding: 8px 0;
+  }
+
+  .isHome:not(.isScrolled) .navigationLink {
+    color: var(--color-white);
+  }
+
+  .navigationLink:hover,
+  .navigationLink.active {
+    color: var(--color-royal-blue);
+  }
+}
+
+/* ГРУПА КНОПОК */
+.actionsGroup {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+/* БАЗОВІ СТИЛІ ДЛЯ КНОПОК */
+.navBtnLink {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-family);
+  font-weight: 500;
+  font-size: 16px;
+  padding: 8px 20px;
+  border-radius: 8px;
+  text-decoration: none;
+  white-space: nowrap;
+  height: 40px;
+  transition: all var(--transition-fast);
+}
+
+/* ПЛАНШЕТ (768px - 1439px): ТОЛЬКО одна кнопка */
+.tabletAuthVisible {
+  display: none;
+}
+
+@media (min-width: 768px) and (max-width: 1439px) {
+  .tabletAuthVisible {
+    display: flex;
+    align-items: center;
+  }
+
+  /* Приховуємо desktop на планшеті */
+  .desktopAuthOnly,
+  .desktopNav {
+    display: none !important;
+  }
+
+  /* ПЛАНШЕТ: "Опублікувати історію" */
+  .tabletAuthVisible .navBtnLink {
+    background: #ffffff !important;
+    color: #000000 !important;
+    border: 1px solid #e0e0e0 !important;
+    font-weight: 600 !important;
+    padding: 8px 24px;
+  }
+
+  .tabletAuthVisible .navBtnLink:hover {
+    background: #f8f9fa !important;
+    transform: translateY(-1px);
+  }
+}
+
+/* ДЕСКТОП (1440px+): Вхід/Реєстрація */
+@media (min-width: 1440px) {
+  /* Приховуємо планшет та бургер на десктопі */
+  .tabletAuthVisible,
+  .burgerButton {
+    display: none !important;
+  }
+
+  .desktopAuthOnly {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  /* ДЕСКТОП: Вхід — БІЛІ ЛІТЕРА, ПРОЗОРИЙ ФОН */
+  .desktopAuthOnly .navBtnLink:first-child {
+    background: transparent !important;
+    color: var(--color-scheme-1-text) !important;
+    border: 1px solid rgba(255, 255, 255, 0.6) !important;
+    font-weight: 500 !important;
+  }
+
+  .isHome:not(.isScrolled) .desktopAuthOnly .navBtnLink:first-child {
+    color: var(--color-white) !important;
+    border-color: rgba(255, 255, 255, 0.6) !important;
+  }
+
+  .desktopAuthOnly .navBtnLink:first-child:hover {
+    background: rgba(255, 255, 255, 0.15) !important;
+  }
+
+  /* ДЕСКТОП: Реєстрація — ЧОРНІ ЛІТЕРА, БІЛИЙ ФОН */
+  .desktopAuthOnly .navBtnLink:nth-child(2) {
+    background: #ffffff !important;
+    color: #1a1a1a !important;
+    border: none !important;
+    font-weight: 600 !important;
+  }
+
+  .desktopAuthOnly .navBtnLink:nth-child(2):hover {
+    background: #f0f0f0 !important;
+    transform: translateY(-1px);
+  }
+}
+
+/* ПЕРЕМИКАЧ ТЕМИ */
+.themeToggle {
+  width: 40px;
+  height: 40px;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--color-scheme-1-text);
+  cursor: pointer;
+  background: transparent;
+  border: none;
+  transition: all var(--transition-fast);
+  font-size: 20px;
+}
+
+.isHome:not(.isScrolled) .themeToggle {
+  color: var(--color-white);
+}
+
+.themeToggle:hover {
+  background-color: var(--opacity-neutral-darkest-5);
+}
+
+/* БУРГЕР (планшет + мобільний) */
+.burgerButton {
+  display: none;
+}
+
+@media (max-width: 1439px) {
+  .burgerButton {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 4px;
+    width: 40px;
+    height: 40px;
+    padding: 0;
+    background: transparent;
+    border: 1px solid var(--color-scheme-1-border);
+    border-radius: 8px;
+    color: var(--color-scheme-1-text);
+    cursor: pointer;
+    transition: all var(--transition-fast);
+  }
+
+  .isHome:not(.isScrolled) .burgerButton {
+    color: var(--color-white);
+    border-color: rgba(255, 255, 255, 0.15);
+  }
+
+  .burgerLines {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    width: 24px;
+  }
+
+  .burgerLines span {
+    display: block;
+    width: 100%;
+    height: 2px;
+    background-color: currentColor;
+    border-radius: 2px;
+    transition: all 0.2s ease;
+  }
+
+  .burgerButton:hover {
+    background-color: var(--opacity-neutral-darkest-5);
+  }
+}
+
+/* МОБІЛЬНА ВЕРСІЯ */
+@media (max-width: 767px) {
+  .container {
+    padding: 0 16px;
+  }
+  
+  .logoText {
+    font-size: 18px;
+  }
+}
+
+ /* ===========================================
+   ОСНОВНА СТРУКТУРА ХЕДЕРА
+============================================== /
+.header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 72px;
+  display: flex;
+  align-items: center;
+  z-index: 1000;
+  /* Додаємо блюр та напівпрозорість для стану, коли користувач скролить /
+  background-color: var(--color-scheme-1-background);
+  backdrop-filter: blur(8px);
+  border-bottom: 1px solid var(--color-scheme-1-border);
+  transition: background-color var(--transition-fast), 
+              border-color var(--transition-fast),
+              backdrop-filter var(--transition-fast);
+}
+
+/* Стан для головної сторінки, коли ми зверху (над Hero) /
+.isHome {
+  background-color: transparent;
+  border-bottom-color: transparent;
+  backdrop-filter: blur(0px);
+}
+
+/* Стан для головної сторінки при скролі (додаємо цей клас через JS у Header.tsx) /
 .isScrolled {
   background-color: var(--color-scheme-1-background);
   border-bottom: 1px solid var(--color-scheme-1-border);
@@ -385,7 +331,7 @@
   width: 100%;
 }
 
-/* ЛОГОТИП */
+/* ЛОГОТИП /
 .logoLink {
   display: flex;
   align-items: center;
@@ -404,7 +350,7 @@
   color: var(--color-white);
 }
 
-/* ДЕСКТОПНА НАВІГАЦІЯ (> 1440px) */
+/* ДЕСКТОПНА НАВІГАЦІЯ (> 1440px) /
 .desktopNav {
   display: none;
 }
@@ -441,14 +387,14 @@
   }
 }
 
-/* ГРУПА КНОПОК */
+/* ГРУПА КНОПОК /
 .actionsGroup {
   display: flex;
   align-items: center;
   gap: 16px;
 }
 
-/* 1. ПЛАНШЕТНА ВЕРСІЯ (768px - 1439px) */
+/* 1. ПЛАНШЕТНА ВЕРСІЯ (768px - 1439px) /
 .tabletAuthVisible {
   display: none;
 }
@@ -482,7 +428,7 @@
   color: var(--color-royal-blue);
 }
 
-/* 2. ДЕСКТОПНА ВЕРСІЯ (1440px+) */
+/* 2. ДЕСКТОПНА ВЕРСІЯ (1440px+) /
 .desktopAuthOnly {
   display: none;
 }
@@ -494,7 +440,7 @@
   }
 }
 
-/* ПЕРЕМИКАЧ ТЕМИ */
+/* ПЕРЕМИКАЧ ТЕМИ /
 .themeToggle {
   width: 40px;
   height: 40px;
@@ -515,7 +461,7 @@
   background-color: var(--opacity-neutral-darkest-5);
 }
 
-/* КНОПКА БУРГЕРА */
+/* КНОПКА БУРГЕРА /
 .burgerButton {
   display: flex;
   flex-direction: column;
@@ -555,4 +501,4 @@
 
 .burgerButton:hover {
   background-color: var(--opacity-neutral-darkest-5);
-}
+}*/
