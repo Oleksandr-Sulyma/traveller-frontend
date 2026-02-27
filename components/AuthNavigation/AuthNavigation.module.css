@@ -17,11 +17,20 @@
   transition: all var(--transition-fast);
 }
 
-/* ✅ КНОПКА "ВХІД" — ПРОЗРАЧНИЙ ФОН + БІЛИЙ ТЕКСТ */
+/* 🔥 КНОПКА "ВХІД" — АДАПТИВНИЙ КОЛІР */
 .loginButton {
   background-color: transparent;
   color: var(--color-white);
   border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+/* ✅ ЧЁРНЫЙ ТЕКСТ + РАМКА при скролле/на белом фоне */
+.loginButton.darkText,
+header.isScrolled .loginButton,
+header:not(.isHome) .loginButton {
+  color: #000000 !important;
+  border-color: rgba(0, 0, 0, 0.2) !important;
+  background-color: rgba(255, 255, 255, 0.1) !important;
 }
 
 .loginButton:hover {
@@ -30,12 +39,21 @@
   transform: translateY(-1px);
 }
 
-/* ✅ КНОПКА "РЕЄСТРАЦІЯ" — БІЛИЙ ФОН + ЧОРНИЙ ТЕКСТ */
+/*  КНОПКА "РЕЄСТРАЦІЯ" — АДАПТИВНАЯ РАМКА */
 .registerButton {
   background-color: var(--color-white);
   color: #1a1a1a;
-  border: none;
+  border: none;                    /* прозрачная рамка по умолчанию */
   font-weight: 600;
+}
+
+/*  ЧЁРНАЯ РАМКА на белом фоне (такая же как у "Вхід") */
+.registerButton.darkText,
+header.isScrolled .registerButton,
+header:not(.isHome) .registerButton {
+  border: 1px solid rgba(0, 0, 0, 0.2) !important;  
+  background-color: var(--color-white) !important;
+  color: #1a1a1a !important;
 }
 
 .registerButton:hover {

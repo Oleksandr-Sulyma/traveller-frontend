@@ -63,7 +63,7 @@
   color: var(--color-white);
 }
 
-/* ДЕСКТОПНА НАВІГАЦІЯ (1440px+) */
+/* ДЕСКТОПНА НАВІГАЦІЯ */
 .desktopNav {
   display: none;
 }
@@ -128,16 +128,14 @@
   transition: all var(--transition-fast);
 }
 
-/* 🔥 МОБІЛЬНА */
+/* МОБІЛЬНА */
 @media (max-width: 767px) {
   .container {
     padding: 0 16px;
   }
-
   .logoText {
     font-size: 18px;
   }
-
   .tabletAuthVisible,
   .desktopAuthOnly,
   .desktopNav {
@@ -151,12 +149,10 @@
     display: flex;
     align-items: center;
   }
-
   .desktopAuthOnly,
   .desktopNav {
     display: none !important;
   }
-
   .tabletAuthVisible .navBtnLink {
     background: #ffffff !important;
     color: #000000 !important;
@@ -164,14 +160,13 @@
     font-weight: 600 !important;
     padding: 8px 24px;
   }
-
   .tabletAuthVisible .navBtnLink:hover {
     background: #f8f9fa !important;
     transform: translateY(-1px);
   }
 }
 
-/* ДЕСКТОП */
+/* 🔥 ДЕСКТОП - СУПЕР СПЕЦИФИЧНЫЕ ПРАВИЛА ДЛЯ КНОПКИ "ВХІД" */
 @media (min-width: 1440px) {
   .tabletAuthVisible,
   .burgerButton {
@@ -184,17 +179,26 @@
     gap: 12px;
   }
 
-  .desktopAuthOnly .navBtnLink:first-child {
+  /* БАЗОВЫЙ СТИЛЬ - БЕЛЫЙ ТЕКСТ НА ПРОЗРАЧНОМ ФОНЕ */
+  header.header.desktopAuthOnly .navBtnLink:first-child,
+  header.isHome.desktopAuthOnly .navBtnLink:first-child {
     background: transparent !important;
-    color: var(--color-scheme-1-text) !important;
+    color: #ffffff !important;  /* ✅ БЕЛЫЙ */
     border: 1px solid rgba(255, 255, 255, 0.6) !important;
     font-weight: 500 !important;
   }
 
-  .desktopAuthOnly .navBtnLink:first-child:hover {
-    background: rgba(255, 255, 255, 0.15) !important;
+  /* 🔥 ЧЁРНЫЙ ТЕКСТ НА БЕЛОМ ФОНЕ - МАКСИМАЛЬНАЯ СПЕЦИФИЧНОСТЬ */
+  header.header.isScrolled.desktopAuthOnly .navBtnLink:first-child,
+  header.header.isScrolled.isHome.desktopAuthOnly .navBtnLink:first-child,
+  header.header:not(.isHome).desktopAuthOnly .navBtnLink:first-child {
+    background: rgba(255, 255, 255, 0.9) !important;
+    color: #000000 !important;  /* ✅ ЧЁРНЫЙ */
+    border: 1px solid rgba(0, 0, 0, 0.15) !important;
+    font-weight: 500 !important;
   }
 
+  /* КНОПКА "РЕЄСТРАЦІЯ" */
   .desktopAuthOnly .navBtnLink:nth-child(2) {
     background: #ffffff !important;
     color: #1a1a1a !important;
@@ -205,6 +209,11 @@
   .desktopAuthOnly .navBtnLink:nth-child(2):hover {
     background: #f0f0f0 !important;
     transform: translateY(-1px);
+  }
+
+  /* HOVER ДЛЯ "ВХІД" */
+  header.desktopAuthOnly .navBtnLink:first-child:hover {
+    background: rgba(255, 255, 255, 0.2) !important;
   }
 }
 
@@ -280,6 +289,7 @@
     background-color: var(--opacity-neutral-darkest-5);
   }
 }
+
 
 
  /* ===========================================
