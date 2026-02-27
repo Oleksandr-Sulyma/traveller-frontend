@@ -1,0 +1,32 @@
+.sectionContainer {
+    display: flex;
+
+    padding-top: 48px;
+
+    align-items: center;
+
+    gap: 24px;
+}
+
+.img {
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.title {
+    font-family: var(--second-family);
+    font-weight: 700;
+    font-size: 32px;
+    line-height: 1.3;
+    letter-spacing: -0.01em;
+}
+
+.text {
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 1.5;
+
+    max-width: 367px;
+}
