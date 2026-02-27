@@ -31,7 +31,6 @@ export default function Header({ isHome = false }: HeaderProps) {
   useEffect(() => {
     setMounted(true);
 
-    // Функція для відстеження скролу сторінки
     const handleScroll = () => {
       if (window.scrollY > 50) {
         setIsScrolled(true);
@@ -40,16 +39,20 @@ export default function Header({ isHome = false }: HeaderProps) {
       }
     };
 
+    const handleMenuOverflow = () => {
+      if (isMenuOpen) {
+        document.body.style.overflow = 'hidden';
+      } else {
+        document.body.style.overflow = 'unset';
+      }
+    };
+
     window.addEventListener('scroll', handleScroll);
-    
-    if (isMenuOpen) {
-      document.body.style.overflow = 'hidden';
-    } else {
-      document.body.style.overflow = 'unset';
-    }
+    handleMenuOverflow();
 
     return () => {
       window.removeEventListener('scroll', handleScroll);
+      document.body.style.overflow = 'unset';
     };
   }, [isMenuOpen]);
 
@@ -62,10 +65,7 @@ export default function Header({ isHome = false }: HeaderProps) {
   ];
 
   if (isLoggedIn) {
-    navLinks.push(
-      { name: 'Мій Профіль', href: '/profile' }
-      // "Опублікувати історію" НЕ добавляем в navLinks - она отдельно в tablet/desktop
-    );
+    navLinks.push({ name: 'Мій Профіль', href: '/profile' });
   }
 
   const toggleMenu = () => setIsMenuOpen(prev => !prev);
@@ -87,7 +87,7 @@ export default function Header({ isHome = false }: HeaderProps) {
             src={logo} 
             width={22} 
             height={22} 
-            alt="Logo" 
+            alt="Логотип Подорожники" 
             priority 
           />
           <span className={css.logoText}>Подорожники</span>
@@ -101,6 +101,7 @@ export default function Header({ isHome = false }: HeaderProps) {
                 <Link 
                   href={link.href} 
                   className={`${css.navigationLink} ${currentPath === link.href ? css.active : ''}`}
+                  onClick={closeMenu}
                 >
                   {link.name}
                 </Link>
@@ -111,18 +112,14 @@ export default function Header({ isHome = false }: HeaderProps) {
 
         <div className={css.actionsGroup}>
           
-          {/* ТАБЛЕТ (768px - 1439px): Вхід/Реєстрація ИЛИ Опублікувати */}
+          {/* ТАБЛЕТ (768px - 1439px): "Опублікувати історію" */}
           <div className={css.tabletAuthVisible}>
-            {!isLoggedIn ? (
-              <div className={css.tabletGuestActions}>
-                <Link href="/sign-in" className={css.navBtnLink}>Вхід</Link>
-                <Link href="/sign-up" className={css.navBtnLink}>Реєстрація</Link>
-              </div>
-            ) : (
-              <Link href="/stories/create" className={css.navBtnLink}>
-                Опублікувати історію
-              </Link>
-            )}
+            <Link 
+              href={isLoggedIn ? "/stories/create" : "/sign-in"} 
+              className={css.navBtnLink}
+            >
+              Опублікувати історію
+            </Link>
           </div>
 
           {/* ДЕСКТОП (1440px+): AuthNavigation */}
@@ -130,7 +127,23 @@ export default function Header({ isHome = false }: HeaderProps) {
             <AuthNavigation mode="desktop" isLoggedIn={isLoggedIn} />
           </div>
 
-          {/* ТЕМА (всегда видно) */}
+          {/* МОБІЛЬНА (до 767px): ТІЛЬКИ БУРГЕР */}
+          <div className={css.mobileBurgerOnly}>
+            <button 
+              type="button"
+              className={css.burgerButton} 
+              onClick={toggleMenu}
+              aria-label="Відкрити меню"
+            >
+              <div className={css.burgerLines}>
+                <span></span>
+                <span></span>
+                <span></span>
+              </div>
+            </button>
+          </div>
+
+          {/* ТЕМА (всі екрани) */}
           <button 
             type="button"
             className={css.themeToggle} 
@@ -138,20 +151,6 @@ export default function Header({ isHome = false }: HeaderProps) {
             aria-label="Змінити тему"
           >
             {theme === 'dark' ? '🌞' : '🌙'}
-          </button>
-
-          {/* БУРГЕР (tablet + mobile) */}
-          <button 
-            type="button"
-            className={css.burgerButton} 
-            onClick={toggleMenu}
-            aria-label="Відкрити меню"
-          >
-            <div className={css.burgerLines}>
-              <span></span>
-              <span></span>
-              <span></span>
-            </div>
           </button>
         </div>
 
