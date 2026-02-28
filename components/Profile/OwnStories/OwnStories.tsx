@@ -11,6 +11,7 @@ const OwnStories = ({ stories, page }: SavedStoriesProps) => {
                     stories.map((story) => (
                         <StoryCard storyInf={story} />
                     )) : page === "profile" ?
+
                     <div className={css.div}>
                         <h2 className={css.title}>Ви ще нічого не публікували, поділіться своєю першою історією!</h2>
                         <Link href="/stories/create" className={css.btn}>Опублікувати історію</Link>
