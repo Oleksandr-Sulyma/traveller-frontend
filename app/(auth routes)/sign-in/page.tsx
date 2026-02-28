@@ -5,6 +5,7 @@ import { useAuthStore } from '@/lib/store/authStore';
 import { useMutation } from '@tanstack/react-query';
 import { login } from '@/lib/api/clientApi';
 import { useRouter } from 'next/navigation';
+import css from './SignInPage.module.css';
 import { useId } from 'react';
 import Link from 'next/link';
 import * as Yup from 'yup';
@@ -32,7 +33,7 @@ export default function SignIn() {
   const id = useId();
 
   const { mutate, isPending } = useMutation({
-    mutationFn: (data: FormValues) => login(data),
+    mutationFn: login,
     onSuccess: user => {
       setUser(user);
       router.push('/profile');
@@ -49,24 +50,30 @@ export default function SignIn() {
     );
   };
   return (
-    <main>
-      <ul>
-        <li>
-          <Link href="/sign-in">Реєстраця</Link>
+    <div className={css.wrapper}>
+      <ul className={css.list}>
+        <li className={css.item}>
+          <Link className={`${css.link} "text-md"`} href="/sign-up">
+            Реєстраця
+          </Link>
         </li>
-        <li>
-          <Link href="/sign-in">Вхід</Link>
+        <li className={`${css.item} ${css.active}`}>
+          <Link className={`${css.link} "text-md"`} href="/sign-in">
+            Вхід
+          </Link>
         </li>
       </ul>
-      <h1>Вхід</h1>
-      <p>Вітаємо знову у спільноту мандрівників!</p>
+      <div>
+        <h1 className={`${css.center_text} ${css.mb_24}`}>Вхід</h1>
+        <p className={`${css.center_text} "text-main"`}>Вітаємо знову у спільноту мандрівників!</p>
+      </div>
       <Formik
         validationSchema={loginSchema}
         initialValues={initialValues}
         onSubmit={handleSubmit}
       >
-        <Form>
-          <div>
+        <Form className={css.form}>
+          <div className="input-group input-type">
             <label htmlFor={`${id}-email`}>Пошта*</label>
             <Field
               className="input"
@@ -75,10 +82,10 @@ export default function SignIn() {
               name="email"
               placeholder="hello@podorozhnyky.ua"
             />
-            <ErrorMessage component="span" name="email" />
+            <ErrorMessage className="error-text" component="span" name="email" />
           </div>
 
-          <div>
+          <div className="input-group input-type">
             <label htmlFor={`${id}-password`}>Пароль*</label>
             <Field
               className="input"
@@ -87,16 +94,16 @@ export default function SignIn() {
               name="password"
               placeholder="********"
             />
-            <ErrorMessage component="span" name="password" />
+            <ErrorMessage className="error-text" component="span" name="password" />
           </div>
 
           <div>
-            <button className="button-primary" type="submit">
+            <button className="btn btn-primary" style={{ height: '44px', width: '100% ' }}>
               {isPending ? 'Здійснюється вхід...' : 'Увійти'}
             </button>
           </div>
         </Form>
       </Formik>
-    </main>
+    </div>
   );
 }

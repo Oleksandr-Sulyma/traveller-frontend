@@ -51,6 +51,12 @@ export async function deleteStory(id: string): Promise<Story> {
 }
 
 export interface RegisterRequest {
+  name: string;
+  email: string;
+  password: string;
+}
+
+export interface LoginRequest {
   email: string;
   password: string;
 }
@@ -65,7 +71,7 @@ export async function register(data: RegisterRequest) {
   return res.data;
 }
 
-export async function login(data: RegisterRequest) {
+export async function login(data: LoginRequest) {
   const res = await nextServer.post<User>('/auth/login', data);
   return res.data;
 }
