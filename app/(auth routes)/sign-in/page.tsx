@@ -55,15 +55,17 @@ export default function SignIn() {
           <Link href="/sign-in">Вхід</Link>
         </li>
       </ul>
-      <h1>Вхід</h1>
-      <p>Вітаємо знову у спільноту мандрівників!</p>
+      <div>
+        <h1>Вхід</h1>
+        <p>Вітаємо знову у спільноту мандрівників!</p>
+      </div>
       <Formik
         validationSchema={RegisterSchema}
         initialValues={initialValues}
         onSubmit={handleSubmit}
       >
         <Form>
-          <div>
+          <div className="input-group input-type">
             <label htmlFor={`${id}-email`}>Пошта*</label>
             <Field
               className="input"
@@ -72,10 +74,10 @@ export default function SignIn() {
               name="email"
               placeholder="hello@podorozhnyky.ua"
             />
-            <ErrorMessage component="span" name="email" />
+            <ErrorMessage className="error-text" component="span" name="email" />
           </div>
 
-          <div>
+          <div className="input-group input-type">
             <label htmlFor={`${id}-password`}>Пароль*</label>
             <Field
               className="input"
@@ -84,7 +86,7 @@ export default function SignIn() {
               name="password"
               placeholder="********"
             />
-            <ErrorMessage component="span" name="password" />
+            <ErrorMessage className="error-text" component="span" name="password" />
           </div>
 
           <div>

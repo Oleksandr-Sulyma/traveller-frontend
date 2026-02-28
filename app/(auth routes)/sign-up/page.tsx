@@ -62,66 +62,80 @@ export default function SignUp() {
     );
   };
   return (
-    <main className={css.center}>
-      <ul>
-        <li>
-          <Link href="/sign-in">Реєстраця</Link>
-        </li>
-        <li>
-          <Link href="/sign-in">Вхід</Link>
-        </li>
-      </ul>
-      <h1>Реєстрація</h1>
-      <p>Раді вас бачити у спільноті мандрівників!</p>
-      <Formik
-        validationSchema={RegisterSchema}
-        initialValues={initialValues}
-        onSubmit={handleSubmit}
-      >
-        <Form className={css.form}>
-          <div className={css.formGroup}>
-            <label htmlFor={`${id}-username`}>Імʼя та Прізвище*</label>
-            <Field
-              className="input"
-              id={`${id}-username`}
-              type="text"
-              name="username"
-              placeholder="Ваше імʼя та прізвище"
-            />
-            <ErrorMessage component="span" name="username" />
-          </div>
+    <main>
+      <div className={css.wrapper}>
+        <ul className={`${css.list}`}>
+          <li className={`${css.item} ${css.active}`}>
+            <Link className={`${css.link} "text-md"`} href="/sign-up">
+              Реєстраця
+            </Link>
+          </li>
+          <li className={css.item}>
+            <Link className={`${css.link} "text-md"`} href="/sign-in">
+              Вхід
+            </Link>
+          </li>
+        </ul>
+        <div>
+          <h1 className={`${css.center_text} ${css.mb_24}`}>Реєстрація</h1>
+          <p className={`${css.center_text} "text-main"`}>
+            Раді вас бачити у спільноті мандрівників!
+          </p>
+        </div>
+        <Formik
+          validationSchema={RegisterSchema}
+          initialValues={initialValues}
+          onSubmit={handleSubmit}
+        >
+          <Form className={css.form}>
+            <div className="input-group input-type">
+              <label htmlFor={`${id}-username`}>Імʼя та Прізвище*</label>
+              <Field
+                className="input"
+                id={`${id}-username`}
+                type="text"
+                name="username"
+                placeholder="Ваше імʼя та прізвище"
+              />
+              <ErrorMessage className="error-text" component="span" name="username" />
+            </div>
 
-          <div className={css.formGroup}>
-            <label htmlFor={`${id}-email`}>Пошта*</label>
-            <Field
-              className="input"
-              id={`${id}-email`}
-              type="email"
-              name="email"
-              placeholder="hello@podorozhnyky.ua"
-            />
-            <ErrorMessage component="span" name="email" />
-          </div>
+            <div className="input-group input-type">
+              <label htmlFor={`${id}-email`}>Пошта*</label>
+              <Field
+                className="input"
+                id={`${id}-email`}
+                type="email"
+                name="email"
+                placeholder="hello@podorozhnyky.ua"
+              />
+              <ErrorMessage className="error-text" component="span" name="email" />
+            </div>
 
-          <div className={css.formGroup}>
-            <label htmlFor={`${id}-password`}>Пароль*</label>
-            <Field
-              className="input"
-              id={`${id}-password`}
-              type="password"
-              name="password"
-              placeholder="********"
-            />
-            <ErrorMessage component="span" name="password" />
-          </div>
+            <div className="input-group input-type">
+              <label htmlFor={`${id}-password`}>Пароль*</label>
+              <Field
+                className="input"
+                id={`${id}-password`}
+                type="password"
+                name="password"
+                placeholder="********"
+              />
+              <ErrorMessage className="error-text" component="span" name="password" />
+            </div>
 
-          <div>
-            <button className="button-primary" type="submit">
-              {isPending ? 'Реєструємо...' : 'Зареєструватись'}
-            </button>
-          </div>
-        </Form>
-      </Formik>
+            <div>
+              <button
+                className="btn btn-primary"
+                style={{ height: '44px', width: '100% ' }}
+                type="submit"
+              >
+                {isPending ? 'Реєструємо...' : 'Зареєструватись'}
+              </button>
+            </div>
+          </Form>
+        </Formik>
+      </div>
     </main>
   );
 }
