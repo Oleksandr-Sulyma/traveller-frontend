@@ -10,10 +10,10 @@
   flex-direction: column;
   gap: 24px;
 }
-@media (max-width: 767px) {
-  .positionUlButton > a {
-    display: none;
-  }
+@media (max-width: 768px) {
+.positionUlButton > a {
+  display: none;
+}
 }
 /**=================================768px===================================*/
 
