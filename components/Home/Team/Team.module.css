@@ -11,9 +11,9 @@
   gap: 24px;
 }
 @media (max-width: 768px) {
-.positionUlButton > a {
-  display: none;
-}
+  .positionUlButton > a {
+    display: none;
+  }
 }
 /**=================================768px===================================*/
 
@@ -26,10 +26,6 @@
     flex-direction: column;
     gap: 48px;
     align-items: center;
-    button {
-      font-size: 16px;
-      display: inline-block;
-    }
   }
   .wrapperUl {
     flex-direction: row;
@@ -48,10 +44,5 @@
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
-  }
-  .positionUlButton {
-    button {
-      font-size: 18px;
-    }
   }
 }
