@@ -3,6 +3,19 @@ import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 import type { Story } from '../../types/story';
 
+export interface Story {
+  _id: string;
+  title: string;
+  article: string;
+  img: string;
+  category: { _id: string; name: string };
+  ownerId: { _id: string; name: string; avatarUrl?: string };
+  date: string;
+  favoriteCount: number;
+  createdAt?: string;
+  updatedAt?: string;
+}
+
 interface StoryCardProps extends Pick<
   Story,
   '_id' | 'title' | 'article' | 'img' | 'category' | 'ownerId' | 'date' | 'favoriteCount'
@@ -83,12 +96,12 @@ export default function StoryCard({
           <div className={styles.story_card_author_info}>
             <div className={styles.story_card_author}>
               <img
-                src={ownerId.avatarUrl}
-                alt={ownerId.name}
+                src={ownerId?.avatarUrl}
+                alt={ownerId?.name}
                 className={styles.story_card_author_avatar}
               />
               <div className={styles.story_card_author_text_block}>
-                <span className={styles.story_card_author_name}>{ownerId.name}</span>
+                <span className={styles.story_card_author_name}>{ownerId?.name}</span>
                 <div className={styles.story_card_author_data_block}>
                   <span className={styles.story_card_date}>{formatDate(date)}</span>
                   <span className={styles.story_card_separator}>●</span>
