@@ -18,7 +18,6 @@ import { ImageUpload, type ImageUploadValue } from './ImageUpload';
 import { useCategories } from '@/lib/hooks/useCategories';
 
 
-
 interface StoryFormValues {
   title: string;
   article: string;

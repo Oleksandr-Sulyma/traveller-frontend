@@ -1,4 +1,3 @@
-import { title } from 'process';
 import styles from './Hero.module.css';
 import Image from 'next/image';
 import Link from 'next/link';
