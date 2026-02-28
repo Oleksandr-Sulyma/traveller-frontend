@@ -7,5 +7,6 @@ export interface TravellerInfoProps {
 }
 
 export interface SavedStoriesProps {
-    stories: Story[];
+    stories: Story[],
+    page: "profile" | "user"
 }
