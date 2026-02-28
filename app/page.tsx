@@ -1,8 +1,6 @@
 import Hero from '@/components/Home/Hero/Hero';
 // import LatestStories from '@/components/Home/Blog/LatestStories';
 // import TopTravellers from '@/components/Home/Team/TopTravellers';
-// import Cta from '@/components/Home/Cta/Cta';
-
 import Blog from '@/components/Home/Blog/Blog';
 import Layout from '@/components/Home/Layouts/Layout';
 import Team from '@/components/Home/Team/Team';
