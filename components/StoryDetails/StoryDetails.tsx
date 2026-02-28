@@ -17,10 +17,10 @@ export default function StoryDetails({ story }: StoryDetailsProps) {
     const queryClient = useQueryClient();
 
     const { mutate, isPending } = useMutation({
-        mutationFn: () => addToSave(story._id),
+        mutationFn: () => addToSave(story.id),
         onSuccess: () => {
             toast.success("Історію збережено у вашому профілі!");
-            queryClient.invalidateQueries({ queryKey: ["story", story._id] });
+            queryClient.invalidateQueries({ queryKey: ["story", story.id] });
         },
         onError: (error: any) => {
             const status = error.response?.status;
@@ -53,7 +53,7 @@ export default function StoryDetails({ story }: StoryDetailsProps) {
                         <div className={css.metaItem}>
                             <span className={css.label}>Автор статті: </span>
                             <span className={css.value}>
-                                {story.ownerId.name}
+                                {story.owner.name}
                             </span>
                         </div>
                         <div className={css.metaItem}>
