@@ -51,7 +51,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       <body suppressHydrationWarning>
         <ThemeProvider>
           <TanStackProvider>
-            <HeaderWrapper />
+            <HeaderWrapper hideOn={['/sign-up', '/sign-in']} />
             <MainContent>{children}</MainContent>
 
             <FooterWrapper hideOn={['/sign-up', '/sign-in']} />
