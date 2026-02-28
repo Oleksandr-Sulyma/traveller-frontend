@@ -8,4 +8,5 @@ export interface TravellerInfoProps {
 
 export interface SavedStoriesProps {
     stories: Story[];
+    page: string
 }
