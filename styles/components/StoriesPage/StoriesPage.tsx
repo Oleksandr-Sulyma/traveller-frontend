@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
-import Tabs from '../../Tabs/Tabs';
-import SavedStoriesList from '../../SavedStoriesList/SavedStoriesList';
-import MyStoriesList from '../../MyStoriesList/MyStoriesList';
+import Tabs from '../Tabs/Tabs';
+import SavedStoriesList from '../SavedStoriesList/SavedStoriesList';
+import MyStoriesList from '../MyStoriesList/MyStoriesList';
 
 const StoriesPage = () => {
   // Використовуємо 'state1' як початкове значення (відповідає "Збережені історії")

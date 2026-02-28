@@ -1,8 +1,8 @@
 .grid {
   display: grid;
-  gap: 24px; /* Однаковий gap по вертикалі та горизонталі */
+  gap: 24px; 
   width: 100%;
-  justify-content: center; /* Центрує сітку, якщо контейнер ширший за колонки */
+  justify-content: center;
   list-style: none;
   padding: 0;
   margin: 0;
