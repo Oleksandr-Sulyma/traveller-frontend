@@ -9,7 +9,7 @@ const OwnStories = ({ stories, page }: SavedStoriesProps) => {
             <div className="container">
                 {stories.length != 0 ?
                     stories.map((story) => (
-                        <StoryCard storyInf={story} />
+                        <StoryCard key={story.id} storyInf={story} />
                     )) : page === "profile" ?
 
                     <div className={css.div}>
