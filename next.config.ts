@@ -7,6 +7,7 @@ const nextConfig: NextConfig = {
         source: '/api/:path*',
         destination: 'http://localhost:5000/:path*', 
       },
+
     ];
   },
   images: {
@@ -14,6 +15,11 @@ const nextConfig: NextConfig = {
       {
         protocol: 'https',
         hostname: 'res.cloudinary.com',
+        pathname: '/**', 
+      },
+      {
+        protocol: 'https',
+        hostname: 'ftp.goit.study',
         pathname: '/**', 
       },
     ],
