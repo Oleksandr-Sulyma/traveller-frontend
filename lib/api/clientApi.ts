@@ -1,6 +1,7 @@
-import { User } from "@/types/user";
-import nextServer from "./api";
-import { Story } from "@/types/story";
+import { User } from '@/types/user';
+import nextServer from './api';
+import { Story, StoryPost } from '@/types/story';
+import { Category } from '@/types/category';
 
 export interface StoryHttpResponse {
   stories: Story[];
@@ -9,9 +10,9 @@ export interface StoryHttpResponse {
 
 export default async function fetchStories(
   query: string,
-  page: number,
+  page: number
 ): Promise<StoryHttpResponse> {
-  const response = await nextServer.get<StoryHttpResponse>("/stories", {
+  const response = await nextServer.get<StoryHttpResponse>('/stories', {
     params: {
       search: query,
       page,
@@ -27,18 +28,19 @@ export async function fetchStoryById(id: string): Promise<Story> {
   return responseById.data;
 }
 
-export interface CreateStoryPost {
-  title: string;
-  article: string;
-}
+export async function createStory(input: StoryPost): Promise<Story> {
+  const formData = new FormData();
+  formData.append('title', input.title);
+  formData.append('article', input.article);
+  formData.append('category', input.category);
+  formData.append('img', input.img as any);
 
-export async function createStory({
-  title,
-  article,
-}: CreateStoryPost): Promise<Story> {
-  const postResponse = await nextServer.post<Story>("/stories", {
-    title,
-    article,
+  const postResponse = await nextServer.post<Story>('/stories', formData, {
+    withCredentials: true,
+    headers: {
+      // не указываем Content-Type, браузер сам выставит boundary
+      authorization: '4JPnXgAiLAaCNQzOnf0tOz37/gznEAU3yhppTISm',
+    },
   });
   return postResponse.data;
 }
@@ -59,17 +61,17 @@ export interface RegisterRequest {
 // }
 
 export async function register(data: RegisterRequest) {
-  const res = await nextServer.post<User>("/auth/register", data);
+  const res = await nextServer.post<User>('/auth/register', data);
   return res.data;
 }
 
 export async function login(data: RegisterRequest) {
-  const res = await nextServer.post<User>("/auth/login", data);
+  const res = await nextServer.post<User>('/auth/login', data);
   return res.data;
 }
 
 export const logout = async (): Promise<void> => {
-  await nextServer.post("/auth/logout");
+  await nextServer.post('/auth/logout');
 };
 
 interface CheckSessionRequest {
@@ -77,12 +79,12 @@ interface CheckSessionRequest {
 }
 
 export async function checkSession() {
-  const res = await nextServer.get<CheckSessionRequest>("/auth/session");
+  const res = await nextServer.get<CheckSessionRequest>('/auth/session');
   return res.data.success;
 }
 
 export const getMe = async () => {
-  const res = await nextServer.get<User>("/users/me");
+  const res = await nextServer.get<User>('/users/me');
   return res.data;
 };
 
@@ -91,6 +93,11 @@ export interface UpdateUserRequest {
 }
 
 export const updateMe = async (payload: UpdateUserRequest) => {
-  const res = await nextServer.patch<User>("/users/me", payload);
+  const res = await nextServer.patch<User>('/users/me', payload);
+  return res.data;
+};
+
+export const fetchCategories = async (): Promise<Array<Category>> => {
+  const res = await nextServer.get<Array<Category>>('/categories');
   return res.data;
 };

@@ -1,15 +1,19 @@
-import { User } from "./user";
-import { Category } from "./category"; 
-
 export interface Story {
-    _id: string;
-    title: string;
-    article: string;
-    img: string; 
-    category: Category;
-    ownerId: Pick<User, '_id' | 'name'> & Partial<Pick<User, 'avatarUrl'>>;
-    date: string;      
-    favoriteCount: number;
-    createdAt: string;
-    updatedAt: string;
-  }
+  id: string;
+  title: string;
+  article: string;
+  img: string; // URL/path returned from backend
+  category: string;
+  ownerId: string;
+  date: string;
+  favoriteCount: number;
+  createdAt: string;
+  updatedAt: string;
+}
+
+export type StoryPost = {
+  title: string;
+  article: string;
+  category: string;
+  img: File; // file that we send via multipart/form-data
+};
