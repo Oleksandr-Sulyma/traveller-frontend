@@ -6,7 +6,7 @@ import type { Story } from '../../types/story';
 
 interface StoryCardProps extends Pick<
   Story,
-  '_id' | 'title' | 'article' | 'img' | 'category' | 'ownerId' | 'date' | 'favoriteCount'
+  'id' | 'title' | 'article' | 'img' | 'category' | 'owner' | 'date' | 'favoriteCount'
 > {
   buttonText?: string;
 }
@@ -18,12 +18,12 @@ function formatDate(dateStr: string): string {
 }
 
 export default function StoryCard({
-  _id,
+  id,
   title,
   article,
   img,
   category,
-  ownerId,
+  owner,
   date,
   favoriteCount,
   buttonText = 'Переглянути статтю',
@@ -62,7 +62,7 @@ export default function StoryCard({
       setIsSaving(false);
       return;
     }
-    const ok = await saveStory(_id);
+    const ok = await saveStory(id);
     if (ok) setSaved(true);
     setIsSaving(false);
   };
@@ -80,12 +80,12 @@ export default function StoryCard({
           <div className={styles.story_card_author_info}>
             <div className={styles.story_card_author}>
               <img
-                src={ownerId.avatarUrl}
-                alt={ownerId.name}
+                src={owner.avatarUrl}
+                alt={owner.name}
                 className={styles.story_card_author_avatar}
               />
               <div className={styles.story_card_author_text_block}>
-                <span className={styles.story_card_author_name}>{ownerId.name}</span>
+                <span className={styles.story_card_author_name}>{owner.name}</span>
                 <div className={styles.story_card_author_data_block}>
                   <span className={styles.story_card_date}>{formatDate(date)}</span>
                   <span className={styles.story_card_separator}>●</span>
@@ -100,7 +100,7 @@ export default function StoryCard({
             </div>
           </div>
           <div className={styles.story_card_footer}>
-            <Link href={`/stories/${_id}`}>
+            <Link href={`/stories/${id}`}>
               <button className={`btn btn-secondary ${styles.story_card_button}`} type="button">
                 {buttonText}
               </button>
