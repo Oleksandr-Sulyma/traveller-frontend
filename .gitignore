@@ -40,3 +40,4 @@ yarn-error.log*
 *.tsbuildinfo
 next-env.d.ts
 pullrequests-list.txt
+lib/api/api.ts

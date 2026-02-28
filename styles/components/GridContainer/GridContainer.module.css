@@ -1,0 +1,45 @@
+.grid {
+  display: grid;
+  gap: 24px; /* Однаковий gap по вертикалі та горизонталі */
+  width: 100%;
+  justify-content: center; /* Центрує сітку, якщо контейнер ширший за колонки */
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+/* Варіант для мандрівників: 1 -> 2 -> 4 колонки */
+.travellers {
+  grid-template-columns: repeat(1, minmax(0, 335px));
+}
+
+@media (min-width: 768px) {
+  .travellers {
+    grid-template-columns: repeat(2, minmax(0, 335px));
+    gap: 24px; 
+  }
+}
+
+@media (min-width: 1440px) {
+  .travellers {
+    grid-template-columns: repeat(4, minmax(0, 335px));
+    gap: 24px;
+  }
+}
+
+/* Варіант для історій (опціонально): 1 -> 2 -> 3 колонки */
+.stories {
+  grid-template-columns: repeat(1, minmax(0, 335px));
+}
+
+@media (min-width: 768px) {
+  .stories {
+    grid-template-columns: repeat(2, minmax(0, 335px));
+  }
+}
+
+@media (min-width: 1440px) {
+  .stories {
+    grid-template-columns: repeat(3, minmax(0, 421px));
+  }
+}
