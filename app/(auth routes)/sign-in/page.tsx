@@ -3,7 +3,7 @@
 import { ErrorMessage, Field, Form, Formik, FormikHelpers } from 'formik';
 import { useAuthStore } from '@/lib/store/authStore';
 import { useMutation } from '@tanstack/react-query';
-import { register } from '@/lib/api/clientApi';
+import { login } from '@/lib/api/clientApi';
 import { useRouter } from 'next/navigation';
 import { useId } from 'react';
 import Link from 'next/link';
@@ -16,7 +16,7 @@ interface FormValues {
 
 const initialValues: FormValues = { email: '', password: '' };
 
-const RegisterSchema = Yup.object().shape({
+const loginSchema = Yup.object().shape({
   email: Yup.string()
     .trim()
     .lowercase()
@@ -32,11 +32,14 @@ export default function SignIn() {
   const id = useId();
 
   const { mutate, isPending } = useMutation({
-    mutationFn: (data: FormValues) => register(data),
+    mutationFn: (data: FormValues) => login(data),
     onSuccess: user => {
       setUser(user);
       router.push('/profile');
     },
+    onError: (error: any) => {
+      console.error("Login failed:", error.response?.data || error.message);
+    }
   });
 
   const handleSubmit = (values: FormValues, actions: FormikHelpers<FormValues>) => {
@@ -58,7 +61,7 @@ export default function SignIn() {
       <h1>Вхід</h1>
       <p>Вітаємо знову у спільноту мандрівників!</p>
       <Formik
-        validationSchema={RegisterSchema}
+        validationSchema={loginSchema}
         initialValues={initialValues}
         onSubmit={handleSubmit}
       >

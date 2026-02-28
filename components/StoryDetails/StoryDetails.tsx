@@ -15,22 +15,22 @@ interface StoryDetailsProps {
 export default function StoryDetails({ story }: StoryDetailsProps) {
     const [isAuthModalOpen, setIsAuthModalOpen] = useState(false);
     const queryClient = useQueryClient();
-    
+
     const { mutate, isPending } = useMutation({
         mutationFn: () => addToSave(story._id),
         onSuccess: () => {
-          toast.success("Історію збережено у вашому профілі!");
-          queryClient.invalidateQueries({ queryKey: ["story", story._id] });
+            toast.success("Історію збережено у вашому профілі!");
+            queryClient.invalidateQueries({ queryKey: ["story", story._id] });
         },
         onError: (error: any) => {
             const status = error.response?.status;
-            
+
             if (status === 401) {
-              setIsAuthModalOpen(true);
+                setIsAuthModalOpen(true);
             } else if (status === 409) {
-              toast("Ця історія вже збережена", { icon: 'ℹ️' });
+                toast("Ця історія вже збережена", { icon: 'ℹ️' });
             } else {
-              toast.error(error.response?.data?.message || "Помилка збереження");
+                toast.error(error.response?.data?.message || "Помилка збереження");
             }
         }
     });
@@ -43,32 +43,32 @@ export default function StoryDetails({ story }: StoryDetailsProps) {
         mutate();
     };
 
-   
+
 
     return (
         <section className="section">
             <article className="container">
                 <div className={css.metaContainer}>
-                <div className={css.meta}>
-                    <div className={css.metaItem}>
-                        <span className={css.lebel}>Автор статті: </span>
-                        <span className={css.value}>
-                            {story.ownerId.name}
-                        </span>
-                    </div>
-                    <div className={css.metaItem}>
-                        <span className={css.lebel}>Опубліковано: </span>
-                        <span className={css.value}>
-                           
-                            {new Date(story.createdAt).toLocaleDateString()}
-                        </span>
-                    </div>
-                </div>
+                    <div className={css.meta}>
+                        <div className={css.metaItem}>
+                            <span className={css.label}>Автор статті: </span>
+                            <span className={css.value}>
+                                {story.ownerId.name}
+                            </span>
+                        </div>
+                        <div className={css.metaItem}>
+                            <span className={css.label}>Опубліковано: </span>
+                            <span className={css.value}>
 
-                {/* Категорія */}
-                <div className={css.categoryTag}>
-                    {story.category.name}
-                </div>
+                                {new Date(story.createdAt).toLocaleDateString()}
+                            </span>
+                        </div>
+                    </div>
+
+                    {/* Категорія */}
+                    <div className={css.categoryTag}>
+                        {story.category.name}
+                    </div>
                 </div>
                 {/* Головне зображення */}
                 <div className={css.imageWrapper}>
@@ -87,20 +87,20 @@ export default function StoryDetails({ story }: StoryDetailsProps) {
                     <p className={css.storyArticle}>
                         {story.article}
                     </p>
-                    
+
                     {/* Блок для додавання в Збережені */}
                     <div className={css.saveBox}>
                         <h3 className={css.sidebarTitle}>Збережіть собі історію</h3>
                         <p className={css.sidebarText}>
                             Вона буде доступна у вашому профілі у розділі збережене
                         </p>
-                        <button 
-                            onClick={handleSave} 
+                        <button
+                            onClick={handleSave}
                             disabled={isPending}
                             className={`btn btn-primary ${css.saveBtn}`}
                         >
                             {isPending ? "Зберігаємо..." : "Зберегти"}
-                        </button>  
+                        </button>
                     </div>
                 </aside>
             </article>

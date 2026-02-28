@@ -5,7 +5,7 @@
     align-items: flex-start;
     justify-content: center;
     gap:16px;
-    margin-bottom:16px;
+   
    
 }
 
@@ -14,7 +14,7 @@
 }
 
 
-.lebel {
+.label {
     font-family: var(--font-family);
     font-weight: 700;
     font-size: 16px;
@@ -34,11 +34,11 @@ color: var(--color-scheme-2-text);
 /* Категорія */
 .categoryTag {
     border: 1px solid var(--opacity-transparent);
-border-radius: 6px;
-padding: 4px 10px;
-max-width: 76px;
-background: var(--opacity-neutral-darkest-5);
-text-align:center;
+   border-radius: 6px;
+   padding: 4px 10px;
+   
+   background: var(--opacity-neutral-darkest-5);
+   text-align:center;
  
 }
 
@@ -46,6 +46,7 @@ text-align:center;
     
    width: 100%;
    height: auto;
+   margin: 0 auto 32px;
 
 }
 
@@ -102,7 +103,7 @@ margin-bottom:16px
     height: 48px;
 }
 
-/* --- Tablet & Desktop (768px+) --- */
+/* --- Tablet  (768px+) --- */
 @media (min-width: 768px) {
     .meta {
         flex-direction: row;
@@ -124,7 +125,32 @@ margin-bottom:16px
     .saveBox{
          padding: 32px;
          max-width:418px;
-        /* move the box right */
+        margin:0
+    }
+    .saveBtn{
+        max-width: 345px;
+    }
+ @media (min-width: 1440px) {
+       .meta{
+        margin-bottom: 21px;
+       }
+       .label{
+         font-size: 18px;
+       }
+       .value{
+        font-size:18px
+       }
+       .imageWrapper{
+        max-width: 1312px
+    }
+
+    .contentSide{
+        flex-direction: row;
+    }
+    .storyArticle{
+        padding:48px 64px
+    }
+
     }
 
 
