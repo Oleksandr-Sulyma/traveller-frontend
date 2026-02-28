@@ -7,10 +7,11 @@ import toast from 'react-hot-toast';
 import { Formik, Form, Field } from 'formik';
 import * as Yup from 'yup';
 
+import Loader from '@/components/Loader/Loader';
 import type { StoryPost } from '@/types/story';
 import { createStory } from '@/lib/api/clientApi';
 import { useStoryDraftStore } from '@/lib/store/storyStore';
-
+import ModalLayout from '@/components/ModalLayout/ModalLayout';
 import css from './StoryForm.module.css';
 import { ImageUpload, type ImageUploadValue } from './ImageUpload';
 
@@ -44,9 +45,13 @@ export default function StoryForm() {
   const queryClient = useQueryClient();
   const router = useRouter();
 
+  const [isOpen, setIsOpen] = React.useState(false);
+
+  const handleOpen = () => setIsOpen(true);
+  const handleClose = () => setIsOpen(false);
   const { draft, setDraft, clearDraft } = useStoryDraftStore();
   const [coverImage, setCoverImage] = React.useState<ImageUploadValue | null>(null);
-  const { categories, isLoading, isError } = useCategories();
+  const { categories } = useCategories();
 
   const initialValues: StoryFormValues = {
     title: draft.title,
@@ -56,17 +61,20 @@ export default function StoryForm() {
   };
 
   const handleCancel = () => {
-    router.back();
+    clearDraft();
   };
 
 
   const { mutate: createStoryMutation, isPending } = useMutation({
     mutationFn: createStory,
-    onSuccess() {
+    onSuccess(data) {
       queryClient.invalidateQueries({ queryKey: ['stories'] });
+      router.push(`/stories/${data.id}`);
       clearDraft();
     },
     onError() {
+      console.error('Помилка при створенні історії');
+      setIsOpen(true);
       toast.error('Помилка при створенні історії');
     },
   });
@@ -86,7 +94,7 @@ export default function StoryForm() {
     setCoverImage(value);
     const imgPreview = value?.preview ?? '';
     setFieldValue('img', imgPreview);
-
+    
     setDraft({
       ...draft,
       img: (value?.file as any)!,
@@ -98,13 +106,6 @@ export default function StoryForm() {
       enableReinitialize
       initialValues={initialValues}
       validationSchema={validationSchema}
-      validate={values => {
-        const errors: Partial<Record<keyof StoryFormValues | 'img', string>> = {};
-        if (!coverImage) {
-          errors.img = 'Обкладинка історії є обов\'язковою';
-        }
-        return errors;
-      }}
       onSubmit={values => {
         if (!coverImage) {
           toast.error('Додайте обкладинку історії');
@@ -142,6 +143,16 @@ export default function StoryForm() {
         isSubmitting,
       }) => (
         <>
+          {isPending && <Loader className={css.loader} size={100} color="#ffffff"  />}
+           {isOpen && (
+            <ModalLayout
+              showButtons={false}
+              title="Помилка під час збереження"
+              onConfirm={() => setIsOpen(false)}
+              onCancel={handleCancel}
+              onClose={handleClose}
+            />
+          )}
           <h1>Створити нову історію</h1>
           <Form className={css.form}>
             <div className={css.coverRow}>
@@ -190,6 +201,10 @@ export default function StoryForm() {
                 className="input"
                 placeholder="Введіть заголовок історії"
                 maxLength={80}
+                onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) => {
+                  handleChange(e);
+                  setDraft({ ...draft, title: e.target.value });
+                }}
               />
               {touched.title && errors.title && (
                 <div className={css.error}>{errors.title}</div>
