@@ -6,7 +6,7 @@ import { Category } from '@/types/category';
 import { QueryParams, StoryHttpResponse } from './clientApi';
 
 /* =========================
-   HELPER
+HELPER
 ========================= */
 
 const getAuthHeaders = async () => {
@@ -18,7 +18,7 @@ const getAuthHeaders = async () => {
 };
 
 /* =========================
-   STORIES
+STORIES
 ========================= */
 
 export const fetchStories = async (params?: QueryParams): Promise<StoryHttpResponse> => {
@@ -57,7 +57,7 @@ export const getSavedStories = async (): Promise<Story[]> => {
 };
 
 /* =========================
-   USERS
+USERS
 ========================= */
 
 export const getMe = async (): Promise<User> => {
@@ -77,7 +77,7 @@ export const getUserById = async (id: string): Promise<User> => {
 };
 
 /* =========================
-   CATEGORIES
+CATEGORIES
 ========================= */
 
 export const fetchCategories = async (): Promise<Category[]> => {
@@ -89,7 +89,7 @@ export const fetchCategories = async (): Promise<Category[]> => {
 };
 
 /* =========================
-   SESSION CHECK
+SESSION CHECK
 ========================= */
 
 export const checkSession = async () => {
