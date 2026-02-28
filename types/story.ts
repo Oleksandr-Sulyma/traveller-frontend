@@ -17,3 +17,4 @@ export type StoryPost = {
   category: string;
   img: File; // file that we send via multipart/form-data
 };
+
