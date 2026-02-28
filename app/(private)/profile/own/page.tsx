@@ -5,7 +5,7 @@ import { Story } from "@/types/story"
 
 const Saved = () => {
     const [ownUserStories, setSavedUserStories] = useState<Story[]>([])
-    return (<OwnStories stories={ownUserStories} />)
+    return (<OwnStories stories={ownUserStories} page='profile' />)
 }
 
 export default Saved;

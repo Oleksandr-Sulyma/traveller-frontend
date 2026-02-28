@@ -8,7 +8,7 @@ const SavedStories = ({ stories }: SavedStoriesProps) => {
     <section>
       <div className="container">
         {stories.length != 0 ? (
-          stories.map(story => <StoryCard {...story} />)
+          stories.map(story => <StoryCard key={story.id} storyInf={story} />)
         ) : (
           <div className={css.div}>
             <h2 className={css.title}>
