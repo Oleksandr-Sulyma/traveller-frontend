@@ -26,7 +26,6 @@
     flex-direction: row;
     margin-bottom: 64px;
     gap: 24px;
-    font-weight: 700;
     & h2 {
       font-size: 44px;
       width: 340px;

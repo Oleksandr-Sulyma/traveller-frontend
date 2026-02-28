@@ -13,7 +13,7 @@
   background-color: var(--color-scheme-1-background);
   backdrop-filter: blur(8px);
   border-bottom: 1px solid var(--color-scheme-1-border);
-  transition: background-color var(--transition-fast), 
+  transition: background-color var(--transition-fast),
               border-color var(--transition-fast),
               backdrop-filter var(--transition-fast);
 }
@@ -30,6 +30,7 @@
   backdrop-filter: blur(8px);
 }
 
+/* КОНТЕЙНЕР */
 .container {
   display: flex;
   align-items: center;
@@ -42,7 +43,7 @@
   box-sizing: border-box;
 }
 
-/* ЛОГОТИП */
+/* ЛОГО */
 .logoLink {
   display: flex;
   align-items: center;
@@ -80,8 +81,8 @@
     display: flex;
     align-items: center;
     gap: 32px;
-    flex: 1;
-    justify-content: center;
+    margin-left: auto; /* ✅ прижимаем навигацию вправо */
+    margin-right: 24px; /* ✅ отступ перед кнопками входа и регистрации */
   }
 
   .navigationLink {
@@ -127,24 +128,35 @@
   transition: all var(--transition-fast);
 }
 
-/* ПЛАНШЕТ (768px - 1439px): ТОЛЬКО одна кнопка */
-.tabletAuthVisible {
-  display: none;
+/* 🔥 МОБІЛЬНА */
+@media (max-width: 767px) {
+  .container {
+    padding: 0 16px;
+  }
+
+  .logoText {
+    font-size: 18px;
+  }
+
+  .tabletAuthVisible,
+  .desktopAuthOnly,
+  .desktopNav {
+    display: none !important;
+  }
 }
 
+/* ПЛАНШЕТ */
 @media (min-width: 768px) and (max-width: 1439px) {
   .tabletAuthVisible {
     display: flex;
     align-items: center;
   }
 
-  /* Приховуємо desktop на планшеті */
   .desktopAuthOnly,
   .desktopNav {
     display: none !important;
   }
 
-  /* ПЛАНШЕТ: "Опублікувати історію" */
   .tabletAuthVisible .navBtnLink {
     background: #ffffff !important;
     color: #000000 !important;
@@ -159,9 +171,8 @@
   }
 }
 
-/* ДЕСКТОП (1440px+): Вхід/Реєстрація */
+/* ДЕСКТОП */
 @media (min-width: 1440px) {
-  /* Приховуємо планшет та бургер на десктопі */
   .tabletAuthVisible,
   .burgerButton {
     display: none !important;
@@ -173,7 +184,6 @@
     gap: 12px;
   }
 
-  /* ДЕСКТОП: Вхід — БІЛІ ЛІТЕРА, ПРОЗОРИЙ ФОН */
   .desktopAuthOnly .navBtnLink:first-child {
     background: transparent !important;
     color: var(--color-scheme-1-text) !important;
@@ -181,16 +191,10 @@
     font-weight: 500 !important;
   }
 
-  .isHome:not(.isScrolled) .desktopAuthOnly .navBtnLink:first-child {
-    color: var(--color-white) !important;
-    border-color: rgba(255, 255, 255, 0.6) !important;
-  }
-
   .desktopAuthOnly .navBtnLink:first-child:hover {
     background: rgba(255, 255, 255, 0.15) !important;
   }
 
-  /* ДЕСКТОП: Реєстрація — ЧОРНІ ЛІТЕРА, БІЛИЙ ФОН */
   .desktopAuthOnly .navBtnLink:nth-child(2) {
     background: #ffffff !important;
     color: #1a1a1a !important;
@@ -204,7 +208,7 @@
   }
 }
 
-/* ПЕРЕМИКАЧ ТЕМИ */
+/* ТЕМА */
 .themeToggle {
   width: 40px;
   height: 40px;
@@ -228,14 +232,14 @@
   background-color: var(--opacity-neutral-darkest-5);
 }
 
-/* БУРГЕР (планшет + мобільний) */
+/* БУРГЕР */
 .burgerButton {
   display: none;
 }
 
 @media (max-width: 1439px) {
   .burgerButton {
-    display: flex;
+    display: flex !important;
     flex-direction: column;
     justify-content: center;
     align-items: center;
@@ -277,16 +281,7 @@
   }
 }
 
-/* МОБІЛЬНА ВЕРСІЯ */
-@media (max-width: 767px) {
-  .container {
-    padding: 0 16px;
-  }
-  
-  .logoText {
-    font-size: 18px;
-  }
-}
+
 
  /* ===========================================
    ОСНОВНА СТРУКТУРА ХЕДЕРА
