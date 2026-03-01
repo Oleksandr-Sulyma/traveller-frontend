@@ -83,7 +83,7 @@ CATEGORIES
 export const fetchCategories = async (): Promise<Category[]> => {
   const headers = await getAuthHeaders();
 
-  const { data } = await nextServer.get('/', { headers });
+  const { data } = await nextServer.get('/categories', { headers });
 
   return data;
 };
