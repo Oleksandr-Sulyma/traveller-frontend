@@ -1,6 +1,6 @@
 'use client';
 
-import React from 'react';
+import React, { useEffect, useMemo } from 'react';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { useRouter } from 'next/navigation';
 import toast from 'react-hot-toast';
@@ -8,10 +8,9 @@ import { Formik, Form, Field } from 'formik';
 import * as Yup from 'yup';
 
 import Loader from '@/components/Loader/Loader';
-import type { StoryPost } from '@/types/story';
+
 import { createStory } from '@/lib/api/clientApi';
 import { useStoryDraftStore } from '@/lib/store/storyStore';
-import ModalLayout from '@/components/ModalLayout/ModalLayout';
 import css from './StoryForm.module.css';
 import { ImageUpload, type ImageUploadValue } from './ImageUpload';
 
@@ -33,24 +32,27 @@ const validationSchema = Yup.object({
   img: Yup.string().nullable(),
 });
 
-export default function StoryForm() {
+export default function AddStoryForm() {
   const queryClient = useQueryClient();
   const router = useRouter();
 
-  const [isOpen, setIsOpen] = React.useState(false);
-
-  const handleOpen = () => setIsOpen(true);
-  const handleClose = () => setIsOpen(false);
   const { draft, setDraft, clearDraft } = useStoryDraftStore();
   const [coverImage, setCoverImage] = React.useState<ImageUploadValue | null>(null);
   const { categories } = useCategories();
 
-  const initialValues: StoryFormValues = {
-    title: draft.title,
-    article: draft.article,
-    category: draft.category as unknown as string,
-    img: '',
-  };
+  const initialValues = useMemo<StoryFormValues>(
+    () => ({
+      title: '',
+      article: '',
+      category: '',
+      img: '',
+    }),
+    []
+  );
+
+  useEffect(() => {
+    clearDraft();
+  }, [clearDraft]);
 
   const handleCancel = () => {
     clearDraft();
@@ -60,12 +62,11 @@ export default function StoryForm() {
     mutationFn: createStory,
     onSuccess(data) {
       queryClient.invalidateQueries({ queryKey: ['stories'] });
-      router.push(`/stories/${data.id}`);
+      toast.success('Історія успішно створена');
       clearDraft();
+      router.push(`/stories/${data.id}`);
     },
     onError() {
-      console.error('Помилка при створенні історії');
-      setIsOpen(true);
       toast.error('Помилка при створенні історії');
     },
   });
@@ -94,7 +95,6 @@ export default function StoryForm() {
 
   return (
     <Formik
-      enableReinitialize
       initialValues={initialValues}
       validationSchema={validationSchema}
       onSubmit={values => {
@@ -111,30 +111,17 @@ export default function StoryForm() {
           img: coverImage.file as any,
         });
 
-        const payload: StoryPost = {
+        createStoryMutation({
           title: values.title,
           article: values.article,
           category: values.category,
           img: coverImage.file,
-        };
-
-        console.log('Submitting story with payload:', payload);
-
-        createStoryMutation(payload);
+        });
       }}
     >
       {({ values, handleChange, setFieldValue, errors, touched, isValid, isSubmitting }) => (
         <>
           {isPending && <Loader className={css.loader} size={100} color="#ffffff" />}
-          {isOpen && (
-            <ModalLayout
-              showButtons={false}
-              title="Помилка під час збереження"
-              onConfirm={() => setIsOpen(false)}
-              onCancel={handleCancel}
-              onClose={handleClose}
-            />
-          )}
           <h1 className={css.title}>Створити нову історію</h1>
           <Form className={css.form}>
             <div className={css.coverRow}>

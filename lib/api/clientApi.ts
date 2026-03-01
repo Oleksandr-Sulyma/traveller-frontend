@@ -37,8 +37,14 @@ export const createStory = async (input: StoryPost): Promise<Story> => {
   return data;
 };
 
-export const updateStory = async (storyId: string, payload: Partial<StoryPost>): Promise<Story> => {
-  const { data } = await nextServer.patch(`/stories/${storyId}`, payload);
+export const updateStory = async (storyId: string, input: Partial<StoryPost>): Promise<Story> => {
+  const formData = new FormData();
+  if (input.title != null) formData.append('title', input.title);
+  if (input.article != null) formData.append('article', input.article);
+  if (input.category != null) formData.append('category', input.category);
+  if (input.img != null) formData.append('img', input.img);
+
+  const { data } = await nextServer.patch(`/stories/${storyId}`, formData);
   return data;
 };
 
