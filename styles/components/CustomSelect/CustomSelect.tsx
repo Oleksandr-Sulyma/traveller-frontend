@@ -5,15 +5,15 @@ import { Category } from '@/types/category';
 
 
 export const CATEGORIES_LIST: Category[] = [
-  { _id: 'asia', name: 'Азія' },
-  { _id: 'mountains', name: 'Гори' },
-  { _id: 'europe', name: 'Європа' },
-  { _id: 'america', name: 'Америка' },
-  { _id: 'africa', name: 'Африка' },
-  { _id: 'deserts', name: 'Пустелі' },
-  { _id: 'balkans', name: 'Балкани' },
-  { _id: 'caucasus', name: 'Кавказ' },
-  { _id: 'oceania', name: 'Океанія' }
+  { id: 'asia', name: 'Азія' },
+  { id: 'mountains', name: 'Гори' },
+  { id: 'europe', name: 'Європа' },
+  { id: 'america', name: 'Америка' },
+  { id: 'africa', name: 'Африка' },
+  { id: 'deserts', name: 'Пустелі' },
+  { id: 'balkans', name: 'Балкани' },
+  { id: 'caucasus', name: 'Кавказ' },
+  { id: 'oceania', name: 'Океанія' }
 ];
 
 interface CustomSelectProps {
@@ -112,7 +112,7 @@ const CustomSelect: React.FC<CustomSelectProps> = ({
           }}>
             {categories.map((category) => (
               <div 
-                key={category._id} 
+                key={category.id} 
                 className="select-item"
                 onClick={() => handleSelect(category)}
                 style={{

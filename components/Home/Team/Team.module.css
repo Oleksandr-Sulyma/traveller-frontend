@@ -1,15 +1,7 @@
 .wrapper {
   padding: 64px 0;
-}
-.positionH2Svg {
-  display: flex;
-  gap: 8px;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 48px;
-  & button {
-    width: 48px;
-    height: 48px;
+  h2 {
+    margin-bottom: 48px;
   }
 }
 .wrapperUl {
@@ -17,58 +9,31 @@
   display: flex;
   flex-direction: column;
   gap: 24px;
-  & li {
-    background-color: aqua;
-    border-radius: 16px;
-    max-width: 335px;
-    height: 363px;
+}
+@media (max-width: 768px) {
+  .positionUlButton > a {
+    display: none;
   }
 }
-.positionUlButton button {
-  display: none;
-}
-
 /**=================================768px===================================*/
 
 @media (min-width: 768px) {
   .wrapper {
     padding: 64px 0;
   }
-  .positionH2Svg {
-    display: flex;
-    gap: 8px;
-    align-items: center;
-    margin-bottom: 48px;
-    & button {
-      display: none;
-    }
-  }
   .positionUlButton {
     display: flex;
     flex-direction: column;
     gap: 48px;
     align-items: center;
-    button {
-      font-size: 16px;
-      width: 147px;
-      display: inline-block;
-    }
   }
   .wrapperUl {
     flex-direction: row;
     flex-wrap: wrap;
     gap: 24px;
     justify-content: space-between;
-
-    & li {
-      background-color: aqua;
-      border-radius: 16px;
-      height: 363px;
-      width: 100%;
-    }
   }
 }
-
 /**===================================1440px================================*/
 
 @media (min-width: 1440px) {
@@ -77,21 +42,7 @@
   }
   .wrapperUl {
     display: flex;
-    flex-direction: row;
-    flex-wrap: nowrap;
+    flex-wrap: wrap;
     justify-content: space-between;
-
-    & li {
-      background-color: aqua;
-      border-radius: 16px;
-      height: 384px;
-      width: 100%;
-    }
-  }
-  .positionUlButton {
-    button {
-      font-size: 18px;
-      width: 173px;
-    }
   }
 }

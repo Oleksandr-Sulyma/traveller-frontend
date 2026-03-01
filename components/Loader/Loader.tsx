@@ -1,9 +1,15 @@
 'use client';
 import { Oval } from 'react-loader-spinner';
 
-export default function Loader({ size = 40, color = '#4F6EDB' }) {
+type LoaderProps = {
+  size?: number;
+  color?: string;
+  className?: string;
+};
+
+export default function Loader({ size = 40, color = '#4F6EDB', className }: LoaderProps) {
   return (
-    <div style={{ display: 'flex', justifyContent: 'center' }}>
+    <div style={{ display: 'flex', justifyContent: 'center' }} className={className}>
       <Oval
         height={size}
         width={size}

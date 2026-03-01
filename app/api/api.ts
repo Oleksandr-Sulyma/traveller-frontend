@@ -3,6 +3,6 @@
 import axios from 'axios';
 
 export const api = axios.create({
-  baseURL: 'traveller-backend-lia1.onrender.com',
+  baseURL: 'traveller-frontend-one.vercel.app',
   withCredentials: true,
 });

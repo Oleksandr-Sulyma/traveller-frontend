@@ -104,6 +104,30 @@ h4 { font-size: 26px; }
 .upload-text { font-size: 18px; }
 }
 
+/* Глобальний клас для заголовків на темному фоні/картинках */
+.section-title-light {
+  font-family: "Inter", sans-serif;
+  font-weight: 700;
+  font-size: 26px; /* Моб - 26px */
+  line-height: 1.2;
+  letter-spacing: -0.01em;
+  color: #ffffff !important; /* Завжди білий */
+}
+
+/* TABLET (768px) */
+@media (min-width: 768px) {
+  .section-title-light {
+    font-size: 32px; /* Планшет - 32px */
+  }
+}
+
+/* DESKTOP (1440px) */
+@media (min-width: 1440px) {
+  .section-title-light {
+    font-size: 48px; /* ПК - 48px */
+  }
+}
+
 /* DARK THEME */
 [data-theme='dark'] {
 body { color: var(--color-white); }

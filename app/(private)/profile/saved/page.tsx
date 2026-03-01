@@ -4,7 +4,7 @@ import { useState } from "react"
 
 const Saved = () => {
     const [savedUserStories, setSavedUserStories] = useState([])
-    return (<SavedStories stories={savedUserStories} />)
+    return (<SavedStories stories={savedUserStories} page="profile" />)
 }
 
 export default Saved;
