@@ -93,6 +93,11 @@ export async function login(data: LoginRequest): Promise<User> {
   return res.data;
 }
 
+export async function login(data: LoginRequest): Promise<User> {
+  const res = await nextServer.post<User>('/auth/login', data);
+  return res.data;
+}
+
 export const logout = async (): Promise<void> => {
   await nextServer.post('/auth/logout');
 };
