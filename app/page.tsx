@@ -6,7 +6,8 @@ import Hero from '@/components/Home/Hero/Hero';
 import Blog from '@/components/Home/Blog/Blog';
 import Layout from '@/components/Home/Layouts/Layout';
 import Team from '@/components/Home/Team/Team';
-import Cta from '@/components/Home/Cta/Cta';
+import CTA from '@/components/Home/Cta/CTA';
+
 
 // import { getPopularStories, getTopTravellers } from '@/lib/api/serverApi';
 
@@ -32,7 +33,7 @@ export default async function HomePage() {
       <Team />
 
       {/* Секція 4: Блок реєстрації (Task 22) */}
-      <Cta />
+      <CTA />
     </>
   );
 }
