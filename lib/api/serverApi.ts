@@ -1,9 +1,10 @@
 import { cookies } from 'next/headers';
 import nextServer from './api';
-import { Story, StoryPost } from '@/types/story';
+import { Story } from '@/types/story';
 import { User } from '@/types/user';
 import { Category } from '@/types/category';
-import { QueryParams, StoryHttpResponse } from './clientApi';
+import { QueryParams, StoryHttpResponse } from '@/types/api';
+import { AxiosResponse, InternalAxiosRequestConfig, AxiosResponseHeaders } from 'axios';
 
 /* =========================
 HELPER
@@ -92,21 +93,27 @@ export const fetchCategories = async (): Promise<Category[]> => {
 SESSION CHECK
 ========================= */
 
-export const checkSession = async () => {
-  const headers = await getAuthHeaders();
+// export const checkSession = async () => {
+//   const headers = await getAuthHeaders();
 
-  const { data } = await nextServer.get('/auth/session', { headers });
+//   const { data } = await nextServer.get('/auth/session', { headers });
 
-  return data;
-};
+//   return data;
+// };
 
-export const checkServerSession = async () => {
-  const cookieStore = await cookies();
-  const res = await nextServer.get("/auth/session", {
-    headers: {
-      Cookie: cookieStore.toString(),
-    },
-  });
-
-  return res;
+export const checkServerSession = async (): Promise<AxiosResponse<unknown>> => {
+  try {
+    const cookieStore = await cookies();
+    return await nextServer.get('/auth/session', {
+      headers: { Cookie: cookieStore.toString() },
+    });
+  } catch (error: unknown) {
+    return {
+      data: null,
+      status: 401,
+      statusText: 'Unauthorized',
+      headers: {} as AxiosResponseHeaders,
+      config: {} as InternalAxiosRequestConfig,
+    };
+  }
 };

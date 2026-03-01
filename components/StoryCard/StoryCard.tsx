@@ -73,7 +73,7 @@ export default function StoryCard({
       <img src={img} alt={title} className={styles.story_card_img} />
       <div className={styles.story_card_content}>
         <div className={styles.text_wrapper}>
-          <p className={styles.story_card_category}>{category.name}</p>
+          <p className={styles.story_card_category}>{category?.name|| 'Без категорії'}</p>
           <p className={styles.story_card_title}>{title}</p>
           <p className={styles.story_card_text}>{article}</p>
         </div>
