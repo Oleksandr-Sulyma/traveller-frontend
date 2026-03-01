@@ -12,7 +12,6 @@ const GridContainer: React.FC<GridContainerProps> = ({
   variant = 'travellers', 
   className = '' 
 }) => {
-  // Комбінуємо базовий клас .grid, клас варіанту та зовнішній className
   const combinedClasses = `${css.grid} ${css[variant]} ${className}`.trim();
 
   return (

@@ -24,3 +24,15 @@
   display: flex;
   height: 100%;
 }
+
+@media (min-width: 1440px) {
+  .blog_item:nth-child(4) {
+    display: none;
+  }
+}
+
+@media (max-width: 767px) {
+  .blog_item:nth-child(n+4) {
+    display: none;
+  }
+}

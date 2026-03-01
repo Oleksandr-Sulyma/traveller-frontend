@@ -1,5 +1,5 @@
 'use client';
-import css from './Team.module.css';
+import css from './OurTravellers.module.css';
 import { useEffect, useState } from 'react';
 import axios from 'axios';
 import TravelerCard from '@/components/TravellerCard/TravellerCard';
@@ -11,7 +11,7 @@ interface RequestUser {
   totalPages: number;
 }
 
-export default function Team() {
+export default function OurTravellers() {
   const [users, setUsers] = useState<User[]>([]);
   const perPage = 4;
 
