@@ -50,14 +50,26 @@ export const createStory = async (input: StoryPost): Promise<Story> => {
   formData.append('title', input.title);
   formData.append('article', input.article);
   formData.append('category', input.category);
+  formData.append('img', input.img as any);
+
+  const postResponse = await nextServer.post<Story>('/stories', formData);
+  return postResponse.data;
+}
 
   if (input.img) {
     formData.append('img', input.img);
   }
 
-  const { data } = await nextServer.post('/stories', formData);
-  return data;
-};
+export interface RegisterRequest {
+  name: string;
+  email: string;
+  password: string;
+}
+
+export interface LoginRequest {
+  email: string;
+  password: string;
+}
 
 export const updateStory = async (storyId: string, payload: Partial<StoryPost>): Promise<Story> => {
   const { data } = await nextServer.patch(`/stories/${storyId}`, payload);
@@ -69,14 +81,6 @@ export const saveStory = async (storyId: string): Promise<Story> => {
   return data;
 };
 
-export const removeSavedStory = async (storyId: string): Promise<Story> => {
-  const { data } = await nextServer.delete(`/stories/${storyId}/save`);
-  return data;
-};
-
-/* =========================
-   AUTH
-========================= */
 
 export const register = async (payload: { email: string; password: string }): Promise<User> => {
   const { data } = await nextServer.post('/auth/register', payload);
@@ -92,6 +96,10 @@ export const refresh = async () => {
   const { data } = await nextServer.post('/auth/refresh');
   return data;
 };
+export async function login(data: LoginRequest) {
+  const res = await nextServer.post<User>('/auth/login', data);
+  return res.data;
+}
 
 export const logout = async (): Promise<void> => {
   await nextServer.post('/auth/logout');

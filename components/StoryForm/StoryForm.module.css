@@ -1,7 +1,14 @@
+.loader {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 1000;
+}
 .form {
   display: flex;
   flex-direction: column;
-  gap: 24px;
+  gap: 32px;
 }
 
 .coverRow {
@@ -24,7 +31,7 @@
 }
 
 .formGroup {
-  margin-bottom: 0;
+  margin-bottom: 24px;
 }
 
 .error {
