@@ -1,4 +1,3 @@
-
 import { Story } from '@/types/story';
 
 export interface QueryParams {

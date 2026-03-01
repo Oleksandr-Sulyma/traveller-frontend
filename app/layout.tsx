@@ -22,6 +22,7 @@ import HeaderWrapper from '@/components/Header/HeaderWrapper';
 import FooterWrapper from '@/components/Footer/FooterWrapper';
 import MainContent from '@/components/MainContent/MainContent';
 import TanStackProvider from '@/components/Providers/TanStackProvider';
+import { Toaster } from 'react-hot-toast';
 import { BASE_URL, SITE_DESCRIPTION, SITE_NAME, SITE_SMAL_DESCRIPTION } from '@/lib/constants/seo';
 
 export const metadata: Metadata = {
@@ -55,6 +56,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             <MainContent>{children}</MainContent>
 
             <FooterWrapper hideOn={['/sign-up', '/sign-in']} />
+            <Toaster position="top-center" />
             <div id="modal-root"></div>
           </TanStackProvider>
         </ThemeProvider>
