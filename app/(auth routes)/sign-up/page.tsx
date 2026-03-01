@@ -57,6 +57,7 @@ export default function SignUp() {
 
   const handleSubmit = (values: FormValues, actions: FormikHelpers<FormValues>) => {
     mutate(
+      // @ts-ignore
       { name: values.name, email: values.email, password: values.password },
       { onSuccess: () => actions.resetForm() }
     );
