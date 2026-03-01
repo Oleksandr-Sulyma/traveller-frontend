@@ -128,7 +128,7 @@ export default function Page({ params }: Props) {
         <ul className={css.storiesGrid}>
           {stories.map((story) => (
             <li key={story.id} className={css.storyItem}>
-              <StoryCard storyInf={story} />
+              <StoryCard {...story} />
             </li>
           ))}
         </ul>
