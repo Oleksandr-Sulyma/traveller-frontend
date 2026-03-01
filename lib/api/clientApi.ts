@@ -35,13 +35,7 @@ export async function createStory(input: StoryPost): Promise<Story> {
   formData.append('category', input.category);
   formData.append('img', input.img as any);
 
-  const postResponse = await nextServer.post<Story>('/stories', formData, {
-    withCredentials: true,
-    headers: {
-      // не указываем Content-Type, браузер сам выставит boundary
-      authorization: '4JPnXgAiLAaCNQzOnf0tOz37/gznEAU3yhppTISm',
-    },
-  });
+  const postResponse = await nextServer.post<Story>('/stories', formData);
   return postResponse.data;
 }
 
