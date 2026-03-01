@@ -8,10 +8,9 @@
   max-width: 375px;
   width: 100%;
   margin-inline: auto;
-  padding-inline: 20px; 
+  padding-inline: 20px;
   transition: all 0.3s ease;
 }
-
 
 @media (min-width: 768px) {
   .container {
@@ -33,14 +32,14 @@
 ========================= */
 
 .main-content {
-    min-height: 100vh;
-    /* Відступ зверху для всіх сторінок за замовчуванням */
-    padding-top: 72px; 
-    transition: padding-top 0.3s ease;
+  min-height: 100vh;
+  /* Відступ зверху для всіх сторінок за замовчуванням */
+  padding-top: 72px;
+  transition: padding-top 0.3s ease;
 }
 
 /* Спеціальний клас для головної сторінки: 
    Hero має заходити ПІД прозорий хедер */
 .is-home-layout {
-    padding-top: 0 !important;
+  padding-top: 0 !important;
 }

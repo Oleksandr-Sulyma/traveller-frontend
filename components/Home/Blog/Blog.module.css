@@ -1,0 +1,26 @@
+.blog_container {
+  padding: 40px 20px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.header_wrapper {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 30px;
+}
+
+.blog_grid {
+  display: grid;
+  /* Адаптивна сітка: 1 колонка на мобільних, 2 на планшетах, 3 на десктопах */
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 24px;
+  list-style: none;
+  padding: 0;
+}
+
+.blog_item {
+  display: flex;
+  height: 100%;
+}

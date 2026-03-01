@@ -4,9 +4,18 @@ import styles from './Footer.module.css';
 import '@/styles/components/links.css';
 import Image from 'next/image';
 import logo from '@/public/favicon.svg';
+import { usePathname } from 'next/navigation';
 
 export default function Footer() {
   const year = new Date().getFullYear();
+  const pathname = usePathname();
+
+  const handleHomeClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
+    if (pathname === '/') {
+      e.preventDefault();
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+  };
 
   return (
     <footer className={styles.footer} style={{ background: 'var(--footer-background)' }}>
@@ -14,6 +23,7 @@ export default function Footer() {
         <div className={styles.mainRow}>
           <Link
             href="/"
+            onClick={handleHomeClick}
             className={styles.logo + ' link-base link-text link-footer-pc link-footer-mobile'}
           >
             <Image
@@ -70,7 +80,11 @@ export default function Footer() {
           </div>
 
           <nav className={styles.nav}>
-            <Link href="/" className="link-base link-text link-footer-pc link-footer-mobile ">
+            <Link
+              href="/"
+              onClick={handleHomeClick}
+              className="link-base link-text link-footer-pc link-footer-mobile "
+            >
               Головна
             </Link>
             <Link
