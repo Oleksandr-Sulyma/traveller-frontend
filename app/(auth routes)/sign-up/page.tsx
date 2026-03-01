@@ -18,14 +18,14 @@ interface FormValues {
 
 const initialValues: FormValues = { name: '', email: '', password: '' };
 
-const passwordRules = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&]).{8,}$/;
+const passwordRules = /^(?=.*\p{Ll})(?=.*\p{Lu})(?=.*\d)(?=.*[@$!%*?&]).{8,}$/u;
 
 const RegisterSchema = Yup.object().shape({
   name: Yup.string()
     .trim()
     .min(5, 'Ім’я користувача має містити щонайменше 5 символів')
     .max(30, 'Ім’я користувача має містити не більше 30 символів')
-    .matches(/^[a-zA-Z0-9_]+$/, 'Можна використовувати лише літери, цифри та підкреслення')
+    .matches(/^[\p{L}\p{N}_]+$/u, 'Можна використовувати лише літери, цифри та підкреслення')
     .required('Будь ласка, введіть ім’я користувача'),
 
   email: Yup.string()
