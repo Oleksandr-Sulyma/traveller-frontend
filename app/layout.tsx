@@ -1,4 +1,5 @@
 import type { Metadata } from 'next';
+import { Toaster } from 'react-hot-toast';
 
 /* Стилі (Reset та Глобальні змінні) */
 import 'modern-normalize/modern-normalize.css';
@@ -55,6 +56,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             <MainContent>{children}</MainContent>
 
             <FooterWrapper hideOn={['/sign-up', '/sign-in']} />
+            <Toaster position="bottom-right" />
             <div id="modal-root"></div>
           </TanStackProvider>
         </ThemeProvider>
