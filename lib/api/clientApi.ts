@@ -54,11 +54,7 @@ export const createStory = async (input: StoryPost): Promise<Story> => {
 
   const postResponse = await nextServer.post<Story>('/stories', formData);
   return postResponse.data;
-}
-
-  if (input.img) {
-    formData.append('img', input.img);
-  }
+};
 
 export interface RegisterRequest {
   name: string;
@@ -81,14 +77,8 @@ export const saveStory = async (storyId: string): Promise<Story> => {
   return data;
 };
 
-
 export const register = async (payload: { email: string; password: string }): Promise<User> => {
   const { data } = await nextServer.post('/auth/register', payload);
-  return data;
-};
-
-export const login = async (payload: { email: string; password: string }): Promise<User> => {
-  const { data } = await nextServer.post('/auth/login', payload);
   return data;
 };
 
@@ -96,7 +86,8 @@ export const refresh = async () => {
   const { data } = await nextServer.post('/auth/refresh');
   return data;
 };
-export async function login(data: LoginRequest) {
+
+export async function login(data: LoginRequest): Promise<User> {
   const res = await nextServer.post<User>('/auth/login', data);
   return res.data;
 }
