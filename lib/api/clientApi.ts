@@ -151,6 +151,6 @@ export const patchAvatarMe = async (file: File): Promise<User> => {
 ========================= */
 
 export const fetchCategories = async (): Promise<Category[]> => {
-  const { data } = await nextServer.get('/');
+  const { data } = await nextServer.get('/categories');
   return data;
 };
