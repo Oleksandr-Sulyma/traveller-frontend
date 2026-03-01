@@ -15,7 +15,7 @@ export interface Story {
   article: string;
   img: string;
   category: Category;
-  owner: Owner;
+  ownerId: Owner;
   date: string;
   favoriteCount: number;
   createdAt: string;

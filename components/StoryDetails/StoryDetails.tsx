@@ -1,6 +1,8 @@
 'use client'
 import Image from "next/image";
 import { Story } from "@/types/story";
+import { Category } from "@/types/story";
+import { Owner } from "@/types/story";
 import { useState } from "react";
 import AuthNavModal from "@/components/AuthNavModal/AuthNavModal"
 import toast from "react-hot-toast";
@@ -53,14 +55,14 @@ export default function StoryDetails({ story }: StoryDetailsProps) {
                         <div className={css.metaItem}>
                             <span className={css.label}>Автор статті: </span>
                             <span className={css.value}>
-                                {story.owner.name}
+                                {story.ownerId.name}
                             </span>
                         </div>
                         <div className={css.metaItem}>
                             <span className={css.label}>Опубліковано: </span>
                             <span className={css.value}>
 
-                                {new Date(story.createdAt).toLocaleDateString()}
+                                {new Date(story.date).toLocaleDateString()}
                             </span>
                         </div>
                     </div>
