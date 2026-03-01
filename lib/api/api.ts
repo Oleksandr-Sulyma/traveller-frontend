@@ -1,9 +1,10 @@
 import axios from 'axios';
 
-const baseURL = process.env.NEXT_PUBLIC_API_URL + '/api';
+const BASE_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3000'
+const cleanedBaseURL = BASE_URL.replace(/\/$/, '') + '/api';
 
 const nextServer = axios.create({
-  baseURL: 'https://traveller-backend-lia1.onrender.com/',
+  baseURL: cleanedBaseURL,
   withCredentials: true,
 });
 
