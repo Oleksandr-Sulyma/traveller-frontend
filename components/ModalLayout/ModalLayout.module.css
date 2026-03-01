@@ -77,7 +77,8 @@
 .button {
 
   width: 100%;
-  max-width:295px  
+  max-width:295px ;
+  height:48px;
 
 }
 

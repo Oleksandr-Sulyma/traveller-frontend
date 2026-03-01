@@ -1,8 +1,6 @@
 'use client'
 import Image from "next/image";
 import { Story } from "@/types/story";
-import { Category } from "@/types/story";
-import { Owner } from "@/types/story";
 import { useState } from "react";
 import AuthNavModal from "@/components/AuthNavModal/AuthNavModal"
 import toast from "react-hot-toast";
@@ -18,11 +16,14 @@ export default function StoryDetails({ story }: StoryDetailsProps) {
     const [isAuthModalOpen, setIsAuthModalOpen] = useState(false);
     const queryClient = useQueryClient();
 
+
+
     const { mutate, isPending } = useMutation({
-        mutationFn: () => addToSave(story.id),
+        mutationFn: () => addToSave((story as any)._id),
         onSuccess: () => {
             toast.success("Історію збережено у вашому профілі!");
-            queryClient.invalidateQueries({ queryKey: ["story", story.id] });
+
+            queryClient.invalidateQueries({ queryKey: ["story", (story as any)._id] });
         },
         onError: (error: any) => {
             const status = error.response?.status;

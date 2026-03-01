@@ -3,6 +3,7 @@ import nextServer from './api';
 import { Story, StoryPost } from '@/types/story';
 import { Category } from '@/types/category';
 
+
 export interface StoryHttpResponse {
   stories: Story[];
   totalPages: number;
@@ -110,9 +111,13 @@ export const fetchCategories = async (): Promise<Array<Category>> => {
 
 
 export async function addToSave(storyId: string): Promise<Story> {
+
   const response = await nextServer.post<Story>(`/stories/${storyId}/save`);
+  
   return response.data;
 }
+
+
 
 export async function removeFromSave(storyId: string): Promise<Story> {
   const response = await nextServer.delete<Story>(`/stories/${storyId}/save`);
