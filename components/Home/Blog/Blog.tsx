@@ -1,4 +1,3 @@
-
 export default function Blog() {
   return (
     <section className="container">
@@ -11,8 +10,8 @@ export default function Blog() {
 
 // import css from './Blog.module.css';
 // import StoryCard from '@/components/StoryCard/StoryCard';
-// import 
-// import { Story } from '@/types/story'; 
+// import
+// import { Story } from '@/types/story';
 // import Link from 'next/link';
 
 // interface BlogSectionProps {
