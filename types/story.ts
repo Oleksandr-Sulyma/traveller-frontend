@@ -22,12 +22,12 @@ export interface Owner {
 //   updatedAt: string;
 // }
 
-// export type StoryPost = {
-//   title: string;
-//   article: string;
-//   category: string;
-//   img: File;
-// };
+export type StoryPost = {
+  title: string;
+  article: string;
+  category: string;
+  img: File;
+};
 
 export interface Story {
   _id: string;        // У Swagger це _id
