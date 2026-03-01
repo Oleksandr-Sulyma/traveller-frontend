@@ -28,3 +28,4 @@ export type StoryPost = {
   category: string;
   img: File;
 };
+
