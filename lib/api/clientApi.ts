@@ -35,13 +35,7 @@ export async function createStory(input: StoryPost): Promise<Story> {
   formData.append('category', input.category);
   formData.append('img', input.img as any);
 
-  const postResponse = await nextServer.post<Story>('/stories', formData, {
-    withCredentials: true,
-    headers: {
-      // не указываем Content-Type, браузер сам выставит boundary
-      authorization: '4JPnXgAiLAaCNQzOnf0tOz37/gznEAU3yhppTISm',
-    },
-  });
+  const postResponse = await nextServer.post<Story>('/stories', formData);
   return postResponse.data;
 }
 
@@ -51,6 +45,12 @@ export async function deleteStory(id: string): Promise<Story> {
 }
 
 export interface RegisterRequest {
+  name: string;
+  email: string;
+  password: string;
+}
+
+export interface LoginRequest {
   email: string;
   password: string;
 }
@@ -65,7 +65,7 @@ export async function register(data: RegisterRequest) {
   return res.data;
 }
 
-export async function login(data: RegisterRequest) {
+export async function login(data: LoginRequest) {
   const res = await nextServer.post<User>('/auth/login', data);
   return res.data;
 }

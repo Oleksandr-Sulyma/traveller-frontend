@@ -1,0 +1,14 @@
+.auth_page {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.auth_content {
+  flex: 1;
+}
+
+.auth_footer {
+  text-align: center;
+  padding: 16px 0;
+}

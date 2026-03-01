@@ -1,4 +1,4 @@
-import { FC, ChangeEvent, useState } from "react";
+import { FC, ChangeEvent, useState, useRef } from "react";
 import Image from 'next/image';
 
 export interface ImageUploadValue {
@@ -50,6 +50,12 @@ export const ImageUpload: FC<ImageUploadProps> = ({
     previewReader.readAsDataURL(file);
   };
 
+  const fileInputRef = useRef<HTMLInputElement | null>(null);
+
+  const handleClick = () => {
+    fileInputRef.current?.click();
+  };
+
   return (
     <div>
       <div
@@ -82,11 +88,13 @@ export const ImageUpload: FC<ImageUploadProps> = ({
       <label style={{ display: 'inline-block', marginTop: 12 }}>
         <button
           type="button"
+          onClick={handleClick}
           className="btn btn--default btn-secondary"
         >
           Завантажити фото
         </button>
         <input
+          ref={fileInputRef}
           type="file"
           accept="image/*"
           onChange={handleChange}
