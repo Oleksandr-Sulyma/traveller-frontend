@@ -51,7 +51,7 @@ export default function Team() {
           <Link
             className="btn btn-primary"
             style={{ height: '48px', width: '156px' }}
-            href="/app/(public)/travellers"
+            href="/travellers"
           >
             Переглянути всіх
           </Link>
