@@ -9,7 +9,7 @@ const SavedStories = ({ stories }: SavedStoriesProps) => {
             <div className="container">
                 {stories.length != 0 ?
                     stories.map((story) => (
-                        <StoryCard key={story.id} storyInf={story} />
+                        <StoryCard key={story.id} {...story} />
                     )) : 
                     <div className={css.div}>
                         <h2 className={css.title}>У вас ще немає збережених історій, мершій збережіть вашу першу історію!</h2>
