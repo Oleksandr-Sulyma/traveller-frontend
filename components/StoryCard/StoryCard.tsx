@@ -3,22 +3,9 @@ import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 import type { Story } from '../../types/story';
 
-// export interface Story {
-//   _id: string;
-//   title: string;
-//   article: string;
-//   img: string;
-//   category: { _id: string; name: string };
-//   ownerId: { _id: string; name: string; avatarUrl?: string };
-//   date: string;
-//   favoriteCount: number;
-//   createdAt?: string;
-//   updatedAt?: string;
-// }
-
 interface StoryCardProps extends Pick<
   Story,
-  '_id' | 'title' | 'article' | 'img' | 'category' | 'ownerId' | 'date' | 'favoriteCount'
+  'id' | 'title' | 'article' | 'img' | 'category' | 'ownerId' | 'date' | 'favoriteCount'
 > {
   buttonText?: string;
 }
