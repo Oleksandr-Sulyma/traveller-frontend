@@ -3,9 +3,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 
 export default function Hero() {
-
   return (
-    
     <section className={styles.heroContainer}>
       <picture>
         <source
@@ -26,15 +24,14 @@ export default function Hero() {
         />
       </picture>
       <div className={`container ${styles.container}`}>
-       
-       <h1 className={`hero-title ${styles['hero-title']}`}>
-        Відкрийте світ подорожей з нами!
-        </h1>
-        <p  className={`hero-text ${styles['hero-text']}`}>
-          Приєднуйтесь до нашої спільноти мандрівників, де ви зможете ділитися своїми історіями та отримувати натхнення для нових пригод. Відкрийте для себе нові місця та знайдіть однодумців!
-          </p>
-        
-        <Link href="/sign-up" className="btn btn--hero">
+        <h1 className={`hero-title ${styles['hero-title']}`}>Відкрийте світ подорожей з нами!</h1>
+        <p className={`hero-text ${styles['hero-text']}`}>
+          Приєднуйтесь до нашої спільноти мандрівників, де ви зможете ділитися своїми історіями та
+          отримувати натхнення для нових пригод. Відкрийте для себе нові місця та знайдіть
+          однодумців!
+        </p>
+
+        <Link href="#join" className="btn btn--hero">
           Доєднатись
         </Link>
       </div>
