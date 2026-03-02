@@ -6,9 +6,11 @@ import { useMutation } from '@tanstack/react-query';
 import { login } from '@/lib/api/clientApi';
 import { useRouter } from 'next/navigation';
 import css from './SignInPage.module.css';
+import toast from 'react-hot-toast';
 import { useId } from 'react';
 import Link from 'next/link';
 import * as Yup from 'yup';
+import { AxiosError } from 'axios';
 
 interface FormValues {
   email: string;
@@ -17,7 +19,7 @@ interface FormValues {
 
 const initialValues: FormValues = { email: '', password: '' };
 
-const RegisterSchema = Yup.object().shape({
+const loginSchema = Yup.object().shape({
   email: Yup.string()
     .trim()
     .lowercase()
@@ -36,7 +38,20 @@ export default function SignIn() {
     mutationFn: login,
     onSuccess: user => {
       setUser(user);
+      toast.success('Вхід успішний! Раді вас бачити 👋');
       router.push('/profile');
+    },
+    onError: (err: AxiosError) => {
+      const status = err.response?.status ?? 0;
+
+      const errorMessages: Record<number, string> = {
+        400: 'Перевірте правильність введених даних.',
+        409: 'Email вже зареєстрований. Спробуйте увійти.',
+        422: 'Некоректні дані для реєстрації.',
+        500: 'Помилка сервера. Спробуйте пізніше.',
+      };
+
+      toast.error(errorMessages[status] ?? 'Щось пішло не так. Спробуйте ще раз.');
     },
   });
 
@@ -65,7 +80,7 @@ export default function SignIn() {
         <p className={`${css.center_text} "text-main"`}>Вітаємо знову у спільноту мандрівників!</p>
       </div>
       <Formik
-        validationSchema={RegisterSchema}
+        validationSchema={loginSchema}
         initialValues={initialValues}
         onSubmit={handleSubmit}
       >

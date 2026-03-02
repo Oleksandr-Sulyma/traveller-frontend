@@ -1,11 +1,18 @@
 import axios from 'axios';
 
-const BASE_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3000'
-const cleanedBaseURL = BASE_URL.replace(/\/$/, '') + '/api';
+const baseURL = process.env.NEXT_PUBLIC_API_URL +'/api' ;
 
 const nextServer = axios.create({
-  baseURL: cleanedBaseURL,
+  baseURL,
   withCredentials: true,
+});
+
+nextServer.interceptors.request.use((config) => {
+  const token = typeof window !== 'undefined' ? localStorage.getItem("token") : null;
+  if (token) {
+    config.headers.Authorization = `Bearer ${token}`;
+  }
+  return config;
 });
 
 export default nextServer;
