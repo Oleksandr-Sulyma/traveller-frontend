@@ -10,7 +10,10 @@ import {
   UsersHttpResponse,
 } from '@/types/api';
 
-
+export const fetchStories = async (params?: QueryParams): Promise<StoryHttpResponse> => {
+  const { data } = await nextServer.get('/stories', { params });
+  return data;
+};
 
 export const fetchAllUsers = async (params?: QueryParams): Promise<UsersHttpResponse> => {
   const { data } = await nextServer.get<UsersHttpResponse>('/users', { params });
@@ -115,8 +118,6 @@ export const fetchCategories = async (): Promise<Category[]> => {
   const { data } = await nextServer.get('/categories');
   return data;
 };
-
-
 export async function addToSave(storyId: string): Promise<Story> {
 
   const response = await nextServer.post<Story>(`/stories/${storyId}/save`,{});
