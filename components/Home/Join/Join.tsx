@@ -5,7 +5,7 @@ let isAuth = false;
 
 export default function Join() {
   return (
-    <section className="container">
+    <section id="join" className="container">
       <div className={css.position}>
         <div className={css.wrapper}>
           <h2 className={css.title}>Приєднуйтесь до нашої спільноти</h2>
