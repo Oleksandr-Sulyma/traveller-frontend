@@ -118,3 +118,16 @@ export const fetchCategories = async (): Promise<Category[]> => {
   const { data } = await nextServer.get('/categories');
   return data;
 };
+export async function addToSave(storyId: string): Promise<Story> {
+
+  const response = await nextServer.post<Story>(`/stories/${storyId}/save`,{});
+  
+  return response.data;
+}
+
+
+
+export async function removeFromSave(storyId: string): Promise<Story> {
+  const response = await nextServer.delete<Story>(`/stories/${storyId}/save`);
+  return response.data;
+}

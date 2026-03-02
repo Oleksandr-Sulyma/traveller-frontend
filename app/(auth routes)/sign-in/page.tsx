@@ -19,7 +19,7 @@ interface FormValues {
 
 const initialValues: FormValues = { email: '', password: '' };
 
-const RegisterSchema = Yup.object().shape({
+const loginSchema = Yup.object().shape({
   email: Yup.string()
     .trim()
     .lowercase()
@@ -80,7 +80,7 @@ export default function SignIn() {
         <p className={`${css.center_text} "text-main"`}>Вітаємо знову у спільноту мандрівників!</p>
       </div>
       <Formik
-        validationSchema={RegisterSchema}
+        validationSchema={loginSchema}
         initialValues={initialValues}
         onSubmit={handleSubmit}
       >

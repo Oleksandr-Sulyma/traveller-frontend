@@ -29,9 +29,10 @@ export const fetchStories = async (params?: QueryParams): Promise<StoryHttpRespo
     params,
     headers,
   });
+  return  data;
+}
+ 
 
-  return data;
-};
 
 export const fetchAllUsers = async (params?: QueryParams): Promise<UsersHttpResponse> => {
   const { data } = await nextServer.get<UsersHttpResponse>('/users', { params });
