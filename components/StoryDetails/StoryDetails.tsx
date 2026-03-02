@@ -79,7 +79,7 @@ export default function StoryDetails({ story }: StoryDetailsProps) {
                             <span className={css.label}>Опубліковано: </span>
                             <span className={css.value}>
 
-                                {new Date(story.favoriteCount).toLocaleDateString()}
+                                {story.formattedDate}
                             </span>
                         </div>
                     </div>
