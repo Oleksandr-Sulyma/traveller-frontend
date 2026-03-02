@@ -1,11 +1,12 @@
 
 "use client";
-import { fetchStoryById } from "@/lib/api/clientApi";
+import { getStoryById } from "@/lib/api/clientApi";
 import { Story } from "@/types/story";
 import { useQuery } from "@tanstack/react-query";
 import StoryDetails from "@/components/StoryDetails/StoryDetails";
 import Loader from "@/components/Loader/Loader";
 import { useEffect } from "react";
+import css from "./StoryDetailsPage.module.css"
 // import Popular from "@/components/Popular/Popular"; //
 
 
@@ -19,7 +20,7 @@ export default function StoryDetailsClient({ storyId }: Props) {
 
     const { data: story, isLoading, error } = useQuery<Story, Error>({
         queryKey: ["story", storyId],
-        queryFn: () => fetchStoryById(storyId),
+        queryFn: () => getStoryById(storyId),
         refetchOnMount: false,
     });
 
@@ -33,13 +34,13 @@ export default function StoryDetailsClient({ storyId }: Props) {
 
 
     return (
-        <main>
-            <section>
-                <h1>{story.title}</h1>
+        <main className="container">
+            <section className={`section ${css.storyPageSection}`}>
+                <h1 className={css.title}>{story.title}</h1>
                 <StoryDetails story={story} />
             </section>
-            <section>
-                <h2>Популярні історії</h2>
+            <section className={`section ${css.popularSection}`}>
+                <h2 className={css.titlePopularStory}>Популярні історії</h2>
                 <div>-------</div>
                 {/* компонент популярні історії */}
             </section>

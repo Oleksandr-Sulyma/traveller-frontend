@@ -1,0 +1,67 @@
+.storyPageSection{
+    padding-top: 20px;
+}
+.title{
+    font-family: var(--second-family);
+    font-weight: 700;
+   font-size: 32px;
+line-height: 110%;
+letter-spacing: -0.01em;
+color: var(--color-scheme-2-text);
+margin-bottom:32px
+}
+.titlePopularStory{
+     font-family: var(--second-family);
+   font-weight: 700;
+  font-size: 28px;
+  line-height: 120%;
+  letter-spacing: -0.01em;
+  color: var(--color-scheme-1-text);
+  margin-bottom: 40px;
+}
+
+.popularSection{
+    padding-top: 64px;
+}
+
+
+@media (min-width: 768px){
+    .storyPageSection{
+    padding-top: 32px ;
+    }
+
+    .title{
+       
+    font-weight: 700;
+    font-size: 48px;
+
+    }
+
+    .titlePorularStory{
+    
+    font-size: 44px;
+
+    }
+}
+
+@media (min-width: 1440px){
+    .storyPageSection{
+    padding-top: 48px ;
+}
+
+.title{
+    
+
+   font-size: 56px;
+
+   
+}
+.titlePorularStory{
+ 
+font-size: 52px;
+
+}
+
+}
+
+

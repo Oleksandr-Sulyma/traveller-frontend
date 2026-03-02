@@ -1,8 +1,9 @@
-import { fetchStoryByIdServer } from "@/lib/api/serverApi";
+import { getStoryById } from "@/lib/api/serverApi";
 import StoryDetailsClient from "./StoryDetails.client";
 import { HydrationBoundary, dehydrate, QueryClient } from "@tanstack/react-query";
 import type { Story } from "@/types/story";
 import { Metadata } from "next";
+import { BASE_URL } from "@/lib/constants/seo";
 
 
 interface StoryDetailsPageProps {
@@ -10,27 +11,37 @@ interface StoryDetailsPageProps {
 }
 
 
-export async function generateMetadata({ params }: StoryDetailsPageProps): Promise<Metadata> {
-  const { id } = await params;
-  const story = await fetchStoryByIdServer(id);
-  if (!story) {
-    return {
-      title: "Історія не знайдена | Подорожники",
-    };
-  }
+// export async function generateMetadata({ params }: StoryDetailsPageProps): Promise<Metadata> {
+//   const { id } = await params;
+//   try {
 
-  return {
-    title: story.title,
-    description: story.article.slice(0, 160),
-    openGraph: {
-      title: story.title,
-      description: story.article.slice(0, 160),
-      images: [{ url: "тут треба лінк" }],
+//     const story = await getStoryById(id);
 
-      url: `тут треба лінк на деплой/stories/${id}`,
-    }
-  }
-}
+
+//     if (!story) {
+//       return { title: "Історія не знайдена | Подорожники" };
+//     }
+
+
+//     const description = story.article ? story.article.slice(0, 160) : "Подорожники — цікаві історії";
+
+
+//     return {
+//       title: `${story.title} | Подорожники`,
+//       description,
+//       openGraph: {
+//         title: story.title,
+//         description,
+//         images: [{ url: story.img }],
+//         url: `${BASE_URL}/stories/${id}`,
+//       }
+//     };
+//   } catch (error) {
+//     console.error("Metadata error:", error);
+//     return { title: "Подорожники" };
+//   }
+// }
+
 
 export default async function StoryDetailsPage(params: StoryDetailsPageProps) {
   const queryClient = new QueryClient()
@@ -39,7 +50,7 @@ export default async function StoryDetailsPage(params: StoryDetailsPageProps) {
   await queryClient.prefetchQuery<Story, Error>({
     queryKey: ["story", id],
     queryFn: async () => {
-      const data = await fetchStoryByIdServer(id);
+      const data = await getStoryById(id);
       if (!data) throw new Error("Story not found");
       console.log(data)
       return data;

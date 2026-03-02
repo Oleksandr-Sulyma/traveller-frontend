@@ -8,6 +8,7 @@ import { useQueryClient, useMutation } from "@tanstack/react-query";
 import { addToSave } from "@/lib/api/clientApi";
 import css from "./StoryDetails.module.css";
 
+
 interface StoryDetailsProps {
     story: Story;
 }
@@ -15,18 +16,16 @@ interface StoryDetailsProps {
 export default function StoryDetails({ story }: StoryDetailsProps) {
     const [isAuthModalOpen, setIsAuthModalOpen] = useState(false);
     const queryClient = useQueryClient();
-
-
-    const [alreadySaved, setAlreadySaved] = useState((story as any).isSaved || false);
+    const [alreadySaved, setAlreadySaved] = useState(false);
 
     const { mutate, isPending } = useMutation({
-        mutationFn: () => addToSave((story as any)._id),
+        mutationFn: () => addToSave(story.id),
         onSuccess: () => {
             toast.success("Історію збережено у вашому профілі!");
             setAlreadySaved(true);
 
 
-            queryClient.invalidateQueries({ queryKey: ["story", (story as any)._id] });
+            queryClient.invalidateQueries({ queryKey: ["story", story.id] });
             queryClient.invalidateQueries({ queryKey: ["saved-stories"] });
         },
         onError: (error: any) => {
@@ -63,8 +62,8 @@ export default function StoryDetails({ story }: StoryDetailsProps) {
 
 
     return (
-        <section className="section">
-            <article className="container">
+        <div className="section">
+            <article>
                 <div className={css.metaContainer}>
                     <div className={css.meta}>
                         <div className={css.metaItem}>
@@ -77,7 +76,7 @@ export default function StoryDetails({ story }: StoryDetailsProps) {
                             <span className={css.label}>Опубліковано: </span>
                             <span className={css.value}>
 
-                                {new Date(story.date).toLocaleDateString()}
+                                {new Date(story.createdAt).toLocaleDateString()}
                             </span>
                         </div>
                     </div>
@@ -126,6 +125,6 @@ export default function StoryDetails({ story }: StoryDetailsProps) {
             {isAuthModalOpen && (
                 <AuthNavModal onClose={() => setIsAuthModalOpen(false)} />
             )}
-        </section>
+        </div>
     );
 }
