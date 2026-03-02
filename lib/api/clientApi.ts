@@ -2,10 +2,21 @@ import nextServer from './api';
 import { Story, StoryPost } from '@/types/story';
 import { User } from '@/types/user';
 import { Category } from '@/types/category';
-import { QueryParams, StoryHttpResponse, RegisterRequest, LoginRequest } from '@/types/api';
+import {
+  QueryParams,
+  StoryHttpResponse,
+  RegisterRequest,
+  LoginRequest,
+  UsersHttpResponse,
+} from '@/types/api';
 
 export const fetchStories = async (params?: QueryParams): Promise<StoryHttpResponse> => {
   const { data } = await nextServer.get('/stories', { params });
+  return data;
+};
+
+export const fetchAllUsers = async (params?: QueryParams): Promise<UsersHttpResponse> => {
+  const { data } = await nextServer.get<UsersHttpResponse>('/users', { params });
   return data;
 };
 

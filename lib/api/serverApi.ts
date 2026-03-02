@@ -3,7 +3,7 @@ import nextServer from './api';
 import { Story } from '@/types/story';
 import { User } from '@/types/user';
 import { Category } from '@/types/category';
-import { QueryParams, StoryHttpResponse } from '@/types/api';
+import { QueryParams, StoryHttpResponse, UsersHttpResponse } from '@/types/api';
 import { AxiosResponse, InternalAxiosRequestConfig, AxiosResponseHeaders } from 'axios';
 
 /* =========================
@@ -24,7 +24,7 @@ STORIES
 
 export const fetchStories = async (params?: QueryParams): Promise<StoryHttpResponse> => {
   const headers = await getAuthHeaders();
-  
+
   const { data } = await nextServer.get('/stories', {
     params,
     headers,
@@ -33,12 +33,17 @@ export const fetchStories = async (params?: QueryParams): Promise<StoryHttpRespo
   return data;
 };
 
+export const fetchAllUsers = async (params?: QueryParams): Promise<UsersHttpResponse> => {
+  const { data } = await nextServer.get<UsersHttpResponse>('/users', { params });
+  return data;
+};
+
 // export const fetchStories = async (params?: QueryParams) => {
 //   try {
 //     // const headers = await getAuthHeaders();
-//     const { data } = await nextServer.get('/stories', { 
-//       params, 
-//       // headers 
+//     const { data } = await nextServer.get('/stories', {
+//       params,
+//       // headers
 //     });
 //     return data;
 //   } catch (error: any) {
@@ -48,12 +53,8 @@ export const fetchStories = async (params?: QueryParams): Promise<StoryHttpRespo
 //   }
 // };
 
-
-
-
 export const getStoryById = async (id: string): Promise<Story> => {
   const headers = await getAuthHeaders();
-  
 
   const { data } = await nextServer.get(`/stories/${id}`, { headers });
 
