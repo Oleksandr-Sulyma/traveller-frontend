@@ -18,8 +18,11 @@ export default function StoryDetails({ story }: StoryDetailsProps) {
     const queryClient = useQueryClient();
     const [alreadySaved, setAlreadySaved] = useState(false);
 
+    console.log(`mutate:${(story as any)._id}`);
+
     const { mutate, isPending } = useMutation({
-        mutationFn: () => addToSave(story.id),
+
+        mutationFn: () => addToSave(story.id || (story as any)._id),
         onSuccess: () => {
             toast.success("Історію збережено у вашому профілі!");
             setAlreadySaved(true);
@@ -43,7 +46,7 @@ export default function StoryDetails({ story }: StoryDetailsProps) {
         }
     });
 
-    const handleSave = () => {
+    const handleSave = async () => {
 
         if (!localStorage.getItem("token")) {
             setIsAuthModalOpen(true);
@@ -76,7 +79,7 @@ export default function StoryDetails({ story }: StoryDetailsProps) {
                             <span className={css.label}>Опубліковано: </span>
                             <span className={css.value}>
 
-                                {new Date(story.createdAt).toLocaleDateString()}
+                                {new Date(story.favoriteCount).toLocaleDateString()}
                             </span>
                         </div>
                     </div>

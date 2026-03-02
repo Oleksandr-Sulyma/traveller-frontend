@@ -15,8 +15,7 @@ interface Props {
 }
 
 export default function StoryDetailsClient({ storyId }: Props) {
-    console.log(storyId)
-    console.log("client")
+
 
     const { data: story, isLoading, error } = useQuery<Story, Error>({
         queryKey: ["story", storyId],
