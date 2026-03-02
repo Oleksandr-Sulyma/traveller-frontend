@@ -7,9 +7,10 @@ const OwnStories = ({ stories, page }: SavedStoriesProps) => {
     return (
         <section>
             <div className="container">
+                <div className={css.wrapDiv}>
                 {stories.length != 0 ?
                     stories.map((story) => (
-                        <StoryCard key={story.id} storyInf={story} />
+                        <StoryCard key={story.id} {...story} />
                     )) : page === "profile" ?
 
                     <div className={css.div}>
@@ -22,6 +23,7 @@ const OwnStories = ({ stories, page }: SavedStoriesProps) => {
                         <Link href="/stories" className={css.btn}>Назад до історій</Link>
                     </div>
                     }
+                </div>
             </div>
         </section>
     )

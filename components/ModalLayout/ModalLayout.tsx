@@ -7,14 +7,15 @@ import css from "./ModalLayout.module.css";
 
 export interface ModalLayoutProps {
     title: string;
+    showButtons?: boolean;
     description?: string;
-    confirmButtonText: string;
-    cancelButtonText: string;
+    confirmButtonText?: string;
+    cancelButtonText?: string;
     onConfirm: () => void;
     onCancel: () => void;
     onClose: () => void;
 }
-export default function ModalLayout({ title, description, confirmButtonText, cancelButtonText, onConfirm, onCancel, onClose }: ModalLayoutProps) {
+export default function ModalLayout({ showButtons = true, title, description, confirmButtonText, cancelButtonText, onConfirm, onCancel, onClose }: ModalLayoutProps) {
     const modalRoot = document.getElementById("modal-root");
     const modalRef = useRef<HTMLDivElement>(null);
 
@@ -62,11 +63,12 @@ export default function ModalLayout({ title, description, confirmButtonText, can
                     <h3 className={css.title}>{title}</h3>
                     {description && <p className={css.description}>{description}</p>}
                 </div>
-                <div className={css.buttons}>
-                    <button onClick={onCancel} className={`btn btn-secondary ${css.button} `}>{cancelButtonText}</button>
-                    <button onClick={onConfirm} className={`btn btn-primary ${css.button} `}>{confirmButtonText}</button>
-                </div>
-
+                {showButtons && (
+                    <div className={css.buttons}>
+                        <button onClick={onCancel} className={`btn btn-secondary ${css.button} `}>{cancelButtonText}</button>
+                        <button onClick={onConfirm} className={`btn btn-primary ${css.button} `}>{confirmButtonText}</button>
+                     </div>
+                )}
             </div>
         </div >, modalRoot
     )

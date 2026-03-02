@@ -1,4 +1,4 @@
-import { FC, ChangeEvent, useState } from "react";
+import { FC, ChangeEvent, useState, useRef } from 'react';
 import Image from 'next/image';
 
 export interface ImageUploadValue {
@@ -12,10 +12,7 @@ interface ImageUploadProps {
   onChange: (value: ImageUploadValue | null) => void;
 }
 
-export const ImageUpload: FC<ImageUploadProps> = ({
-  value,
-  onChange,
-}) => {
+export const ImageUpload: FC<ImageUploadProps> = ({ value, onChange }) => {
   const [preview, setPreview] = useState<string | null>(value ?? null);
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>): void => {
@@ -29,7 +26,7 @@ export const ImageUpload: FC<ImageUploadProps> = ({
     const bufferReader = new FileReader();
 
     previewReader.onload = () => {
-      if (typeof previewReader.result !== "string") return;
+      if (typeof previewReader.result !== 'string') return;
 
       const previewResult = previewReader.result;
       setPreview(previewResult);
@@ -50,13 +47,21 @@ export const ImageUpload: FC<ImageUploadProps> = ({
     previewReader.readAsDataURL(file);
   };
 
+  const fileInputRef = useRef<HTMLInputElement | null>(null);
+
+  const handleClick = () => {
+    fileInputRef.current?.click();
+  };
+
   return (
     <div>
       <div
         style={{
-          marginTop: 12,
+          // width: '100%',
           width: 865,
           height: 576,
+          // maxWidth: 865,
+          // aspectRatio: '865 / 576',
           borderRadius: 16,
           overflow: 'hidden',
           backgroundColor: '#e5e7eb',
@@ -79,14 +84,12 @@ export const ImageUpload: FC<ImageUploadProps> = ({
         )}
       </div>
 
-      <label style={{ display: 'inline-block', marginTop: 12 }}>
-        <button
-          type="button"
-          className="btn btn--default btn-secondary"
-        >
+      <label style={{ display: 'inline-block', marginTop: 24 }}>
+        <button type="button" onClick={handleClick} className="btn btn--default btn-secondary">
           Завантажити фото
         </button>
         <input
+          ref={fileInputRef}
           type="file"
           accept="image/*"
           onChange={handleChange}

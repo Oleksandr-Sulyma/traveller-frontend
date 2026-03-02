@@ -1,19 +1,39 @@
-export interface Story {
+export interface Category {
   id: string;
-  title: string;
-  article: string;
-  img: string; // URL/path returned from backend
-  category: string;
-  ownerId: string;
-  date: string;
-  favoriteCount: number;
-  createdAt: string;
-  updatedAt: string;
+  name: string;
 }
+
+export interface Owner {
+  id: string;
+  name: string;
+  avatarUrl: string;
+}
+
 
 export type StoryPost = {
   title: string;
   article: string;
   category: string;
-  img: File; // file that we send via multipart/form-data
+  img: File;
 };
+
+export interface Story {
+  id: string; // У Swagger це id
+  title: string;
+  article: string;
+  img: string; // Тут ок
+  category: {
+    id: string;
+    name: string;
+  };
+  ownerId: {
+    // У Swagger це ownerId, а не owner
+    id: string;
+    name: string;
+    avatarUrl: string;
+  };
+  favoriteCount: number;
+  formattedDate: string; // Swagger повертає вже відформатовану дату
+  createdAt: string;
+  updatedAt: string;
+}
