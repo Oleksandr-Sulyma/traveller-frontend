@@ -3,7 +3,7 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { Category } from '@/types/category';
 
-// Ми залишаємо список тут як дефолтний, якщо пропси не передані
+
 export const CATEGORIES_LIST: Category[] = [
   { id: 'asia', name: 'Азія' },
   { id: 'mountains', name: 'Гори' },

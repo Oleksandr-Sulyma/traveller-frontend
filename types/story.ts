@@ -9,18 +9,18 @@ export interface Owner {
   avatarUrl: string;
 }
 
-export interface Story {
-  id: string;
-  title: string;
-  article: string;
-  img: string;
-  category: Category;
-  owner: Owner;
-  date: string;
-  favoriteCount: number;
-  createdAt: string;
-  updatedAt: string;
-}
+// export interface Story {
+//   id: string;
+//   title: string;
+//   article: string;
+//   img: string;
+//   category: Category;
+//   owner: Owner;
+//   date: string;
+//   favoriteCount: number;
+//   createdAt: string;
+//   updatedAt: string;
+// }
 
 export type StoryPost = {
   title: string;
@@ -29,3 +29,23 @@ export type StoryPost = {
   img: File;
 };
 
+export interface Story {
+  id: string; // У Swagger це id
+  title: string;
+  article: string;
+  img: string; // Тут ок
+  category: {
+    id: string;
+    name: string;
+  };
+  ownerId: {
+    // У Swagger це ownerId, а не owner
+    id: string;
+    name: string;
+    avatarUrl: string;
+  };
+  favoriteCount: number;
+  formattedDate: string; // Swagger повертає вже відформатовану дату
+  createdAt: string;
+  updatedAt: string;
+}

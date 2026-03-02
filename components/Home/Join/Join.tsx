@@ -1,9 +1,9 @@
 import Link from 'next/link';
-import css from './CTA.module.css';
+import css from './Join.module.css';
 
 let isAuth = false;
 
-export default function CTA() {
+export default function Join() {
   return (
     <section className="container">
       <div className={css.position}>

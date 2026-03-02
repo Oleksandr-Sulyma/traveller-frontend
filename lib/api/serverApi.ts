@@ -24,7 +24,7 @@ STORIES
 
 export const fetchStories = async (params?: QueryParams): Promise<StoryHttpResponse> => {
   const headers = await getAuthHeaders();
-
+  
   const { data } = await nextServer.get('/stories', {
     params,
     headers,
@@ -33,8 +33,27 @@ export const fetchStories = async (params?: QueryParams): Promise<StoryHttpRespo
   return data;
 };
 
+// export const fetchStories = async (params?: QueryParams) => {
+//   try {
+//     // const headers = await getAuthHeaders();
+//     const { data } = await nextServer.get('/stories', { 
+//       params, 
+//       // headers 
+//     });
+//     return data;
+//   } catch (error: any) {
+//     // Цей лог у терміналі покаже справжню причину (наприклад, "Invalid limit value")
+//     console.error("BACKEND ERROR DATA:", error.response?.data);
+//     throw error;
+//   }
+// };
+
+
+
+
 export const getStoryById = async (id: string): Promise<Story> => {
   const headers = await getAuthHeaders();
+  
 
   const { data } = await nextServer.get(`/stories/${id}`, { headers });
 
