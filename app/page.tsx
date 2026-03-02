@@ -2,13 +2,11 @@ import { Suspense } from 'react';
 import Loader from '@/components/Loader/Loader';
 
 import Hero from '@/components/Home/Hero/Hero';
-// import LatestStories from '@/components/Home/Blog/LatestStories';
-// import TopTravellers from '@/components/Home/Team/TopTravellers';
-// import Cta from '@/components/Home/Cta/Cta';
 
 import PopularStoriesSection from '@/components/Home/PopularStoriesSection/PopularStoriesSection';
 import Layout from '@/components/Home/Layouts/Layout';
 import OurTravellers from '@/components/Home/OurTravellers/OurTravellers';
+import TopTravellers from '@/components/Home/OurTravellers/TopTravellers';
 import Join from '@/components/Home/Join/Join';
 
 // import { getPopularStories, getTopTravellers } from '@/lib/api/serverApi';
@@ -25,11 +23,11 @@ export default async function HomePage() {
       <Layout />
 
       {/* {<Suspense fallback={<Loader className="py-20" />}>} */}
-        <PopularStoriesSection />
+      <PopularStoriesSection />
       {/* {</Suspense>} */}
 
-      <OurTravellers />
-
+      {/* <OurTravellers /> */}
+      <TopTravellers />
       <Join />
     </>
   );
