@@ -9,18 +9,6 @@ export interface Owner {
   avatarUrl: string;
 }
 
-// export interface Story {
-//   id: string;
-//   title: string;
-//   article: string;
-//   img: string;
-//   category: Category;
-//   owner: Owner;
-//   date: string;
-//   favoriteCount: number;
-//   createdAt: string;
-//   updatedAt: string;
-// }
 
 export type StoryPost = {
   title: string;
