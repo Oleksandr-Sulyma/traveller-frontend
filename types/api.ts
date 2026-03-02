@@ -1,5 +1,5 @@
 import { Story } from '@/types/story';
-
+import { User } from './user';
 export interface QueryParams {
   page?: number;
   perPage?: number;
@@ -23,4 +23,9 @@ export interface RegisterRequest {
 export interface LoginRequest {
   email: string;
   password: string;
+}
+
+export interface UsersHttpResponse {
+  users: User[];
+  totalPages: number;
 }
