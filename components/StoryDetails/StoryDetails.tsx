@@ -17,13 +17,17 @@ export default function StoryDetails({ story }: StoryDetailsProps) {
     const queryClient = useQueryClient();
 
 
+    const [alreadySaved, setAlreadySaved] = useState((story as any).isSaved || false);
 
     const { mutate, isPending } = useMutation({
         mutationFn: () => addToSave((story as any)._id),
         onSuccess: () => {
             toast.success("Історію збережено у вашому профілі!");
+            setAlreadySaved(true);
+
 
             queryClient.invalidateQueries({ queryKey: ["story", (story as any)._id] });
+            queryClient.invalidateQueries({ queryKey: ["saved-stories"] });
         },
         onError: (error: any) => {
             const status = error.response?.status;
@@ -31,6 +35,8 @@ export default function StoryDetails({ story }: StoryDetailsProps) {
             if (status === 401) {
                 setIsAuthModalOpen(true);
             } else if (status === 409) {
+
+                setAlreadySaved(true);
                 toast("Ця історія вже збережена", { icon: 'ℹ️' });
             } else {
                 toast.error(error.response?.data?.message || "Помилка збереження");
@@ -39,13 +45,21 @@ export default function StoryDetails({ story }: StoryDetailsProps) {
     });
 
     const handleSave = () => {
+
         if (!localStorage.getItem("token")) {
             setIsAuthModalOpen(true);
             return;
         }
+
+
+        if (alreadySaved) {
+            toast("Ця історія вже у вас у збережених", { icon: 'ℹ️' });
+            return;
+        }
+
+
         mutate();
     };
-
 
 
     return (
