@@ -16,7 +16,7 @@ import { isAxiosError } from 'axios';
 //     const res = await api.get('/stories', {
 //       params,
 //       headers: {
-//         Cookie: cookieStore.toString(),
+//         Cookie: cookieStore.getAll().map(c => `${c.name}=${c.value}`).join('; '),
 //       },
 //     });
 

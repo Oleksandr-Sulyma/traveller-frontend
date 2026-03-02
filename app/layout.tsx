@@ -24,6 +24,7 @@ import FooterWrapper from '@/components/Footer/FooterWrapper';
 import MainContent from '@/components/MainContent/MainContent';
 import TanStackProvider from '@/components/Providers/TanStackProvider';
 import { BASE_URL, SITE_DESCRIPTION, SITE_NAME, SITE_SMAL_DESCRIPTION } from '@/lib/constants/seo';
+import AuthProvider from '@/components/Providers/AuthProvider';
 
 export const metadata: Metadata = {
   metadataBase: new URL(BASE_URL),
@@ -52,12 +53,14 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       <body suppressHydrationWarning>
         <ThemeProvider>
           <TanStackProvider>
-            <HeaderWrapper hideOn={['/sign-up', '/sign-in']} />
-            <MainContent>{children}</MainContent>
+            <AuthProvider>
+              <HeaderWrapper hideOn={['/sign-up', '/sign-in']} />
+              <MainContent>{children}</MainContent>
 
-            <FooterWrapper hideOn={['/sign-up', '/sign-in']} />
-            <Toaster position="bottom-right" />
-            <div id="modal-root"></div>
+              <FooterWrapper hideOn={['/sign-up', '/sign-in']} />
+              <Toaster position="bottom-right" />
+              <div id="modal-root"></div>
+            </AuthProvider>
           </TanStackProvider>
         </ThemeProvider>
       </body>
