@@ -8,7 +8,7 @@ const StoriesPage = () => {
   const [activeTab, setActiveTab] = useState('state1');
 
   const handleTabChange = (selectedState: 'state1' | 'state2') => {
-  setActiveTab(selectedState);
+    setActiveTab(selectedState);
   };
 
   return (
@@ -26,7 +26,7 @@ const StoriesPage = () => {
             Якщо activeTab дорівнює 'state1' — рендеримо список збережених.
             Якщо activeTab дорівнює 'state2' — рендеримо список власних історій.
         */}
-        
+
         {activeTab === 'state1' && <SavedStoriesList />}
         {activeTab === 'state2' && <MyStoriesList />}
       </section>
