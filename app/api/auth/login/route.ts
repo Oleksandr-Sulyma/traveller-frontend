@@ -24,6 +24,7 @@ export async function POST(req: NextRequest) {
         };
         if (parsed.accessToken) cookieStore.set('accessToken', parsed.accessToken, options);
         if (parsed.refreshToken) cookieStore.set('refreshToken', parsed.refreshToken, options);
+        if (parsed.sessionId) cookieStore.set('sessionId', parsed.sessionId, options);
       }
 
       return NextResponse.json(apiRes.data, { status: apiRes.status });
@@ -35,7 +36,7 @@ export async function POST(req: NextRequest) {
       logErrorResponse(error.response?.data);
       return NextResponse.json(
         { error: error.message, response: error.response?.data },
-        { status: error.status }
+        { status: error.response?.status ?? 500 } // ← було error.status
       );
     }
     logErrorResponse({ message: (error as Error).message });
