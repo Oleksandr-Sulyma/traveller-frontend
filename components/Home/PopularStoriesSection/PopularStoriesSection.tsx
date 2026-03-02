@@ -1,25 +1,38 @@
+'use client';
+
+import { useEffect, useState } from 'react';
 import css from './PopularStoriesSection.module.css';
-import { fetchStories } from '@/lib/api/serverApi';
 import StoryCard from '@/components/StoryCard/StoryCard';
 import Loader from '@/components/Loader/Loader';
 import GridContainer from '@/styles/components/GridContainer/GridContainer';
 import Link from 'next/link';
 import { Story } from '@/types/story';
+import { fetchStories } from '@/lib/api/clientApi';
 
-export default async function PopularStoriesSection() {
-  let stories: Story[] = [];
+export default function PopularStoriesSection() {
+  const [stories, setStories] = useState<Story[]>([]);
+  const [loading, setLoading] = useState(true);
 
-  try {
-    const response = await fetchStories({
-      perPage: 4,
-      sortBy: 'favoriteCount',
-    });
-    stories = response?.stories || [];
-  } catch (error) {
-    console.error('Failed to fetch stories:', error);
-  }
+  useEffect(() => {
+    const loadStories = async () => {
+      try {
+        const response = await fetchStories({
+          perPage: 4,
+          sortBy: 'favoriteCount',
+        });
+        setStories(response?.stories || []);
+      } catch (error) {
+        console.error('Failed to fetch stories:', error);
+      } finally {
+        setLoading(false);
+      }
+    };
 
-  const displayStories = stories.length > 0 ? stories : Array(4).fill({ id: 'skeleton' });
+    loadStories();
+  }, []);
+
+  // Якщо ще завантажуються дані або немає, показуємо скелетони
+  const displayStories = loading ? Array(4).fill({ id: 'skeleton' }) : stories;
 
   return (
     <section className={`container ${css.section}`}>

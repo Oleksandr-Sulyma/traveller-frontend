@@ -1,32 +1,43 @@
+'use client';
+
+import { useEffect, useState } from 'react';
 import Link from 'next/link';
 import css from './TopTravellers.module.css';
 import Loader from '@/components/Loader/Loader';
 import GridContainer from '@/styles/components/GridContainer/GridContainer';
 import TravelerCard from '@/components/TravellerCard/TravellerCard';
-import { fetchAllUsers } from '@/lib/api/serverApi';
+import { fetchAllUsers } from '@/lib/api/clientApi';
 import { User } from '@/types/user';
 
-export default async function TopTravellers() {
-  let users: User[] = [];
+export default function TopTravellers() {
+  const [users, setUsers] = useState<User[]>([]);
+  const [loading, setLoading] = useState(true);
 
-  try {
-    // Використовуємо серверний запит
-    const data = await fetchAllUsers({
-      page: 1,
-      perPage: 4,
-      sortBy: 'articlesAmount',
-      sortOrder: 'desc',
-    });
+  useEffect(() => {
+    const loadUsers = async () => {
+      try {
+        const data = await fetchAllUsers({
+          page: 1,
+          perPage: 4,
+          sortBy: 'articlesAmount',
+          sortOrder: 'desc',
+        });
 
-    if (data && data.users) {
-      users = data.users;
-    }
-  } catch (error) {
-    console.error('Помилка при отриманні мандрівників на сервері:', error);
-  }
+        if (data && data.users) {
+          setUsers(data.users);
+        }
+      } catch (error) {
+        console.error('Помилка при отриманні мандрівників:', error);
+      } finally {
+        setLoading(false);
+      }
+    };
 
-  // Якщо даних немає (наприклад, помилка API), показуємо скелетони
-  const displayUsers = users.length > 0 ? users : Array(4).fill({ id: 'skeleton' });
+    loadUsers();
+  }, []);
+
+  // Якщо даних ще немає або loading, показуємо скелетони
+  const displayUsers = loading ? Array(4).fill({ id: 'skeleton' }) : users;
 
   return (
     <section className="container">
