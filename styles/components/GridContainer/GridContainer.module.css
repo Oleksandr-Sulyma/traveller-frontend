@@ -1,6 +1,6 @@
 .grid {
   display: grid;
-  gap: 24px; 
+  gap: 24px;
   width: 100%;
   justify-content: center;
   list-style: none;
@@ -16,7 +16,7 @@
 @media (min-width: 768px) {
   .travellers {
     grid-template-columns: repeat(2, minmax(0, 335px));
-    gap: 24px; 
+    gap: 24px;
   }
 }
 
@@ -27,7 +27,6 @@
   }
 }
 
-/* Варіант для історій (опціонально): 1 -> 2 -> 3 колонки */
 .stories {
   grid-template-columns: repeat(1, minmax(0, 335px));
 }

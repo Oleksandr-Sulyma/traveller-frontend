@@ -30,16 +30,17 @@ export type StoryPost = {
 };
 
 export interface Story {
-  _id: string;        // У Swagger це _id
+  id: string; // У Swagger це id
   title: string;
   article: string;
-  img: string;        // Тут ок
+  img: string; // Тут ок
   category: {
-    _id: string;
+    id: string;
     name: string;
   };
-  ownerId: {          // У Swagger це ownerId, а не owner
-    _id: string;
+  ownerId: {
+    // У Swagger це ownerId, а не owner
+    id: string;
     name: string;
     avatarUrl: string;
   };

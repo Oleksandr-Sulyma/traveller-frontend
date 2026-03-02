@@ -60,7 +60,7 @@ export default function StoryForm() {
     mutationFn: createStory,
     onSuccess(data) {
       queryClient.invalidateQueries({ queryKey: ['stories'] });
-      router.push(`/stories/${data._id}`);
+      router.push(`/stories/${data.id}`);
       clearDraft();
     },
     onError() {

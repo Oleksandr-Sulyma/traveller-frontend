@@ -143,7 +143,6 @@
 //   );
 // }
 
-
 'use client';
 
 import { useState } from 'react';
@@ -154,7 +153,7 @@ import styles from './StoryCard.module.css';
 import type { Story } from '../../types/story';
 
 interface StoryCardProps {
-  _id?: string;
+  id?: string;
   title?: string;
   article?: string;
   img?: string;
@@ -166,7 +165,7 @@ interface StoryCardProps {
 }
 
 export default function StoryCard({
-  _id,
+  id,
   title,
   article,
   img,
@@ -180,8 +179,8 @@ export default function StoryCard({
   const [isSaving, setIsSaving] = useState(false);
   const [saved, setSaved] = useState(false);
 
-  // Якщо _id немає, рендеримо порожню картку (заглушку)
-  if (!_id) {
+  // Якщо id немає, рендеримо порожню картку (заглушку)
+  if (!id) {
     return <div className={`${styles.story_card} ${styles.skeleton}`}></div>;
   }
 
@@ -190,9 +189,9 @@ export default function StoryCard({
     setIsSaving(true);
 
     try {
-      const res = await fetch(`/api/stories/${_id}/save`, { 
-        method: 'POST', 
-        credentials: 'include' 
+      const res = await fetch(`/api/stories/${id}/save`, {
+        method: 'POST',
+        credentials: 'include',
       });
 
       if (res.status === 401) {
@@ -226,7 +225,7 @@ export default function StoryCard({
         <div className={styles.after_text_wrapper}>
           <div className={styles.story_card_author}>
             <img
-              src={ownerId?.avatarUrl || '/default-avatar.png'}
+              src={ownerId?.avatarUrl || '/images/default-avatar.png'}
               alt={ownerId?.name}
               className={styles.story_card_author_avatar}
             />
@@ -249,7 +248,7 @@ export default function StoryCard({
 
           <div className={styles.story_card_footer}>
             <Link
-              href={`/stories/${_id}`}
+              href={`/stories/${id}`}
               className={`btn btn-secondary ${styles.story_card_button}`}
             >
               {buttonText}
