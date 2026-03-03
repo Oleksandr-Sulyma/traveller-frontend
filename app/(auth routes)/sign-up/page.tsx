@@ -1,14 +1,16 @@
 'use client';
 
 import css from './SignUpPage.module.css';
+import toast from 'react-hot-toast';
 import Link from 'next/link';
 import * as Yup from 'yup';
 import { ErrorMessage, Field, Form, Formik, FormikHelpers } from 'formik';
+import { useAuthStore } from '@/lib/store/authStore';
 import { useMutation } from '@tanstack/react-query';
 import { register } from '@/lib/api/clientApi';
 import { useRouter } from 'next/navigation';
 import { useId } from 'react';
-import { useAuthStore } from '@/lib/store/authStore';
+import { AxiosError } from 'axios';
 
 interface FormValues {
   name: string;
@@ -18,14 +20,17 @@ interface FormValues {
 
 const initialValues: FormValues = { name: '', email: '', password: '' };
 
-const passwordRules = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&]).{8,}$/;
+const passwordRules = /^(?=.*\p{Ll})(?=.*\p{Lu})(?=.*\d)(?=.*[@$!%*?&]).{8,}$/u;
 
 const RegisterSchema = Yup.object().shape({
   name: Yup.string()
     .trim()
     .min(5, 'Ім’я користувача має містити щонайменше 5 символів')
-    .max(30, 'Ім’я користувача має містити не більше 30 символів')
-    .matches(/^[a-zA-Z0-9_]+$/, 'Можна використовувати лише літери, цифри та підкреслення')
+    .max(40, 'Ім’я користувача має містити не більше 40 символів')
+    .matches(
+      /^[\p{L}\p{N}_ ]+$/u,
+      'Можна використовувати лише літери, цифри, підкреслення та пробіл'
+    )
     .required('Будь ласка, введіть ім’я користувача'),
 
   email: Yup.string()
@@ -51,12 +56,26 @@ export default function SignUp() {
     mutationFn: register,
     onSuccess: user => {
       setUser(user);
+      toast.success('Акаунт створено! Перенаправляємо до профілю...');
       router.push('/profile');
+    },
+    onError: (err: AxiosError) => {
+      const status = err.response?.status ?? 0;
+
+      const errorMessages: Record<number, string> = {
+        400: 'Будь ласка, перевірте правильність заповнення форми.',
+        409: 'Email вже зареєстрований. Спробуйте увійти або використати інший email.',
+        422: 'Пароль має бути не менше 8 символів і містити велику літеру, цифру та спеціальний символ.',
+        500: 'Виникла помилка на сервері. Спробуйте пізніше.',
+      };
+
+      toast.error(errorMessages[status] ?? 'Не вдалося завершити реєстрацію. Спробуйте ще раз.');
     },
   });
 
   const handleSubmit = (values: FormValues, actions: FormikHelpers<FormValues>) => {
     mutate(
+      // @ts-ignore
       { name: values.name, email: values.email, password: values.password },
       { onSuccess: () => actions.resetForm() }
     );

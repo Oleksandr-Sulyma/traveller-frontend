@@ -4,7 +4,7 @@ import { useEffect, useState } from 'react';
 import type { User } from '@/types/user';
 import TravelerCard from '@/components/TravellerCard/TravellerCard';
 import Pagination from '@/components/Pagination/Pagination';
-import { api } from '../../api/api';
+import nextServer  from '@/lib/api/api';
 import css from './TravellersPage.module.css';
 
 type UsersResponse =
@@ -46,7 +46,7 @@ export default function Page() {
   setIsLoading(true);
 
   try {
-    const { data } = await api.get(
+    const { data } = await nextServer.get(
       '/users',
       { params: { page: 1, perPage: limit } }
     );

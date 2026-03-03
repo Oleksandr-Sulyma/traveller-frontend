@@ -7,15 +7,17 @@ const SavedStories = ({ stories }: SavedStoriesProps) => {
     return (
         <section>
             <div className="container">
-                {stories.length != 0 ?
-                    stories.map((story) => (
-                        <StoryCard key={story.id} {...story} />
-                    )) : 
-                    <div className={css.div}>
-                        <h2 className={css.title}>У вас ще немає збережених історій, мершій збережіть вашу першу історію!</h2>
-                        <Link href="/stories" className={css.btn}>До історій</Link>
-                    </div>
+                <div className={css.wrapDiv}>
+                    {stories.length != 0 ?
+                        stories.map((story) => (
+                            <StoryCard key={story.id} {...story} />
+                        )) : 
+                        <div className={css.div}>
+                            <h2 className={css.title}>У вас ще немає збережених історій, мершій збережіть вашу першу історію!</h2>
+                            <Link href="/stories" className={css.btn}>До історій</Link>
+                        </div>
                     }
+                </div>
             </div>
         </section>
     )

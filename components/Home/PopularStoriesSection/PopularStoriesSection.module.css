@@ -1,0 +1,48 @@
+.section {
+  /* padding: 60px 0; */
+}
+
+.title {
+  /* Заголовок з початку */
+  text-align: left;
+  margin-bottom: 40px;
+}
+
+.btn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  margin-top: 40px;
+}
+
+@media (max-width: 767px) {
+  .btn {
+    display: none;
+  }
+
+  .popular_grid li:nth-child(n + 4) {
+    display: none;
+  }
+}
+
+@media (min-width: 768px) {
+  .popular_grid li:nth-child(4) {
+    display: block;
+  }
+}
+
+@media (min-width: 1440px) {
+  .popular_grid li:nth-child(4) {
+    display: none;
+  }
+}
+
+.loader_wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 450px;
+  background: var(--color-royal-blue-lightest);
+  border-radius: 12px;
+}
