@@ -1,10 +1,9 @@
 import axios from 'axios';
 
-const baseURL = process.env.NEXT_PUBLIC_API_URL +'/api' ;
-
+const baseURL = process.env.NEXT_PUBLIC_API_URL
 const nextServer = axios.create({
-  baseURL: '/api', // ← через Next.js route handlers
-  withCredentials: true,
+  baseURL:'/api' // ← через Next.js route handlers
+  // withCredentials: true,
 });
 
 nextServer.interceptors.request.use((config) => {
