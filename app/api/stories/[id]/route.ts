@@ -47,4 +47,37 @@ export async function GET(request: Request, { params }: Props) {
 }
 
 
-export async function PATCH() {}
+export async function PATCH(request: Request, { params }: Props) {
+  try {
+    const cookieStore = await cookies();
+    const cookieString = cookieStore.getAll().map(c => `${c.name}=${c.value}`).join('; ');
+    const { id } = await params;
+
+    if (!id || id === 'undefined') {
+      return NextResponse.json({ error: 'Story ID is missing' }, { status: 400 });
+    }
+
+    const formData = await request.formData();
+
+    const res = await api.patch(`/stories/${id}`, formData, {
+      headers: {
+        Cookie: cookieString,
+      },
+    });
+
+    return NextResponse.json(res.data, { status: res.status });
+  } catch (error) {
+    if (isAxiosError(error)) {
+      logErrorResponse(error.response?.data);
+      return NextResponse.json(
+        { error: error.message, response: error.response?.data },
+        { status: error.response?.status || 500 }
+      );
+    }
+    logErrorResponse({ message: (error as Error).message });
+    return NextResponse.json(
+      { error: 'Internal Server Error' },
+      { status: 500 }
+    );
+  }
+}
