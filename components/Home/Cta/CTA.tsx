@@ -1,9 +1,12 @@
+'use client';
+
 import Link from 'next/link';
 import css from './CTA.module.css';
-
-let isAuth = false;
+import { useAuthStore } from '@/lib/store/authStore';
 
 export default function CTA() {
+  const { isAuthenticated } = useAuthStore();
+
   return (
     <section className="container">
       <div className={css.position}>
@@ -13,7 +16,7 @@ export default function CTA() {
             Долучайтеся до мандрівників, які діляться своїми історіями та надихають на нові пригоди.
           </p>
 
-          {isAuth ? (
+          {isAuthenticated ? (
             <Link className="btn btn-primary" style={{ height: '48px' }} href="/profile/saved">
               Збережені
             </Link>

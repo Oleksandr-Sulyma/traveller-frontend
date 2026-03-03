@@ -63,13 +63,13 @@
 @media (min-width: 1440px) {
   .wrapper {
     padding: 64px;
-    background-image: 
-    linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)),
-    image-set(
-      url('/images/cta/desktop@1x.webp') 1x,
-      url('/images/cta/desktop@2x.webp') 2x,
-      url('/images/cta/desktop@3x.webp') 3x
-    );
+    background-image:
+      linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)),
+      image-set(
+        url('/images/cta/desktop@1x.webp') 1x,
+        url('/images/cta/desktop@2x.webp') 2x,
+        url('/images/cta/desktop@3x.webp') 3x
+      );
     background-size: cover;
     background-position: center;
   }
