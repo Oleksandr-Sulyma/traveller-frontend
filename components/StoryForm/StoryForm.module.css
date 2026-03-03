@@ -1,0 +1,102 @@
+.loader {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 1000;
+}
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  max-width: 1152px;
+  /* margin: 0 auto; */
+}
+
+.coverRow {
+  display: grid;
+  grid-template-columns: auto 423px;
+  gap: 24px;
+  align-items: flex-start;
+  /* min-width: 0; */
+}
+
+.coverBlock {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  max-width: 865px;
+  /* min-width: 0; */
+}
+
+.label {
+  font-size: 18px;
+  font-weight: 400;
+  /* margin-bottom: 8px; */
+}
+
+/* .formGroup {
+  margin-bottom: 24px;
+} */
+
+.formFields {
+  max-width: 865px;
+  margin-bottom: 72px;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.error {
+  font-size: 12px;
+  color: #e11d48;
+  margin-top: 4px;
+}
+
+.actions {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-top: 36px;
+}
+
+.submitButton,
+.cancelButton {
+  width: 100%;
+  padding: 12px 16px;
+  border-radius: 10px;
+  font-size: 16px;
+  font-weight: 500;
+}
+
+.submitButton {
+  background-color: #111827;
+  color: #f9fafb;
+}
+
+.cancelButton {
+  background-color: transparent;
+  border: 1px solid #d1d5db;
+}
+
+.title {
+  font-weight: 700;
+  margin-bottom: 48px;
+  margin-top: 48px;
+}
+
+@media (max-width: 768px) {
+  .coverRow {
+    grid-template-columns: 1fr;
+  }
+
+  .actions {
+    flex-direction: row;
+  }
+
+  .submitButton,
+  .cancelButton {
+    width: auto;
+    flex: 1;
+  }
+}

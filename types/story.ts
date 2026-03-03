@@ -1,15 +1,39 @@
-import { User } from "./user";
-import { Category } from "./category"; 
+export interface Category {
+  id: string;
+  name: string;
+}
+
+export interface Owner {
+  id: string;
+  name: string;
+  avatarUrl: string;
+}
+
+
+export type StoryPost = {
+  title: string;
+  article: string;
+  category: string;
+  img: File;
+};
 
 export interface Story {
-    _id: string;
-    title: string;
-    article: string;
-    img: string; 
-    category: Category;
-    ownerId: Pick<User, '_id' | 'name'> & Partial<Pick<User, 'avatarUrl'>>;
-    date: string;      
-    favoriteCount: number;
-    createdAt: string;
-    updatedAt: string;
-  }
+  id: string; // У Swagger це id
+  title: string;
+  article: string;
+  img: string; // Тут ок
+  category: {
+    id: string;
+    name: string;
+  };
+  ownerId: {
+    // У Swagger це ownerId, а не owner
+    id: string;
+    name: string;
+    avatarUrl: string;
+  };
+  favoriteCount: number;
+  formattedDate: string; // Swagger повертає вже відформатовану дату
+  createdAt: string;
+  updatedAt: string;
+}

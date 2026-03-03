@@ -1,96 +1,139 @@
-import { User } from "@/types/user";
-import nextServer from "./api";
-import { Story } from "@/types/story";
+import nextServer from './api';
+import { Story, StoryPost } from '@/types/story';
+import { User } from '@/types/user';
+import { Category } from '@/types/category';
+import {
+  QueryParams,
+  StoryHttpResponse,
+  RegisterRequest,
+  LoginRequest,
+  UsersHttpResponse,
+} from '@/types/api';
 
-export interface StoryHttpResponse {
-  stories: Story[];
-  totalPages: number;
-}
+export const fetchStories = async (params?: QueryParams): Promise<StoryHttpResponse> => {
+  const { data } = await nextServer.get('/stories', { params });
+  return data;
+};
 
-export default async function fetchStories(
-  query: string,
-  page: number,
-): Promise<StoryHttpResponse> {
-  const response = await nextServer.get<StoryHttpResponse>("/stories", {
-    params: {
-      search: query,
-      page,
-      perPage: 12,
-    },
-  });
+export const fetchAllUsers = async (params?: QueryParams): Promise<UsersHttpResponse> => {
+  const { data } = await nextServer.get<UsersHttpResponse>('/users', { params });
+  return data;
+};
 
+export const getStoryById = async (id: string): Promise<Story> => {
+  const { data } = await nextServer.get(`/stories/${id}`);
+  return data;
+};
+
+export const getOwnStories = async (): Promise<Story[]> => {
+  const { data } = await nextServer.get('/stories/own');
+  return data;
+};
+
+export const getSavedStories = async (): Promise<Story[]> => {
+  const { data } = await nextServer.get('/stories/saved');
+  return data;
+};
+
+export const createStory = async (input: StoryPost): Promise<Story> => {
+  const formData = new FormData();
+  formData.append('title', input.title);
+  formData.append('article', input.article);
+  formData.append('category', input.category);
+  if (input.img) {
+    formData.append('img', input.img as any);
+  }
+
+  const { data } = await nextServer.post<Story>('/stories', formData);
+  return data;
+};
+
+export const updateStory = async (storyId: string, input: Partial<StoryPost>): Promise<Story> => {
+  const formData = new FormData();
+  if (input.title != null) formData.append('title', input.title);
+  if (input.article != null) formData.append('article', input.article);
+  if (input.category != null) formData.append('category', input.category);
+  if (input.img != null) formData.append('img', input.img);
+
+  const { data } = await nextServer.patch(`/stories/${storyId}`, formData);
+  return data;
+};
+
+export const saveStory = async (storyId: string): Promise<Story> => {
+  const { data } = await nextServer.post(`/stories/${storyId}/save`);
+  return data;
+};
+
+export const register = async (payload: RegisterRequest): Promise<User> => {
+  const { data } = await nextServer.post<User>('/auth/register', payload);
+  return data;
+};
+
+export const login = async (payload: LoginRequest): Promise<User> => {
+  const { data } = await nextServer.post('/auth/login', payload);
+  return data;
+};
+
+export const refresh = async () => {
+  const { data } = await nextServer.post('/auth/refresh');
+  return data;
+};
+
+export const logout = async (): Promise<void> => {
+  await nextServer.post('/auth/logout');
+};
+
+export const requestResetEmail = async (email: string) => {
+  const { data } = await nextServer.post('/auth/reset-email', { email });
+  return data;
+};
+
+export const resetPassword = async (password: string, token: string) => {
+  const { data } = await nextServer.post('/auth/reset-password', { password, token });
+  return data;
+};
+
+export const getMe = async (): Promise<User> => {
+  const { data } = await nextServer.get('/users/me');
+  return data;
+};
+
+export const getUserById = async (id: string): Promise<User> => {
+  const { data } = await nextServer.get(`/users/${id}`);
+  return data;
+};
+
+export const updateProfile = async (payload: {
+  name?: string;
+  description?: string;
+}): Promise<User> => {
+  const { data } = await nextServer.patch('/users/me/profile', payload);
+  return data;
+};
+
+export const patchAvatarMe = async (file: File): Promise<User> => {
+  const formData = new FormData();
+  formData.append('avatar', file);
+
+  const { data } = await nextServer.patch('/users/me/avatar', formData);
+
+  return data;
+};
+
+export const fetchCategories = async (): Promise<Category[]> => {
+  const { data } = await nextServer.get('/categories');
+  return data;
+};
+export async function addToSave(storyId: string): Promise<Story> {
+
+  const response = await nextServer.post<Story>(`/stories/${storyId}/save`,{});
+  
   return response.data;
 }
 
-export async function fetchStoryById(id: string): Promise<Story> {
-  const responseById = await nextServer.get<Story>(`/stories/${id}`);
-  return responseById.data;
+
+
+export async function removeFromSave(storyId: string): Promise<Story> {
+  const response = await nextServer.delete<Story>(`/stories/${storyId}/save`);
+  return response.data;
 }
-
-export interface CreateStoryPost {
-  title: string;
-  article: string;
-}
-
-export async function createStory({
-  title,
-  article,
-}: CreateStoryPost): Promise<Story> {
-  const postResponse = await nextServer.post<Story>("/stories", {
-    title,
-    article,
-  });
-  return postResponse.data;
-}
-
-export async function deleteStory(id: string): Promise<Story> {
-  const deleteResponse = await nextServer.delete<Story>(`/stories/${id}`);
-  return deleteResponse.data;
-}
-
-export interface RegisterRequest {
-  email: string;
-  password: string;
-}
-
-// export interface UserRegister {
-//   username: string;
-//   email: string;
-// }
-
-export async function register(data: RegisterRequest) {
-  const res = await nextServer.post<User>("/auth/register", data);
-  return res.data;
-}
-
-export async function login(data: RegisterRequest) {
-  const res = await nextServer.post<User>("/auth/login", data);
-  return res.data;
-}
-
-export const logout = async (): Promise<void> => {
-  await nextServer.post("/auth/logout");
-};
-
-interface CheckSessionRequest {
-  success: boolean;
-}
-
-export async function checkSession() {
-  const res = await nextServer.get<CheckSessionRequest>("/auth/session");
-  return res.data.success;
-}
-
-export const getMe = async () => {
-  const res = await nextServer.get<User>("/users/me");
-  return res.data;
-};
-
-export interface UpdateUserRequest {
-  username: string;
-}
-
-export const updateMe = async (payload: UpdateUserRequest) => {
-  const res = await nextServer.patch<User>("/users/me", payload);
-  return res.data;
-};
