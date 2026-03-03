@@ -9,10 +9,10 @@ import css from "./StoryDetailsPage.module.css"
 import PopularStoriesSection from "@/components/Home/PopularStoriesSection/PopularStoriesSection";
 
 
+
 interface Props {
     storyId: string;
 }
-
 
 
 export default function StoryDetailsClient({ storyId }: Props) {
@@ -40,10 +40,12 @@ export default function StoryDetailsClient({ storyId }: Props) {
                 <StoryDetails story={story} />
             </section>
             <section className={`section ${css.popularSection}`}>
+
                 {/* <h2 className={css.titlePopularStory}>Популярні історії</h2> */}
                 <div>
                     <PopularStoriesSection />
                 </div>
+
             </section>
         </main>
     )

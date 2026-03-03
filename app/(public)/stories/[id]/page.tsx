@@ -10,15 +10,14 @@ interface StoryDetailsPageProps {
   params: Promise<{ id: string }>
 }
 
-
 export async function generateMetadata({ params }: StoryDetailsPageProps): Promise<Metadata> {
   const { id } = await params;
 
   try {
-    // Делаем запрос. Если он упадет, сработает catch ниже.
+    
     const story = await getStoryById(id);
 
-    // Используем опциональную цепочку (?.) для безопасности
+    
     const title = story?.title ? `${story.title} | Подорожники` : "Історія | Подорожники";
     const description = story?.article?.slice(0, 160) || "Подорожники — цікаві історії";
 
@@ -32,14 +31,14 @@ export async function generateMetadata({ params }: StoryDetailsPageProps): Promi
       },
     };
   } catch (error) {
-    // Если API не ответил или ID плохой — просто возвращаем стандартный заголовок
-    // Страница НЕ упадет, а попытается отрендериться дальше
+    
     return {
       title: "Подорожники - Історія",
       description: "Цікаві історії про подорожі"
     };
   }
 }
+
 
 
 export default async function StoryDetailsPage(params: StoryDetailsPageProps) {

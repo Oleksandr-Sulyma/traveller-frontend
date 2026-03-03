@@ -19,6 +19,7 @@ export default function StoryDetails({ story }: StoryDetailsProps) {
     const [alreadySaved, setAlreadySaved] = useState(false);
 
 
+
     console.log(`id for mutate:${(story as any)._id}`);
 
     const { mutate, isPending } = useMutation({
@@ -29,7 +30,9 @@ export default function StoryDetails({ story }: StoryDetailsProps) {
             setAlreadySaved(true);
 
 
+
             queryClient.invalidateQueries({ queryKey: ["story", story.id || (story as any)._id] });
+
             queryClient.invalidateQueries({ queryKey: ["saved-stories"] });
         },
         onError: (error: any) => {

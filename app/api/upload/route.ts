@@ -14,7 +14,7 @@ export async function POST(request: NextRequest) {
 
     const res = await api.post('/upload', formData, {
       headers: {
-        Cookie: cookieStore.toString(),
+        Cookie: cookieStore.getAll().map(c => `${c.name}=${c.value}`).join('; '),
       },
     });
 

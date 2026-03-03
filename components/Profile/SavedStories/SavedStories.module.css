@@ -2,7 +2,6 @@
     background: #e8eeff;
     padding: 40px 32px;
     max-width: 533px;
-    margin-top: 40px;
     border-radius: 24px;
 
     margin-bottom: 72px;
@@ -30,4 +29,12 @@
     border: 1px solid #4169e1;
     border-radius: 8px;
     padding: 10px 12px;
+}
+
+.wrapDiv {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 24px;
+
+    margin-top: 40px;
 }
