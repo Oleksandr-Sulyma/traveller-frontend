@@ -1,3 +1,4 @@
+// import { useAuthStore } from '@/lib/store/authStore';
 import styles from './Hero.module.css';
 import Image from 'next/image';
 import Link from 'next/link';
@@ -8,17 +9,16 @@ export default function Hero() {
       <picture>
         <source
           media="(min-width: 1440px)"
-          srcSet="/images/hero/desktop@1x.webp 1x, /images/hero/desktop@2x.webp 2x"
+          srcSet="/images/hero/desktop@1x.webp 1x, /images/hero/desktop@2x.webp 2x, /images/hero/desktop@3x.webp 3x"
         />
         <source
           media="(min-width: 768px)"
-          srcSet="/images/hero/tablet@1x.webp 1x, /images/hero/tablet@2x.webp 2x"
+          srcSet="/images/hero/tablet@1x.webp 1x, /images/hero/tablet@2x.webp 2x, /images/hero/tablet@3x.webp 3x"
         />
         <Image
-          src="/images/hero/mobile@1x.webp"
+          src="/images/hero/desktop@1x.webp"
           alt="Traveler Background"
           fill
-          priority
           quality={75}
           className={styles['hero-image']}
         />

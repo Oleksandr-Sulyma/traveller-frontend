@@ -1,9 +1,12 @@
+"use client"
 import Link from 'next/link';
 import css from './Join.module.css';
-
-let isAuth = false;
+import { useAuthStore } from '@/lib/store/authStore';
 
 export default function Join() {
+
+const isAuth = useAuthStore();
+
   return (
     <section id="join" className="container">
       <div className={css.position}>

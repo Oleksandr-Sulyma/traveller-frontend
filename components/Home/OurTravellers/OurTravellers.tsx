@@ -13,13 +13,13 @@ interface RequestUser {
 
 export default function OurTravellers() {
   const [users, setUsers] = useState<User[]>([]);
-  const perPage = 4;
 
-  const fetchUsers = async (perPage: number, nextPage: number) => {
+
+  const fetchUsers = async () => {
     try {
       const { data } = await axios.get<RequestUser>(
-        'https://traveller-backend-lia1.onrender.com/users',
-        { params: { page: nextPage, perPage } }
+        'https://traveller-backend-lia1.onrender.com/users?page=1&perPage=4',
+        
       );
 
       setUsers([...data.users]);
@@ -29,7 +29,7 @@ export default function OurTravellers() {
   };
 
   useEffect(() => {
-    fetchUsers(perPage, 1);
+    fetchUsers();
   }, []);
   return (
     <section className="container">
