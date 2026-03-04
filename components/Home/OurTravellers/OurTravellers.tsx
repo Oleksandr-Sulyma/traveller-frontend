@@ -51,7 +51,7 @@ export default function OurTravellers() {
           <Link
             className="btn btn-primary"
             style={{ height: '48px', width: '156px' }}
-            href="/travellers"
+            href="/app/(public)/travellers"
           >
             Переглянути всіх
           </Link>

@@ -70,7 +70,7 @@ export const register = async (payload: RegisterRequest): Promise<User> => {
 };
 
 export const login = async (payload: LoginRequest): Promise<User> => {
-  const { data } = await nextServer.post('/auth/login', payload);
+  const { data } = await nextServer.post('/auth/auth/login', payload);
   return data;
 };
 

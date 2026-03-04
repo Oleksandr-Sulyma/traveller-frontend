@@ -1,30 +1,30 @@
-.wrapper {
+/* .wrapper {
   padding-block: 40px;
 }
 
 .title {
   margin-bottom: 32px;
   text-align: left;
-}
+} */
 
 /* Контейнер для лоадера, щоб він займав місце картки */
-.loader_item {
+/* .loader_item {
   display: flex;
   justify-content: center;
   align-items: center;
-  min-height: 400px; /* Висота приблизно як у TravelerCard */
+  min-height: 400px; 
   background: var(--color-scheme-2-foreground);
   border-radius: 16px;
-}
+} */
 
-.action_wrapper {
+/* .action_wrapper {
   margin-top: 40px;
   display: flex;
   justify-content: center;
-}
+} */
 
 /* Логіка приховування кнопки на мобільних */
-.mobile_hidden {
+/* .mobile_hidden {
   display: none;
 }
 
@@ -32,4 +32,4 @@
   .mobile_hidden {
     display: flex;
   }
-}
+} */
