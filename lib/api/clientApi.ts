@@ -1,5 +1,5 @@
 import nextServer from './api';
-import { Story, StoryPost } from '@/types/story';
+import { Story, StoryPost, StoryUpdate } from '@/types/story';
 import { User } from '@/types/user';
 import { Category } from '@/types/category';
 import {
@@ -9,6 +9,10 @@ import {
   LoginRequest,
   UsersHttpResponse,
 } from '@/types/api';
+
+/* Примітка: Припускаємо, що nextServer вже має налаштований baseURL.
+  Якщо токени в куках, переконайтеся, що в axios інстансі стоїть withCredentials: true
+*/
 
 export const fetchStories = async (params?: QueryParams): Promise<StoryHttpResponse> => {
   const { data } = await nextServer.get('/stories', { params });
@@ -41,15 +45,32 @@ export const createStory = async (input: StoryPost): Promise<Story> => {
   formData.append('article', input.article);
   formData.append('category', input.category);
   if (input.img) {
-    formData.append('img', input.img as any);
+    formData.append('img', input.img);
   }
 
-  const { data } = await nextServer.post<Story>('/stories', formData);
+  const { data } = await nextServer.post<Story>('/stories', formData, {
+    headers: { 'Content-Type': 'multipart/form-data' },
+  });
   return data;
 };
 
-export const updateStory = async (storyId: string, payload: Partial<StoryPost>): Promise<Story> => {
-  const { data } = await nextServer.patch(`/stories/${storyId}`, payload);
+export const updateStory = async (storyId: string, payload: StoryUpdate): Promise<Story> => {
+  const hasFile = payload.img instanceof File;
+
+  if (hasFile) {
+    const formData = new FormData();
+    if (payload.title) formData.append('title', payload.title);
+    if (payload.article) formData.append('article', payload.article);
+    if (payload.category) formData.append('category', payload.category);
+    if (payload.img) formData.append('img', payload.img);
+
+    const { data } = await nextServer.patch<Story>(`/stories/${storyId}`, formData, {
+      headers: { 'Content-Type': 'multipart/form-data' },
+    });
+    return data;
+  }
+
+  const { data } = await nextServer.patch<Story>(`/stories/${storyId}`, payload);
   return data;
 };
 
@@ -58,13 +79,17 @@ export const saveStory = async (storyId: string): Promise<Story> => {
   return data;
 };
 
+/* =========================
+   AUTH (Tokens in Cookies)
+   ========================= */
+
 export const register = async (payload: RegisterRequest): Promise<User> => {
   const { data } = await nextServer.post<User>('/auth/register', payload);
   return data;
 };
 
 export const login = async (payload: LoginRequest): Promise<User> => {
-  const { data } = await nextServer.post('/auth/login', payload);
+  const { data } = await nextServer.post<User>('/auth/login', payload);
   return data;
 };
 
@@ -86,6 +111,10 @@ export const resetPassword = async (password: string, token: string) => {
   const { data } = await nextServer.post('/auth/reset-password', { password, token });
   return data;
 };
+
+/* =========================
+   USERS & PROFILE
+   ========================= */
 
 export const getMe = async (): Promise<User> => {
   const { data } = await nextServer.get('/users/me');
@@ -109,10 +138,16 @@ export const patchAvatarMe = async (file: File): Promise<User> => {
   const formData = new FormData();
   formData.append('avatar', file);
 
-  const { data } = await nextServer.patch('/users/me/avatar', formData);
+  const { data } = await nextServer.patch<User>('/users/me/avatar', formData, {
+    headers: { 'Content-Type': 'multipart/form-data' },
+  });
 
   return data;
 };
+
+/* =========================
+   CATEGORIES
+   ========================= */
 
 export const fetchCategories = async (): Promise<Category[]> => {
   const { data } = await nextServer.get('/categories');
