@@ -1,30 +1,18 @@
-import StoryCard from "@/components/StoryCard/StoryCard";
-import type { Story } from "@/types/story";
-
-async function getStories(): Promise<Story[]> {
-  const res = await fetch("/api/stories", {
-    cache: "no-store",
-  });
-
-  if (!res.ok) {
-    throw new Error("Failed to fetch stories");
-  }
-
-  return res.json();
-}
+import { fetchStories } from '@/lib/api/serverApi';
+import { dehydrate, QueryClient, HydrationBoundary } from '@tanstack/react-query';
+import StoriesClient from './Stories.client';
 
 export default async function Page() {
-  const stories = await getStories();
+  const queryClient = new QueryClient();
+
+  await queryClient.prefetchQuery({
+    queryKey: ['stories'],
+    queryFn: () => fetchStories({ page: 1, perPage: 6 }),
+  });
 
   return (
-    <div className="container mx-auto px-4 py-8">
-      <h1 className="text-2xl font-semibold mb-6">Історії</h1>
-
-      <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-3 gap-6">
-        {stories.map((story) => (
-          <StoryCard key={story.id} {...story} />
-        ))}
-      </div>
-    </div>
+    <HydrationBoundary state={dehydrate(queryClient)}>
+      <StoriesClient />
+    </HydrationBoundary>
   );
 }
