@@ -6,27 +6,37 @@ import { logErrorResponse } from "../../_utils/utils";
 import { isAxiosError } from "axios";
 
 type Props = {
-  params: Promise<{ id: string }>;
+  params: { id: string };
 };
 
-export async function GET(request: Request, { params }: Props) {
+export async function GET(
+  request: Request,
+  { params }: { params: { id: string } }
+) {
   try {
     const cookieStore = await cookies();
-    const { id } = await params;
+    const cookieString = cookieStore
+      .getAll()
+      .map(c => `${c.name}=${c.value}`)
+      .join('; ');
 
+    const { id } = params;
 
     if (!id || id === 'undefined') {
-      return NextResponse.json({ error: "Story ID is missing" }, { status: 400 });
+      return NextResponse.json(
+        { error: "Story ID is missing" },
+        { status: 400 }
+      );
     }
 
-    
-    const res = await api(`/stories/${id}`, {
+    console.log("FETCHING STORY:", id);
+
+    const res = await api.get(`/stories/${id}`, {
       headers: {
-        Cookie: cookieStore.toString(),
+        Cookie: cookieString,
       },
     });
 
-    
     return NextResponse.json(res.data, { status: res.status });
 
   } catch (error) {
@@ -37,8 +47,7 @@ export async function GET(request: Request, { params }: Props) {
         { status: error.response?.status || 500 }
       );
     }
-    
-    logErrorResponse({ message: (error as Error).message });
+
     return NextResponse.json(
       { error: "Internal Server Error" },
       { status: 500 }
@@ -47,14 +56,24 @@ export async function GET(request: Request, { params }: Props) {
 }
 
 
-export async function PATCH(request: Request, { params }: Props) {
+export async function PATCH(
+  request: Request,
+  { params }: { params: { id: string } }
+) {
   try {
     const cookieStore = await cookies();
-    const cookieString = cookieStore.getAll().map(c => `${c.name}=${c.value}`).join('; ');
-    const { id } = await params;
+    const cookieString = cookieStore
+      .getAll()
+      .map(c => `${c.name}=${c.value}`)
+      .join('; ');
+
+    const { id } = params;
 
     if (!id || id === 'undefined') {
-      return NextResponse.json({ error: 'Story ID is missing' }, { status: 400 });
+      return NextResponse.json(
+        { error: 'Story ID is missing' },
+        { status: 400 }
+      );
     }
 
     const formData = await request.formData();
@@ -66,6 +85,7 @@ export async function PATCH(request: Request, { params }: Props) {
     });
 
     return NextResponse.json(res.data, { status: res.status });
+
   } catch (error) {
     if (isAxiosError(error)) {
       logErrorResponse(error.response?.data);
@@ -74,7 +94,7 @@ export async function PATCH(request: Request, { params }: Props) {
         { status: error.response?.status || 500 }
       );
     }
-    logErrorResponse({ message: (error as Error).message });
+
     return NextResponse.json(
       { error: 'Internal Server Error' },
       { status: 500 }
