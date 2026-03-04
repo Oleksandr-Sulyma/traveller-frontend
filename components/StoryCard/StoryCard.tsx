@@ -3,19 +3,18 @@
 import { useState } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
-import Image from 'next/image'; // Рекомендовано для Next.js
 import styles from './StoryCard.module.css';
-import type { Story } from '../../types/story';
+import { saveStory as apiSaveStory } from '@/lib/api/clientApi';
 
 interface StoryCardProps {
-  id?: string;
-  title?: string;
-  article?: string;
-  img?: string;
-  category?: { name: string };
-  ownerId?: { name: string; avatarUrl: string };
-  formattedDate?: string;
-  favoriteCount?: number;
+  id: string;
+  title: string;
+  article: string;
+  img: string;
+  category: { id: string; name: string };
+  ownerId: { id: string; name: string; avatarUrl: string };
+  formattedDate: string;
+  favoriteCount: number;
   buttonText?: string;
 }
 
@@ -27,41 +26,28 @@ export default function StoryCard({
   category,
   ownerId,
   formattedDate,
-  favoriteCount = 0,
+  favoriteCount,
   buttonText = 'Переглянути статтю',
 }: StoryCardProps) {
   const router = useRouter();
   const [isSaving, setIsSaving] = useState(false);
   const [saved, setSaved] = useState(false);
-
-  // Якщо id немає, рендеримо порожню картку (заглушку)
-  if (!id) {
-    return <div className={`${styles.story_card} ${styles.skeleton}`}></div>;
-  }
+  const [currentFavoriteCount, setCurrentFavoriteCount] = useState(favoriteCount);
 
   const handleSaveClick = async () => {
     if (isSaving || saved) return;
     setIsSaving(true);
 
     try {
-      const res = await fetch(`/api/stories/${id}/save`, {
-        method: 'POST',
-        credentials: 'include',
-      });
-
-      if (res.status === 401) {
+      await apiSaveStory(id);
+      setSaved(true);
+      setCurrentFavoriteCount(prev => prev + 1);
+    } catch (error: any) {
+      if (error.response?.status === 401) {
         router.push('/sign-in');
-        return;
+      } else {
+        console.error('Помилка при збереженні:', error);
       }
-
-      if (res.status === 404) {
-        console.error('Save route not found');
-        return;
-      }
-
-      if (res.ok) setSaved(true);
-    } catch (error) {
-      console.error('Failed to save story:', error);
     } finally {
       setIsSaving(false);
     }
@@ -97,7 +83,7 @@ export default function StoryCard({
                 <span className={styles.story_card_date}>{formattedDate}</span>
                 <span className={styles.story_card_separator}>●</span>
                 <span className={styles.story_card_favorite}>
-                  {favoriteCount}
+                  {currentFavoriteCount}
                   <svg width="20" height="20" aria-hidden="true" className={styles.icon}>
                     <use xlinkHref="/sprites/sprite.svg#icon-bookmark" />
                   </svg>
