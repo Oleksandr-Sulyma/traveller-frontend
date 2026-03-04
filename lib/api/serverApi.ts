@@ -28,9 +28,10 @@ export const fetchStories = async (params?: QueryParams): Promise<StoryHttpRespo
     params,
     headers,
   });
+  return  data;
+}
+ 
 
-  return data;
-};
 
 export const getStoryById = async (id: string): Promise<Story> => {
   const headers = await getAuthHeaders();

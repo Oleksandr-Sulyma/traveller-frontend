@@ -1,7 +1,5 @@
-import Link from 'next/link';
+import SavedOrRegisterButton from '@/components/SavedOrRegisterButton/SavedOrRegisterButton';
 import css from './Join.module.css';
-
-let isAuth = false;
 
 export default function Join() {
   return (
@@ -12,16 +10,7 @@ export default function Join() {
           <p className={css.description}>
             Долучайтеся до мандрівників, які діляться своїми історіями та надихають на нові пригоди.
           </p>
-
-          {isAuth ? (
-            <Link className="btn btn-primary" style={{ height: '48px' }} href="/profile/saved">
-              Збережені
-            </Link>
-          ) : (
-            <Link className="btn btn-primary" style={{ height: '48px' }} href="/sign-up">
-              Зареєструватися
-            </Link>
-          )}
+          <SavedOrRegisterButton />
         </div>
       </div>
     </section>

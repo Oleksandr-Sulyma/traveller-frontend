@@ -1,4 +1,4 @@
-import { FC, ChangeEvent, useState, useRef } from 'react';
+import { FC, ChangeEvent, useState, useRef, useEffect } from 'react';
 import Image from 'next/image';
 
 export interface ImageUploadValue {
@@ -14,6 +14,15 @@ interface ImageUploadProps {
 
 export const ImageUpload: FC<ImageUploadProps> = ({ value, onChange }) => {
   const [preview, setPreview] = useState<string | null>(value ?? null);
+
+  const fileInputRef = useRef<HTMLInputElement | null>(null);
+
+  useEffect(() => {
+    setPreview(value ?? null);
+    if (fileInputRef.current) {
+      fileInputRef.current.value = '';
+    }
+  }, [value]);
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>): void => {
     const file = e.target.files?.[0];
@@ -46,8 +55,6 @@ export const ImageUpload: FC<ImageUploadProps> = ({ value, onChange }) => {
 
     previewReader.readAsDataURL(file);
   };
-
-  const fileInputRef = useRef<HTMLInputElement | null>(null);
 
   const handleClick = () => {
     fileInputRef.current?.click();

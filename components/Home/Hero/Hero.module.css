@@ -1,27 +1,34 @@
-
 .heroContainer {
-position: relative;
-width: 100%;
-margin-inline: auto;
-overflow: hidden;
-min-height: 100svh;
+  position: relative;
+  overflow: hidden;
+  /* width: 100%;
+  margin-inline: auto; */
+  /* min-height: 100svh;
+  background: rgba(0, 0, 0, 0.52); */
 }
-
+.picture {
+  position: absolute;
+  width: 100%;
+  margin-inline: auto;
+  overflow: hidden;
+  min-height: 100svh;
+  background: rgba(0, 0, 0, 0.52);
+}
 @media (min-width: 768px) {
-.heroContainer {
-min-height: 634px;
-}
+  .heroContainer {
+    min-height: 634px;
+  }
 }
 
 @media (min-width: 1440px) {
-.heroContainer {
-min-height: 900px;
-}
+  .heroContainer {
+    min-height: 900px;
+  }
 }
 
 .hero-image {
-object-fit: cover;
-z-index: -1;
+  object-fit: cover;
+  z-index: -1;
 }
 
 .container {
@@ -32,36 +39,35 @@ z-index: -1;
 }
 
 @media (min-width: 768px) {
-.container {
-padding-top: 244px;
-}
+  .container {
+    padding-top: 244px;
+  }
 }
 
 @media (min-width: 1440px) {
-.container {
-padding-top: 244px;
-}
+  .container {
+    padding-top: 244px;
+  }
 }
 
 .hero-title {
-margin-bottom: 24px;
-text-align: left;
+  margin-bottom: 24px;
+  text-align: left;
 }
 
 @media (min-width: 768px) {
-.hero-title {
-max-width: 600px;
-}
+  .hero-title {
+    max-width: 600px;
+  }
 }
 
 @media (min-width: 1440px) {
-.hero-title {
-max-width: 650px;
+  .hero-title {
+    max-width: 650px;
+  }
 }
-}
-
 
 .hero-text {
-text-align: left;
-margin-bottom: 32px;
+  text-align: left;
+  margin-bottom: 32px;
 }
