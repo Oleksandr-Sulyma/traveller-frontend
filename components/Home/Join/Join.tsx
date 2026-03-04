@@ -1,12 +1,7 @@
-"use client"
-import Link from 'next/link';
+import SavedOrRegisterButton from '@/components/SavedOrRegisterButton/SavedOrRegisterButton';
 import css from './Join.module.css';
-import { useAuthStore } from '@/lib/store/authStore';
 
 export default function Join() {
-
-const isAuth = useAuthStore();
-
   return (
     <section id="join" className="container">
       <div className={css.position}>
@@ -15,16 +10,7 @@ const isAuth = useAuthStore();
           <p className={css.description}>
             Долучайтеся до мандрівників, які діляться своїми історіями та надихають на нові пригоди.
           </p>
-
-          {isAuth ? (
-            <Link className="btn btn-primary" style={{ height: '48px' }} href="/profile/saved">
-              Збережені
-            </Link>
-          ) : (
-            <Link className="btn btn-primary" style={{ height: '48px' }} href="/sign-up">
-              Зареєструватися
-            </Link>
-          )}
+          <SavedOrRegisterButton />
         </div>
       </div>
     </section>

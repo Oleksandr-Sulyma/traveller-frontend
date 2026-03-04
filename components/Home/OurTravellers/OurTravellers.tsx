@@ -13,13 +13,13 @@ interface RequestUser {
 
 export default function OurTravellers() {
   const [users, setUsers] = useState<User[]>([]);
+  const perPage = 4;
 
-
-  const fetchUsers = async () => {
+  const fetchUsers = async (perPage: number, nextPage: number) => {
     try {
       const { data } = await axios.get<RequestUser>(
-        'https://traveller-backend-lia1.onrender.com/users?page=1&perPage=4',
-        
+        'https://traveller-backend-lia1.onrender.com/users',
+        { params: { page: nextPage, perPage } }
       );
 
       setUsers([...data.users]);
@@ -29,7 +29,7 @@ export default function OurTravellers() {
   };
 
   useEffect(() => {
-    fetchUsers();
+    fetchUsers(perPage, 1);
   }, []);
   return (
     <section className="container">
@@ -51,7 +51,7 @@ export default function OurTravellers() {
           <Link
             className="btn btn-primary"
             style={{ height: '48px', width: '156px' }}
-            href="/travellers"
+            href="/app/(public)/travellers"
           >
             Переглянути всіх
           </Link>
