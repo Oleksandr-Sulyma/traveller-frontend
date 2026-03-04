@@ -12,7 +12,6 @@ HELPER
 
 const getAuthHeaders = async () => {
   const cookieStore = await cookies();
-
   return {
     Cookie: cookieStore.toString(),
   };
@@ -34,47 +33,21 @@ export const fetchStories = async (params?: QueryParams): Promise<StoryHttpRespo
  
 
 
-export const fetchAllUsers = async (params?: QueryParams): Promise<UsersHttpResponse> => {
-  const { data } = await nextServer.get<UsersHttpResponse>('/users', { params });
-  return data;
-};
-
-// export const fetchStories = async (params?: QueryParams) => {
-//   try {
-//     // const headers = await getAuthHeaders();
-//     const { data } = await nextServer.get('/stories', {
-//       params,
-//       // headers
-//     });
-//     return data;
-//   } catch (error: any) {
-//     // Цей лог у терміналі покаже справжню причину (наприклад, "Invalid limit value")
-//     console.error("BACKEND ERROR DATA:", error.response?.data);
-//     throw error;
-//   }
-// };
-
 export const getStoryById = async (id: string): Promise<Story> => {
   const headers = await getAuthHeaders();
-
   const { data } = await nextServer.get(`/stories/${id}`, { headers });
-
   return data;
 };
 
 export const getOwnStories = async (): Promise<Story[]> => {
   const headers = await getAuthHeaders();
-
   const { data } = await nextServer.get('/stories/own', { headers });
-
   return data;
 };
 
 export const getSavedStories = async (): Promise<Story[]> => {
   const headers = await getAuthHeaders();
-
   const { data } = await nextServer.get('/stories/saved', { headers });
-
   return data;
 };
 
@@ -82,19 +55,28 @@ export const getSavedStories = async (): Promise<Story[]> => {
 USERS
 ========================= */
 
-export const getMe = async (): Promise<User> => {
+export const fetchAllUsers = async (params?: QueryParams): Promise<UsersHttpResponse> => {
   const headers = await getAuthHeaders();
-
-  const { data } = await nextServer.get('/users/me', { headers });
-
+  const { data } = await nextServer.get<UsersHttpResponse>('/users', {
+    params,
+    headers,
+  });
   return data;
+};
+
+export const getMe = async (): Promise<User | null> => {
+  try {
+    const headers = await getAuthHeaders();
+    const { data } = await nextServer.get('/users/me', { headers });
+    return data;
+  } catch (error) {
+    return null;
+  }
 };
 
 export const getUserById = async (id: string): Promise<User> => {
   const headers = await getAuthHeaders();
-
   const { data } = await nextServer.get(`/users/${id}`, { headers });
-
   return data;
 };
 
@@ -104,9 +86,7 @@ CATEGORIES
 
 export const fetchCategories = async (): Promise<Category[]> => {
   const headers = await getAuthHeaders();
-
   const { data } = await nextServer.get('/categories', { headers });
-
   return data;
 };
 
@@ -114,27 +94,17 @@ export const fetchCategories = async (): Promise<Category[]> => {
 SESSION CHECK
 ========================= */
 
-// export const checkSession = async () => {
-//   const headers = await getAuthHeaders();
-
-//   const { data } = await nextServer.get('/auth/session', { headers });
-
-//   return data;
-// };
-
-export const checkServerSession = async (): Promise<AxiosResponse<unknown>> => {
+export const checkServerSession = async (): Promise<AxiosResponse<User | null>> => {
   try {
-    const cookieStore = await cookies();
-    return await nextServer.get('/auth/session', {
-      headers: { Cookie: cookieStore.toString() },
-    });
-  } catch (error: unknown) {
+    const headers = await getAuthHeaders();
+    return await nextServer.get('/auth/session', { headers });
+  } catch (error: any) {
     return {
       data: null,
-      status: 401,
-      statusText: 'Unauthorized',
-      headers: {} as AxiosResponseHeaders,
-      config: {} as InternalAxiosRequestConfig,
+      status: error.response?.status || 401,
+      statusText: error.response?.statusText || 'Unauthorized',
+      headers: error.response?.headers || ({} as AxiosResponseHeaders),
+      config: error.config || ({} as InternalAxiosRequestConfig),
     };
   }
 };

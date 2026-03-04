@@ -4,7 +4,7 @@ import { useEffect, useState } from 'react';
 import type { User } from '@/types/user';
 import TravelerCard from '@/components/TravellerCard/TravellerCard';
 import Pagination from '@/components/Pagination/Pagination';
-import nextServer  from '@/lib/api/api';
+import nextServer from '@/lib/api/api';
 import css from './TravellersPage.module.css';
 
 type UsersResponse =
@@ -17,7 +17,7 @@ export default function Page() {
   const [users, setUsers] = useState<User[]>([]);
   const [total, setTotal] = useState<number | null>(null);
   const [isLoading, setIsLoading] = useState(false);
-   
+
   const getInitialPerPage = () => {
     if (typeof window === 'undefined') return 12;
     const w = window.innerWidth;
@@ -26,35 +26,32 @@ export default function Page() {
     return 8;
   };
 
- const extract = (data: any) => {
-  const list: User[] =
-    data?.users ?? data?.items ?? data?.data ?? (Array.isArray(data) ? data : []);
+  const extract = (data: any) => {
+    const list: User[] =
+      data?.users ?? data?.items ?? data?.data ?? (Array.isArray(data) ? data : []);
 
-  const nextTotal: number | null =
-    typeof data?.total === 'number'
-      ? data.total
-      : typeof data?.totalCount === 'number'
-        ? data.totalCount
-        : typeof data?.count === 'number'
-          ? data.count
-          : null;
+    const nextTotal: number | null =
+      typeof data?.total === 'number'
+        ? data.total
+        : typeof data?.totalCount === 'number'
+          ? data.totalCount
+          : typeof data?.count === 'number'
+            ? data.count
+            : null;
 
-  return { list, nextTotal };
-};
+    return { list, nextTotal };
+  };
 
   const fetchUsers = async (limit: number) => {
-  setIsLoading(true);
+    setIsLoading(true);
 
-  try {
-    const { data } = await nextServer.get(
-      '/users',
-      { params: { page: 1, perPage: limit } }
-    );
+    try {
+      const { data } = await nextServer.get('/users', { params: { page: 1, perPage: limit } });
 
-    const { list, nextTotal } = extract(data);
-  setUsers(list);
+      const { list, nextTotal } = extract(data);
+      setUsers(list);
 
-if (nextTotal !== null) {
+      if (nextTotal !== null) {
         setTotal(nextTotal);
       } else if (list.length < limit) {
         setTotal(list.length);
@@ -78,34 +75,34 @@ if (nextTotal !== null) {
     await fetchUsers(users.length + 4);
   };
 
- return (
-  <div className={css.page}>
-    <div className="container">
-      <h1 className={css.title}>Мандрівники</h1>
+  return (
+    <div className={css.page}>
+      <div className="container">
+        <h1 className={css.title}>Мандрівники</h1>
 
-      <ul className={css.list}>
-        {users.map((u) => (
-          <li key={u._id} className={css.item}>
-            <TravelerCard
-              _id={u._id}
-              name={u.name}
-              description={u.description}
-              avatarUrl={u.avatarUrl ?? '/images/default-avatar.png'}
-            />
-          </li>
-        ))}
-      </ul>
+        <ul className={css.list}>
+          {users.map(u => (
+            <li key={u.id} className={css.item}>
+              <TravelerCard
+                id={u.id}
+                name={u.name}
+                description={u.description}
+                avatarUrl={u.avatarUrl ?? '/images/default-avatar.png'}
+              />
+            </li>
+          ))}
+        </ul>
 
-      <div className={css.pagination}>
-        <Pagination
-          onLoadMore={handleLoadMore}
-          isLoading={isLoading}
-          hasMore={hasMore}
-          perPageMap={{ mobile: 8, tablet: 8, desktop: 12 }}
-          label="Показати ще"
-        />
+        <div className={css.pagination}>
+          <Pagination
+            onLoadMore={handleLoadMore}
+            isLoading={isLoading}
+            hasMore={hasMore}
+            perPageMap={{ mobile: 8, tablet: 8, desktop: 12 }}
+            label="Показати ще"
+          />
+        </div>
       </div>
     </div>
-  </div>
-);
+  );
 }
