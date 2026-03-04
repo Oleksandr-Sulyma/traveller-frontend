@@ -1,5 +1,6 @@
 import styles from './Hero.module.css';
 import Image from 'next/image';
+import Link from 'next/link'; // Додай цей імпорт!
 
 export default function Hero() {
   return (
@@ -18,6 +19,7 @@ export default function Hero() {
           alt="Traveler Background"
           fill
           quality={75}
+          loading="eager"
           className={styles['hero-image']}
         />
       </picture>
@@ -30,9 +32,10 @@ export default function Hero() {
           однодумців!
         </p>
 
-        <a href="#join" className="btn btn--hero">
+        {/* Використовуємо Link для плавної навігації */}
+        <Link href="#join" className="btn btn--hero">
           Доєднатись
-        </a>
+        </Link>
       </div>
     </section>
   );

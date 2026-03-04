@@ -1,18 +1,17 @@
 .heroContainer {
   position: relative;
   overflow: hidden;
-  /* width: 100%;
-  margin-inline: auto; */
-  /* min-height: 100svh;
-  background: rgba(0, 0, 0, 0.52); */
+  background: linear-gradient(rgba(0, 0, 0, 0.22), rgba(0, 0, 0, 0.22));
 }
+
 .picture {
   position: absolute;
+  inset: 0;
   width: 100%;
   margin-inline: auto;
   overflow: hidden;
   min-height: 100svh;
-  background: rgba(0, 0, 0, 0.52);
+  z-index: -1;
 }
 @media (min-width: 768px) {
   .heroContainer {
