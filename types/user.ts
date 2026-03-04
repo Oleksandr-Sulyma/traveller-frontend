@@ -5,7 +5,7 @@ export interface User {
   avatarUrl?: string;
   articlesAmount: number;
   description: string;
-  savedStories: string[]; 
+  savedStories: string[];
   createdAt: string;
   updatedAt: string;
 }

@@ -56,7 +56,7 @@ export default function TopTravellers() {
                       avatarUrl={user.avatarUrl}
                       name={user.name}
                       description={user.description}
-                      id={user._id}
+                      id={user.id}
                     />
                   ) : (
                     <div className={css.loader_item}>

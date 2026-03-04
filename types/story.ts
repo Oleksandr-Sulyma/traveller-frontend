@@ -1,14 +1,8 @@
-export interface Category {
-  id: string;
-  name: string;
-}
-
 export interface Owner {
   id: string;
   name: string;
   avatarUrl: string;
 }
-
 
 export type StoryPost = {
   title: string;
@@ -18,22 +12,25 @@ export type StoryPost = {
 };
 
 export interface Story {
-  id: string; // У Swagger це id
+  id: string;
   title: string;
   article: string;
-  img: string; // Тут ок
+  img: string;
   category: {
     id: string;
     name: string;
   };
   ownerId: {
-    // У Swagger це ownerId, а не owner
     id: string;
     name: string;
     avatarUrl: string;
   };
   favoriteCount: number;
-  formattedDate: string; // Swagger повертає вже відформатовану дату
+  formattedDate: string;
   createdAt: string;
   updatedAt: string;
 }
+
+export type StoryUpdate = Partial<Omit<StoryPost, 'img'>> & {
+  img?: File | string;
+};

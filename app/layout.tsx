@@ -58,7 +58,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
               <MainContent>{children}</MainContent>
 
               <FooterWrapper hideOn={['/sign-up', '/sign-in']} />
-              <Toaster position="bottom-right" />
+              <Toaster position="top-right" />
               <div id="modal-root"></div>
             </AuthProvider>
           </TanStackProvider>
