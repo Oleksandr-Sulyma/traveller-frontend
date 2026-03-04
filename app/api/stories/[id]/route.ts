@@ -1,33 +1,28 @@
-
-import { NextResponse } from "next/server";
-import { api } from "../../api"; 
+import { NextRequest, NextResponse } from "next/server";
+import { api } from "../../api";
 import { cookies } from "next/headers";
 import { logErrorResponse } from "../../_utils/utils";
 import { isAxiosError } from "axios";
 
-type Props = {
-  params: { id: string };
-};
-
 export async function GET(
-  request: Request,
-  { params }: { params: { id: string } }
+  request: NextRequest,
+  { params }: { params: Promise<{ id: string }> }
 ) {
   try {
-    const cookieStore = await cookies();
-    const cookieString = cookieStore
-      .getAll()
-      .map(c => `${c.name}=${c.value}`)
-      .join('; ');
+    const { id } = await params;
 
-    const { id } = params;
-
-    if (!id || id === 'undefined') {
+    if (!id || id === "undefined") {
       return NextResponse.json(
         { error: "Story ID is missing" },
         { status: 400 }
       );
     }
+
+    const cookieStore = await cookies();
+    const cookieString = cookieStore
+      .getAll()
+      .map((c) => `${c.name}=${c.value}`)
+      .join("; ");
 
     console.log("FETCHING STORY:", id);
 
@@ -38,10 +33,10 @@ export async function GET(
     });
 
     return NextResponse.json(res.data, { status: res.status });
-
   } catch (error) {
     if (isAxiosError(error)) {
       logErrorResponse(error.response?.data);
+
       return NextResponse.json(
         { error: error.message, response: error.response?.data },
         { status: error.response?.status || 500 }
@@ -55,26 +50,25 @@ export async function GET(
   }
 }
 
-
 export async function PATCH(
-  request: Request,
-  { params }: { params: { id: string } }
+  request: NextRequest,
+  { params }: { params: Promise<{ id: string }> }
 ) {
   try {
-    const cookieStore = await cookies();
-    const cookieString = cookieStore
-      .getAll()
-      .map(c => `${c.name}=${c.value}`)
-      .join('; ');
+    const { id } = await params;
 
-    const { id } = params;
-
-    if (!id || id === 'undefined') {
+    if (!id || id === "undefined") {
       return NextResponse.json(
-        { error: 'Story ID is missing' },
+        { error: "Story ID is missing" },
         { status: 400 }
       );
     }
+
+    const cookieStore = await cookies();
+    const cookieString = cookieStore
+      .getAll()
+      .map((c) => `${c.name}=${c.value}`)
+      .join("; ");
 
     const formData = await request.formData();
 
@@ -85,10 +79,10 @@ export async function PATCH(
     });
 
     return NextResponse.json(res.data, { status: res.status });
-
   } catch (error) {
     if (isAxiosError(error)) {
       logErrorResponse(error.response?.data);
+
       return NextResponse.json(
         { error: error.message, response: error.response?.data },
         { status: error.response?.status || 500 }
@@ -96,7 +90,7 @@ export async function PATCH(
     }
 
     return NextResponse.json(
-      { error: 'Internal Server Error' },
+      { error: "Internal Server Error" },
       { status: 500 }
     );
   }
