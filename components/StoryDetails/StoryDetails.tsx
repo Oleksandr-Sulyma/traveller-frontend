@@ -18,11 +18,11 @@ export default function StoryDetails({ story }: StoryDetailsProps) {
     const queryClient = useQueryClient();
     const [alreadySaved, setAlreadySaved] = useState(false);
 
-    console.log(`mutate:${(story as any)._id}`);
+    console.log(`mutate:${(story as any).id}`);
 
     const { mutate, isPending } = useMutation({
 
-        mutationFn: () => addToSave(story.id || (story as any)._id),
+        mutationFn: () => addToSave(story.id || (story as any).id),
         onSuccess: () => {
             toast.success("Історію збережено у вашому профілі!");
             setAlreadySaved(true);
