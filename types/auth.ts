@@ -1,3 +1,6 @@
 export interface CheckSessionResponse {
-  success: boolean;
+  id: string;
+  name: string;
+  email: string;
+  avatarUrl: string;
 }

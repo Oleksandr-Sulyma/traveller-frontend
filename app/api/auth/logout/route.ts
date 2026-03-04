@@ -11,7 +11,7 @@ export async function POST() {
     const accessToken = cookieStore.get('accessToken')?.value;
     const refreshToken = cookieStore.get('refreshToken')?.value;
 
-    await api.post('auth/logout', null, {
+    await api.post('/auth/logout', null, {
       headers: {
         Cookie: `accessToken=${accessToken}; refreshToken=${refreshToken}`,
       },
