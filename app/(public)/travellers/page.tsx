@@ -85,9 +85,9 @@ if (nextTotal !== null) {
 
       <ul className={css.list}>
         {users.map((u) => (
-          <li key={u._id} className={css.item}>
+          <li key={u.id} className={css.item}>
             <TravelerCard
-              _id={u._id}
+              id={u.id}
               name={u.name}
               description={u.description}
               avatarUrl={u.avatarUrl ?? '/images/default-avatar.png'}

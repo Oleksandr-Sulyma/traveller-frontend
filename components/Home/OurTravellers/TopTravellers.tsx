@@ -47,16 +47,16 @@ export default function TopTravellers() {
         <div className={css.content}>
           <GridContainer variant="travellers">
             {displayUsers.map((user, index) => {
-              const isSkeleton = !user._id || user.id === 'skeleton';
+              const isSkeleton = !user.id || user.id === 'skeleton';
 
               return (
-                <li key={isSkeleton ? `skel-${index}` : user._id}>
+                <li key={isSkeleton ? `skel-${index}` : user.id}>
                   {!isSkeleton ? (
                     <TravelerCard
                       avatarUrl={user.avatarUrl}
                       name={user.name}
                       description={user.description}
-                      _id={user._id}
+                      id={user._id}
                     />
                   ) : (
                     <div className={css.loader_item}>

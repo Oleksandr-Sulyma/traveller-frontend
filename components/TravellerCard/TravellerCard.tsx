@@ -2,13 +2,13 @@ import styles from './TravellerCard.module.css';
 import Link from 'next/link';
 import type { User } from '../../types/user';
 
-interface TravelerCardProps extends Pick<User, '_id' | 'avatarUrl' | 'description' | 'name'> {
+interface TravelerCardProps extends Pick<User, 'id' | 'avatarUrl' | 'description' | 'name'> {
   avatarUrl?: string;
   buttonText?: string;
 }
 
 export default function TravelerCard({
-  _id,
+  id,
   avatarUrl,
   name,
   description,
@@ -22,7 +22,7 @@ export default function TravelerCard({
         <p className={styles.traveler_card_text}>{description}</p>
 
         <Link
-          href={`/travellers/${_id}`}
+          href={`/travellers/${id}`}
           className={`btn btn-secondary ${styles.traveler_card_button}`}
         >
           {buttonText}
