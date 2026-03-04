@@ -38,7 +38,7 @@ export default function OurTravellers() {
         <div className={css.positionUlButton}>
           <ul className={css.wrapperUl}>
             {users.map(user => (
-              <li key={user._id}>
+              <li key={user.email ?? user._id}>
                 <TravelerCard
                   avatarUrl={user.avatarUrl}
                   name={user.name}
