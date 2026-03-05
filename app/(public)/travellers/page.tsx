@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from 'react';
 import type { User } from '@/types/user';
-import { fetchAllUsers } from '@/lib/api/clientApi';
+import { fetchAllUsers } from '@/lib/api/clientApi'; // ПЕРЕВІРТЕ ЦЕЙ ШЛЯХ (можливо @/api/api)
 import TravelerCard from '@/components/TravellerCard/TravellerCard';
 import Pagination from '@/components/Pagination/Pagination';
 import css from './TravellersPage.module.css';
@@ -15,19 +15,18 @@ export default function Page() {
   const getInitialPerPage = () => {
     if (typeof window === 'undefined') return 12;
     const w = window.innerWidth;
-    return w >= 1440 ? 12 : 8;
+    if (w >= 1440) return 12;
+    return 8;
   };
 
   const fetchUsers = async (limit: number) => {
     setIsLoading(true);
     try {
-      // Використовуємо QueryParams: { page, perPage }
       const data = await fetchAllUsers({ 
         page: 1, 
         perPage: limit 
       });
 
-      // Згідно з UsersHttpResponse, дані лежать у data.users
       setUsers(data.users);
       setTotalPages(data.totalPages);
     } catch (error) {
@@ -42,13 +41,9 @@ export default function Page() {
     fetchUsers(getInitialPerPage());
   }, []);
 
-  // Логіка hasMore: якщо поточна кількість завантажених користувачів 
-  // менша за загальну кількість (якщо б вона була) або якщо ми ще не на останній сторінці.
-  // Оскільки ми просто збільшуємо perPage, логіка спрощується:
   const hasMore = users.length > 0 && totalPages > 1; 
 
   const handleLoadMore = async () => {
-    // Збільшуємо кількість на сторінці (або реалізуйте справжню пагінацію по сторінках)
     await fetchUsers(users.length + 4);
   };
 
@@ -61,7 +56,7 @@ export default function Page() {
           {users.map((u) => (
             <li key={u.id} className={css.item}>
               <TravelerCard
-                id={u.id} // Використовуємо id (string) з вашого інтерфейсу User
+                id={u.id}
                 name={u.name}
                 description={u.description}
                 avatarUrl={u.avatarUrl ?? '/images/default-avatar.png'}
@@ -81,7 +76,5 @@ export default function Page() {
         </div>
       </div>
     </div>
-  );
-}
   );
 }
