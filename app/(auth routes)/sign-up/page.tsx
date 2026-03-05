@@ -7,7 +7,7 @@ import * as Yup from 'yup';
 import { ErrorMessage, Field, Form, Formik, FormikHelpers } from 'formik';
 import { useAuthStore } from '@/lib/store/authStore';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
-import { register } from '@/lib/api/clientApi';
+import { register, getMe } from '@/lib/api/clientApi';
 import { useRouter } from 'next/navigation';
 import { useId } from 'react';
 import { AxiosError } from 'axios';
@@ -55,9 +55,15 @@ export default function SignUp() {
 
   const { mutate, isPending } = useMutation({
     mutationFn: register,
-    onSuccess: user => {
-      setUser(user);
-      queryClient.invalidateQueries({ queryKey: ['me'] });
+    onSuccess: async registerUser => {
+      setUser(registerUser);
+      try {
+        const fullUser = await getMe();
+        setUser(fullUser);
+        queryClient.setQueryData(['me'], fullUser);
+      } catch {
+        queryClient.invalidateQueries({ queryKey: ['me'] });
+      }
       toast.success('Акаунт створено! Перенаправляємо до профілю...');
       router.push('/profile');
     },

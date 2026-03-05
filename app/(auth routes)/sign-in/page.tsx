@@ -3,7 +3,7 @@
 import { ErrorMessage, Field, Form, Formik, FormikHelpers } from 'formik';
 import { useAuthStore } from '@/lib/store/authStore';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
-import { login } from '@/lib/api/clientApi';
+import { login, getMe } from '@/lib/api/clientApi';
 import { useRouter } from 'next/navigation';
 import css from './SignInPage.module.css';
 import toast from 'react-hot-toast';
@@ -37,9 +37,16 @@ export default function SignIn() {
 
   const { mutate, isPending } = useMutation({
     mutationFn: login,
-    onSuccess: user => {
-      setUser(user);
-      queryClient.invalidateQueries({ queryKey: ['me'] });
+    onSuccess: async loginUser => {
+      setUser(loginUser);
+      try {
+        // Отримуємо повні дані юзера (з savedStories) і одразу заповнюємо кеш
+        const fullUser = await getMe();
+        setUser(fullUser);
+        queryClient.setQueryData(['me'], fullUser);
+      } catch {
+        queryClient.invalidateQueries({ queryKey: ['me'] });
+      }
       toast.success('Вхід успішний! Раді вас бачити 👋');
       router.push('/profile');
     },
