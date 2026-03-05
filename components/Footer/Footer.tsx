@@ -88,7 +88,7 @@ export default function Footer() {
               Головна
             </Link>
             <Link
-              href="/stories"
+              href="/stories/filter/all"
               className="link-base link-text link-footer-pc link-footer-mobile "
             >
               Історії
