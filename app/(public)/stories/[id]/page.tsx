@@ -3,44 +3,42 @@ import StoryDetailsClient from "./StoryDetails.client";
 import { HydrationBoundary, dehydrate, QueryClient } from "@tanstack/react-query";
 import type { Story } from "@/types/story";
 import { Metadata } from "next";
-import { BASE_URL } from "@/lib/constants/seo";
+// import { BASE_URL } from "@/lib/constants/seo";
 
 
 interface StoryDetailsPageProps {
   params: Promise<{ id: string }>
 }
 
+export async function generateMetadata({ params }: StoryDetailsPageProps): Promise<Metadata> {
+  const { id } = await params;
 
-// export async function generateMetadata({ params }: StoryDetailsPageProps): Promise<Metadata> {
-//   const { id } = await params;
-//   try {
+  try {
 
-//     const story = await getStoryById(id);
-
-
-//     if (!story) {
-//       return { title: "Історія не знайдена | Подорожники" };
-//     }
+    const story = await getStoryById(id);
 
 
-//     const description = story.article ? story.article.slice(0, 160) : "Подорожники — цікаві історії";
+    const title = story?.title ? `${story.title} | Подорожники` : "Історія | Подорожники";
+    const description = story?.article?.slice(0, 160) || "Подорожники — цікаві історії";
 
+    return {
+      title,
+      description,
+      openGraph: {
+        title,
+        description,
+        images: story?.img ? [{ url: story.img }] : [],
+      },
+    };
+  } catch (error) {
 
-//     return {
-//       title: `${story.title} | Подорожники`,
-//       description,
-//       openGraph: {
-//         title: story.title,
-//         description,
-//         images: [{ url: story.img }],
-//         url: `${BASE_URL}/stories/${id}`,
-//       }
-//     };
-//   } catch (error) {
-//     console.error("Metadata error:", error);
-//     return { title: "Подорожники" };
-//   }
-// }
+    return {
+      title: "Подорожники - Історія",
+      description: "Цікаві історії про подорожі"
+    };
+  }
+}
+
 
 
 export default async function StoryDetailsPage(params: StoryDetailsPageProps) {

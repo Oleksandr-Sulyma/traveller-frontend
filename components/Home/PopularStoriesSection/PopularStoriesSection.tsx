@@ -9,7 +9,12 @@ import Link from 'next/link';
 import { Story } from '@/types/story';
 import { fetchStories } from '@/lib/api/clientApi';
 
-export default function PopularStoriesSection() {
+interface Props {
+  showButton?: boolean;
+  className?: string;
+}
+
+export default function PopularStoriesSection({ showButton = true, className }: Props) {
   const [stories, setStories] = useState<Story[]>([]);
   const [loading, setLoading] = useState(true);
 
@@ -35,7 +40,7 @@ export default function PopularStoriesSection() {
   const displayStories = loading ? Array(4).fill({ id: 'skeleton' }) : stories;
 
   return (
-    <section className={`container ${css.section}`}>
+    <section className={className ? className : `container ${css.section}`}>
       <h2 className={css.title}>Популярні історії</h2>
       <GridContainer variant="stories" className={css.popular_grid}>
         {displayStories.map((story, index) => {
@@ -62,15 +67,11 @@ export default function PopularStoriesSection() {
           );
         })}
       </GridContainer>
-      <div className={css.btn}>
-        <Link
-          href="/stories/filter/all"
-          className="btn btn-primary btn--default"
-          style={{ width: '156px' }}
-        >
+      {showButton && (<div className={css.btn}>
+        <Link href="/stories" className="btn btn-primary btn--default" style={{ width: '156px' }}>
           Дивитися всі
         </Link>
-      </div>
+      </div>)}
     </section>
   );
 }

@@ -1,0 +1,26 @@
+ .container {
+  width: 100%;
+  max-width: 865px;
+  aspect-ratio: 705 / 469;
+  border-radius: 16px;
+  overflow: hidden;
+  background-color: #e5e7eb;
+  position: relative;
+}
+
+@media (min-width: 769px) and (max-width: 1024px) {
+  .container {
+    width: 705px;
+    height: 469px;
+    aspect-ratio: auto;
+  }
+}
+
+@media (min-width: 1025px) {
+  .container {
+    width: 865px;
+    height: 576px;
+    aspect-ratio: auto;
+  }
+}
+
