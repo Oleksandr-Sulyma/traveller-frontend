@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from 'react';
 import type { User } from '@/types/user';
-import { fetchAllUsers } from '@/api/api'; // Імпортуємо вашу функцію
+import { fetchAllUsers } from '@/api/clientApi';
 import TravelerCard from '@/components/TravellerCard/TravellerCard';
 import Pagination from '@/components/Pagination/Pagination';
 import css from './TravellersPage.module.css';
