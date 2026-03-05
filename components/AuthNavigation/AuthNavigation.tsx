@@ -2,6 +2,10 @@
 
 import Link from 'next/link';
 import css from './AuthNavigation.module.css';
+import { logout } from '@/lib/api/clientApi';
+import { useAuthStore } from '@/lib/store/authStore';
+import { useQueryClient } from '@tanstack/react-query';
+import { useRouter } from 'next/navigation';
 
 type AuthNavigationProps = {
   mode?: 'desktop' | 'modal';
@@ -14,8 +18,18 @@ export default function AuthNavigation({
   onCloseAction,
   isLoggedIn = false,
 }: AuthNavigationProps) {
-  const handleClick = () => {
-    if (onCloseAction) onCloseAction();
+  const clearIsAuthenticated = useAuthStore(state => state.clearIsAuthenticated);
+  const queryClient = useQueryClient();
+  const router = useRouter();
+
+  const handleLogout = async () => {
+    try {
+      await logout();
+    } catch {}
+    clearIsAuthenticated();
+    queryClient.removeQueries({ queryKey: ['me'] });
+    onCloseAction?.();
+    router.push('/');
   };
 
   // 1. СТАН: КОРИСТУВАЧ АВТОРИЗОВАНИЙ
@@ -31,7 +45,7 @@ export default function AuthNavigation({
         </div>
         <button 
           className={css.logoutButton} 
-          onClick={handleClick}
+          onClick={handleLogout}
           aria-label="Вийти з системи"
         >
           ➔
@@ -47,7 +61,7 @@ export default function AuthNavigation({
         <Link
           href="/sign-in"
           className={css.modalLogin}
-          onClick={handleClick}
+          onClick={onCloseAction}
           aria-label="Увійти в акаунт"
         >
           Вхід
@@ -55,7 +69,7 @@ export default function AuthNavigation({
         <Link
           href="/sign-up"
           className={css.modalRegister}
-          onClick={handleClick}
+          onClick={onCloseAction}
           aria-label="Зареєструватися"
         >
           Реєстрація
