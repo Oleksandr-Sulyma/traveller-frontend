@@ -1,4 +1,4 @@
-import StoryCard from "@/components/StoryCard/StoryCard";
+/*import StoryCard from "@/components/StoryCard/StoryCard";
 import { SavedStoriesProps } from "@/types/profile";
 import Link from "next/link";
 import css from "./OwnStories.module.css"
@@ -29,4 +29,4 @@ const OwnStories = ({ stories, page }: SavedStoriesProps) => {
     )
 }
 
-export default OwnStories;
+export default OwnStories;*/

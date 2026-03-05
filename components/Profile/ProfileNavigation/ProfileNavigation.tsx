@@ -1,4 +1,4 @@
-import css from "./ProfileNavigation.module.css"
+/*import css from "./ProfileNavigation.module.css"
 import { usePathname } from "next/navigation";
 import Link from "next/link";
 
@@ -30,4 +30,4 @@ const ProfileNavigation = () => {
     )
 }
 
-export default ProfileNavigation;
+export default ProfileNavigation;*/

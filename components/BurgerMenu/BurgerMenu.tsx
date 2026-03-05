@@ -1,6 +1,5 @@
 
 
-
 'use client';
 
 import Link from 'next/link';
@@ -8,17 +7,22 @@ import Image from 'next/image';
 import { usePathname } from 'next/navigation';
 import { FC, MouseEvent } from 'react';
 import css from './BurgerMenu.module.css';
-import AuthNavigation from '../AuthNavigation/AuthNavigation';
 import logo from '@/public/favicon.svg';
 
 interface BurgerMenuProps {
   onCloseAction: () => void;
   isLoggedIn: boolean;
   navLinks: { name: string; href: string }[];
+  currentPath: string;  
 }
 
-const BurgerMenu: FC<BurgerMenuProps> = ({ onCloseAction, isLoggedIn, navLinks }) => {
-  const pathname = usePathname();
+const BurgerMenu: FC<BurgerMenuProps> = ({ 
+  onCloseAction, 
+  isLoggedIn, 
+  navLinks, 
+  currentPath 
+}) => {
+  const pathname = currentPath || usePathname(); // ✅ Используем переданный путь
 
   // Запобігаємо закриттю меню при кліку всередині модального вікна
   const handleModalClick = (e: MouseEvent<HTMLDivElement>) => {
@@ -52,7 +56,7 @@ const BurgerMenu: FC<BurgerMenuProps> = ({ onCloseAction, isLoggedIn, navLinks }
           </button>
         </div>
 
-        {/* НАВІГАЦІЯ: Динамічний список згідно з ТЗ */}
+        {/* НАВІГАЦІЯ: */}
         <nav className={css.modalNav}>
           <ul className={css.navigation}>
             {navLinks.map((link) => (
@@ -69,13 +73,43 @@ const BurgerMenu: FC<BurgerMenuProps> = ({ onCloseAction, isLoggedIn, navLinks }
           </ul>
         </nav>
 
-        {/* АВТОРИЗАЦІЯ: Вхід/Реєстрація або Аватар+Вихід */}
+        {/* АВТОРИЗАЦІЯ */}
         <div className={css.modalAuthWrapper}>
-          <AuthNavigation 
-            mode="modal" 
-            onCloseAction={onCloseAction} 
-            isLoggedIn={isLoggedIn} 
-          />
+          {!isLoggedIn ? (
+            <div className={css.authButtons}>
+              <Link
+                href="/sign-in"
+                className={`${css.authBtn} ${css.authBtnPrimary}`}
+                onClick={onCloseAction}
+              >
+                Увійти
+              </Link>
+              <Link
+                href="/sign-up"
+                className={`${css.authBtn} ${css.authBtnSecondary}`}
+                onClick={onCloseAction}
+              >
+                Зареєструватися
+              </Link>
+            </div>
+          ) : (
+            <div className={css.userMenu}>
+              <Link
+                href="/profile"
+                className={css.profileLink}
+                onClick={onCloseAction}
+              >
+                Мій профіль
+              </Link>
+              <Link
+                href="/sign-out"
+                className={css.logoutLink}
+                onClick={onCloseAction}
+              >
+                Вийти
+              </Link>
+            </div>
+          )}
         </div>
         
       </div>

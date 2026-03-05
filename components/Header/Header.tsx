@@ -154,12 +154,13 @@ export default function Header({ isHome = false }: HeaderProps) {
           </button>
         </div>
 
-        {/* БУРГЕР МЕНЮ */}
+          {/* БУРГЕР МЕНЮ - ИСПРАВЛЕНО */}
         {isMenuOpen && (
           <BurgerMenu 
             onCloseAction={closeMenu} 
             isLoggedIn={isLoggedIn} 
-            navLinks={navLinks} 
+            navLinks={navLinks}
+            currentPath={currentPath} 
           />
         )}
       </div>
