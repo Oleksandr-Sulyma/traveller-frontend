@@ -51,11 +51,13 @@ export default function StoryCard({
 
   // Синхронізуємо стан збереження коли user завантажився в authStore або через props
   useEffect(() => {
+    // Найвищий пріоритет: юзер вилогувався — завжди скидаємо стан
+    if (user === null) {
+      setSaved(false);
+      return;
+    }
     if (savedStoryIds !== undefined) {
       setSaved(savedStoryIds.includes(id));
-    } else if (user === null) {
-      // Юзер вилогувався — скидаємо стан
-      setSaved(false);
     } else if (user?.savedStories !== undefined) {
       setSaved(user.savedStories.includes(id));
     }
