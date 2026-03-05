@@ -2,7 +2,7 @@
 
 import { ErrorMessage, Field, Form, Formik, FormikHelpers } from 'formik';
 import { useAuthStore } from '@/lib/store/authStore';
-import { useMutation } from '@tanstack/react-query';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { login } from '@/lib/api/clientApi';
 import { useRouter } from 'next/navigation';
 import css from './SignInPage.module.css';
@@ -33,11 +33,13 @@ export default function SignIn() {
   const setUser = useAuthStore(state => state.setUser);
   const router = useRouter();
   const id = useId();
+  const queryClient = useQueryClient();
 
   const { mutate, isPending } = useMutation({
     mutationFn: login,
     onSuccess: user => {
       setUser(user);
+      queryClient.invalidateQueries({ queryKey: ['me'] });
       toast.success('Вхід успішний! Раді вас бачити 👋');
       router.push('/profile');
     },
@@ -79,11 +81,7 @@ export default function SignIn() {
         <h1 className={`${css.center_text} ${css.mb_24}`}>Вхід</h1>
         <p className={`${css.center_text} "text-main"`}>Вітаємо знову у спільноту мандрівників!</p>
       </div>
-      <Formik
-        validationSchema={loginSchema}
-        initialValues={initialValues}
-        onSubmit={handleSubmit}
-      >
+      <Formik validationSchema={loginSchema} initialValues={initialValues} onSubmit={handleSubmit}>
         <Form className={css.form}>
           <div className="input-group input-type">
             <label htmlFor={`${id}-email`}>Пошта*</label>

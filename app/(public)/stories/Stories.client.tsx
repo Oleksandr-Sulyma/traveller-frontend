@@ -1,5 +1,5 @@
 'use client';
-import { fetchStories } from '@/lib/api/clientApi';
+import { fetchStories, getMe } from '@/lib/api/clientApi';
 import { useState } from 'react';
 import { useQuery, keepPreviousData } from '@tanstack/react-query';
 import Loader from '@/components/Loader/Loader';
@@ -16,6 +16,13 @@ export default function StoriesClient() {
     queryFn: () => fetchStories({ page, perPage }),
     placeholderData: keepPreviousData,
     staleTime: 60 * 1000,
+  });
+
+  const { data: me } = useQuery({
+    queryKey: ['me'],
+    queryFn: getMe,
+    staleTime: 5 * 60 * 1000,
+    retry: false,
   });
 
   if (isLoading) return <Loader color="#FFFFFF" size={50} />;
@@ -39,6 +46,8 @@ export default function StoriesClient() {
                   ownerId={story.ownerId}
                   formattedDate={story.formattedDate}
                   favoriteCount={story.favoriteCount}
+                  currentUserId={me?.id}
+                  savedStoryIds={me?.savedStories}
                 />
               </li>
             );

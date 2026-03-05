@@ -118,3 +118,17 @@
 .story_card_footer a {
   flex: 1;
 }
+
+.delete_btn {
+  color: var(--color-error, #e53935);
+  border-color: var(--color-error, #e53935);
+}
+
+.delete_btn:hover:not(:disabled) {
+  background-color: var(--color-error, #e53935);
+  color: #fff;
+}
+
+.saved svg {
+  fill: white;
+}
