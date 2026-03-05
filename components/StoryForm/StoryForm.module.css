@@ -14,11 +14,7 @@
 }
 
 .coverRow {
-  display: grid;
-  grid-template-columns: auto 423px;
-  gap: 24px;
-  align-items: flex-start;
-  /* min-width: 0; */
+  /* на планшете и мобильном — обычный поток, без колонок */
 }
 
 .coverBlock {
@@ -86,12 +82,18 @@
 }
 
 @media (max-width: 768px) {
-  .coverRow {
-    grid-template-columns: 1fr;
+  .form {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .formFields {
+    margin-bottom: 24px;
   }
 
   .actions {
     flex-direction: row;
+    margin-top: 0;
   }
 
   .submitButton,
@@ -100,3 +102,42 @@
     flex: 1;
   }
 }
+
+@media (min-width: 769px) and (max-width: 1024px) {
+  .formFields {
+    margin-bottom: 24px; /* 24px от текста истории до кнопок */
+  }
+
+  .actions {
+    margin-top: 0;
+    margin-bottom: 64px; /* 64px от кнопок до футера */
+  }
+}
+
+
+@media (min-width: 1025px) {
+  .form {
+    display: grid;
+    grid-template-columns: auto 423px;
+    column-gap: 24px;
+    align-items: flex-start;
+  }
+
+  .coverRow {
+    grid-column: 1 / 2;
+    grid-row: 1;
+  }
+
+  .formFields {
+    grid-column: 1 / 2;
+    grid-row: 2;
+  }
+
+  .actions {
+    grid-column: 2 / 3;
+    grid-row: 1;
+    margin-top: 36px; /* лейбл + gap 8px — кнопки на уровне начала плейсхолдера фото */
+    align-self: start;
+  }
+}
+
