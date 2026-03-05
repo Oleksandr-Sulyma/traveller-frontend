@@ -7,6 +7,7 @@ import toast from "react-hot-toast";
 import { useQueryClient, useMutation } from "@tanstack/react-query";
 import { addToSave } from "@/lib/api/clientApi";
 import css from "./StoryDetails.module.css";
+import { useEffect } from "react";
 
 
 interface StoryDetailsProps {
@@ -18,17 +19,28 @@ export default function StoryDetails({ story }: StoryDetailsProps) {
     const queryClient = useQueryClient();
     const [alreadySaved, setAlreadySaved] = useState(false);
 
-    console.log(`mutate:${(story as any)._id}`);
+    // дефолтне фото
+    const DEFAULT_IMAGE = "/images/storyForm/desktop@1x.webp"
+    const [imgSrc, setImgSrc] = useState(story.img || DEFAULT_IMAGE);
+
+    useEffect(() => {
+
+        window.scrollTo(0, 0);
+    }, []);
+
+
 
     const { mutate, isPending } = useMutation({
 
-        mutationFn: () => addToSave(story.id || (story as any)._id),
+        mutationFn: () => addToSave(story.id),
         onSuccess: () => {
             toast.success("Історію збережено у вашому профілі!");
             setAlreadySaved(true);
 
 
+
             queryClient.invalidateQueries({ queryKey: ["story", story.id] });
+
             queryClient.invalidateQueries({ queryKey: ["saved-stories"] });
         },
         onError: (error: any) => {
@@ -79,7 +91,7 @@ export default function StoryDetails({ story }: StoryDetailsProps) {
                             <span className={css.label}>Опубліковано: </span>
                             <span className={css.value}>
 
-                                {story.formattedDate}
+                                {story.formattedDate || (story.date ? new Date(story.date).toLocaleDateString('uk-UA') : 'Дата невідома')}
                             </span>
                         </div>
                     </div>
@@ -92,13 +104,19 @@ export default function StoryDetails({ story }: StoryDetailsProps) {
                 {/* Головне зображення */}
                 <div className={css.imageWrapper}>
                     <Image
-                        src={story.img}
+                        src={imgSrc}
                         className={css.image}
                         alt={story.title}
                         width={335}
                         height={224}
                         style={{ width: '100%', height: 'auto' }}
                         priority
+                        onError={() => {
+                            if (imgSrc !== DEFAULT_IMAGE) {
+                                setImgSrc(DEFAULT_IMAGE);
+                            }
+                        }}
+
                     />
                 </div>
 

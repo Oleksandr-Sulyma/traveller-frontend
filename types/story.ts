@@ -29,6 +29,7 @@ export interface Story {
   formattedDate: string;
   createdAt: string;
   updatedAt: string;
+  date?: string;
 }
 
 export type StoryUpdate = Partial<Omit<StoryPost, 'img'>> & {

@@ -1,6 +1,8 @@
 .storyPageSection{
-    padding-top: 20px;
+   
+    padding-top: 32px;
 }
+
 .title{
     font-family: var(--second-family);
     font-weight: 700;
@@ -22,6 +24,7 @@ margin-bottom:32px
 
 .popularSection{
     padding-top: 64px;
+    padding-bottom: 64px;
 }
 
 
