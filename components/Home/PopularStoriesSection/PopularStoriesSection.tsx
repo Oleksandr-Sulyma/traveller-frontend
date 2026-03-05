@@ -63,7 +63,11 @@ export default function PopularStoriesSection() {
         })}
       </GridContainer>
       <div className={css.btn}>
-        <Link href="/stories" className="btn btn-primary btn--default" style={{ width: '156px' }}>
+        <Link
+          href="/stories/filter/all"
+          className="btn btn-primary btn--default"
+          style={{ width: '156px' }}
+        >
           Дивитися всі
         </Link>
       </div>
