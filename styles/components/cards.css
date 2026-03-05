@@ -7,11 +7,13 @@
   border: none;
   border-radius: 16px;
   /* Використовуємо семантичну змінну з макета */
-  background: var(--color-scheme-2-foreground); 
+  background: var(--color-scheme-2-foreground);
   display: flex;
   gap: 24px;
   overflow: hidden;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  transition:
+    transform 0.3s ease,
+    box-shadow 0.3s ease;
 }
 
 .blog-card:hover {
@@ -22,7 +24,7 @@
 /* Адаптивні розміри Blog Card (згідно з макетом) */
 @media (max-width: 767px) {
   .blog-card {
-    width: 335px;
+    /* width: 335px; */
     height: 575px;
     flex-direction: column;
     margin-inline: auto;
@@ -63,14 +65,23 @@
 }
 
 /* Розміри Traveler Card */
-@media (max-width: 767px) { 
-  .traveler-card { width: 335px; height: 575px; } 
+@media (max-width: 767px) {
+  .traveler-card {
+    width: 335px;
+    height: 575px;
+  }
 }
-@media (min-width: 768px) { 
-  .traveler-card { width: 340px; height: 363px; } 
+@media (min-width: 768px) {
+  .traveler-card {
+    width: 340px;
+    height: 363px;
+  }
 }
-@media (min-width: 1440px) { 
-  .traveler-card { width: 310px; height: 384px; } 
+@media (min-width: 1440px) {
+  .traveler-card {
+    width: 310px;
+    height: 384px;
+  }
 }
 
 /* =========================
