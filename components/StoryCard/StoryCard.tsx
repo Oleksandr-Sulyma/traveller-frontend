@@ -178,7 +178,7 @@ export default function StoryCard({
                 title="Видалити історію"
               >
                 <svg width="24" height="24" aria-hidden="true">
-                  <use xlinkHref="/sprites/sprite.svg#icon-bookmark" />
+                  <use xlinkHref="/sprites/sprite.svg#icon-bookmark" /> 
                 </svg>
               </button>
             )}
