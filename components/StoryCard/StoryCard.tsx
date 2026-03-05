@@ -158,27 +158,27 @@ export default function StoryCard({
             </Link>
 
             <button
-              className={`btn btn-primary btn-icon ${saved ? styles.saved : ''}`}
+              className={`btn ${saved ? 'btn-primary' : 'btn-secondary'} btn-icon`}
               type="button"
               onClick={handleSaveClick}
               disabled={isSaving}
               title={saved ? 'Видалити з улюблених' : 'Додати в улюблені'}
             >
               <svg width="24" height="24" aria-hidden="true">
-                <use xlinkHref={`/sprites/sprite.svg#icon-bookmark${saved ? '-active' : ''}`} />
+                <use xlinkHref="/sprites/sprite.svg#icon-bookmark" />
               </svg>
             </button>
 
             {isOwner && (
               <button
-                className={`btn btn-icon ${styles.delete_btn}`}
+                className={`btn btn-secondary btn-icon`}
                 type="button"
                 onClick={handleDeleteClick}
                 disabled={isDeleting}
                 title="Видалити історію"
               >
                 <svg width="24" height="24" aria-hidden="true">
-                  <use xlinkHref="/sprites/sprite.svg#icon-trash" />
+                  <use xlinkHref="/sprites/sprite.svg#icon-bookmark" />
                 </svg>
               </button>
             )}
