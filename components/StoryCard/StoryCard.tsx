@@ -53,10 +53,13 @@ export default function StoryCard({
   useEffect(() => {
     if (savedStoryIds !== undefined) {
       setSaved(savedStoryIds.includes(id));
+    } else if (user === null) {
+      // Юзер вилогувався — скидаємо стан
+      setSaved(false);
     } else if (user?.savedStories !== undefined) {
       setSaved(user.savedStories.includes(id));
     }
-  }, [savedStoryIds, user?.savedStories, id]);
+  }, [savedStoryIds, user, id]);
 
   const handleSaveClick = async () => {
     if (isSaving) return;
