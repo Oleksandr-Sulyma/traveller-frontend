@@ -1,0 +1,22 @@
+.header {
+  position: absolute;
+  top: 0;
+  height: 72px;
+  display: flex;
+  align-items: center;
+  z-index: 1000;
+}
+
+.logoLink {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.logoText {
+  font-family: var(--second-family);
+  font-weight: 700;
+  font-size: 20px;
+  color: var(--color-scheme-1-text);
+  transition: color var(--transition-fast);
+}

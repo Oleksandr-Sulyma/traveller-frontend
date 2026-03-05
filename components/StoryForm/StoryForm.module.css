@@ -1,0 +1,143 @@
+.loader {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 1000;
+}
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  max-width: 1152px;
+  /* margin: 0 auto; */
+}
+
+.coverRow {
+  /* на планшете и мобильном — обычный поток, без колонок */
+}
+
+.coverBlock {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  max-width: 865px;
+  /* min-width: 0; */
+}
+
+.label {
+  font-size: 18px;
+  font-weight: 400;
+  /* margin-bottom: 8px; */
+}
+
+/* .formGroup {
+  margin-bottom: 24px;
+} */
+
+.formFields {
+  max-width: 865px;
+  margin-bottom: 72px;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.error {
+  font-size: 12px;
+  color: #e11d48;
+  margin-top: 4px;
+}
+
+.actions {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-top: 36px;
+}
+
+.submitButton,
+.cancelButton {
+  width: 100%;
+  padding: 12px 16px;
+  border-radius: 10px;
+  font-size: 16px;
+  font-weight: 500;
+}
+
+.submitButton {
+  background-color: #111827;
+  color: #f9fafb;
+}
+
+.cancelButton {
+  background-color: transparent;
+  border: 1px solid #d1d5db;
+}
+
+.title {
+  font-weight: 700;
+  margin-bottom: 48px;
+  margin-top: 48px;
+}
+
+@media (max-width: 768px) {
+  .form {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .formFields {
+    margin-bottom: 24px;
+  }
+
+  .actions {
+    flex-direction: row;
+    margin-top: 0;
+  }
+
+  .submitButton,
+  .cancelButton {
+    width: auto;
+    flex: 1;
+  }
+}
+
+@media (min-width: 769px) and (max-width: 1024px) {
+  .formFields {
+    margin-bottom: 24px; /* 24px от текста истории до кнопок */
+  }
+
+  .actions {
+    margin-top: 0;
+    margin-bottom: 64px; /* 64px от кнопок до футера */
+  }
+}
+
+
+@media (min-width: 1025px) {
+  .form {
+    display: grid;
+    grid-template-columns: auto 423px;
+    column-gap: 24px;
+    align-items: flex-start;
+  }
+
+  .coverRow {
+    grid-column: 1 / 2;
+    grid-row: 1;
+  }
+
+  .formFields {
+    grid-column: 1 / 2;
+    grid-row: 2;
+  }
+
+  .actions {
+    grid-column: 2 / 3;
+    grid-row: 1;
+    margin-top: 36px; /* лейбл + gap 8px — кнопки на уровне начала плейсхолдера фото */
+    align-self: start;
+  }
+}
+

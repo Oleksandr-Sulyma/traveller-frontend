@@ -1,57 +1,110 @@
-import { cookies } from "next/headers";
-import nextServer from "./api";
-import { Story } from "@/types/story";
-import { User } from "@/types/user";
-import { StoryHttpResponse } from "./clientApi";
+import { cookies } from 'next/headers';
+import nextServer from './api';
+import { Story } from '@/types/story';
+import { User } from '@/types/user';
+import { Category } from '@/types/category';
+import { QueryParams, StoryHttpResponse, UsersHttpResponse } from '@/types/api';
+import { AxiosResponse, InternalAxiosRequestConfig, AxiosResponseHeaders } from 'axios';
 
-export default async function fetchStoryServer(
-  query: string,
-  page: number,
-): Promise<StoryHttpResponse> {
+/* =========================
+HELPER
+========================= */
+
+const getAuthHeaders = async () => {
   const cookieStore = await cookies();
+  return {
+    Cookie: cookieStore.toString(),
+  };
+};
 
-  const response = await nextServer.get<StoryHttpResponse>("/stories", {
-    params: {
-      search: query,
-      page,
-      perPage: 12,
-    },
-    headers: {
-      Cookie: cookieStore.toString(),
-    },
+/* =========================
+STORIES
+========================= */
+
+export const fetchStories = async (params?: QueryParams): Promise<StoryHttpResponse> => {
+  const headers = await getAuthHeaders();
+
+  const { data } = await nextServer.get('/stories', {
+    params,
+    headers,
   });
-
-  return response.data;
+  return  data;
 }
+ 
 
-export async function fetchStoryByIdServer(id: string): Promise<Story> {
-  const cookieStore = await cookies();
 
-  const responseById = await nextServer.get<Story>(`/stories/${id}`, {
-    headers: {
-      Cookie: cookieStore.toString(),
-    },
-  });
-  return responseById.data;
-}
+export const getStoryById = async (id: string): Promise<Story> => {
+  const headers = await getAuthHeaders();
+  const { data } = await nextServer.get(`/stories/${id}`, { headers });
+  return data;
+};
 
-export const getMeServer = async () => {
-  const cookieStore = await cookies();
-  const { data } = await nextServer.get<User>("/users/me", {
-    headers: {
-      Cookie: cookieStore.toString(),
-    },
+export const getOwnStories = async (): Promise<Story[]> => {
+  const headers = await getAuthHeaders();
+  const { data } = await nextServer.get('/stories/own', { headers });
+  return data;
+};
+
+export const getSavedStories = async (): Promise<Story[]> => {
+  const headers = await getAuthHeaders();
+  const { data } = await nextServer.get('/stories/saved', { headers });
+  return data;
+};
+
+/* =========================
+USERS
+========================= */
+
+export const fetchAllUsers = async (params?: QueryParams): Promise<UsersHttpResponse> => {
+  const headers = await getAuthHeaders();
+  const { data } = await nextServer.get<UsersHttpResponse>('/users', {
+    params,
+    headers,
   });
   return data;
 };
 
-export const checkServerSession = async () => {
-  const cookieStore = await cookies();
-  const res = await nextServer.get("/auth/session", {
-    headers: {
-      Cookie: cookieStore.toString(),
-    },
-  });
+export const getMe = async (): Promise<User | null> => {
+  try {
+    const headers = await getAuthHeaders();
+    const { data } = await nextServer.get('/users/me', { headers });
+    return data;
+  } catch (error) {
+    return null;
+  }
+};
 
-  return res;
+export const getUserById = async (id: string): Promise<User> => {
+  const headers = await getAuthHeaders();
+  const { data } = await nextServer.get(`/users/${id}`, { headers });
+  return data;
+};
+
+/* =========================
+CATEGORIES
+========================= */
+
+export const fetchCategories = async (): Promise<Category[]> => {
+  const headers = await getAuthHeaders();
+  const { data } = await nextServer.get('/categories', { headers });
+  return data;
+};
+
+/* =========================
+SESSION CHECK
+========================= */
+
+export const checkServerSession = async (): Promise<AxiosResponse<User | null>> => {
+  try {
+    const headers = await getAuthHeaders();
+    return await nextServer.get('/auth/session', { headers });
+  } catch (error: any) {
+    return {
+      data: null,
+      status: error.response?.status || 401,
+      statusText: error.response?.statusText || 'Unauthorized',
+      headers: error.response?.headers || ({} as AxiosResponseHeaders),
+      config: error.config || ({} as InternalAxiosRequestConfig),
+    };
+  }
 };

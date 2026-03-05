@@ -1,0 +1,97 @@
+import { FC, ChangeEvent, useState, useRef, useEffect } from 'react';
+import Image from 'next/image';
+import styles from './ImageUpload.module.css';
+
+export interface ImageUploadValue {
+  file: File;
+  buffer: Uint8Array;
+  preview: string;
+}
+
+interface ImageUploadProps {
+  value?: string | null;
+  onChange: (value: ImageUploadValue | null) => void;
+}
+
+export const ImageUpload: FC<ImageUploadProps> = ({ value, onChange }) => {
+  const [preview, setPreview] = useState<string | null>(value ?? null);
+
+  const fileInputRef = useRef<HTMLInputElement | null>(null);
+
+  useEffect(() => {
+    setPreview(value ?? null);
+    if (fileInputRef.current) {
+      fileInputRef.current.value = '';
+    }
+  }, [value]);
+
+  const handleChange = (e: ChangeEvent<HTMLInputElement>): void => {
+    const file = e.target.files?.[0];
+    if (!file) {
+      onChange(null);
+      return;
+    }
+
+    const previewReader = new FileReader();
+    const bufferReader = new FileReader();
+
+    previewReader.onload = () => {
+      if (typeof previewReader.result !== 'string') return;
+
+      const previewResult = previewReader.result;
+      setPreview(previewResult);
+
+      bufferReader.onload = () => {
+        if (!(bufferReader.result instanceof ArrayBuffer)) return;
+
+        onChange({
+          file,
+          preview: previewResult,
+          buffer: new Uint8Array(bufferReader.result),
+        });
+      };
+
+      bufferReader.readAsArrayBuffer(file);
+    };
+
+    previewReader.readAsDataURL(file);
+  };
+
+  const handleClick = () => {
+    fileInputRef.current?.click();
+  };
+
+  return (
+    <div>
+      <div className={styles.container}>
+        {preview ? (
+          <img
+            src={preview}
+            alt="preview"
+            style={{ width: '100%', height: '100%', objectFit: 'cover' }}
+          />
+        ) : (
+          <Image
+            src="/images/storyForm/desktop@1x.webp"
+            alt="Story placeholder"
+            fill
+            style={{ objectFit: 'cover' }}
+          />
+        )}
+      </div>
+
+      <label style={{ display: 'inline-block', marginTop: 24 }}>
+        <button type="button" onClick={handleClick} className="btn btn--default btn-secondary">
+          Завантажити фото
+        </button>
+        <input
+          ref={fileInputRef}
+          type="file"
+          accept="image/*"
+          onChange={handleChange}
+          style={{ display: 'none' }}
+        />
+      </label>
+    </div>
+  );
+};

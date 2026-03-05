@@ -1,15 +1,37 @@
-import { User } from "./user";
-import { Category } from "./category"; 
+export interface Owner {
+  id: string;
+  name: string;
+  avatarUrl: string;
+}
+
+export type StoryPost = {
+  title: string;
+  article: string;
+  category: string;
+  img: File;
+};
 
 export interface Story {
-    _id: string;
-    title: string;
-    article: string;
-    img: string; 
-    category: Category;
-    ownerId: Pick<User, '_id' | 'name'> & Partial<Pick<User, 'avatarUrl'>>;
-    date: string;      
-    favoriteCount: number;
-    createdAt: string;
-    updatedAt: string;
-  }
+  id: string;
+  title: string;
+  article: string;
+  img: string;
+  category: {
+    id: string;
+    name: string;
+  };
+  ownerId: {
+    id: string;
+    name: string;
+    avatarUrl: string;
+  };
+  favoriteCount: number;
+  formattedDate: string;
+  createdAt: string;
+  updatedAt: string;
+  date?: string;
+}
+
+export type StoryUpdate = Partial<Omit<StoryPost, 'img'>> & {
+  img?: File | string;
+};

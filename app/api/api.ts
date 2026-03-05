@@ -1,8 +1,10 @@
-// 22.02.26 - тут нічого не змінювати!!!
-
 import axios from 'axios';
 
-export const api = axios.create({
-  baseURL: 'traveller-frontend-one.vercel.app',
+const baseURL = process.env.NEXT_PUBLIC_API_URL + '/api';
+
+const nextServer = axios.create({
+  baseURL,
   withCredentials: true,
 });
+
+export default nextServer;
