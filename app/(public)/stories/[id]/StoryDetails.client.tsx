@@ -5,9 +5,9 @@ import { Story } from "@/types/story";
 import { useQuery } from "@tanstack/react-query";
 import StoryDetails from "@/components/StoryDetails/StoryDetails";
 import Loader from "@/components/Loader/Loader";
-import { useEffect } from "react";
 import css from "./StoryDetailsPage.module.css"
-// import Popular from "@/components/Popular/Popular"; //
+import PopularStoriesSection from "@/components/Home/PopularStoriesSection/PopularStoriesSection";
+
 
 
 interface Props {
@@ -38,10 +38,13 @@ export default function StoryDetailsClient({ storyId }: Props) {
                 <h1 className={css.title}>{story.title}</h1>
                 <StoryDetails story={story} />
             </section>
-            <section className={`section ${css.popularSection}`}>
-                <h2 className={css.titlePopularStory}>Популярні історії</h2>
-                <div>-------</div>
-                {/* компонент популярні історії */}
+            <section className={` ${css.popularSection}`}>
+
+
+                <div >
+                    <PopularStoriesSection showButton={false} className="section" />
+                </div>
+
             </section>
         </main>
     )
