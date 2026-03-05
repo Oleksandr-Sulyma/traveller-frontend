@@ -1,5 +1,6 @@
 import { FC, ChangeEvent, useState, useRef, useEffect } from 'react';
 import Image from 'next/image';
+import styles from './ImageUpload.module.css';
 
 export interface ImageUploadValue {
   file: File;
@@ -62,19 +63,7 @@ export const ImageUpload: FC<ImageUploadProps> = ({ value, onChange }) => {
 
   return (
     <div>
-      <div
-        style={{
-          // width: '100%',
-          width: 865,
-          height: 576,
-          // maxWidth: 865,
-          // aspectRatio: '865 / 576',
-          borderRadius: 16,
-          overflow: 'hidden',
-          backgroundColor: '#e5e7eb',
-          position: 'relative',
-        }}
-      >
+      <div className={styles.container}>
         {preview ? (
           <img
             src={preview}

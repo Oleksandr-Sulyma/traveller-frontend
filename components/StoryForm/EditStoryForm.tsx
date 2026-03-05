@@ -125,23 +125,6 @@ export default function EditStoryForm({ story }: EditStoryFormProps) {
                   />
                   {'img' in errors && <div className={css.error}>{(errors as any).img}</div>}
                 </div>
-
-                <div className={css.actions}>
-                  <button
-                    type="submit"
-                    className="btn btn--default btn-primary"
-                    disabled={isPending || !isValid || !dirty}
-                  >
-                    {isPending ? 'Зберігаємо...' : 'Зберегти'}
-                  </button>
-                  <button
-                    type="button"
-                    className="btn btn--default btn-secondary"
-                    onClick={() => handleCancel(resetForm)}
-                  >
-                    Відмінити
-                  </button>
-                </div>
               </div>
 
               <div className={css.formFields}>
@@ -214,6 +197,23 @@ export default function EditStoryForm({ story }: EditStoryFormProps) {
                     <div className={css.error}>{errors.article}</div>
                   )}
                 </div>
+              </div>
+
+              <div className={css.actions}>
+                <button
+                  type="submit"
+                  className={`btn btn--default btn-primary ${css.submitButton}`}
+                  disabled={isPending || !isValid || !dirty}
+                >
+                  {isPending ? 'Зберігаємо...' : 'Зберегти'}
+                </button>
+                <button
+                  type="button"
+                  className={`btn btn--default btn-secondary ${css.cancelButton}`}
+                  onClick={() => handleCancel(resetForm)}
+                >
+                  Відмінити
+                </button>
               </div>
             </Form>
           </>
