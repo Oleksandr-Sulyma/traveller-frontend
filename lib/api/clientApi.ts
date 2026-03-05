@@ -163,3 +163,7 @@ export async function removeFromSave(storyId: string): Promise<Story> {
   const response = await nextServer.delete<Story>(`/stories/${storyId}/save`);
   return response.data;
 }
+
+export async function deleteStory(storyId: string): Promise<void> {
+  await nextServer.delete(`/stories/${storyId}`);
+}

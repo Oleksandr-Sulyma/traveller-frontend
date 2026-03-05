@@ -60,7 +60,7 @@ export default function StoryDetails({ story }: StoryDetailsProps) {
 
     const handleSave = async () => {
 
-        if (!localStorage.getItem("token")) {
+        if (!localStorage.getItem("auth-storage")) {
             setIsAuthModalOpen(true);
             return;
         }
