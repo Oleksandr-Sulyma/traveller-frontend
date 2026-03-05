@@ -171,14 +171,14 @@ export default function StoryCard({
 
             {isOwner && (
               <button
-                className={`btn btn-secondary btn-icon`}
+                className={`btn btn-icon ${styles.delete_btn}`}
                 type="button"
                 onClick={handleDeleteClick}
                 disabled={isDeleting}
                 title="Видалити історію"
               >
                 <svg width="24" height="24" aria-hidden="true">
-                  <use xlinkHref="/sprites/sprite.svg#icon-bookmark" /> 
+                  <use xlinkHref="/sprites/sprite.svg#icon-trash" />
                 </svg>
               </button>
             )}
