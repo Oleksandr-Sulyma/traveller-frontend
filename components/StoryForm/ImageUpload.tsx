@@ -80,7 +80,7 @@ export const ImageUpload: FC<ImageUploadProps> = ({ value, onChange }) => {
         )}
       </div>
 
-      <label style={{ display: 'inline-block', marginTop: 24 }}>
+      <div style={{ display: 'inline-block', marginTop: 24 }}>
         <button type="button" onClick={handleClick} className="btn btn--default btn-secondary">
           Завантажити фото
         </button>
@@ -91,7 +91,7 @@ export const ImageUpload: FC<ImageUploadProps> = ({ value, onChange }) => {
           onChange={handleChange}
           style={{ display: 'none' }}
         />
-      </label>
+      </div>
     </div>
   );
 };
