@@ -3,20 +3,26 @@
   background: var(--color-scheme-2-foreground);
   border: 1px solid rgba(255, 255, 255, 0);
   border-radius: 10px;
+  display: inline-flex;
+  background: var(--color-scheme-2-foreground);
+  border: 1px solid rgba(255, 255, 255, 0);
+  border-radius: 10px;
 
   margin-top: 48px;
+  margin-top: 48px;
 
+  padding: 4px;
   padding: 4px;
 }
 
 .link {
   border-radius: 8px;
   padding: 7px 30px;
+  border-radius: 8px;
+  padding: 7px 30px;
 }
 
 .active {
-  background: var(--color-white);
-  color: var(--color-neutral-darkest);
-
+  background: #f7f9ff;
   border: 1px solid rgba(0, 0, 0, 0.15);
 }

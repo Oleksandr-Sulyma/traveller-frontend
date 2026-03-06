@@ -10,9 +10,6 @@ import {
   UsersHttpResponse,
 } from '@/types/api';
 
-/* Примітка: Припускаємо, що nextServer вже має налаштований baseURL.
-  Якщо токени в куках, переконайтеся, що в axios інстансі стоїть withCredentials: true
-*/
 
 export const fetchStories = async (params?: QueryParams): Promise<StoryHttpResponse> => {
   const { data } = await nextServer.get('/stories', { params });
@@ -35,7 +32,7 @@ export const getOwnStories = async (): Promise<Story[]> => {
 };
 
 export const getSavedStories = async (): Promise<Story[]> => {
-  const { data } = await nextServer.get('/stories/saved');
+  const { data } = await nextServer.get<Story[]>('/stories/saved');
   return data;
 };
 

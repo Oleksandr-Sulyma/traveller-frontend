@@ -7,18 +7,19 @@ import styles from './StoryCard.module.css';
 import { addToSave, removeFromSave, deleteStory as apiDeleteStory } from '@/lib/api/clientApi';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { useAuthStore } from '@/lib/store/authStore';
+import { StoryCategory, Owner } from '@/types/story'; // Імпортуємо створені раніше типи
 
 interface StoryCardProps {
   id: string;
   title: string;
   article: string;
   img: string;
-  category: { id: string; name: string };
-  ownerId: { id: string; name: string; avatarUrl: string };
+  category: StoryCategory; // Використовуємо об'єкт
+  ownerId: Owner; // Використовуємо об'єкт
   formattedDate: string;
   favoriteCount: number;
   currentUserId?: string;
-  savedStoryIds?: string[];
+  savedStoryIds?: string[]; // Може бути string[] або Story[] (якщо з беку)
   buttonText?: string;
   onDelete?: (id: string) => void;
 }
@@ -91,6 +92,7 @@ export default function StoryCard({
   return (
     <div className={`blog-card ${styles.story_card}`}>
       <div className={styles.image_container}>
+        {/* Додано заповнення alt та обробку порожнього зображення */}
         <img src={img || '/placeholder.jpg'} alt={title} className={styles.story_card_img} />
       </div>
 
@@ -109,7 +111,7 @@ export default function StoryCard({
           <div className={styles.story_card_author}>
             <img
               src={ownerId?.avatarUrl || '/images/default-avatar.png'}
-              alt={ownerId?.name}
+              alt={ownerId?.name || 'Автор'}
               className={styles.story_card_author_avatar}
             />
 

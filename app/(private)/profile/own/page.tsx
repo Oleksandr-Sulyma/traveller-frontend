@@ -1,9 +1,19 @@
+'use client';
+
+import { useQuery } from '@tanstack/react-query';
+import { getOwnStories } from '@/lib/api/clientApi';
 import OwnStories from '@/components/Profile/OwnStories/OwnStories';
-import { getOwnStories } from '@/lib/api/serverApi';
+import Loader from '@/components/Loader/Loader';
 
-export default async function Saved() {
-  const ownStories = await getOwnStories();
+export default function MyStoriesPage() {
+  const { data, isLoading } = useQuery({
+    queryKey: ['stories', 'own'],
+    queryFn: getOwnStories,
+  });
 
-  if (!ownStories) return;
-  return <OwnStories stories={ownStories.stories} page="profile" />;
+  if (isLoading) return <Loader />;
+
+  const stories = Array.isArray(data) ? data : (data as any)?.stories || [];
+
+  return <OwnStories stories={stories} page="profile" />;
 }
