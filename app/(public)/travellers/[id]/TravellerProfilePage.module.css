@@ -4,6 +4,7 @@
   gap: 24px;
   align-items: center;
   padding: 120px 0 0;
+  width: 100%;
 }
 
 .avatar {
@@ -30,6 +31,23 @@
   padding: 32px 20px 64px;
 }
 
+.muted {
+  border-radius: 24px;
+padding-block: 40px;
+padding-inline: 32px;
+width: 533px;
+height: 232px;
+max-width: 768px;
+background: #e8eeff;
+padding-bottom: 72px;
+}
+
+.subtitle {
+  padding: 48px 0 40px;
+}
+.title{
+  padding: 0 50px 32px 0;
+}
 .description {
   margin: 0;
 }
