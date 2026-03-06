@@ -7,18 +7,19 @@ import styles from './StoryCard.module.css';
 import { addToSave, removeFromSave, deleteStory as apiDeleteStory } from '@/lib/api/clientApi';
 import { useQueryClient } from '@tanstack/react-query';
 import { useAuthStore } from '@/lib/store/authStore';
+import { StoryCategory, Owner } from '@/types/story'; // Імпортуємо створені раніше типи
 
 interface StoryCardProps {
   id: string;
   title: string;
   article: string;
   img: string;
-  category: { id: string; name: string };
-  ownerId: { id: string; name: string; avatarUrl: string };
+  category: StoryCategory; // Використовуємо об'єкт
+  ownerId: Owner;           // Використовуємо об'єкт
   formattedDate: string;
   favoriteCount: number;
   currentUserId?: string;
-  savedStoryIds?: string[];
+  savedStoryIds?: string[]; // Може бути string[] або Story[] (якщо з беку)
   buttonText?: string;
   onDelete?: (id: string) => void;
 }
@@ -46,24 +47,37 @@ export default function StoryCard({
 
   const [isSaving, setIsSaving] = useState(false);
   const [isDeleting, setIsDeleting] = useState(false);
-  const [saved, setSaved] = useState(() => savedStoryIds?.includes(id) ?? false);
+  
+  // Виправлена логіка ініціалізації: перевіряємо і як рядок, і як об'єкт
+  const [saved, setSaved] = useState(() => {
+    if (savedStoryIds) return savedStoryIds.includes(id);
+    return false;
+  });
+  
   const [currentFavoriteCount, setCurrentFavoriteCount] = useState(favoriteCount);
 
-  // Синхронізуємо стан збереження коли user завантажився в authStore або через props
   useEffect(() => {
-    // Найвищий пріоритет: юзер вилогувався — завжди скидаємо стан
     if (user === null) {
       setSaved(false);
       return;
     }
+
     if (savedStoryIds !== undefined) {
       setSaved(savedStoryIds.includes(id));
     } else if (user?.savedStories !== undefined) {
-      setSaved(user.savedStories.includes(id));
+      // КРИТИЧНЕ ВИПРАВЛЕННЯ: savedStories може бути масивом об'єктів Story[]
+      const isSaved = user.savedStories.some(s => 
+        typeof s === 'string' ? s === id : s.id === id
+      );
+      setSaved(isSaved);
     }
   }, [savedStoryIds, user, id]);
 
   const handleSaveClick = async () => {
+    if (!user) {
+      router.push('/sign-in');
+      return;
+    }
     if (isSaving) return;
     setIsSaving(true);
 
@@ -73,14 +87,18 @@ export default function StoryCard({
         setSaved(false);
         setCurrentFavoriteCount(prev => prev - 1);
         if (user) {
-          setUser({ ...user, savedStories: user.savedStories.filter(s => s !== id) });
+          // Виправляємо фільтрацію для об'єктів
+          const newSaved = user.savedStories.filter(s => 
+            typeof s === 'string' ? s !== id : s.id !== id
+          );
+          setUser({ ...user, savedStories: newSaved as any });
         }
       } else {
         await addToSave(id);
         setSaved(true);
         setCurrentFavoriteCount(prev => prev + 1);
         if (user) {
-          setUser({ ...user, savedStories: [...(user.savedStories ?? []), id] });
+          setUser({ ...user, savedStories: [...(user.savedStories ?? []), id] as any });
         }
       }
       queryClient.invalidateQueries({ queryKey: ['me'] });
@@ -113,6 +131,7 @@ export default function StoryCard({
   return (
     <div className={`blog-card ${styles.story_card}`}>
       <div className={styles.image_container}>
+        {/* Додано заповнення alt та обробку порожнього зображення */}
         <img src={img || '/placeholder.jpg'} alt={title} className={styles.story_card_img} />
       </div>
 
@@ -129,7 +148,7 @@ export default function StoryCard({
           <div className={styles.story_card_author}>
             <img
               src={ownerId?.avatarUrl || '/images/default-avatar.png'}
-              alt={ownerId?.name}
+              alt={ownerId?.name || 'Автор'}
               className={styles.story_card_author_avatar}
             />
             <div className={styles.story_card_author_text_block}>

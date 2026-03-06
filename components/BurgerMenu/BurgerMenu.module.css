@@ -1,3 +1,264 @@
+
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: var(--color-scheme-1-background);
+  z-index: 2000;
+  display: flex;
+  flex-direction: column;
+  animation: fadeIn 0.3s ease-out forwards;
+}
+
+
+.modal {
+  width: 100%;
+  height: 100%;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 48px;
+}
+
+
+.modalHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.logoModal {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.logoModalIcon {
+  width: 22px;
+  height: 22px;
+}
+
+.logoModalText {
+  font-family: var(--second-family);
+  font-weight: 700;
+  font-size: 20px;
+  color: var(--color-scheme-1-text);
+}
+
+
+.headerRight {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+
+.closeButton {
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: var(--color-scheme-1-text);
+  transition: color var(--transition-fast);
+}
+
+.closeCross {
+  font-size: 32px;
+  line-height: 1;
+}
+
+.closeButton:hover {
+  color: var(--color-royal-blue);
+}
+
+
+.avatarPlaceholder {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background-color: var(--color-royal-blue);
+  color: var(--color-white);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 14px;
+}
+
+
+.avatarLarge {
+  width: 44px;
+  height: 44px;
+  font-size: 18px;
+  line-height: 44px;
+}
+
+
+.userName {
+  font-family: var(--font-family);
+  font-size: 16px;
+  font-weight: 500;
+  color: var(--color-scheme-1-text);
+}
+
+.userNameWhite {
+  color: #ffffff;
+  font-weight: 600;
+}
+
+
+.separator {
+  margin: 0 10px;
+  color: var(--color-scheme-1-text);
+  font-weight: 600;
+}
+
+.separatorWhite {
+  margin: 0 10px;
+  color: #ffffff;
+  font-weight: 600;
+}
+
+
+.logoutButton {
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 20px;
+  color: var(--color-scheme-1-text);
+  padding: 4px;
+  transition: transform var(--transition-fast), color var(--transition-fast);
+}
+
+/* большая версия кнопки (по желанию) */
+.logoutButtonLarge {
+  font-size: 28px;
+  padding: 6px;
+  color: #ffffff;
+}
+.logoutButtonLarge svg {
+  width: 30px;
+  height: 30px;
+}
+
+.logoutButton svg {
+  width: 24px;
+  height: 24px;
+}
+
+.logoutButton svg path,
+.logoutButton svg use {
+  fill: currentColor;
+}
+
+.logoutButton:hover {
+  transform: translateX(3px);
+  color: var(--color-red);
+}
+
+
+.modalNav {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.navigation {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 32px;
+}
+
+.navigationLink {
+  font-family: var(--second-family);
+  font-size: 24px;
+  font-weight: 700;
+  color: var(--color-scheme-1-text);
+  transition: color var(--transition-fast);
+}
+
+.navigationLink:hover,
+.navigationLink.active {
+  color: var(--color-royal-blue);
+}
+
+
+.modalAuthWrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  margin-top: auto;
+}
+
+
+.modalLogin,
+.modalRegister {
+  width: 100%;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 12px;
+  font-weight: 600;
+  transition: all var(--transition-fast);
+}
+
+.modalLogin {
+  background-color: var(--color-royal-blue-lightest);
+  color: var(--color-royal-blue);
+  border: 1px solid var(--color-royal-blue-lighter);
+}
+
+.modalRegister {
+  background-color: var(--color-royal-blue);
+  color: var(--color-white);
+}
+
+
+[data-theme='dark'] .modalLogin {
+  background-color: var(--opacity-white-10);
+  color: var(--color-white);
+  border-color: var(--opacity-white-15);
+}
+
+
+@keyframes fadeIn {
+  from { 
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to { 
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+
+@media (min-width: 768px) {
+  .navigationLink {
+    font-size: 32px;
+  }
+}
+
+
+
+
+
+
 /* /*
 /* ===== Overlay ===== /
 .overlay {
@@ -206,119 +467,3 @@
 
 
 
-/* ===== Overlay (Задній фон) ===== */
-.overlay {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100vw;
-  height: 100vh;
-  /* Використовуємо ваш колір фону зі змінних */
-  background-color: var(--color-scheme-1-background);
-  z-index: 2000;
-  display: flex;
-  flex-direction: column;
-  /* Анімація появи згідно з ТЗ */
-  animation: fadeIn 0.3s ease-out forwards;
-}
-
-/* ===== Modal (Контент меню) ===== */
-.modal {
-  width: 100%;
-  height: 100%;
-  padding: 20px 20px 40px 20px;
-  display: flex;
-  flex-direction: column;
-  gap: 48px;
-  /* Прибираємо старі тіні та бордери, щоб був ефект повного екрану */
-}
-
-/* ===== Header всередині меню (Лого + Хрестик) ===== */
-.modalHeader {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  width: 100%;
-}
-
-.logoModal {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-}
-
-.logoModalText {
-  font-family: var(--second-family);
-  font-weight: 700;
-  font-size: 20px;
-  color: var(--color-scheme-1-text);
-}
-
-.closeButton {
-  width: 40px;
-  height: 40px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background: none;
-  border: none;
-  cursor: pointer;
-  color: var(--color-scheme-1-text);
-  transition: color var(--transition-fast);
-}
-
-.closeCross {
-  font-size: 32px; /* Робимо хрестик більшим і зручнішим */
-  line-height: 1;
-}
-
-.closeButton:hover {
-  color: var(--color-royal-blue);
-}
-
-/* ===== Навігація =====*/
-.modalNav {
-  flex: 1; 
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.navigation {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 32px;
-}
-
-.navigationLink {
-  font-family: var(--second-family);
-  font-size: 24px;
-  font-weight: 700;
-  color: var(--color-scheme-1-text);
-  transition: color var(--transition-fast);
-}
-
-.navigationLink:hover,
-.navigationLink.active {
-  color: var(--color-royal-blue);
-}
-
-/* ===== Animations ===== */
-@keyframes fadeIn {
-  from { 
-    opacity: 0;
-    transform: translateY(-10px);
-  }
-  to { 
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-/* Адаптація під планшет: контент не має занадто розтягуватися */
-@media (min-width: 768px) {
-  .navigationLink {
-    font-size: 32px;
-  }
-}
