@@ -2,41 +2,55 @@
 
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
-// Імпортуйте ваші хуки авторизації (наприклад, з Zustand або Context)
-// import { useAuthStore } from '@/store/authStore'; 
+import { usePathname } from 'next/navigation';
+import { useAuthStore } from '@/lib/store/authStore';
+import css from './AuthNavigation.module.css';
 
-export default function AuthNavigation() {
+interface AuthNavigationProps {
+  mode?: 'desktop' | 'mobile';
+}
+
+export default function AuthNavigation({ mode = 'desktop' }: AuthNavigationProps) {
   const [mounted, setMounted] = useState(false);
+  const pathname = usePathname();
   
-  // Припустимо, у вас є стан авторизації
-  // const { isAuthenticated, user } = useAuthStore();
+  const isAuthenticated = useAuthStore((state) => state.isAuthenticated);
+  const user = useAuthStore((state) => state.user);
+  const logout = useAuthStore((state) => state.logout);
 
-  // useEffect спрацює ТІЛЬКИ на клієнті після того, як DOM буде готовий
   useEffect(() => {
     setMounted(true);
   }, []);
 
-  // Поки компонент не "ожив" на клієнті, повертаємо "заглушку"
-  // Це запобігає помилці Hydration
   if (!mounted) {
-    return <div style={{ minWidth: '100px' }} />; // Або порожній div, щоб не "стрибав" хедер
+    return <div className={css.placeholder} />;
   }
 
-  const isAuthenticated = false; // Замініть на вашу реальну логіку
+  if (isAuthenticated) {
+    return (
+      <div className={`${css.wrapper} ${css[mode]}`}>
+        <span className={css.userName}>{user?.name || 'Мандрівник'}</span>
+        <button onClick={() => logout()} className={css.logoutBtn}>
+          Вийти
+        </button>
+      </div>
+    );
+  }
 
   return (
-    <div className="flex items-center gap-4">
-      {isAuthenticated ? (
-        <>
-          <Link href="/profile">Мій профіль</Link>
-          <button>Вийти</button>
-        </>
-      ) : (
-        <>
-          <Link href="/sign-in">Увійти</Link>
-          <Link href="/sign-up" className="btn-primary">Реєстрація</Link>
-        </>
-      )}
+    <div className={`${css.authLinks} ${css[mode]}`}>
+      <Link 
+        href="/sign-in" 
+        className={`${css.loginLink} ${pathname === '/sign-in' ? css.active : ''}`}
+      >
+        Увійти
+      </Link>
+      <Link 
+        href="/sign-up" 
+        className={`${css.registerLink} ${pathname === '/sign-up' ? css.active : ''}`}
+      >
+        Реєстрація
+      </Link>
     </div>
   );
 }
