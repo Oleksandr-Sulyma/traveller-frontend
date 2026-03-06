@@ -1,164 +1,33 @@
-'use client';
+import { useInfiniteQuery, useQuery, useQueryClient } from '@tanstack/react-query';
+import { fetchStories } from '@/lib/api/serverApi';
+import { dehydrate, QueryClient, HydrationBoundary } from '@tanstack/react-query';
+import { userAgent } from 'next/server';
+import { headers } from 'next/headers';
+import { getUserById } from '@/lib/api/serverApi';
+import TravellerProfile from './TravelerDetail.client';
 
-import { useEffect, useState, use } from 'react';
-import nextServer from '@/lib/api/api';
-import type { User } from '@/types/user';
-import type { Story } from '@/types/story';
-import StoryCard from '@/components/StoryCard/StoryCard';
-import Loader from '@/components/Loader/Loader';
-import css from './TravellerProfilePage.module.css';
-
-// В Next.js 15 params — це Promise
 type Props = { params: Promise<{ id: string }> };
 
-export default function Page({ params }: Props) {
-  // Розпаковуємо params за допомогою React use()
-  const { id } = use(params);
+const perPage = 6;
 
-  const [traveller, setTraveller] = useState<User | null>(null);
-  const [stories, setStories] = useState<Story[]>([]);
-  const [total, setTotal] = useState<number | null>(null);
+export default async function Page({ params }: Props) {
+  const { id } = await params;
 
-  const [loading, setLoading] = useState(true);
-  const [loadingMore, setLoadingMore] = useState(false);
-  const [error, setError] = useState<string | null>(null);
+  const queryClient = new QueryClient();
 
-  const [page, setPage] = useState(1);
-  const perPage = 6;
+  await queryClient.prefetchQuery({
+    queryKey: ['stories', id, perPage],
+    queryFn: () => fetchStories({ page: 1, perPage, ownerId: id }),
+  });
 
-  // Перевірка чи є ще сторінки для завантаження
-  const hasMore = total === null ? true : stories.length < total;
-
-  const load = async (nextPage: number, append: boolean) => {
-    if (append) setLoadingMore(true);
-    else setLoading(true);
-
-    setError(null);
-
-    try {
-      // Запит до бекенда на отримання користувача та його історій
-      const res = await nextServer.get(`/users/${id}`, {
-        params: {
-          page: nextPage,
-          perPage,
-          sortBy: 'createdAt',
-          sortOrder: 'desc',
-        },
-      });
-
-      // Бекенд повертає дані безпосередньо або в полі data
-      const payload = res.data;
-
-      // Оновлюємо дані про мандрівника
-      setTraveller(payload as User);
-
-      // Отримуємо історії та загальну кількість з відповіді
-      const newStories = (payload?.stories ?? []) as Story[];
-      const newTotal = typeof payload?.total === 'number' ? payload.total : null;
-
-      setStories(prev => (append ? [...prev, ...newStories] : newStories));
-
-      if (newTotal !== null) {
-        setTotal(newTotal);
-      } else if (!append && newStories.length < perPage) {
-        setTotal(newStories.length);
-      }
-    } catch (e: any) {
-      console.error('Помилка завантаження профілю:', e);
-      if (!append) {
-        setTraveller(null);
-        setStories([]);
-        setTotal(0);
-        setError('Мандрівника не знайдено або сталася помилка.');
-      }
-    } finally {
-      if (append) setLoadingMore(false);
-      else setLoading(false);
-    }
-  };
-
-  // Скидаємо стан і завантажуємо дані при зміні ID
-  useEffect(() => {
-    if (!id) return;
-    setPage(1);
-    setStories([]);
-    setTotal(null);
-    load(1, false);
-  }, [id]);
-
-  const onLoadMore = async () => {
-    if (loadingMore || !hasMore) return;
-    const next = page + 1;
-    setPage(next);
-    await load(next, true);
-  };
-
-  if (loading && !traveller) {
-    return (
-      <div className={css.stateWrapper}>
-        <Loader />
-      </div>
-    );
-  }
-
-  if (error && !traveller) {
-    return (
-      <div className={css.errorWrapper}>
-        <div className={css.errorCard}>
-          <h2 className={css.errorTitle}>Щось пішло не так :(</h2>
-          <p className={css.errorText}>{error}</p>
-          <button className={css.retryBtn} onClick={() => window.location.reload()}>
-            Спробувати ще раз
-          </button>
-        </div>
-      </div>
-    );
-  }
+  await queryClient.prefetchQuery({
+    queryKey: ['traveller', id],
+    queryFn: () => getUserById(id),
+  });
 
   return (
-    <div className={css.page}>
-      {traveller && (
-        <div className={css.profileCard}>
-          <img
-            className={css.avatar}
-            src={traveller.avatarUrl ?? '/images/default-avatar.png'}
-            alt={traveller.name ?? 'Traveller'}
-          />
-          <div className={css.profileInfo}>
-            <h2 className={css.name}>{traveller.name}</h2>
-            {traveller.description && <p className={css.description}>{traveller.description}</p>}
-          </div>
-        </div>
-      )}
-
-      <h2 className={css.subtitle}>Історії мандрівника</h2>
-
-      {stories.length === 0 && !loading && !error && (
-        <p className={css.muted}>У цього мандрівника поки що немає історій.</p>
-      )}
-
-      {stories.length > 0 && (
-        <ul className={css.storiesGrid}>
-          {stories.map(story => (
-            <li key={story.id} className={css.storyItem}>
-              <StoryCard {...story} />
-            </li>
-          ))}
-        </ul>
-      )}
-
-      {stories.length > 0 && (
-        <div className={css.actions}>
-          <button
-            className={css.loadMore}
-            type="button"
-            onClick={onLoadMore}
-            disabled={loadingMore || !hasMore}
-          >
-            {loadingMore ? 'Завантаження…' : hasMore ? 'Показати ще' : 'Більше немає'}
-          </button>
-        </div>
-      )}
-    </div>
+    <HydrationBoundary state={dehydrate(queryClient)}>
+      <TravellerProfile id={id} perPage={perPage} />
+    </HydrationBoundary>
   );
 }
