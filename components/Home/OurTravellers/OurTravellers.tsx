@@ -5,6 +5,9 @@ import axios from 'axios';
 import TravelerCard from '@/components/TravellerCard/TravellerCard';
 import { User } from '@/types/user';
 import Link from 'next/link';
+import { useQuery } from '@tanstack/react-query';
+import { fetchAllUsers } from '@/lib/api/clientApi';
+import { fetchCategories } from '@/lib/api/clientApi';
 
 interface RequestUser {
   users: User[];
@@ -12,32 +15,44 @@ interface RequestUser {
 }
 
 export default function OurTravellers() {
-  const [users, setUsers] = useState<User[]>([]);
   const perPage = 4;
 
-  const fetchUsers = async (perPage: number, nextPage: number) => {
-    try {
-      const { data } = await axios.get<RequestUser>(
-        'https://traveller-backend-lia1.onrender.com/users',
-        { params: { page: nextPage, perPage } }
-      );
+  const {
+    data: users,
+    isLoading,
+    isError,
+    error,
+  } = useQuery({
+    queryKey: ['travellers', perPage],
+    queryFn: () => fetchAllUsers({ perPage }),
+  });
 
-      setUsers([...data.users]);
-    } catch (error) {
-      console.error('Помилка при отриманні користувачів:', error);
-    }
-  };
+  if (isLoading) {
+    return <p>Завантаження мандрівників... ✈️</p>;
+  }
 
-  useEffect(() => {
-    fetchUsers(perPage, 1);
-  }, []);
+  if (isError) {
+    return (
+      <p>
+        Вибачте, не вдалося завантажити список мандрівників. 😔 Спробуйте оновити сторінку трохи
+        пізніше.
+        <br />
+        <small>{error?.message}</small>
+      </p>
+    );
+  }
+
+  if (!users || users.length === 0) {
+    return <p>Мандрівників поки що немає. 🧳</p>;
+  }
+
   return (
     <section className="container">
       <div className={css.wrapper}>
         <h2>Наші Мандрівники</h2>
         <div className={css.positionUlButton}>
           <ul className={css.wrapperUl}>
-            {users.map(user => (
+            {users.users.map(user => (
               <li key={user.id}>
                 <TravelerCard
                   avatarUrl={user.avatarUrl}
