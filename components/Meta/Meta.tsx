@@ -15,7 +15,7 @@ export default function Meta({
   description = 'Traveller App',
   keywords = ['traveller', 'profile', 'frontend'],
   image = '/default-og.png',
-  url = '/public/images/',
+  url = '/public/images/placeholder.webp',
 }: MetaProps) {
   return (
     <Head>
