@@ -4,33 +4,30 @@ export interface Owner {
   avatarUrl: string;
 }
 
-export type StoryPost = {
-  title: string;
-  article: string;
-  category: string;
-  img: File;
-};
+export interface StoryCategory {
+  id: string;
+  name: string;
+}
 
 export interface Story {
   id: string;
   title: string;
   article: string;
   img: string;
-  category: {
-    id: string;
-    name: string;
-  };
-  ownerId: {
-    id: string;
-    name: string;
-    avatarUrl: string;
-  };
+  category: StoryCategory; 
+  ownerId: Owner;           
   favoriteCount: number;
-  formattedDate: string;
+  formattedDate: string;  
   createdAt: string;
   updatedAt: string;
-  date?: string;
 }
+
+export type StoryPost = {
+  title: string;
+  article: string;
+  category: string; 
+  img: File;      
+};
 
 export type StoryUpdate = Partial<Omit<StoryPost, 'img'>> & {
   img?: File | string;

@@ -4,6 +4,7 @@ import { Story } from '@/types/story';
 import { User } from '@/types/user';
 import { Category } from '@/types/category';
 import { QueryParams, StoryHttpResponse, UsersHttpResponse } from '@/types/api';
+import { CheckSessionResponse} from "@/types/auth"
 import { AxiosResponse, InternalAxiosRequestConfig, AxiosResponseHeaders } from 'axios';
 
 /* =========================
@@ -74,9 +75,16 @@ export const getMe = async (): Promise<User | null> => {
   }
 };
 
+
 export const getUserById = async (id: string): Promise<User> => {
   const headers = await getAuthHeaders();
   const { data } = await nextServer.get(`/users/${id}`, { headers });
+  return data;
+};
+
+export const getUserPrivateData = async (id: string): Promise<{user: User, stories: Story[], savedStories: Story[]}> => {
+  const headers = await getAuthHeaders();
+  const { data } = await nextServer.get(`/users/${id}/private`, { headers });
   return data;
 };
 
@@ -94,17 +102,11 @@ export const fetchCategories = async (): Promise<Category[]> => {
 SESSION CHECK
 ========================= */
 
-export const checkServerSession = async (): Promise<AxiosResponse<User | null>> => {
+export const checkServerSession = async (): Promise<AxiosResponse<CheckSessionResponse | null>> => {
   try {
     const headers = await getAuthHeaders();
-    return await nextServer.get('/auth/session', { headers });
+    return await nextServer.get('/auth/check', { headers });
   } catch (error: any) {
-    return {
-      data: null,
-      status: error.response?.status || 401,
-      statusText: error.response?.statusText || 'Unauthorized',
-      headers: error.response?.headers || ({} as AxiosResponseHeaders),
-      config: error.config || ({} as InternalAxiosRequestConfig),
-    };
+    return { data: null, status: error.response?.status || 401 } as AxiosResponse;
   }
 };
