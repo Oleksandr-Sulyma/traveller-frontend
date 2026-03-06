@@ -4,21 +4,21 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { usePathname } from 'next/navigation';
 import { FC, MouseEvent } from 'react';
-import { useAuthStore } from '@/lib/store/authStore';
 import css from './BurgerMenu.module.css';
 import logo from '@/public/favicon.svg';
 
 interface BurgerMenuProps {
   onCloseAction: () => void;
   navLinks: { name: string; href: string }[];
+  isLoggedIn: boolean;
 }
 
 const BurgerMenu: FC<BurgerMenuProps> = ({
   onCloseAction,
   navLinks,
+  isLoggedIn,
 }) => {
   const pathname = usePathname();
-  const { isAuthenticated } = useAuthStore();
 
   const handleModalClick = (e: MouseEvent<HTMLDivElement>) => {
     e.stopPropagation();
@@ -39,9 +39,10 @@ const BurgerMenu: FC<BurgerMenuProps> = ({
             />
             <span className={css.logoModalText}>Подорожники</span>
           </div>
-          <button 
+
+          <button
             type="button"
-            className={css.closeButton} 
+            className={css.closeButton}
             onClick={onCloseAction}
             aria-label="Закрити меню"
           >
@@ -56,7 +57,9 @@ const BurgerMenu: FC<BurgerMenuProps> = ({
               <li key={link.href}>
                 <Link
                   href={link.href}
-                  className={`${css.navigationLink} ${pathname === link.href ? css.active : ''}`}
+                  className={`${css.navigationLink} ${
+                    pathname === link.href ? css.active : ''
+                  }`}
                   onClick={onCloseAction}
                 >
                   {link.name}
@@ -66,22 +69,35 @@ const BurgerMenu: FC<BurgerMenuProps> = ({
           </ul>
         </nav>
 
-      
+        {/* AUTH */}
         <div className={css.modalAuth}>
-          <Link 
-            href="/sign-in" 
-            className={`${css.modalLogin} ${css.modalAuthButton}`}
-            onClick={onCloseAction}
-          >
-            Вхід
-          </Link>
-          <Link 
-            href="/sign-up" 
-            className={`${css.modalRegister} ${css.modalAuthButton}`}
-            onClick={onCloseAction}
-          >
-            Реєстрація
-          </Link>
+          {isLoggedIn ? (
+            <Link
+              href="/stories/create"
+              className={`${css.modalRegister} ${css.modalAuthButton}`}
+              onClick={onCloseAction}
+            >
+              Опублікувати історію
+            </Link>
+          ) : (
+            <>
+              <Link
+                href="/sign-in"
+                className={`${css.modalLogin} ${css.modalAuthButton}`}
+                onClick={onCloseAction}
+              >
+                Вхід
+              </Link>
+
+              <Link
+                href="/sign-up"
+                className={`${css.modalRegister} ${css.modalAuthButton}`}
+                onClick={onCloseAction}
+              >
+                Реєстрація
+              </Link>
+            </>
+          )}
         </div>
       </div>
     </div>
@@ -89,8 +105,6 @@ const BurgerMenu: FC<BurgerMenuProps> = ({
 };
 
 export default BurgerMenu;
-
-
 
 /*'use client';
 
