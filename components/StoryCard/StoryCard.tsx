@@ -1,11 +1,11 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import styles from './StoryCard.module.css';
 import { addToSave, removeFromSave, deleteStory as apiDeleteStory } from '@/lib/api/clientApi';
-import { useQueryClient } from '@tanstack/react-query';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { useAuthStore } from '@/lib/store/authStore';
 
 interface StoryCardProps {
@@ -39,72 +39,50 @@ export default function StoryCard({
 }: StoryCardProps) {
   const router = useRouter();
   const user = useAuthStore(state => state.user);
-  const setUser = useAuthStore(state => state.setUser);
   const queryClient = useQueryClient();
+
   const effectiveUserId = currentUserId ?? user?.id;
   const isOwner = Boolean(effectiveUserId && effectiveUserId === ownerId?.id);
 
-  const [isSaving, setIsSaving] = useState(false);
+  const [saved, setSaved] = useState(savedStoryIds?.includes(id) ?? false);
+  const [count, setCount] = useState(favoriteCount);
   const [isDeleting, setIsDeleting] = useState(false);
-  const [saved, setSaved] = useState(() => savedStoryIds?.includes(id) ?? false);
-  const [currentFavoriteCount, setCurrentFavoriteCount] = useState(favoriteCount);
 
-  // Синхронізуємо стан збереження коли user завантажився в authStore або через props
-  useEffect(() => {
-    // Найвищий пріоритет: юзер вилогувався — завжди скидаємо стан
-    if (user === null) {
-      setSaved(false);
-      return;
-    }
-    if (savedStoryIds !== undefined) {
-      setSaved(savedStoryIds.includes(id));
-    } else if (user?.savedStories !== undefined) {
-      setSaved(user.savedStories.includes(id));
-    }
-  }, [savedStoryIds, user, id]);
+  const saveMutation = useMutation({
+    mutationFn: () => (!saved ? removeFromSave(id) : addToSave(id)),
 
-  const handleSaveClick = async () => {
-    if (isSaving) return;
-    setIsSaving(true);
+    onMutate: () => {
+      setSaved(prev => !prev);
+      setCount(prev => (saved ? prev - 1 : prev + 1));
+    },
 
-    try {
-      if (saved) {
-        await removeFromSave(id);
-        setSaved(false);
-        setCurrentFavoriteCount(prev => prev - 1);
-        if (user) {
-          setUser({ ...user, savedStories: user.savedStories.filter(s => s !== id) });
-        }
-      } else {
-        await addToSave(id);
-        setSaved(true);
-        setCurrentFavoriteCount(prev => prev + 1);
-        if (user) {
-          setUser({ ...user, savedStories: [...(user.savedStories ?? []), id] });
-        }
-      }
-      queryClient.invalidateQueries({ queryKey: ['me'] });
-    } catch (error: any) {
-      if (error.response?.status === 401) {
+    onError: (error: any) => {
+      setSaved(prev => !prev);
+      setCount(prev => (saved ? prev + 1 : prev - 1));
+
+      if (error?.response?.status === 401) {
         router.push('/sign-in');
-      } else {
-        console.error('Помилка при збереженні:', error);
       }
-    } finally {
-      setIsSaving(false);
-    }
-  };
+    },
 
-  const handleDeleteClick = async () => {
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['savedStories'] });
+      queryClient.invalidateQueries({ queryKey: ['stories'] });
+      queryClient.invalidateQueries({ queryKey: ['me'] });
+    },
+  });
+
+  const handleDelete = async () => {
     if (isDeleting) return;
     if (!confirm('Видалити цю історію?')) return;
+
     setIsDeleting(true);
 
     try {
       await apiDeleteStory(id);
       onDelete?.(id);
-    } catch (error: any) {
-      console.error('Помилка при видаленні:', error);
+    } catch (err) {
+      console.error(err);
     } finally {
       setIsDeleting(false);
     }
@@ -121,7 +99,9 @@ export default function StoryCard({
           <p className={`tag-text ${styles.story_card_category}`}>
             {category?.name || 'Без категорії'}
           </p>
+
           <h3 className={styles.story_card_title}>{title}</h3>
+
           <p className={styles.story_card_text}>{article}</p>
         </div>
 
@@ -132,16 +112,20 @@ export default function StoryCard({
               alt={ownerId?.name}
               className={styles.story_card_author_avatar}
             />
+
             <div className={styles.story_card_author_text_block}>
               <span className={`author-info ${styles.story_card_author_name}`}>
                 {ownerId?.name || 'Анонім'}
               </span>
+
               <div className={styles.story_card_author_data_block}>
                 <span className={styles.story_card_date}>{formattedDate}</span>
+
                 <span className={styles.story_card_separator}>●</span>
+
                 <span className={styles.story_card_favorite}>
-                  {currentFavoriteCount}
-                  <svg width="20" height="20" aria-hidden="true" className={styles.icon}>
+                  {count}
+                  <svg width="20" height="20" className={styles.icon}>
                     <use xlinkHref="/sprites/sprite.svg#icon-bookmark" />
                   </svg>
                 </span>
@@ -157,28 +141,28 @@ export default function StoryCard({
               {buttonText}
             </Link>
 
-            <button
-              className={`btn ${saved ? 'btn-primary' : 'btn-secondary'} btn-icon`}
-              type="button"
-              onClick={handleSaveClick}
-              disabled={isSaving}
-              title={saved ? 'Видалити з улюблених' : 'Додати в улюблені'}
-            >
-              <svg width="24" height="24" aria-hidden="true">
-                <use xlinkHref="/sprites/sprite.svg#icon-bookmark" />
-              </svg>
-            </button>
+            {isOwner ? (
+              <>
+                <Link href={`/stories/edit/${id}`} className="btn btn-secondary btn-icon">
+                  <svg width="24" height="24">
+                    <use xlinkHref="/sprites/sprite.svg#icon-edit" />
+                  </svg>
+                </Link>
 
-            {isOwner && (
+                <button className="btn btn-icon" onClick={handleDelete} disabled={isDeleting}>
+                  <svg width="24" height="24">
+                    <use xlinkHref="/sprites/sprite.svg#icon-trash" />
+                  </svg>
+                </button>
+              </>
+            ) : (
               <button
-                className={`btn btn-icon ${styles.delete_btn}`}
-                type="button"
-                onClick={handleDeleteClick}
-                disabled={isDeleting}
-                title="Видалити історію"
+                className={`btn ${saved ? 'btn-primary' : 'btn-secondary'} btn-icon`}
+                onClick={() => saveMutation.mutate()}
+                disabled={saveMutation.isPending}
               >
-                <svg width="24" height="24" aria-hidden="true">
-                  <use xlinkHref="/sprites/sprite.svg#icon-trash" />
+                <svg width="24" height="24">
+                  <use xlinkHref="/sprites/sprite.svg#icon-bookmark" />
                 </svg>
               </button>
             )}

@@ -9,8 +9,6 @@
   display: flex;
   flex-direction: column;
   gap: 24px;
-  max-width: 1152px;
-  /* margin: 0 auto; */
 }
 
 .coverRow {
@@ -21,19 +19,12 @@
   display: flex;
   flex-direction: column;
   gap: 8px;
-  max-width: 865px;
-  /* min-width: 0; */
 }
 
 .label {
   font-size: 18px;
   font-weight: 400;
-  /* margin-bottom: 8px; */
 }
-
-/* .formGroup {
-  margin-bottom: 24px;
-} */
 
 .formFields {
   max-width: 865px;
@@ -53,7 +44,8 @@
   display: flex;
   flex-direction: column;
   gap: 12px;
-  margin-top: 36px;
+  margin-top: 32px;
+  margin-bottom: 64px; /* 64px от кнопок до футера */
 }
 
 .submitButton,
@@ -91,11 +83,6 @@
     margin-bottom: 24px;
   }
 
-  .actions {
-    flex-direction: row;
-    margin-top: 0;
-  }
-
   .submitButton,
   .cancelButton {
     width: auto;
@@ -103,7 +90,7 @@
   }
 }
 
-@media (min-width: 769px) and (max-width: 1024px) {
+@media (min-width: 769px) and (max-width: 1440px) {
   .formFields {
     margin-bottom: 24px; /* 24px от текста истории до кнопок */
   }
@@ -114,8 +101,7 @@
   }
 }
 
-
-@media (min-width: 1025px) {
+@media (min-width: 1440px) {
   .form {
     display: grid;
     grid-template-columns: auto 423px;
@@ -136,8 +122,6 @@
   .actions {
     grid-column: 2 / 3;
     grid-row: 1;
-    margin-top: 36px; /* лейбл + gap 8px — кнопки на уровне начала плейсхолдера фото */
     align-self: start;
   }
 }
-

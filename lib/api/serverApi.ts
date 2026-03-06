@@ -28,10 +28,8 @@ export const fetchStories = async (params?: QueryParams): Promise<StoryHttpRespo
     params,
     headers,
   });
-  return  data;
-}
- 
-
+  return data;
+};
 
 export const getStoryById = async (id: string): Promise<Story> => {
   const headers = await getAuthHeaders();
@@ -39,7 +37,12 @@ export const getStoryById = async (id: string): Promise<Story> => {
   return data;
 };
 
-export const getOwnStories = async (): Promise<Story[]> => {
+interface getOwnStoriesResponse {
+  stories: Story[];
+  totalPages: number;
+}
+
+export const getOwnStories = async (): Promise<getOwnStoriesResponse> => {
   const headers = await getAuthHeaders();
   const { data } = await nextServer.get('/stories/own', { headers });
   return data;

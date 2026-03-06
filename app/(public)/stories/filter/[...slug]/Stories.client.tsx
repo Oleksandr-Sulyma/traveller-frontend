@@ -38,7 +38,7 @@ export default function StoriesClient({ category, perPages }: StoriesClientProps
   };
 
   if (isLoading) return <Loader color="#FFFFFF" size={50} />;
-  if (error || !data) return <p>Something went wrong.</p>;
+  if (error || !data) return <p>"Щось пішло не так"</p>;
 
   return (
     <section className={`${css.section} container`}>
@@ -58,7 +58,7 @@ export default function StoriesClient({ category, perPages }: StoriesClientProps
                     formattedDate={story.formattedDate}
                     favoriteCount={story.favoriteCount}
                     currentUserId={me?.id}
-                    savedStoryIds={me?.savedStories}
+                    savedStoryIds={me?.savedStories?.map(story => story.id) || []}
                   />
                 </li>
               );
