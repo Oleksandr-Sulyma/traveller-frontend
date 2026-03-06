@@ -49,7 +49,7 @@ export default function AuthNavigation({
  const userName = user?.name ?? 'Ім`я';
  const avatarLetter = userName.charAt(0).toUpperCase();
 
- // Проверка, когда фон белый для изменения цвета на черный
+ 
  const isOnWhiteBackground =
  document.body.classList.contains('isScrolled') ||
  !document.body.classList.contains('isHome');
