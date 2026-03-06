@@ -1,32 +1,9 @@
-// "use client";
-
-// import ProfileNavigation from "@/components/Profile/ProfileNavigation/ProfileNavigation";
-// import TravellerInfo from "@/components/Profile/TravellerInfo/TravellerInfo";
-// import { useState } from "react";
-
-// export default function ProfileLayout({ children }: { children: React.ReactNode }) {
-//   const [userData] = useState({
-//     imgLink:
-//       "https://png.pngtree.com/thumb_back/fh260/background/20230610/pngtree-picture-of-a-blue-bird-on-a-black-background-image_2937385.jpg",
-//     name: "Анастасія Олійник",
-//     description:
-//       "Люблю активні подорожі та дослідження нових місць. Ділюся практичними порадами та маршрутами для мандрівників.",
-//   });
-
-//   return (
-//     <div>
-//       <TravellerInfo {...userData} />
-//       <ProfileNavigation />
-//       <div>{children}</div>
-//     </div>
-//   );
-// }
-
 'use client';
 
 import ProfileNavigation from '@/components/Profile/ProfileNavigation/ProfileNavigation';
 import TravellerInfo from '@/components/Profile/TravellerInfo/TravellerInfo';
 import { useAuthStore } from '@/lib/store/authStore';
+import css from './Layout.module.css';
 
 export default function ProfileLayout({ children }: { children: React.ReactNode }) {
   const user = useAuthStore(state => state.user);
@@ -34,7 +11,7 @@ export default function ProfileLayout({ children }: { children: React.ReactNode 
   if (!user) return null;
 
   return (
-    <div>
+    <section className={css.section}>
       <TravellerInfo
         imgLink={user.avatarUrl ?? ''}
         name={user.name}
@@ -42,6 +19,6 @@ export default function ProfileLayout({ children }: { children: React.ReactNode 
       />
       <ProfileNavigation />
       <div>{children}</div>
-    </div>
+    </section>
   );
 }

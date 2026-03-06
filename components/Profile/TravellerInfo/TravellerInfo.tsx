@@ -7,7 +7,7 @@ const TravellerInfo = (props: TravellerInfoProps) => {
   const { imgLink, name, description } = props;
 
   return (
-    <section>
+    <div>
       <div className={`${css.sectionContainer} container`}>
         <img className={css.img} src={imgLink || DEFAULT_AVATAR} alt={name} />
         <div>
@@ -15,7 +15,7 @@ const TravellerInfo = (props: TravellerInfoProps) => {
           <p className={css.text}>{description}</p>
         </div>
       </div>
-    </section>
+    </div>
   );
 };
 

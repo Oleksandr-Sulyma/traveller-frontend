@@ -1,9 +1,12 @@
-import AddStoryForm from '@/components/StoryForm/AddStoryForm';
+import StoryForm from '@/components/StoryForm/StoryForm';
+import { fetchCategories } from '@/lib/api/serverApi';
 
-export default function CreateStoryPage() {
+export default async function NewStoryPage() {
+  const categories = await fetchCategories();
+
   return (
-    <div className="container">
-      <AddStoryForm />
+    <div>
+      <StoryForm categories={categories} />
     </div>
   );
 }
