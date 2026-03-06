@@ -85,7 +85,7 @@ export default function Header({ isHome = false }: HeaderProps) {
 
         <div className={css.actionsGroup}>
           <div className={css.tabletAuthVisible}>
-            <Link href={isLoggedIn ? '/stories/create' : '/auth/register'} className={css.navBtnLink}>
+            <Link href={isLoggedIn ? '/stories/create' : '/sign-up'} className={css.navBtnLink}>
               Опублікувати історію
             </Link>
           </div>
