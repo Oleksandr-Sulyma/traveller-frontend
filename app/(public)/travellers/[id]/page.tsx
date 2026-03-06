@@ -105,7 +105,7 @@ export default function Page({ params }: Props) {
     return (
       <div className={css.errorWrapper}>
         <div className={css.errorCard}>
-          <h2 className={css.errorTitle}>Щось пішло не так :(</h2>
+          <h2 className={css.errorTitle}>Щось пішло не так </h2>
           <p className={css.errorText}>{error}</p>
           <button className={css.retryBtn} onClick={() => window.location.reload()}>
             Спробувати ще раз
@@ -116,7 +116,7 @@ export default function Page({ params }: Props) {
   }
 
   return (
-    <div className={css.page}>
+    <div className={`${css.page} container`}>
       {traveller && (
         <div className={css.profileCard}>
           <img
@@ -131,21 +131,21 @@ export default function Page({ params }: Props) {
         </div>
       )}
 
-      <h2 className={css.subtitle}>Історії мандрівника</h2>
-
-      {stories.length === 0 && !loading && !error && (
-        <p className={css.muted}>У цього мандрівника поки що немає історій.</p>
-      )}
-
-      {stories.length > 0 && (
-        <ul className={css.storiesGrid}>
-          {stories.map(story => (
-            <li key={story.id} className={css.storyItem}>
-              <StoryCard {...story} />
-            </li>
-          ))}
-        </ul>
-      )}
+      <div className={css.wrapperStories}>
+        <h2 className={css.subtitle}>Історії мандрівника</h2>
+        {stories.length === 0 && !loading && !error && (
+          <p className={css.muted}>У цього мандрівника поки що немає історій.</p>
+        )}
+        {stories.length > 0 && (
+          <ul className={css.storiesGrid}>
+            {stories.map(story => (
+              <li key={story.id} className={css.storyItem}>
+                <StoryCard {...story} />
+              </li>
+            ))}
+          </ul>
+        )}
+      </div>
 
       {stories.length > 0 && (
         <div className={css.actions}>
