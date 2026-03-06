@@ -63,7 +63,7 @@ export default function TravellerProfile({ id, perPage }: Props) {
     return (
       <div className={css.errorWrapper}>
         <div className={css.errorCard}>
-          <h2 className={css.errorTitle}>Щось пішло не так :(</h2>
+          <h2 className={css.errorTitle}>Щось пішло не так :</h2>
         </div>
       </div>
     );
@@ -89,12 +89,15 @@ export default function TravellerProfile({ id, perPage }: Props) {
           </div>
         </div>
 
-        {/* STORIES */}
+      
         <h2 className={css.subtitle}>Історії мандрівника</h2>
-
-        {/* {stories.length === 0 && (
-          <p className={css.muted}>У цього мандрівника поки що немає історій.</p>
-        )} */}
+<div className={css.muted}>
+        {stories.length === 0 && (
+          
+              <h4 className={css.title}>У цього мандрівника поки що немає історій.</h4>
+          
+          
+        )}
 
         {stories.length > 0 ? (
           <>
@@ -118,12 +121,14 @@ export default function TravellerProfile({ id, perPage }: Props) {
           </>
         ) : (
           <div className={css.div}>
-            <h2 className="h2">Цей користувач ще не публікував історій</h2>
+           
             <Link href="/stories/filter/all" className="btn btn--default btn-primary">
               Назад до історій
             </Link>
           </div>
+          
         )}
+        </div>
       </div>
     </section>
   );
