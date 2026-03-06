@@ -1,7 +1,5 @@
 'use client';
 import css from './OurTravellers.module.css';
-import { useEffect, useState } from 'react';
-import axios from 'axios';
 import TravelerCard from '@/components/TravellerCard/TravellerCard';
 import { User } from '@/types/user';
 import Link from 'next/link';
@@ -17,7 +15,7 @@ export default function OurTravellers() {
   const perPage = 4;
 
   const { data, isLoading, isError, error } = useQuery<RequestUser>({
-    queryKey: ['travellers', perPage],
+    queryKey: ['users', perPage],
     queryFn: () => fetchAllUsers({ perPage }),
   });
 
