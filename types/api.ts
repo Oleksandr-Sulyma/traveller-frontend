@@ -10,7 +10,6 @@ export interface QueryParams {
   sortBy?: string;
   sortOrder?: 'asc' | 'desc';
   search?: string;
-  ownerId?: string;
 }
 
 export interface StoryHttpResponse {

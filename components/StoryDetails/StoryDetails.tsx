@@ -1,8 +1,9 @@
-'use client'
+'use client';
+
 import Image from "next/image";
 import { Story } from "@/types/story";
 import { useState, useEffect } from "react";
-import AuthNavModal from "@/components/AuthNavModal/AuthNavModal"
+import AuthNavModal from "@/components/AuthNavModal/AuthNavModal";
 import toast from "react-hot-toast";
 import { useQueryClient, useMutation } from "@tanstack/react-query";
 import { addToSave } from "@/lib/api/clientApi";
@@ -17,9 +18,8 @@ export default function StoryDetails({ story }: StoryDetailsProps) {
     const queryClient = useQueryClient();
     const [alreadySaved, setAlreadySaved] = useState(false);
 
-    const DEFAULT_IMAGE = "/images/storyForm/desktop@1x.webp"
+    const DEFAULT_IMAGE = "/images/storyForm/desktop@1x.webp";
     const [imgSrc, setImgSrc] = useState(story.img || DEFAULT_IMAGE);
-
 
     useEffect(() => {
         window.scrollTo(0, 0);
@@ -29,6 +29,7 @@ export default function StoryDetails({ story }: StoryDetailsProps) {
             try {
                 const parsed = JSON.parse(authData);
                 const savedIds = parsed.state?.user?.savedStories || [];
+       
                 if (savedIds.includes(story.id)) {
                     setAlreadySaved(true);
                 }
@@ -75,16 +76,18 @@ export default function StoryDetails({ story }: StoryDetailsProps) {
                     <div className={css.meta}>
                         <div className={css.metaItem}>
                             <span className={css.label}>Автор статті: </span>
-                            <span className={css.value}>{story.ownerId.name}</span>
+          
+                            <span className={css.value}>{story.ownerId?.name || "Мандрівник"}</span>
                         </div>
                         <div className={css.metaItem}>
                             <span className={css.label}>Опубліковано: </span>
                             <span className={css.value}>
-                                {story.formattedDate || (story.date ? new Date(story.date).toLocaleDateString('uk-UA') : 'Дата невідома')}
+                        
+                                {story.formattedDate || (story.createdAt ? new Date(story.createdAt).toLocaleDateString('uk-UA') : 'Дата невідома')}
                             </span>
                         </div>
                     </div>
-                    <div className={css.categoryTag}>{story.category.name}</div>
+                    <div className={css.categoryTag}>{story.category?.name}</div>
                 </div>
 
                 <div className={css.imageWrapper}>
@@ -104,7 +107,6 @@ export default function StoryDetails({ story }: StoryDetailsProps) {
 
                 <aside className={css.contentSide}>
                     <p className={css.storyArticle}>{story.article}</p>
-
 
                     {!alreadySaved && (
                         <div className={css.saveBox}>
