@@ -12,17 +12,15 @@ const OwnStories = ({ stories, page }: SavedStoriesProps) => {
             stories.map(story => <StoryCard key={story.id} {...story} />)
           ) : page === 'profile' ? (
             <div className={css.div}>
-              <h2 className={css.title}>
-                Ви ще нічого не публікували, поділіться своєю першою історією!
-              </h2>
+              <h4>Ви ще нічого не публікували, поділіться своєю першою історією!</h4>
               <Link href="/stories/create" className={css.btn}>
                 Опублікувати історію
               </Link>
             </div>
           ) : (
             <div className={css.div}>
-              <h2 className={css.title}>Цей користувач ще не публікував історій</h2>
-              <Link href="/stories/filter/all" className={css.btn}>
+              <h4>Цей користувач ще не публікував історій</h4>
+              <Link href="/stories" className={css.btn}>
                 Назад до історій
               </Link>
             </div>
