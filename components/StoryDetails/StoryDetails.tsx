@@ -26,7 +26,20 @@ export default function StoryDetails({ story }: StoryDetailsProps) {
     useEffect(() => {
 
         window.scrollTo(0, 0);
-    }, []);
+        const authData = localStorage.getItem("auth-storage");
+        if (authData) {
+            try {
+                const parsed = JSON.parse(authData);
+                const savedIds = parsed.state?.user?.savedStories || [];
+                if (savedIds.includes(story.id)) {
+                    setAlreadySaved(true);
+                }
+            } catch (e) {
+                console.error("Error parsing auth-storage", e);
+            }
+        }
+    }, [story.id]);
+
 
 
 
@@ -60,7 +73,14 @@ export default function StoryDetails({ story }: StoryDetailsProps) {
 
     const handleSave = async () => {
 
+        const authData = localStorage.getItem("auth-storage");
+
         if (!localStorage.getItem("auth-storage")) {
+            setIsAuthModalOpen(true);
+            return;
+        }
+
+        if (!authData || !authData.includes('"isAuthenticated":true')) {
             setIsAuthModalOpen(true);
             return;
         }
