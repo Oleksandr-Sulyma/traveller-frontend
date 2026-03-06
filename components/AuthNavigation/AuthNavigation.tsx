@@ -18,43 +18,53 @@ export default function AuthNavigation({
   onCloseAction,
   isLoggedIn = false,
 }: AuthNavigationProps) {
-  const clearIsAuthenticated = useAuthStore(state => state.clearIsAuthenticated);
+  const clearIsAuthenticated = useAuthStore((state) => state.clearIsAuthenticated);
   const queryClient = useQueryClient();
   const router = useRouter();
 
   const handleLogout = async () => {
     try {
       await logout();
-    } catch {}
+    } catch (err) {
+      console.error('Logout error:', err);
+    }
+
     clearIsAuthenticated();
     queryClient.removeQueries({ queryKey: ['me'] });
     onCloseAction?.();
     router.push('/');
   };
 
-  // 1. СТАН: КОРИСТУВАЧ АВТОРИЗОВАНИЙ
+
   if (isLoggedIn) {
     return (
       <div className={mode === 'modal' ? css.modalAuth : css.desktopAuth}>
         <div className={css.userInfo}>
-          <div className={css.avatarPlaceholder}>
-             {/* Тут буде Image або перша літера імені */}
-             М
-          </div>
+          <div className={css.avatarPlaceholder}>М</div>
           <span className={css.userName}>Мандрівник</span>
         </div>
-        <button 
-          className={css.logoutButton} 
+
+        <button
+          className={css.logoutButton}
           onClick={handleLogout}
-          aria-label="Вийти з системи"
+          aria-label="Вийти з акаунту"
+          title="Вийти"
         >
-          ➔
+          <svg
+            className={css.iconLogout}
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
+            aria-hidden="true"
+          >
+            <use href="/sprites/sprite.svg#icon-logout" />
+          </svg>
         </button>
       </div>
     );
   }
 
-  // 2. СТАН: ГІСТЬ (МОДАЛЬНЕ МЕНЮ / БУРГЕР)
+  
   if (mode === 'modal') {
     return (
       <div className={css.modalAuth}>
@@ -66,6 +76,7 @@ export default function AuthNavigation({
         >
           Вхід
         </Link>
+
         <Link
           href="/sign-up"
           className={css.modalRegister}
@@ -78,18 +89,19 @@ export default function AuthNavigation({
     );
   }
 
-  // 3. СТАН: ГІСТЬ (ДЕКСTOP ХЕДЕР)
+ 
   return (
     <div className={css.desktopAuth}>
-      <Link 
-        href="/sign-in" 
+      <Link
+        href="/sign-in"
         className={`${css.loginButton} ${css.authButton}`}
         aria-label="Увійти в акаунт"
       >
         Вхід
       </Link>
-      <Link 
-        href="/sign-up" 
+
+      <Link
+        href="/sign-up"
         className={`${css.registerButton} ${css.authButton}`}
         aria-label="Зареєструватися"
       >
