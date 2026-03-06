@@ -21,30 +21,18 @@ export default function Header({ isHome = false }: HeaderProps) {
   const currentPath = usePathname();
   const { theme, setTheme } = useTheme();
   const user = useAuthStore(state => state.user);
+  const isLoggedIn = !!user;
 
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [mounted, setMounted] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
 
-  const isLoggedIn = !!user;
-
   useEffect(() => {
     setMounted(true);
 
-    const handleScroll = () => {
-      if (window.scrollY > 50) {
-        setIsScrolled(true);
-      } else {
-        setIsScrolled(false);
-      }
-    };
-
+    const handleScroll = () => setIsScrolled(window.scrollY > 50);
     const handleMenuOverflow = () => {
-      if (isMenuOpen) {
-        document.body.style.overflow = 'hidden';
-      } else {
-        document.body.style.overflow = 'unset';
-      }
+      document.body.style.overflow = isMenuOpen ? 'hidden' : 'unset';
     };
 
     window.addEventListener('scroll', handleScroll);
@@ -64,29 +52,21 @@ export default function Header({ isHome = false }: HeaderProps) {
     { name: 'Мандрівники', href: '/travellers' },
   ];
 
-  if (isLoggedIn) {
-    navLinks.push({ name: 'Мій Профіль', href: '/profile' });
-  }
+  if (isLoggedIn) navLinks.push({ name: 'Мій Профіль', href: '/profile' });
 
   const toggleMenu = () => setIsMenuOpen(prev => !prev);
   const closeMenu = () => setIsMenuOpen(false);
 
-  const headerClasses = `
-    ${css.header} 
-    ${isHome ? css.isHome : ''} 
-    ${isScrolled ? css.isScrolled : ''}
-  `.trim();
+  const headerClasses = `${css.header} ${isHome ? css.isHome : ''} ${isScrolled ? css.isScrolled : ''}`.trim();
 
   return (
     <header className={headerClasses}>
       <div className={`container ${css.container}`}>
-        {/* LOGO */}
         <Link href="/" className={css.logoLink} onClick={closeMenu}>
           <Image src={logo} width={22} height={22} alt="Логотип Подорожники" priority />
           <span className={css.logoText}>Подорожники</span>
         </Link>
 
-        {/* ДЕСКТОПНА НАВІГАЦІЯ (1440px+) */}
         <nav className={css.desktopNav} aria-label="Основна навігація">
           <ul className={css.navigation}>
             {navLinks.map(link => (
@@ -104,19 +84,16 @@ export default function Header({ isHome = false }: HeaderProps) {
         </nav>
 
         <div className={css.actionsGroup}>
-          {/* ТАБЛЕТ (768px - 1439px): "Опублікувати історію" */}
           <div className={css.tabletAuthVisible}>
-            <Link href={isLoggedIn ? '/stories/create' : '/sign-in'} className={css.navBtnLink}>
+            <Link href={isLoggedIn ? '/stories/create' : '/auth/register'} className={css.navBtnLink}>
               Опублікувати історію
             </Link>
           </div>
 
-          {/* ДЕСКТОП (1440px+): AuthNavigation */}
           <div className={css.desktopAuthOnly}>
-            <AuthNavigation mode="desktop" isLoggedIn={isLoggedIn} />
+            <AuthNavigation mode="desktop" />
           </div>
 
-          {/* МОБІЛЬНА (до 767px): ТІЛЬКИ БУРГЕР */}
           <div className={css.mobileBurgerOnly}>
             <button
               type="button"
@@ -132,7 +109,6 @@ export default function Header({ isHome = false }: HeaderProps) {
             </button>
           </div>
 
-          {/* ТЕМА (всі екрани) */}
           <button
             type="button"
             className={css.themeToggle}
@@ -143,10 +119,7 @@ export default function Header({ isHome = false }: HeaderProps) {
           </button>
         </div>
 
-        {/* БУРГЕР МЕНЮ */}
-        {isMenuOpen && (
-          <BurgerMenu onCloseAction={closeMenu} isLoggedIn={isLoggedIn} navLinks={navLinks} />
-        )}
+        {isMenuOpen && <BurgerMenu onCloseAction={closeMenu} isLoggedIn={isLoggedIn} navLinks={navLinks} />}
       </div>
     </header>
   );
