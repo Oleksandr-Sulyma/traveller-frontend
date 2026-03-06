@@ -7,6 +7,7 @@ import Loader from '@/components/Loader/Loader';
 import StoryCard from '@/components/StoryCard/StoryCard';
 import GridContainer from '@/styles/components/GridContainer/GridContainer';
 import Pagination from '@/components/Pagination/Pagination';
+import toast from 'react-hot-toast';
 
 interface StoriesClientProps {
   category?: string;
@@ -38,7 +39,21 @@ export default function StoriesClient({ category, perPages }: StoriesClientProps
   };
 
   if (isLoading) return <Loader color="#FFFFFF" size={50} />;
-  if (error || !data) return <p>Something went wrong.</p>;
+
+  if (error || !data)
+    return (
+      <div className={css.center}>
+        <p>Не вдалося завантажити історії. Спробуйте оновити сторінку. </p>
+      </div>
+    );
+
+  if (data.stories.length === 0) {
+    return (
+      <div className={css.center}>
+        <p>Поки що ніхто не поділився історіями в цій категорії. </p>
+      </div>
+    );
+  }
 
   return (
     <section className={`${css.section} container`}>
