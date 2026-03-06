@@ -54,3 +54,4 @@ export default function AuthNavigation({ mode = 'desktop' }: AuthNavigationProps
     </div>
   );
 }
+export default AuthNavModal;
