@@ -1,9 +1,5 @@
-import { useInfiniteQuery, useQuery, useQueryClient } from '@tanstack/react-query';
-import { fetchStories } from '@/lib/api/serverApi';
+import { fetchStories, getUserById } from '@/lib/api/serverApi';
 import { dehydrate, QueryClient, HydrationBoundary } from '@tanstack/react-query';
-import { userAgent } from 'next/server';
-import { headers } from 'next/headers';
-import { getUserById } from '@/lib/api/serverApi';
 import TravellerProfile from './TravelerDetail.client';
 
 type Props = { params: Promise<{ id: string }> };
@@ -17,7 +13,8 @@ export default async function Page({ params }: Props) {
 
   await queryClient.prefetchQuery({
     queryKey: ['stories', id, perPage],
-    queryFn: () => fetchStories({ page: 1, perPage, ownerId: id }),
+
+    queryFn: () => fetchStories({ page: 1, perPage, author: id }),
   });
 
   await queryClient.prefetchQuery({

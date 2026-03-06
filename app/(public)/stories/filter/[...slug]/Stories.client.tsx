@@ -54,31 +54,33 @@ export default function StoriesClient({ category, perPages }: StoriesClientProps
       </div>
     );
   }
+const savedStoryIds =
+  me?.savedStories?.map((s: any) => (typeof s === 'string' ? s : s._id));
 
-  return (
-    <section className={`${css.section} container`}>
-      {isSuccess && (
-        <>
-          <GridContainer variant="stories">
-            {data.stories.map(story => {
-              return (
-                <li key={story.id}>
-                  <StoryCard
-                    id={story.id}
-                    title={story.title}
-                    img={story.img}
-                    article={story.article}
-                    category={story.category}
-                    ownerId={story.ownerId}
-                    formattedDate={story.formattedDate}
-                    favoriteCount={story.favoriteCount}
-                    currentUserId={me?.id}
-                    savedStoryIds={me?.savedStories}
-                  />
-                </li>
-              );
-            })}
-          </GridContainer>
+return (
+  <section className={`${css.section} container`}>
+    {isSuccess && (
+      <>
+        <GridContainer variant="stories">
+          {data.stories.map(story => {
+            return (
+              <li key={story.id}>
+                <StoryCard
+                  id={story.id}
+                  title={story.title}
+                  img={story.img}
+                  article={story.article}
+                  category={story.category}
+                  ownerId={story.ownerId}
+                  formattedDate={story.formattedDate}
+                  favoriteCount={story.favoriteCount}
+                  currentUserId={me?.id}
+                  savedStoryIds={savedStoryIds}
+                />
+              </li>
+            );
+          })}
+        </GridContainer>
 
           <div className={css.center}>
             <Pagination
