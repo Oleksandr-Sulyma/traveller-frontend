@@ -1,14 +1,12 @@
 'use client'
 import Image from "next/image";
 import { Story } from "@/types/story";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import AuthNavModal from "@/components/AuthNavModal/AuthNavModal"
 import toast from "react-hot-toast";
 import { useQueryClient, useMutation } from "@tanstack/react-query";
 import { addToSave } from "@/lib/api/clientApi";
 import css from "./StoryDetails.module.css";
-import { useEffect } from "react";
-
 
 interface StoryDetailsProps {
     story: Story;
@@ -19,13 +17,13 @@ export default function StoryDetails({ story }: StoryDetailsProps) {
     const queryClient = useQueryClient();
     const [alreadySaved, setAlreadySaved] = useState(false);
 
-    // дефолтне фото
     const DEFAULT_IMAGE = "/images/storyForm/desktop@1x.webp"
     const [imgSrc, setImgSrc] = useState(story.img || DEFAULT_IMAGE);
 
-    useEffect(() => {
 
+    useEffect(() => {
         window.scrollTo(0, 0);
+
         const authData = localStorage.getItem("auth-storage");
         if (authData) {
             try {
@@ -40,29 +38,19 @@ export default function StoryDetails({ story }: StoryDetailsProps) {
         }
     }, [story.id]);
 
-
-
-
     const { mutate, isPending } = useMutation({
-
         mutationFn: () => addToSave(story.id),
         onSuccess: () => {
-            toast.success("Історію збережено у вашому профілі!");
+            toast.success("Історію збережено!");
             setAlreadySaved(true);
-
-
-
             queryClient.invalidateQueries({ queryKey: ["story", story.id] });
-
             queryClient.invalidateQueries({ queryKey: ["saved-stories"] });
         },
         onError: (error: any) => {
             const status = error.response?.status;
-
             if (status === 401) {
                 setIsAuthModalOpen(true);
             } else if (status === 409) {
-
                 setAlreadySaved(true);
                 toast("Ця історія вже збережена", { icon: 'ℹ️' });
             } else {
@@ -72,29 +60,13 @@ export default function StoryDetails({ story }: StoryDetailsProps) {
     });
 
     const handleSave = async () => {
-
         const authData = localStorage.getItem("auth-storage");
-
-        if (!localStorage.getItem("auth-storage")) {
-            setIsAuthModalOpen(true);
-            return;
-        }
-
         if (!authData || !authData.includes('"isAuthenticated":true')) {
             setIsAuthModalOpen(true);
             return;
         }
-
-
-        if (alreadySaved) {
-            toast("Ця історія вже у вас у збережених", { icon: 'ℹ️' });
-            return;
-        }
-
-
         mutate();
     };
-
 
     return (
         <div className="section">
@@ -103,25 +75,18 @@ export default function StoryDetails({ story }: StoryDetailsProps) {
                     <div className={css.meta}>
                         <div className={css.metaItem}>
                             <span className={css.label}>Автор статті: </span>
-                            <span className={css.value}>
-                                {story.ownerId.name}
-                            </span>
+                            <span className={css.value}>{story.ownerId.name}</span>
                         </div>
                         <div className={css.metaItem}>
                             <span className={css.label}>Опубліковано: </span>
                             <span className={css.value}>
-
                                 {story.formattedDate || (story.date ? new Date(story.date).toLocaleDateString('uk-UA') : 'Дата невідома')}
                             </span>
                         </div>
                     </div>
-
-                    {/* Категорія */}
-                    <div className={css.categoryTag}>
-                        {story.category.name}
-                    </div>
+                    <div className={css.categoryTag}>{story.category.name}</div>
                 </div>
-                {/* Головне зображення */}
+
                 <div className={css.imageWrapper}>
                     <Image
                         src={imgSrc}
@@ -132,37 +97,33 @@ export default function StoryDetails({ story }: StoryDetailsProps) {
                         style={{ width: '100%', height: 'auto' }}
                         priority
                         onError={() => {
-                            if (imgSrc !== DEFAULT_IMAGE) {
-                                setImgSrc(DEFAULT_IMAGE);
-                            }
+                            if (imgSrc !== DEFAULT_IMAGE) setImgSrc(DEFAULT_IMAGE);
                         }}
-
                     />
                 </div>
 
                 <aside className={css.contentSide}>
-                    <p className={css.storyArticle}>
-                        {story.article}
-                    </p>
+                    <p className={css.storyArticle}>{story.article}</p>
 
-                    {/* Блок для додавання в Збережені */}
-                    <div className={css.saveBox}>
-                        <h3 className={css.sidebarTitle}>Збережіть собі історію</h3>
-                        <p className={css.sidebarText}>
-                            Вона буде доступна у вашому профілі у розділі збережене
-                        </p>
-                        <button
-                            onClick={handleSave}
-                            disabled={isPending}
-                            className={`btn btn-primary ${css.saveBtn}`}
-                        >
-                            {isPending ? "Зберігаємо..." : "Зберегти"}
-                        </button>
-                    </div>
+
+                    {!alreadySaved && (
+                        <div className={css.saveBox}>
+                            <h3 className={css.sidebarTitle}>Збережіть собі історію</h3>
+                            <p className={css.sidebarText}>
+                                Вона буде доступна у вашому профілі у розділі збережене
+                            </p>
+                            <button
+                                onClick={handleSave}
+                                disabled={isPending}
+                                className={`btn btn-primary ${css.saveBtn}`}
+                            >
+                                {isPending ? "Зберігаємо..." : "Зберегти"}
+                            </button>
+                        </div>
+                    )}
                 </aside>
             </article>
 
-            {/* Модалка навігації */}
             {isAuthModalOpen && (
                 <AuthNavModal onClose={() => setIsAuthModalOpen(false)} />
             )}
