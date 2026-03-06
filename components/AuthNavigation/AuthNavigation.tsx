@@ -1,147 +1,42 @@
+'use client';
 
+import { useState, useEffect } from 'react';
 import Link from 'next/link';
-import css from './AuthNavigation.module.css';
-import { logout, getMe } from '@/lib/api/clientApi';
-import { useAuthStore } from '@/lib/store/authStore';
-import { useQueryClient, useQuery } from '@tanstack/react-query';
-import { useRouter } from 'next/navigation';
-import { useAuthStore } from '@/lib/store/authStore';
-import { getMe, logout } from '@/lib/api/clientApi';
-import { useQuery } from '@tanstack/react-query';
-import css from './AuthNavigation.module.css';
-import { User } from '@/types/user';
+// Імпортуйте ваші хуки авторизації (наприклад, з Zustand або Context)
+// import { useAuthStore } from '@/store/authStore'; 
 
-type AuthNavigationProps = {
- mode?: 'desktop' | 'modal';
- onCloseAction?: () => void;
- isLoggedIn?: boolean;
-};
+export default function AuthNavigation() {
+  const [mounted, setMounted] = useState(false);
+  
+  // Припустимо, у вас є стан авторизації
+  // const { isAuthenticated, user } = useAuthStore();
 
-export default function AuthNavigation({
- mode = 'desktop',
- onCloseAction,
- isLoggedIn = false,
-}: AuthNavigationProps) {
- const clearIsAuthenticated = useAuthStore(
- (state) => state.clearIsAuthenticated
- );
+  // useEffect спрацює ТІЛЬКИ на клієнті після того, як DOM буде готовий
+  useEffect(() => {
+    setMounted(true);
+  }, []);
 
- const queryClient = useQueryClient();
- const router = useRouter();
+  // Поки компонент не "ожив" на клієнті, повертаємо "заглушку"
+  // Це запобігає помилці Hydration
+  if (!mounted) {
+    return <div style={{ minWidth: '100px' }} />; // Або порожній div, щоб не "стрибав" хедер
+  }
 
- const { data: user } = useQuery({
- queryKey: ['me'],
- queryFn: getMe,
- enabled: isLoggedIn,
- staleTime: 1000 * 60 * 5,
- });
+  const isAuthenticated = false; // Замініть на вашу реальну логіку
 
- const handleLogout = async () => {
- try {
- await logout();
- } catch (err) {
- console.error('Logout error:', err);
- }
-
- clearIsAuthenticated();
- queryClient.removeQueries({ queryKey: ['me'] });
- onCloseAction?.();
- router.push('/');
- };
-
- if (isLoggedIn) {
- const userName = user?.name ?? 'Ім`я';
- const avatarLetter = userName.charAt(0).toUpperCase();
-
- 
- const isOnWhiteBackground =
- document.body.classList.contains('isScrolled') ||
- !document.body.classList.contains('isHome');
-
- const colorClass = isOnWhiteBackground ? 'darkText' : '';
-
- return (
- <div className={mode === 'modal' ? css.modalAuth : css.desktopAuth}>
- {/* Кнопка "Опублікувати історію" */}
- <Link
- href="/create-story"
- className={`${css.createStoryButton} ${css.authButton} ${colorClass}`}
- onClick={onCloseAction}
- >
- Опублікувати історію
- </Link>
-
-
- <div className={`${css.avatarPlaceholder} ${colorClass}`}>
- {avatarLetter}
- </div>
-
-
- <span className={`${css.userName} ${colorClass}`}>
- {userName}
- </span>
-
- 
- <span className={`${css.separator} ${colorClass}`}>|</span>
-
- {/* Logout */}
- <button
- className={`${css.logoutButton} ${colorClass}`}
- onClick={handleLogout}
- aria-label="Вийти з акаунту"
- title="Вийти"
- >
- <svg
- className={css.iconLogout}
- width="28"
- height="28"
- viewBox="0 0 24 24"
- aria-hidden="true"
- >
- <use href="/sprites/sprite.svg#icon-logout" />
- </svg>
- </button>
- </div>
- );
- }
-
- if (mode === 'modal') {
- return (
- <div className={css.modalAuth}>
- <Link
- href="/sign-in"
- className={css.modalLogin}
- onClick={onCloseAction}
- >
- Вхід
- </Link>
-
- <Link
- href="/sign-up"
- className={css.modalRegister}
- onClick={onCloseAction}
- >
- Реєстрація
- </Link>
- </div>
- );
- }
-
- return (
- <div className={css.desktopAuth}>
- <Link
- href="/sign-in"
- className={`${css.loginButton} ${css.authButton}`}
- >
- Вхід
- </Link>
-
- <Link
- href="/sign-up"
- className={`${css.registerButton} ${css.authButton}`}
- >
- Реєстрація
- </Link>
- </div>
- );
+  return (
+    <div className="flex items-center gap-4">
+      {isAuthenticated ? (
+        <>
+          <Link href="/profile">Мій профіль</Link>
+          <button>Вийти</button>
+        </>
+      ) : (
+        <>
+          <Link href="/sign-in">Увійти</Link>
+          <Link href="/sign-up" className="btn-primary">Реєстрація</Link>
+        </>
+      )}
+    </div>
+  );
 }
