@@ -79,11 +79,7 @@ export default function SignIn() {
         <h1 className={`${css.center_text} ${css.mb_24}`}>Вхід</h1>
         <p className={`${css.center_text} "text-main"`}>Вітаємо знову у спільноту мандрівників!</p>
       </div>
-      <Formik
-        validationSchema={loginSchema}
-        initialValues={initialValues}
-        onSubmit={handleSubmit}
-      >
+      <Formik validationSchema={loginSchema} initialValues={initialValues} onSubmit={handleSubmit}>
         <Form className={css.form}>
           <div className="input-group input-type">
             <label htmlFor={`${id}-email`}>Пошта*</label>
@@ -110,7 +106,11 @@ export default function SignIn() {
           </div>
 
           <div>
-            <button className="btn btn-primary" style={{ height: '44px', width: '100% ' }}>
+            <button
+              type="submit"
+              className="btn btn-primary"
+              style={{ height: '44px', width: '100% ' }}
+            >
               {isPending ? 'Здійснюється вхід...' : 'Увійти'}
             </button>
           </div>
