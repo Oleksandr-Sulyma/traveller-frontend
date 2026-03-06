@@ -15,7 +15,14 @@ import ModalLayout from '@/components/ModalLayout/ModalLayout';
 import css from './StoryForm.module.css';
 import { ImageUpload, type ImageUploadValue } from './ImageUpload';
 
-import { useCategories } from '@/lib/hooks/useCategories';
+interface Category {
+  id: string;
+  name: string;
+}
+
+interface StoryFormProps {
+  categories: Category[];
+}
 
 interface StoryFormValues {
   title: string;
@@ -24,7 +31,7 @@ interface StoryFormValues {
   img: string;
 }
 
-const MAX_IMAGE_SIZE = 2 * 1024 * 1024; // 2MB
+const MAX_IMAGE_SIZE = 2 * 1024 * 1024;
 
 const validationSchema = Yup.object({
   title: Yup.string().max(80, 'Максимум 80 символів').required("Заголовок є обов'язковим"),
@@ -33,22 +40,21 @@ const validationSchema = Yup.object({
   img: Yup.string().nullable(),
 });
 
-export default function StoryForm() {
+export default function StoryForm({ categories }: StoryFormProps) {
   const queryClient = useQueryClient();
   const router = useRouter();
 
   const [isOpen, setIsOpen] = React.useState(false);
+  const { draft, setDraft, clearDraft } = useStoryDraftStore();
+  const [coverImage, setCoverImage] = React.useState<ImageUploadValue | null>(null);
 
   const handleOpen = () => setIsOpen(true);
   const handleClose = () => setIsOpen(false);
-  const { draft, setDraft, clearDraft } = useStoryDraftStore();
-  const [coverImage, setCoverImage] = React.useState<ImageUploadValue | null>(null);
-  const { categories } = useCategories();
 
   const initialValues: StoryFormValues = {
-    title: draft.title,
-    article: draft.article,
-    category: draft.category as unknown as string,
+    title: draft.title || '',
+    article: draft.article || '',
+    category: (draft.category as string) || '',
     img: '',
   };
 
@@ -78,7 +84,6 @@ export default function StoryForm() {
       toast.error('Максимальний розмір зображення — 2MB');
       setCoverImage(null);
       setFieldValue('img', '');
-      setDraft({ ...draft, img: undefined as any });
       return;
     }
 
@@ -88,7 +93,7 @@ export default function StoryForm() {
 
     setDraft({
       ...draft,
-      img: (value?.file as any)!,
+      img: value?.file as any,
     });
   };
 
@@ -103,14 +108,6 @@ export default function StoryForm() {
           return;
         }
 
-        setDraft({
-          ...draft,
-          title: values.title,
-          article: values.article,
-          category: values.category as any,
-          img: coverImage.file as any,
-        });
-
         const payload: StoryPost = {
           title: values.title,
           article: values.article,
@@ -118,14 +115,13 @@ export default function StoryForm() {
           img: coverImage.file,
         };
 
-        console.log('Submitting story with payload:', payload);
-
         createStoryMutation(payload);
       }}
     >
       {({ values, handleChange, setFieldValue, errors, touched, isValid, isSubmitting }) => (
-        <>
+        <div className="container">
           {isPending && <Loader className={css.loader} size={100} color="#ffffff" />}
+
           {isOpen && (
             <ModalLayout
               showButtons={false}
@@ -135,15 +131,19 @@ export default function StoryForm() {
               onClose={handleClose}
             />
           )}
+
           <h1 className={css.title}>Створити нову історію</h1>
+
           <Form className={css.form}>
             <div className={css.coverRow}>
               <div className={css.coverBlock}>
                 <label className={css.label}>Обкладинка статті</label>
+
                 <ImageUpload
                   value={values.img}
                   onChange={value => handleImageChange(value, setFieldValue)}
                 />
+
                 {'img' in errors && <div className={css.error}>{(errors as any).img}</div>}
               </div>
             </div>
@@ -153,6 +153,7 @@ export default function StoryForm() {
                 <label htmlFor="title" className={css.label}>
                   Заголовок
                 </label>
+
                 <Field
                   id="title"
                   type="text"
@@ -160,11 +161,12 @@ export default function StoryForm() {
                   className="input"
                   placeholder="Введіть заголовок історії"
                   maxLength={80}
-                  onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) => {
+                  onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
                     handleChange(e);
                     setDraft({ ...draft, title: e.target.value });
                   }}
                 />
+
                 {touched.title && errors.title && <div className={css.error}>{errors.title}</div>}
               </div>
 
@@ -172,6 +174,7 @@ export default function StoryForm() {
                 <label htmlFor="category" className={css.label}>
                   Категорія
                 </label>
+
                 <select
                   id="category"
                   name="category"
@@ -186,12 +189,14 @@ export default function StoryForm() {
                   <option value="" disabled>
                     Категорія
                   </option>
+
                   {categories.map(({ id, name }) => (
                     <option key={id} value={id}>
                       {name}
                     </option>
                   ))}
                 </select>
+
                 {touched.category && errors.category && (
                   <div className={css.error}>{errors.category}</div>
                 )}
@@ -201,6 +206,7 @@ export default function StoryForm() {
                 <label htmlFor="article" className={css.label}>
                   Текст історії
                 </label>
+
                 <Field
                   as="textarea"
                   id="article"
@@ -214,6 +220,7 @@ export default function StoryForm() {
                     setDraft({ ...draft, article: e.target.value });
                   }}
                 />
+
                 {touched.article && errors.article && (
                   <div className={css.error}>{errors.article}</div>
                 )}
@@ -228,6 +235,7 @@ export default function StoryForm() {
               >
                 {isPending ? 'Зберігаємо...' : 'Зберегти'}
               </button>
+
               <button
                 type="button"
                 className={`btn btn--default btn-secondary ${css.cancelButton}`}
@@ -237,7 +245,7 @@ export default function StoryForm() {
               </button>
             </div>
           </Form>
-        </>
+        </div>
       )}
     </Formik>
   );
