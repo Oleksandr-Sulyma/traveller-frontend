@@ -30,8 +30,8 @@ export async function proxy(request: NextRequest) {
   if (!accessToken) {
     if (refreshToken) {
       const res = await checkServerSession();
-      const headers = res.headers as Record<string, string | string[] | undefined>;
-      const setCookie = headers['set-cookie'];
+      const headers = res?.headers as Record<string, string | string[] | undefined>;
+      const setCookie = headers?.['set-cookie'];
 
       if (setCookie) {
         const cookieArray = Array.isArray(setCookie) ? setCookie : [setCookie];
