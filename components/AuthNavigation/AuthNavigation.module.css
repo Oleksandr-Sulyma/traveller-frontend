@@ -1,192 +1,359 @@
-/* DESKTOP AUTH */
+
 .desktopAuth {
- display: flex;
- align-items: center;
- gap: 12px;
-}
-
-
-.desktopAuthExpanded {
- gap: 18px; 
+  display: flex;
+  align-items: center;
+  gap: 12px;
 }
 
 .authButton {
- text-decoration: none;
- display: flex;
- align-items: center;
- justify-content: center;
- height: 35px;
- padding: 4px 10px;
- border-radius: 8px;
- font-size: 16px;
- font-weight: 500;
- transition: all var(--transition-fast);
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 35px;
+  padding: 4px 10px;
+  border-radius: 8px;
+  font-size: 16px;
+  font-weight: 500;
+  transition: all var(--transition-fast);
 }
 
-
 .loginButton {
- background-color: transparent;
- color: var(--color-white);
- border: 1px solid rgba(255, 255, 255, 0.3);
+  background-color: transparent;
+  color: var(--color-white);
+  border: 1px solid rgba(255, 255, 255, 0.3);
 }
 
 .loginButton.darkText,
 header.isScrolled .loginButton,
 header:not(.isHome) .loginButton {
- color: #000000 !important;
- border-color: rgba(0, 0, 0, 0.2) !important;
- background-color: rgba(255, 255, 255, 0.1) !important;
+  color: #000000 !important;
+  border-color: rgba(0, 0, 0, 0.2) !important;
+  background-color: rgba(255, 255, 255, 0.1) !important;
 }
 
 .loginButton:hover {
- background-color: rgba(255, 255, 255, 0.1);
- border-color: rgba(255, 255, 255, 0.5);
- transform: translateY(-1px);
+  background-color: rgba(255, 255, 255, 0.1);
+  border-color: rgba(255, 255, 255, 0.5);
+  transform: translateY(-1px);
 }
 
-
 .registerButton {
- background-color: var(--color-white);
- color: #1a1a1a;
- border: none;
- font-weight: 600;
+  background-color: var(--color-white);
+  color: #1a1a1a;
+  border: none;
+  font-weight: 600;
 }
 
 .registerButton.darkText,
 header.isScrolled .registerButton,
 header:not(.isHome) .registerButton {
- border: 1px solid rgba(0, 0, 0, 0.2) !important;
- background-color: var(--color-white) !important;
- color: #1a1a1a !important;
+  border: 1px solid rgba(0, 0, 0, 0.2) !important;
+  background-color: var(--color-white) !important;
+  color: #1a1a1a !important;
 }
 
 .registerButton:hover {
- background-color: #f8f9fa;
- transform: translateY(-1px);
- box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+  background-color: #f8f9fa;
+  transform: translateY(-1px);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
 }
 
-/* Користувач */
-.userInfo {
- display: flex;
- align-items: center;
- gap: 8px;
+
+
+/* ДЕСКТОП (1440px+) */
+.userAuthContainer {
+  display: flex;
+  align-items: center;
+  gap: 12px;
 }
 
-/* Аватар по умолчанию */
+/*  ПЛАНШЕТ (768px-1439px)  */
+.tabletCreateStoryOnly {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* КНОПКА "Опублікувати історію" - УСІ ЕКРАНИ */
+.createStoryButton {
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 35px;
+  padding: 4px 20px;
+  border-radius: 8px;
+  font-size: 16px;
+  font-weight: 600;
+  transition: all var(--transition-fast);
+  background-color: var(--color-royal-blue);
+  color: var(--color-white);
+  border: none;
+  text-align: center;
+  white-space: nowrap;
+  box-shadow: 0 2px 4px rgba(59, 130, 246, 0.2);
+}
+
+.createStoryButtonDesktop {
+  padding: 4px 24px;
+}
+
+.createStoryButton:hover {
+  background-color: #1e40af;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(59, 130, 246, 0.4);
+}
+
+
 .avatarPlaceholder {
- width: 32px;
- height: 32px;
- border-radius: 50%;
- background-color: var(--color-royal-blue);
- color: var(--color-white);
- display: flex;
- align-items: center;
- justify-content: center;
- font-weight: 700;
- font-size: 14px;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background-color: var(--color-royal-blue);
+  color: var(--color-white);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 14px;
+  line-height: 1;
+  cursor: pointer;
+  transition: all var(--transition-fast);
 }
 
-
-.avatarLarge {
- width: 44px;
- height: 44px;
- font-size: 18px;
- line-height: 44px;
+.avatarPlaceholder:hover {
+  transform: scale(1.05);
+  box-shadow: 0 2px 8px rgba(59, 130, 246, 0.3);
 }
 
+.avatarAdaptive {
+  background-color: var(--color-royal-blue);
+  color: var(--color-white);
+}
 
 .userName {
- font-family: var(--font-family);
- font-size: 16px;
- font-weight: 500;
- color: var(--color-scheme-1-text);
+  font-family: var(--font-family);
+  font-size: 16px;
+  font-weight: 500;
 }
 
-
-.userNameWhite {
- color: #ffffff;
- font-weight: 600;
+.userNameAdaptive {
+  color: var(--color-white);
+  font-weight: 600;
+  transition: color var(--transition-fast);
 }
 
-/* Прямая линия-разделитель */
-.separatorWhite {
- margin: 0 10px;
- color: #ffffff;
- font-weight: 600;
+.separator {
+  margin: 0 10px;
+  font-weight: 600;
+  font-size: 16px;
 }
 
-/* Logout кнопка */
+.separatorAdaptive {
+  color: var(--color-white);
+  transition: color var(--transition-fast);
+}
+
 .logoutButton {
- background: none;
- border: none;
- cursor: pointer;
- font-size: 20px;
- color: var(--color-scheme-1-text);
- padding: 4px;
- transition: transform var(--transition-fast), color var(--transition-fast);
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 4px;
+  transition: all var(--transition-fast);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 4px;
+}
+
+.logoutButtonAdaptive {
+  color: var(--color-white);
+}
+
+.logoutButtonAdaptive:hover {
+  transform: translateX(3px);
+  color: var(--color-red);
+  background-color: rgba(239, 68, 68, 0.1);
+}
+
+.iconLogout {
+  width: 28px;
+  height: 28px;
+  transition: all var(--transition-fast);
+}
+
+.iconLogoutAdaptive {
+  color: inherit;
 }
 
 
-.logoutButtonLarge {
- font-size: 28px;
- padding: 6px;
- color: #ffffff;
-}
-.logoutButtonLarge svg {
- width: 30px;
- height: 30px;
+header.isScrolled .userNameAdaptive,
+header:not(.isHome) .userNameAdaptive,
+header.hasWhiteBackground .userNameAdaptive {
+  color: #000000 !important;
 }
 
-.logoutButton:hover {
- transform: translateX(3px);
- color: var(--color-red);
+header.isScrolled .separatorAdaptive,
+header:not(.isHome) .separatorAdaptive,
+header.hasWhiteBackground .separatorAdaptive {
+  color: #000000 !important;
 }
 
-/* МОДАЛЬНОЕ МЕНЮ */
+header.isScrolled .logoutButtonAdaptive,
+header:not(.isHome) .logoutButtonAdaptive,
+header.hasWhiteBackground .logoutButtonAdaptive {
+  color: #000000 !important;
+}
+
+header.isScrolled .iconLogoutAdaptive,
+header:not(.isHome) .iconLogoutAdaptive,
+header.hasWhiteBackground .iconLogoutAdaptive {
+  color: #000000 !important;
+}
+
+
 .modalAuth {
- display: flex;
- flex-direction: column;
- gap: 12px;
- width: 100%;
- margin-top: auto; 
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  width: 100%;
+  margin-top: auto;
 }
 
-.modalLogin, 
+.modalLogin,
 .modalRegister {
- width: 100%;
- height: 48px;
- display: flex;
- align-items: center;
- justify-content: center;
- border-radius: 12px;
- font-weight: 600;
- transition: all var(--transition-fast);
+  width: 100%;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 12px;
+  font-weight: 600;
+  font-size: 16px;
+  transition: all var(--transition-fast);
+  text-decoration: none;
 }
 
 .modalLogin {
- background-color: var(--color-royal-blue-lightest);
- color: var(--color-royal-blue);
- border: 1px solid var(--color-royal-blue-lighter);
+  background-color: var(--color-royal-blue-lightest);
+  color: var(--color-royal-blue);
+  border: 1px solid var(--color-royal-blue-lighter);
 }
 
 .modalRegister {
- background-color: var(--color-royal-blue);
- color: var(--color-white);
+  background-color: var(--color-royal-blue);
+  color: var(--color-white);
 }
 
-/* Темна тема для кнопок у бургері */
+.modalLogin:hover {
+  background-color: var(--color-royal-blue-lighter);
+  transform: translateY(-1px);
+}
+
+.modalRegister:hover {
+  background-color: #1e40af;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3);
+}
+
+/* Темна тема */
 [data-theme='dark'] .modalLogin {
- background-color: var(--opacity-white-10);
- color: var(--color-white);
- border-color: var(--opacity-white-15);
+  background-color: var(--opacity-white-10);
+  color: var(--color-white);
+  border-color: var(--opacity-white-15);
 }
 
-/* Кнопка "Опублікувати історію" на десктопе */
+
+/* ПЛАНШЕТ 768px-1439px  */
+@media (min-width: 768px) and (max-width: 1439px) {
+  .userAuthContainer {
+    display: none !important; 
+  }
+  
+  .tabletCreateStoryOnly {
+    display: flex !important; 
+  }
+}
+
+/* ДЕСКТОП 1440px+ */
+@media (min-width: 1440px) {
+  .userAuthContainer {
+    display: flex !important;
+  }
+  
+  .tabletCreateStoryOnly {
+    display: none !important;
+  }
+}
+/* КНОПКИ АВТОРИЗАЦІЇ В БУРГЕР МЕНЮ */
+.modalAuth {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  width: 100%;
+  margin-top: auto;
+  padding-top: 24px;
+  border-top: 1px solid var(--color-scheme-1-border);
+}
+
+.modalAuthButton {
+  width: 100%;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 12px;
+  font-weight: 600;
+  font-size: 16px;
+  text-decoration: none;
+  transition: all var(--transition-fast);
+}
+
+.modalLogin {
+  background-color: var(--color-royal-blue-lightest);
+  color: var(--color-royal-blue);
+  border: 1px solid var(--color-royal-blue-lighter);
+}
+
+.modalRegister {
+  background-color: var(--color-royal-blue);
+  color: var(--color-white);
+}
+
+.modalProfile {
+  background-color: var(--color-royal-blue);
+  color: var(--color-white);
+  width: 100%;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 12px;
+  font-weight: 600;
+  font-size: 16px;
+  text-decoration: none;
+  transition: all var(--transition-fast);
+}
+
+.modalLogin:hover,
+.modalProfile:hover {
+  background-color: var(--color-royal-blue-lighter);
+  transform: translateY(-1px);
+}
+
+.modalRegister:hover {
+  background-color: #1e40af;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3);
+}
+
+
+/* Кнопка "Опублікувати історію" на десктопе /
 .createStoryButtonDesktop {
  min-width: 170px;
  justify-content: center;
- background-color: #1E40FF;
+ background-color: var(--color-royal-blue);
  color: #FFFFFF;
  font-weight: 600;
  border-radius: 8px;

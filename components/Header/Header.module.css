@@ -278,6 +278,28 @@
     background-color: var(--opacity-neutral-darkest-5);
   }
 }
+/*  ТІЛЬКИ ПЛАНШЕТ+ (768px+) */
+.tabletAndDesktopOnly {
+  display: none;
+}
+
+@media (min-width: 768px) {
+  .tabletAndDesktopOnly {
+    display: flex !important;
+  }
+}
+
+/* ✅ Мобільний - приховуємо AuthNavigation */
+@media (max-width: 767px) {
+  .authNavigationContainer,
+  .tabletAndDesktopOnly {
+    display: none !important;
+  }
+  
+  .mobileBurgerOnly {
+    display: flex !important;
+  }
+}
 
 /* ===========================================
    ОСНОВНА СТРУКТУРА ХЕДЕРА

@@ -2,6 +2,100 @@
 
 import Link from 'next/link';
 import Image from 'next/image';
+import { usePathname } from 'next/navigation';
+import { FC, MouseEvent } from 'react';
+import { useAuthStore } from '@/lib/store/authStore';
+import css from './BurgerMenu.module.css';
+import logo from '@/public/favicon.svg';
+
+interface BurgerMenuProps {
+  onCloseAction: () => void;
+  navLinks: { name: string; href: string }[];
+}
+
+const BurgerMenu: FC<BurgerMenuProps> = ({
+  onCloseAction,
+  navLinks,
+}) => {
+  const pathname = usePathname();
+  const { isAuthenticated } = useAuthStore();
+
+  const handleModalClick = (e: MouseEvent<HTMLDivElement>) => {
+    e.stopPropagation();
+  };
+
+  return (
+    <div className={css.overlay} onClick={onCloseAction}>
+      <div className={css.modal} onClick={handleModalClick}>
+        {/* ХЕДЕР */}
+        <div className={css.modalHeader}>
+          <div className={css.logoModal}>
+            <Image
+              src={logo}
+              width={22}
+              height={22}
+              alt="Логотип Подорожники"
+              className={css.logoModalIcon}
+            />
+            <span className={css.logoModalText}>Подорожники</span>
+          </div>
+          <button 
+            type="button"
+            className={css.closeButton} 
+            onClick={onCloseAction}
+            aria-label="Закрити меню"
+          >
+            <span className={css.closeCross}>×</span>
+          </button>
+        </div>
+
+        {/* НАВІГАЦІЯ */}
+        <nav className={css.modalNav}>
+          <ul className={css.navigation}>
+            {navLinks.map((link) => (
+              <li key={link.href}>
+                <Link
+                  href={link.href}
+                  className={`${css.navigationLink} ${pathname === link.href ? css.active : ''}`}
+                  onClick={onCloseAction}
+                >
+                  {link.name}
+                </Link>
+              </li>
+            ))}
+          </ul>
+        </nav>
+
+      
+        <div className={css.modalAuth}>
+          <Link 
+            href="/sign-in" 
+            className={`${css.modalLogin} ${css.modalAuthButton}`}
+            onClick={onCloseAction}
+          >
+            Вхід
+          </Link>
+          <Link 
+            href="/sign-up" 
+            className={`${css.modalRegister} ${css.modalAuthButton}`}
+            onClick={onCloseAction}
+          >
+            Реєстрація
+          </Link>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export default BurgerMenu;
+
+
+
+/*'use client';
+
+import Link from 'next/link';
+import Image from 'next/image';
 import { usePathname, useRouter } from 'next/navigation';
 import { useQueryClient } from '@tanstack/react-query';
 import { useAuthStore } from '@/lib/store/authStore';
@@ -104,7 +198,7 @@ const BurgerMenu: FC<BurgerMenuProps> = ({
           )}
         </div>
 
-        {/* === НАВІГАЦІЯ === */}
+        {/* === НАВІГАЦІЯ === /}
         <nav className={css.modalNav}>
           <ul className={css.navigation}>
             {navLinks.map((link) => (
@@ -137,4 +231,4 @@ const BurgerMenu: FC<BurgerMenuProps> = ({
   );
 };
 
-export default BurgerMenu;
+export default BurgerMenu;*/

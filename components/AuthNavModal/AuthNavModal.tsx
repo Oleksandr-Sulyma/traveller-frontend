@@ -1,6 +1,7 @@
 
 
-import { useRouter } from "next/navigation";
+
+/*import { useRouter } from "next/navigation";
 import ModalLayout from "../ModalLayout/ModalLayout";
 
 interface AuthRedirectModalProps {
@@ -31,4 +32,4 @@ export default function AuthRedirectModal({ onClose }: AuthRedirectModalProps) {
             onClose={onClose}
         />
     );
-}
+}*/
