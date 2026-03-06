@@ -1,3 +1,5 @@
+import { Story } from './story';
+
 export interface User {
   id: string;
   name: string;
@@ -5,7 +7,7 @@ export interface User {
   avatarUrl?: string;
   articlesAmount: number;
   description: string;
-  savedStories: string[];
+  savedStories: Story[] | string[];
   createdAt: string;
   updatedAt: string;
 }
