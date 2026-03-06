@@ -1,62 +1,24 @@
-'use client';
+import { useInfiniteQuery, useQuery, useQueryClient } from '@tanstack/react-query';
+import { fetchStories } from '@/lib/api/serverApi';
+import { dehydrate, QueryClient, HydrationBoundary } from '@tanstack/react-query';
+import { userAgent } from 'next/server';
+import { headers } from 'next/headers';
+import { getUserById } from '@/lib/api/serverApi';
+import TravellerProfile from './TravelerDetail.client';
 
-import { useEffect, useState, use } from 'react';
-import nextServer from '@/lib/api/api';
-import type { User } from '@/types/user';
-import type { Story } from '@/types/story';
-import StoryCard from '@/components/StoryCard/StoryCard';
-import Loader from '@/components/Loader/Loader';
-import css from './TravellerProfilePage.module.css';
-
-// В Next.js 15 params — це Promise
 type Props = { params: Promise<{ id: string }> };
 
-export default function Page({ params }: Props) {
-  // Розпаковуємо params за допомогою React use()
-  const { id } = use(params);
+const perPage = 6;
 
-  const [traveller, setTraveller] = useState<User | null>(null);
-  const [stories, setStories] = useState<Story[]>([]);
-  const [total, setTotal] = useState<number | null>(null);
+export default async function Page({ params }: Props) {
+  const { id } = await params;
 
-  const [loading, setLoading] = useState(true);
-  const [loadingMore, setLoadingMore] = useState(false);
-  const [error, setError] = useState<string | null>(null);
+  const queryClient = new QueryClient();
 
-  const [page, setPage] = useState(1);
-  const perPage = 6;
-
-  // Перевірка чи є ще сторінки для завантаження
-  const hasMore = total === null ? true : stories.length < total;
-
-  const load = async (nextPage: number, append: boolean) => {
-    if (append) setLoadingMore(true);
-    else setLoading(true);
-
-    setError(null);
-
-    try {
-      // Запит до бекенда на отримання користувача та його історій
-      const res = await nextServer.get(`/users/${id}`, {
-        params: {
-          page: nextPage,
-          perPage,
-          sortBy: 'createdAt',
-          sortOrder: 'desc',
-        },
-      });
-
-      // Бекенд повертає дані безпосередньо або в полі data
-      const payload = res.data;
-
-      // Оновлюємо дані про мандрівника
-      setTraveller(payload as User);
-
-      // Отримуємо історії та загальну кількість з відповіді
-      const newStories = (payload?.stories ?? []) as Story[];
-      const newTotal = typeof payload?.total === 'number' ? payload.total : null;
-
-      setStories(prev => (append ? [...prev, ...newStories] : newStories));
+  await queryClient.prefetchQuery({
+    queryKey: ['stories', id, perPage],
+    queryFn: () => fetchStories({ page: 1, perPage, ownerId: id }),
+  });
 
       if (newTotal !== null) {
         setTotal(newTotal);
