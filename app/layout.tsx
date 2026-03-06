@@ -21,7 +21,7 @@ import './fonts.css';
 import { ThemeProvider } from '@/components/ThemeProvider';
 import HeaderWrapper from '@/components/Header/HeaderWrapper';
 import FooterWrapper from '@/components/Footer/FooterWrapper';
-import MainContent from '@/components/MainContent/MainContent';
+import MainContent from '@/components/Profile/TravellerInfo/MainContent/MainContent';
 import TanStackProvider from '@/components/Providers/TanStackProvider';
 import { BASE_URL, SITE_DESCRIPTION, SITE_NAME, SITE_SMAL_DESCRIPTION } from '@/lib/constants/seo';
 import AuthProvider from '@/components/Providers/AuthProvider';

@@ -7,6 +7,7 @@ import Loader from '@/components/Loader/Loader';
 import StoryCard from '@/components/StoryCard/StoryCard';
 import GridContainer from '@/styles/components/GridContainer/GridContainer';
 import Pagination from '@/components/Pagination/Pagination';
+import toast from 'react-hot-toast';
 
 interface StoriesClientProps {
   category?: string;
@@ -38,32 +39,48 @@ export default function StoriesClient({ category, perPages }: StoriesClientProps
   };
 
   if (isLoading) return <Loader color="#FFFFFF" size={50} />;
-  if (error || !data) return <p>Something went wrong.</p>;
 
-  return (
-    <section className={`${css.section} container`}>
-      {isSuccess && (
-        <>
-          <GridContainer variant="stories">
-            {data.stories.map(story => {
-              return (
-                <li key={story.id}>
-                  <StoryCard
-                    id={story.id}
-                    title={story.title}
-                    img={story.img}
-                    article={story.article}
-                    category={story.category}
-                    ownerId={story.ownerId}
-                    formattedDate={story.formattedDate}
-                    favoriteCount={story.favoriteCount}
-                    currentUserId={me?.id}
-                    savedStoryIds={me?.savedStories}
-                  />
-                </li>
-              );
-            })}
-          </GridContainer>
+  if (error || !data)
+    return (
+      <div className={css.center}>
+        <p>Не вдалося завантажити історії. Спробуйте оновити сторінку. </p>
+      </div>
+    );
+
+  if (data.stories.length === 0) {
+    return (
+      <div className={css.center}>
+        <p>Поки що ніхто не поділився історіями в цій категорії. </p>
+      </div>
+    );
+  }
+const savedStoryIds =
+  me?.savedStories?.map((s: any) => (typeof s === 'string' ? s : s._id));
+
+return (
+  <section className={`${css.section} container`}>
+    {isSuccess && (
+      <>
+        <GridContainer variant="stories">
+          {data.stories.map(story => {
+            return (
+              <li key={story.id}>
+                <StoryCard
+                  id={story.id}
+                  title={story.title}
+                  img={story.img}
+                  article={story.article}
+                  category={story.category}
+                  ownerId={story.ownerId}
+                  formattedDate={story.formattedDate}
+                  favoriteCount={story.favoriteCount}
+                  currentUserId={me?.id}
+                  savedStoryIds={savedStoryIds}
+                />
+              </li>
+            );
+          })}
+        </GridContainer>
 
           <div className={css.center}>
             <Pagination
